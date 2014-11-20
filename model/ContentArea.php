@@ -108,6 +108,13 @@ class ContentArea {
   } // getCAAssocpage END
 
 
+  // c_a_createdby GETTER
+  public function getCACreatedby() {
+
+    return $this->c_a_createdby;
+
+  } // getCACreatedby END
+
   // c_a_creationdate GETTER
   public function getCACreationdate() {
 

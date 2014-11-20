@@ -11,14 +11,14 @@ class Style {
   private $s_style;   // String
   private $s_active;  // Boolean
   private $s_createdby;   // Int
-  private $s_createddate; // String
+  private $s_creationdate; // String
   private $s_modifiedby;  // Int
   private $s_modifieddate;// String
 
 
   // Default Constructor
   public function __construct($in_id, $in_name,$in_desc, $in_style, $in_active,
-              $in_createdby, $in_createddate, $in_modifiedby, $in_modifieddate) {
+              $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->s_id = $in_id;
     $this->s_name = $in_name;
@@ -26,7 +26,7 @@ class Style {
     $this->s_style = $in_style;
     $this->s_active = $in_active;
     $this->s_createdby = $in_createdby;
-    $this->s_createddate = $in_createddate;
+    $this->s_creationdate = $in_creationdate;
     $this->s_modifiedby = $in_modifiedby;
     $this->s_modifieddate = $in_modifieddate;
 
@@ -101,12 +101,12 @@ class Style {
   } // getSCreatedby END
 
 
-  // s_createddate GETTER
-  public function getSCreateddate() {
+  // s_creationdate GETTER
+  public function getSCreationdate() {
 
-    return $this->s_createddate;
+    return $this->s_creationdate;
 
-  } // getSCreateddate END
+  } // getSCreationdate END
 
 
   // s_modifiedby GETTER/SETTER

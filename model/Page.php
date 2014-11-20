@@ -6,20 +6,20 @@ class Page {
 
 
   // Variables :
-  private $p_id;          // Int
-  private $p_name;        // String
-  private $p_alias;       // String
-  private $p_desc;        // String
-  private $p_style;       // Style Object
-  private $p_createdby;   // Int
-  private $p_createddate; // String
-  private $p_modifiedby;  // Int
-  private $p_modifieddate;// String
+  private $p_id;            // Int
+  private $p_name;          // String
+  private $p_alias;         // String
+  private $p_desc;          // String
+  private $p_style;         // Style Object
+  private $p_createdby;    // Int
+  private $p_creationdate;  // String
+  private $p_modifiedby;    // Int
+  private $p_modifieddate;  // String
 
 
   // Default Constructor.
   public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_style,
-              $in_createdby, $in_createddate, $in_modifiedby, $in_modifieddate) {
+              $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->p_id = $in_id;
     $this->p_name = $in_name;
@@ -27,7 +27,7 @@ class Page {
     $this->p_desc = $in_desc;
     $this->p_style = $in_style;
     $this->p_createdby = $in_createdby;
-    $this->p_createddate = $in_createddate;
+    $this->p_creationdate = $in_creationdate;
     $this->p_modifiedby = $in_modifiedby;
     $this->p_modifieddate = $in_modifieddate;
 
@@ -102,12 +102,12 @@ class Page {
   } // getPCreatedby END
 
 
-  // p_createddate GETTER
-  public function getPCreateddate() {
+  // p_creationdate GETTER
+  public function getPCreationdate() {
 
-    return $this->p_createddate;
+    return $this->p_creationdate;
 
-  } // getPCreateddate END
+  } // getPCreationdate END
 
 
   // p_modifiedby GETTER/SETTER
