@@ -10,26 +10,30 @@ class Style {
   private $s_desc;    // String
   private $s_style;   // String
   private $s_active;  // Boolean
+  private $s_createdby;   // Int
+  private $s_createddate; // String
+  private $s_modifiedby;  // Int
+  private $s_modifieddate;// String
 
 
   // Default Constructor
-  public function __construct($in_id, $in_name,$in_desc, $in_style, $in_active) {
+  public function __construct($in_id, $in_name,$in_desc, $in_style, $in_active,
+              $in_createdby, $in_createddate, $in_modifiedby, $in_modifieddate) {
 
     $this->s_id = $in_id;
     $this->s_name = $in_name;
     $this->s_desc = $in_desc;
     $this->s_style = $in_style;
     $this->s_active = $in_active;
+    $this->s_createdby = $in_createdby;
+    $this->s_createddate = $in_createddate;
+    $this->s_modifiedby = $in_modifiedby;
+    $this->s_modifieddate = $in_modifieddate;
 
   } // Default Constructor END
 
 
-  // s_id GETTER/SETTER
-  public function setSId($s_id) {
-
-    $this->s_id = $s_id;
-
-  } // setSId END
+  // s_id GETTER
   public function getSId() {
 
     return $this->s_id;
@@ -87,6 +91,48 @@ class Style {
     return $this->s_active;
 
   } // getSActive END
+
+  
+  // s_createdby GETTER
+  public function getSCreatedby() {
+
+    return $this->s_createdby;
+
+  } // getSCreatedby END
+
+
+  // s_createddate GETTER
+  public function getSCreateddate() {
+
+    return $this->s_createddate;
+
+  } // getSCreateddate END
+
+
+  // s_modifiedby GETTER/SETTER
+  public function setSModifiedby($s_modifiedby) {
+
+    $this->s_modifiedby = $s_modifiedby;
+
+  } // setSModifiedby END
+  public function getSModifiedby() {
+
+    return $this->s_modifiedby;
+
+  } // getSModifiedby END
+
+
+  // s_modifieddate GETTER/SETTER
+  public function setSModifieddate($s_modifieddate) {
+
+    $this->s_modifieddate = $s_modifieddate;
+
+  } // setSModifieddate END
+  public function getSModifieddate() {
+
+    return $this->s_modifieddate;
+
+  } // getSModifieddate END
 
 
 } // Style END
