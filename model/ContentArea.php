@@ -5,16 +5,16 @@ class ContentArea {
 
 
   // Variables :
-  private $c_a_id;
-  private $c_a_name;
-  private $c_a_alias;
-  private $c_a_desc;
-  private $c_a_order;
-  private $c_a_assocpage;
-  private $c_a_createdby;
-  private $c_a_creationdate;
-  private $c_a_modifiedby;
-  private $c_a_modifieddate;
+  private $c_a_id;            // Int
+  private $c_a_name;          // String
+  private $c_a_alias;         // String
+  private $c_a_desc;          // String
+  private $c_a_order;         // Int
+  private $c_a_assocpage;     // Int
+  private $c_a_createdby;     // Int
+  private $c_a_creationdate;  // String
+  private $c_a_modifiedby;    // Int
+  private $c_a_modifieddate;  // String
 
 
   // Default Constructor
