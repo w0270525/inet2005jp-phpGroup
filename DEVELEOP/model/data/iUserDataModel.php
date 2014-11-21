@@ -1,0 +1,34 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+interface iUserDataModel
+{
+    public function connectToDB();
+
+    public function closeDB();
+
+    public function selectUsers();
+    
+     public function selectUserById($custID);
+
+     public function fetchUsers();
+
+       public function updateUser($userID,$first_name,$last_name,$username);
+
+    // field access functions
+    public function fetchUserID($row);
+
+    public function fetchUserFirstName($row);
+
+    public function fetchUserLastName($row);
+
+    public function fetchUserRoleID($row);
+
+    public function fetchUserUserName($row);
+
+
+}
+?>
