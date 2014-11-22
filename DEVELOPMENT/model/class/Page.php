@@ -1,6 +1,7 @@
 <?php
 
-
+include_once("Style.php");
+include_once("ContentArea.php");
 
 class Page {
 
@@ -11,7 +12,8 @@ class Page {
   private $p_alias;         // String
   private $p_desc;          // String
   private $p_style;         // Style Object
-  private $p_createdby;    // Int
+  private $p_contentareas;  // Array of ContentArea Object
+  private $p_createdby;     // Int
   private $p_creationdate;  // String
   private $p_modifiedby;    // Int
   private $p_modifieddate;  // String
@@ -19,13 +21,14 @@ class Page {
 
   // Default Constructor.
   public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_style,
-              $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
+    $in_contentareas, $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->p_id = $in_id;
     $this->p_name = $in_name;
     $this->p_alias = $in_alias;
     $this->p_desc = $in_desc;
     $this->p_style = $in_style;
+    $this->p_contentareas = $in_contentareas;
     $this->p_createdby = $in_createdby;
     $this->p_creationdate = $in_creationdate;
     $this->p_modifiedby = $in_modifiedby;
@@ -92,6 +95,14 @@ class Page {
     return $this->p_style;
 
   } // getPStyle END
+
+
+  // p_contentareas GETTER
+  public function getContentAreas() {
+
+    return $this->p_contentareas;
+
+  } // getContentAreas END
 
 
   // p_createdby GETTER
