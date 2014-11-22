@@ -17,70 +17,72 @@ class UserModel
         // not doing anything at the moment
     }
 
+    // get all users from the CMS
     public function getAllUsers()
     {
         $this->m_DataAccess->connectToDB();
 
-        $arrayOfCustomerObjects = array();
+        $arrayOfUserObjects = array();
 
         $this->m_DataAccess->selectUsers();
 
-        while($row =  $this->m_DataAccess->fetchCustomers())
+        while($row =  $this->m_DataAccess->fetchUsers())
         {
-            $address = new Address(
-                $this->m_DataAccess->fetchAddressID($row),
-                $this->m_DataAccess->fetchAddress1($row),
-                $this->m_DataAccess->fetchAddress2($row)
-            );
-            $currentCustomer = new Customer($this->m_DataAccess->fetchCustomerID($row),
-                $this->m_DataAccess->fetchCustomerFirstName($row),
-                $this->m_DataAccess->fetchCustomerLastName($row),
-                $address);
 
-            $arrayOfCustomerObjects[] = $currentCustomer;
+            $currentUser =$this->constructUser($row);
+            $arrayOfUserObjects[] = $currentUser;
         }
 
         $this->m_DataAccess->closeDB();
 
-        return $arrayOfCustomerObjects;
+        return $arrayOfUserObjects;
     }
 
-    public function getCustomer($custID)
+    // returns a single user fetched from the CMS
+    public function getUser($userID)
     {
         $this->m_DataAccess->connectToDB();
 
-        $this->m_DataAccess->selectCustomerById($custID);
+        $this->m_DataAccess->selectUserById($userID);
 
-        $record =  $this->m_DataAccess->fetchCustomers();
+        $record =  $this->m_DataAccess->fetchUsers();
 
-
-        $address = new Address(
-            $this->m_DataAccess->fetchAddressID($record),
-            $this->m_DataAccess->fetchAddress1($record),
-            $this->m_DataAccess->fetchAddress2($record)
-        );
-        $fetchedCustomer = new Customer($this->m_DataAccess->fetchCustomerID($record),
-            $this->m_DataAccess->fetchCustomerFirstName($record),
-            $this->m_DataAccess->fetchCustomerLastName($record),
-            $address);
-
-
+        $fetchedUser = $this->constructUser($record);
 
         $this->m_DataAccess->closeDB();
 
-        return $fetchedCustomer;
+        return $fetchedUser;
     }
 
-    public function updateCustomer($customerToUpdate)
+    //  Updates a user in the CMS
+    public function updateUser($userToUpdate)
     {
         $this->m_DataAccess->connectToDB();
 
-        $recordsAffected = $this->m_DataAccess->updateCustomer($customerToUpdate->getID(),
-            $customerToUpdate->getFirstName(),
-            $customerToUpdate->getLastName());
+        $recordsAffected = $this->m_DataAccess->updateUser($userToUpdate->getID(),
+            $userToUpdate->getFirstName(),
+            $userToUpdate->getLastName(),
+            $userToUpdate->getUsername());
 
         return "$recordsAffected record(s) updated succesfully!";
     }
-}
 
+
+
+    //forms a user from the input array and returns it
+    private function constructUser($row)
+    {
+        $currentUser = new User($this->m_DataAccess->fetchUserID($row),
+            $this->m_DataAccess->fetchUserFirstName($row),
+            $this->m_DataAccess->fetchUserLastName($row),
+            $this->m_DataAccess->fetchUserRoleId($row),
+            $this->m_DataAccess->fetchUserUsername($row),
+            $this->m_DataAccess->fetchUserUsername($row),
+            $this->m_DataAccess->fetchUserCreator($row),
+            $this->m_DataAccess->fetchUserCreationDate($row),
+            $this->m_DataAccess->fetchUserModifiedBy($row),
+            $this->m_DataAccess->fetchUserModifiedDate($row));
+        return $currentUser;
+    }
+}
 ?>

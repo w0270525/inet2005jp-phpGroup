@@ -20,14 +20,14 @@ interface iUserDataModel
 
     // field access functions
     public function fetchUserID($row);
-
     public function fetchUserFirstName($row);
-
     public function fetchUserLastName($row);
-
     public function fetchUserRoleID($row);
-
     public function fetchUserUserName($row);
+    public function fetchUserSalt($row);
+    public function fetchUserPass($row);
+    public function fetchUserModifiedBy($row);
+
 
 
 }

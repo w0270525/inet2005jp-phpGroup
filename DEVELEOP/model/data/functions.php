@@ -17,13 +17,16 @@ class connect{
         {
             $this->dbConnection = new PDO("mysql:host=localhost;dbname=cms","root","inet2005");
             $this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo"conected";
         }
         catch(PDOException $ex)
         {
             die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
         }
 
+    }
+    function getConnection()
+    {
+        return $this->dbConnection;
     }
 
     // closes the database connection

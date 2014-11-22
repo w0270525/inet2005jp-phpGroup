@@ -1,7 +1,7 @@
 <?php
 
 
-class User {
+class User_ {
 
 
   // Variables :
