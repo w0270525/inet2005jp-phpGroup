@@ -41,7 +41,7 @@ class Article {
 
 
   // a_id GETTER
-  public function getAId() {
+  public function getId() {
 
     return $this->a_id;
 
@@ -49,12 +49,12 @@ class Article {
 
 
   // a_contentarea GETTER/SETTER
-  public function setAContentarea($a_contentarea) {
+  public function setContentarea($a_contentarea) {
 
     $this->a_contentarea = $a_contentarea;
 
   } // setAContentarea END
-  public function getAContentarea() {
+  public function getContentarea() {
 
     return $this->a_contentarea;
 
@@ -62,12 +62,12 @@ class Article {
 
 
   // a_name GETTER/SETTER
-  public function setAName($a_name) {
+  public function setName($a_name) {
 
     $this->a_name = $a_name;
 
   } // setAName END
-  public function getAName() {
+  public function getName() {
 
     return $this->a_name;
 
@@ -75,12 +75,12 @@ class Article {
 
 
   // a_title GETTER/SETTER
-  public function setATitle($a_title) {
+  public function setTitle($a_title) {
 
     $this->a_title = $a_title;
 
   } // setATitle END
-  public function getATitle() {
+  public function getTitle() {
 
     return $this->a_title;
 
@@ -88,12 +88,12 @@ class Article {
 
 
   // a_desc GETTER/SETTER
-  public function setADesc($a_desc) {
+  public function setDesc($a_desc) {
 
     $this->a_desc = $a_desc;
 
   } // setADesc END
-  public function getADesc() {
+  public function getDesc() {
 
     return $this->a_desc;
 
@@ -101,12 +101,12 @@ class Article {
 
 
   // a_blurb GETTER/SETTER
-  public function setABlurb($a_blurb) {
+  public function setBlurb($a_blurb) {
 
     $this->a_blurb = $a_blurb;
 
   } // setABlurb END
-  public function getABlurb() {
+  public function getBlurb() {
 
     return $this->a_blurb;
 
@@ -114,12 +114,12 @@ class Article {
 
 
   // a_content GETTER/SETTER
-  public function setAContent($a_content) {
+  public function setContent($a_content) {
 
     $this->a_content = $a_content;
 
   } // setAContent END
-  public function getAContent() {
+  public function getContent() {
 
     return $this->a_content;
 
@@ -127,12 +127,12 @@ class Article {
 
 
   // a_assocpage GETTER/SETTER
-  public function setAAssocpage($a_assocpage) {
+  public function setAssocpage($a_assocpage) {
 
     $this->a_assocpage = $a_assocpage;
 
   } // setAAssocpage END
-  public function getAAssocpage() {
+  public function getAssocpage() {
 
     return $this->a_assocpage;
 
@@ -140,7 +140,7 @@ class Article {
 
 
   // a_createdby GETTER
-  public function getACreatedby() {
+  public function getCreatedby() {
 
     return $this->a_createdby;
 
@@ -148,7 +148,7 @@ class Article {
 
 
   // a_creationdate GETTER
-  public function getACreationdate() {
+  public function getCreationdate() {
 
     return $this->a_creationdate;
 
@@ -156,12 +156,12 @@ class Article {
 
 
   // a_modifiedby GETTER/SETTER
-  public function setAModifiedby($a_modifiedby) {
+  public function setModifiedby($a_modifiedby) {
 
     $this->a_modifiedby = $a_modifiedby;
 
   } // setAModifiedby END
-  public function getAModifiedby() {
+  public function getModifiedby() {
 
     return $this->a_modifiedby;
 
@@ -169,12 +169,12 @@ class Article {
 
 
   // a_modifieddate GETTER/SETTER
-  public function setAModifieddate($a_modifieddate) {
+  public function setModifieddate($a_modifieddate) {
 
     $this->a_modifieddate = $a_modifieddate;
 
   } // setAModifieddate END
-  public function getAModifieddate() {
+  public function getModifieddate() {
 
     return $this->a_modifieddate;
 

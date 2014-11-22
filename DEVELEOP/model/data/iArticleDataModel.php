@@ -4,7 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-interface iUserDataModel
+interface iArticleDataModel
 {
     public function connectToDB();
 
@@ -12,11 +12,11 @@ interface iUserDataModel
 
     public function selectArticles();
 
-    public function selectArticleById($custID);
+    public function selectArticleByArticleId($articleID);
 
-    public function fetchArticles();
+    //public function fetchAllArticles();
 
-    public function updateArticle($article);
+    //public function updateArticle($article);
 
     // field access functions
     public function fetchArticleID($row);

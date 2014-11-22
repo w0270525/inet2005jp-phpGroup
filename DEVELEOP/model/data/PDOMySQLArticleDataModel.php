@@ -3,9 +3,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-include  ('functions.php');
+require_once  ('functions.php');
 require_once 'iArticleDataModel.php';
-class PDOMySQLUserDataModel implements iUserDataModel
+class PDOMySQLArticleDataModel implements iArticleDataModel
 {
     private $connObject;
     private $dbConnection;
@@ -37,7 +37,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
         $start = 0;
         $count = 10;
 
-        $selectStatement = "SELECT * FROM ARTICLES";
+        $selectStatement = "SELECT * FROM ARTICLE ";
         $selectStatement .= " LEFT JOIN PAGE ON a_assocpage = PAGE.p_id ";
         $selectStatement .= " LIMIT :start,:count;";
 
@@ -56,7 +56,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
 
     }
 
-    public function selectArticlerByArticleId($articleID)
+    public function selectArticleByArticleId($articleID)
     {
         $selectStatement = "SELECT * FROM ARTICLE";
         $selectStatement .= " LEFT JOIN PAGE ON a_assocpage = PAGE.p_id ";
@@ -95,7 +95,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
         }
     }
 
-    // returns the Articele  result query of the Content Managemtn System
+    // returns the Articles  result query of the Content Managemtn System
     public function fetchArticle()
     {
         try
@@ -155,7 +155,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
     // returns the  Article description
     public function fetchArticleDescription($row)
     {
-        return $row['a_dec'];
+        return $row['a_desc'];
     }
 
     // returns the Article blurb
@@ -164,39 +164,44 @@ class PDOMySQLUserDataModel implements iUserDataModel
         return $row['a_blurb'];
 
     }
+    // returns the Article content ares
+    public function fetchArticleContentArea($row)
+    {
+        return $row['a_blurb'];
 
-    // returns the Article slt
+    }
+    // returns the Article cotnent
     public function fetchArticleContent($row)
     {
         return $row['a_content'];
     }
 
     // returns the Article asscoiated page
-    public function fetchArticlePage($row)
+    public function fetchArticleAssocPage($row)
     {
         return $row['a_assocpage'];
     }
 
     // returns the Article modified by
-    public function fetchArticleModifiedBy($row)
+    public function fetchArticleLastModifiedBy($row)
     {
         return $row['a_lastmodifiedby']   ;
     }
 
     // returns user creation date
-    public function fetchArticleCreationDate($row)
+    public function fetchArticleCreatedDate($row)
     {
-        return $row['a_creationDate'];
+        return $row['a_creationdate'];
     }
 
     // retrun user creator
-    public function fetchArticleCreator($row)
+    public function fetchArticleCreatedBy($row)
     {
         return $row['a_createdby'];
     }
 
     // returns last modified date
-    public function fetchArticleModifiedDate($row)
+    public function fetchArticleLastModifiedDate($row)
     {
         return $row['a_modifieddate'];
     }

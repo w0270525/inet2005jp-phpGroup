@@ -5,12 +5,7 @@
 class connect{
     protected $dbConnection;
 
-    // constructs the connection object and connects to the CMS data dbase at the same time
-//    function __constructor(){
-//
-//    }
-
-    // force connection to CMS database
+    // conects to the cms
     public function connectToDB()
     {
         try
@@ -35,6 +30,7 @@ class connect{
         // set a PDO connection object to null to close it
         $this->dbConnection = null;
     }
+
 
 
 }

@@ -1,7 +1,7 @@
 <?php
 
 
-class Article {
+class Article_ {
 
 
   // Variables :
