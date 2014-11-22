@@ -1,4 +1,5 @@
 <?php
+require_once "../controller/StyleController.php";
 require_once "../controller/UserController.php";
 require_once "../controller/ArticleController.php";
 require_once "../controller/PageController.php";
@@ -12,6 +13,7 @@ class MainController
         $this->userController = new UserController();
         $this->articleController = new ArticleController();
         $this->pageController = new PageController();
+        $this->styleController= new StyleController();
     }
 
 
@@ -35,4 +37,11 @@ class MainController
     {
         return $this->pageController;
     }
+
+    protected $styleController;
+    function styleController(){
+        return $this->styleController;
+    }
+
+
 }
