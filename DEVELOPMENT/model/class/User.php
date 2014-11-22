@@ -126,12 +126,12 @@ class User {
 
 
   // u_modifiedby GETTER/SETTER
-  public function setUModifiedBy($u_modifiedby) {
+  public function setModifiedBy($u_modifiedby) {
 
     $this->u_modifiedby = $u_modifiedby;
 
   } // setUModifiedby END
-  public function getUModifiedBy() {
+  public function getModifiedBy() {
 
     return $this->u_modifiedby;
 
@@ -139,13 +139,13 @@ class User {
 
 
   // u_modifieddate GETTER/SETTER
-  public function setUModifiedDate($u_modifieddate) {
+  public function setModifiedDate($u_modifieddate) {
 
     $this->u_modifieddate = $u_modifieddate;
 
   } // setUModifieddate END
 
-  public function getUModifiedDate() {
+  public function getModifiedDate() {
 
     return $this->u_modifieddate;
 
