@@ -7,3 +7,5 @@ $control->userController()->displayAction();
 $control->articleController()->displayAction();
 
 $control->pageController()->displayAction();
+
+$control->styleController()->displayAction();
