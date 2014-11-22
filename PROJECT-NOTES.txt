@@ -1,0 +1,37 @@
+
+
+SAT - 4:00PM
+AARON ALI
+I added some controllers and models for each of the classes. If you set
+the project to run and point it at the development folder you should be ale to see
+some unfinished html tables returning the values from the CMS data base for each of the major CMS tables.
+Getting a page from all this information should'nt be to hard now.
+
+
+DUE MONDAY
+REQ-008   Display of Generated Website (6 pts.)
+Users navigating to the front-end site in a web browser will be presented with a website,
+dynamically created from the pages, content areas, articles, and currently active CSS template
+defined in the CMS database. A menu with appropriate hyperlinks will be added to every page allowing
+ for complete navigation of the site. If multiple articles are currently defined in the database for
+  a particular content area on a particular page, newer articles will show up first/on top in that area.
+All users will be able to display the basic site without having to log in.
+NOTE: IN ORDER TO TEST THIS REQUIREMENT DURING THE CODE REVIEW AT LEAST FOUR PAGES, EACH
+WITH AT LEAST FOUR CONTENT AREAS, EACH WITH AT LEAST ONE ARTICLE (i.e. AN ARTICLE IN ALL
+CONTENT AREAS ON ALL PAGES) WILL NEED TO ALREADY BE CREATED WITH SUFFICIENT TEXT TO LOOK
+PRESENTABLE. LOREM IPSUM TEXT FROM A SITE SUCH AS http://www.lipsum.com/ IS ACCEPTABLE.
+YOU WILL ALSO NEED TWO CSS TEMPLATES PREDEFINED WITH DIFFEREING STYLES SO WE CAN TEST
+ SWITCHING BACK AND FORTH BETWEEN THE TWO.
+
+
+REQ-0020 Entity Relationship Diagram for Custom CMS Database (5 pts.)
+An Entity Relationship Diagram (ERD) document will be created for the MySQL database to support
+the custom CMS web application. The document will use Crow’s Feet Notation. All entities and
+relationships will be reflected in the document. All relevant fields, data types, and keys will be
+appropriately indicated.
+
+REQ-0021 MySQL Workbench Data Model (5 pts.)
+The Entity Relationship Diagram (ERD) document described in RE-0020 above should be implemented
+ as a MySQL Workbench Data Model. The model should be added to Source Control (see REQ-0022) and
+ sample data should be included in this model. With sample data included, you will generate a sample
+ database to use for development.
