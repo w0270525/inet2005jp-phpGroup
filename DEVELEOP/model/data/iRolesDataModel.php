@@ -10,11 +10,11 @@ interface iRolesDataModel
     public function closeDB();
 
     public function selectRoles();
-    public function selectRolesById($custID);
+    public function selectRolesById($roleID);
 
     public function fetchRoles();
 
-    public function updateRoleArea($userID,$first_name,$last_name,$username);
+   // public function updateRoleArea($userID,$first_name,$last_name,$username);
 
     // field access functions
     public function fetchRoleID($row);

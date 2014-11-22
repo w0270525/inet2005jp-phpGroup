@@ -1,6 +1,7 @@
 <?php
 require_once "../controller/UserController.php";
 require_once "../controller/ArticleController.php";
+require_once "../controller/PageController.php";
 class MainController
 {
     // This class contains a single controller for each of the data models
@@ -10,6 +11,7 @@ class MainController
     {
         $this->userController = new UserController();
         $this->articleController = new ArticleController();
+        $this->pageController = new PageController();
     }
 
 
@@ -28,4 +30,9 @@ class MainController
         return $this->articleController;
     }
 
+    protected $pageController;
+    function pageController()
+    {
+        return $this->pageController;
+    }
 }

@@ -12,9 +12,9 @@ interface iPageDataModel
     public function selectPages();
     public function selectPageById($custID);
 
-    public function fetchUsers();
+    public function fetchPage();
 
-    public function updatePage($userID,$first_name,$last_name,$username);
+   // public function updatePage($userID,$first_name,$last_name,$username);
 
     // field access functions
     public function fetchPageID($row);
@@ -23,8 +23,8 @@ interface iPageDataModel
     public function fetchPageStyle($row);
     public function fetchPageCreatedBy($row);
     public function fetchPageCreatedDate($row);
-    public function fetchPageModifiedBy($row);
-    public function fetchPageModifiedDate($row);
+    public function fetchPageLastModifiedBy($row);
+    public function fetchPageLastModifiedDate($row);
 
 
 

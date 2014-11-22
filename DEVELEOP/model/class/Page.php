@@ -1,6 +1,6 @@
 <?php
 
-require_once "../model/Style.php";
+
 
 class Page {
 
@@ -35,7 +35,7 @@ class Page {
 
 
   // p_id GETTER
-  public function getPId() {
+  public function getId() {
 
     return $this->p_id;
 
@@ -43,12 +43,12 @@ class Page {
 
 
   // p_name GETTER/SETTER
-  public function setPName($p_name) {
+  public function setName($p_name) {
 
     $this->p_name = $p_name;
 
   } // setPName END
-  public function getPName() {
+  public function getName() {
 
     return $this->p_name;
 
@@ -56,12 +56,12 @@ class Page {
 
 
   // p_alias GETTER/SETTER
-  public function setPAlias($p_alias) {
+  public function setAlias($p_alias) {
 
     $this->p_alias = $p_alias;
 
   } // setPAlias END
-  public function getPAlias() {
+  public function getAlias() {
 
     return $this->p_alias;
 
@@ -69,12 +69,12 @@ class Page {
 
 
   // p_desc GETTER/SETTER
-  public function setPDesc($p_desc) {
+  public function setDesc($p_desc) {
 
     $this->p_desc = $p_desc;
 
   } // setPDesc END
-  public function getPDesc() {
+  public function getDesc() {
 
     return $this->p_desc;
 
@@ -82,12 +82,12 @@ class Page {
 
 
   // p_style GETTER/SETTER
-  public function setPStyle($p_style) {
+  public function setStyle($p_style) {
 
     $this->p_style = $p_style;
 
   } // setPStyle END
-  public function getPStyle() {
+  public function getStyle() {
 
     return $this->p_style;
 
@@ -95,7 +95,7 @@ class Page {
 
 
   // p_createdby GETTER
-  public function getPCreatedby() {
+  public function getCreatedby() {
 
     return $this->p_createdby;
 
@@ -103,7 +103,7 @@ class Page {
 
 
   // p_creationdate GETTER
-  public function getPCreationdate() {
+  public function getCreationdate() {
 
     return $this->p_creationdate;
 
@@ -111,12 +111,12 @@ class Page {
 
 
   // p_modifiedby GETTER/SETTER
-  public function setPModifiedby($p_modifiedby) {
+  public function setModifiedby($p_modifiedby) {
 
     $this->p_modifiedby = $p_modifiedby;
 
   } // setPModifiedby END
-  public function getPModifiedby() {
+  public function getModifiedby() {
 
     return $this->p_modifiedby;
 
@@ -124,12 +124,12 @@ class Page {
 
 
   // p_modifieddate GETTER/SETTER
-  public function setPModifieddate($p_modifieddate) {
+  public function setModifieddate($p_modifieddate) {
 
     $this->p_modifieddate = $p_modifieddate;
 
   } // setPModifieddate END
-  public function getPModifieddate() {
+  public function getModifieddate() {
 
     return $this->p_modifieddate;
 

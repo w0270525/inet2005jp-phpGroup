@@ -5,3 +5,5 @@ $control = new MainController();
 $control->userController()->displayAction();
 
 $control->articleController()->displayAction();
+
+$control->pageController()->displayAction();

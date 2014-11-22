@@ -2,7 +2,7 @@
 
 require_once "../model/Style.php";
 
-class Page {
+class Page_ {
 
 
   // Variables :
