@@ -70,7 +70,45 @@
 
     <?php
 
-      // loop through content areas and echo their associated articles.
+      $sql = "SELECT * FROM cms.CONTENT_AREAS ";
+      $sql .= "WHERE c_a_assocpage = ";
+      $sql .= $_GET['page'] . " ";
+      $sql .= "ORDER BY c_a_order;";
+
+      $result = mysqli_query($db, $sql);
+
+      while($row = mysqli_fetch_assoc($result)) {
+
+    ?>
+
+    <div class="<?php echo $row['c_a_alias']; ?>">
+
+      <?php
+
+        $sql = "SELECT * FROM cms.ARTICLE ";
+        $sql .= "WHERE a_assocpage = " . $_GET['page'] . " ";
+        $sql .= "AND a_contentarea = " . $row['c_a_id'] . " ";
+        $sql .= "ORDER BY a_creationdate;";
+        $articleResults = mysqli_query($db, $sql);
+
+        while($artRow = mysqli_fetch_assoc($articleResults)) {
+
+      ?>
+
+      <h3><?php echo $artRow['a_title']; ?></h3>
+      <article><?php echo $artRow['a_content']; ?></article>
+
+      <?php
+
+        } // while END
+
+      ?>
+
+    </div>
+
+    <?php
+
+      } // while END
 
 
       mysqli_close($db);
