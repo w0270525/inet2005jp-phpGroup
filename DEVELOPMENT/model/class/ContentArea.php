@@ -1,5 +1,6 @@
 <?php
 
+include_once("Article.php");
 
 class ContentArea {
 
@@ -10,6 +11,7 @@ class ContentArea {
   private $c_a_alias;         // String
   private $c_a_desc;          // String
   private $c_a_order;         // Int
+  private $c_a_articles;      // Array of Article Object
   private $c_a_assocpage;     // Int
   private $c_a_createdby;     // Int
   private $c_a_creationdate;  // String
@@ -18,14 +20,15 @@ class ContentArea {
 
 
   // Default Constructor
-  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_order, $in_assocpage,
-                            $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
+  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_order, $in_articles,
+            $in_assocpage, $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->c_a_id = $in_id;
     $this->c_a_name = $in_name;
     $this->c_a_alias = $in_alias;
     $this->c_a_desc = $in_desc;
     $this->c_a_order = $in_order;
+    $this->c_a_articles = $in_articles;
     $this->c_a_assocpage = $in_assocpage;
     $this->c_a_createdby = $in_createdby;
     $this->c_a_creationdate = $in_creationdate;
@@ -36,7 +39,7 @@ class ContentArea {
 
 
   // c_a_id GETTER
-  public function getCAId() {
+  public function getId() {
 
     return $this->c_a_id;
 
@@ -44,109 +47,117 @@ class ContentArea {
 
 
   // c_a_name GETTER/SETTER
-  public function setCAName($c_a_name) {
+  public function setName($c_a_name) {
 
     $this->c_a_name = $c_a_name;
 
-  } // setCAName END
-  public function getCAName() {
+  } // setName END
+  public function getName() {
 
     return $this->c_a_name;
 
-  } // getCAName END
+  } // getName END
 
 
   // a_alias GETTER/SETTER
-  public function setCAAlias($c_a_alias) {
+  public function setAlias($c_a_alias) {
 
     $this->c_a_alias = $c_a_alias;
 
-  } // setCAAlias END
-  public function getCAAlias() {
+  } // setAlias END
+  public function getAlias() {
 
     return $this->c_a_alias;
 
-  } // getCAAlias END
+  } // getAlias END
 
 
   // c_a_desc GETTER/SETTER
-  public function setCADesc($c_a_desc) {
+  public function setDesc($c_a_desc) {
 
     $this->c_a_desc = $c_a_desc;
 
-  } // setCADesc END
-  public function getCADesc() {
+  } // setDesc END
+  public function getDesc() {
 
     return $this->c_a_desc;
 
-  } // getCADesc END
+  } // getDesc END
 
 
   // c_a_order GETTER/SETTER
-  public function setCAOrder($c_a_order) {
+  public function setOrder($c_a_order) {
 
     $this->c_a_order = $c_a_order;
 
-  } // setCAOrder END
-  public function getCAOrder() {
+  } // setOrder END
+  public function getOrder() {
 
     return $this->c_a_order;
 
-  } // getCAOrder END
+  } // getOrder END
+
+
+  // c_a_articles GETTER
+  public function getArticles() {
+
+    return $this->c_a_articles;
+
+  } // getArticles END
 
 
   // c_a_assocpage GETTER/SETTER
-  public function setCAAssocpage($c_a_assocpage) {
+  public function setAssocpage($c_a_assocpage) {
 
     $this->c_a_assocpage = $c_a_assocpage;
 
-  } // setCAAssocpage END
-  public function getCAAssocpage() {
+  } // setAssocpage END
+  public function getAssocpage() {
 
     return $this->c_a_assocpage;
 
-  } // getCAAssocpage END
+  } // getAssocpage END
 
 
   // c_a_createdby GETTER
-  public function getCACreatedby() {
+  public function getCreatedby() {
 
     return $this->c_a_createdby;
 
-  } // getCACreatedby END
+  } // getCreatedby END
 
   // c_a_creationdate GETTER
-  public function getCACreationdate() {
+  public function getCreationdate() {
 
     return $this->c_a_creationdate;
 
-  } // getCACreationdate END
+  } // getCreationdate END
 
 
   // c_a_modifiedby GETTER/SETTER
-  public function setCAModifiedby($c_a_modifiedby) {
+  public function setModifiedby($c_a_modifiedby) {
 
     $this->c_a_modifiedby = $c_a_modifiedby;
 
-  } // setCAModifiedby END
-  public function getCAModifiedby() {
+  } // setModifiedby END
+  public function getModifiedby() {
 
     return $this->c_a_modifiedby;
 
-  } // getCAModifiedby END
+  } // getModifiedby END
 
 
   // c_a_modifieddate GETTER/SETTER
-  public function setCAModifieddate($c_a_modifieddate) {
+  public function setModifieddate($c_a_modifieddate) {
 
     $this->c_a_modifieddate = $c_a_modifieddate;
 
-  } // setCAModifieddate END
-  public function getCAModifieddate() {
+  } // setModifieddate END
+  public function getModifieddate() {
 
     return $this->c_a_modifieddate;
 
-  } // getCAModifieddate END
+  } // getModifieddate END
 
 
 } // ContentArea END
