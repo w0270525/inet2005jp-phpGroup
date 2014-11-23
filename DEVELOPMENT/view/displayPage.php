@@ -12,13 +12,13 @@
 
       } else {
 
-        $sql = "SELECT * FROM cms.PAGES";
-        $sql .= "INNER JOIN cms.STYLE ON PAGES.p_style = STYLE.s_id";
-        $sql .= "INNER JOIN cms.CONTENT_AREAS ON PAGES.p_id = CONTENT_AREAS.c_a_assocpage";
-        $sql .= "INNER JOIN cms.ARTICLE ON CONTENT_AREAS.c_a_id = ARTICLE.a_contentarea";
+        $sql = "SELECT * FROM cms.PAGES ";
+        $sql .= "INNER JOIN cms.STYLE ON PAGES.p_style = STYLE.s_id ";
         $sql .= "WHERE p_id = ";
-        $sql .= $_GET['page'] . ";";
-
+        if(!empty($_GET['page']))
+          $sql .= $_GET['page'] . ";";
+        else
+          $sql .= "1;";
         $result = mysqli_query($db, $sql);
 
       } // if else END
@@ -29,12 +29,14 @@
 
       } // if END
 
+      $row = mysqli_fetch_assoc($result);
+
     ?>
 
-    <title><?php // echo p_name here ?></title>
+    <title><?php echo $row['p_name']; ?></title>
     <style>
 
-      <?php // echo s_style here ?>
+      <?php echo $row['s_style']; ?>
 
     </style>
   </head>
@@ -42,7 +44,74 @@
 
     <?php
 
-      // loop through content areas and echo their associated articles.
+      $sql = "SELECT * FROM cms.PAGES";
+      $result = mysqli_query($db, $sql);
+
+    ?>
+
+    <ul>
+
+    <?php
+
+      while($row = mysqli_fetch_assoc($result)) {
+
+    ?>
+
+      <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo $row['p_id']; ?>">
+          <?php echo $row['p_name']; ?></a></li>
+
+    <?php
+
+      } // while END
+
+    ?>
+
+    </ul>
+
+    <?php
+
+      $sql = "SELECT * FROM cms.CONTENT_AREAS ";
+      $sql .= "WHERE c_a_assocpage = ";
+      $sql .= $_GET['page'] . " ";
+      $sql .= "ORDER BY c_a_order;";
+
+      $result = mysqli_query($db, $sql);
+
+      while($row = mysqli_fetch_assoc($result)) {
+
+    ?>
+
+    <div class="<?php echo $row['c_a_alias']; ?>">
+
+      <?php
+
+        $sql = "SELECT * FROM cms.ARTICLE ";
+        $sql .= "WHERE a_assocpage = " . $_GET['page'] . " ";
+        $sql .= "AND a_contentarea = " . $row['c_a_id'] . " ";
+        $sql .= "ORDER BY a_creationdate;";
+        $articleResults = mysqli_query($db, $sql);
+
+        while($artRow = mysqli_fetch_assoc($articleResults)) {
+
+      ?>
+
+      <h3><?php echo $artRow['a_title']; ?></h3>
+      <article><?php echo $artRow['a_content']; ?></article>
+
+      <?php
+
+        } // while END
+
+      ?>
+
+    </div>
+
+    <?php
+
+      } // while END
+
+
+      mysqli_close($db);
 
     ?>
 
