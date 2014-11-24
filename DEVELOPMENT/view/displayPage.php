@@ -13,7 +13,6 @@
       } else {
 
         $sql = "SELECT * FROM cms.PAGES ";
-        $sql .= "INNER JOIN cms.STYLE ON PAGES.p_style = STYLE.s_id ";
         $sql .= "WHERE p_id = ";
         if(!empty($_GET['page']))
           $sql .= $_GET['page'] . ";";
@@ -35,9 +34,16 @@
 
     <title><?php echo $row['p_name']; ?></title>
     <style>
+      <?php
 
-      <?php echo $row['s_style']; ?>
+        $sql = "SELECT s_style FROM cms.STYLE";
+        $sql .= "WHERE s_active = 1;";
+        $result = mysqli_query($db, $sql);
+        $row = mysqli_fetch_assoc($result);
 
+        echo $row['s_style'];
+
+      ?>
     </style>
   </head>
   <body>
@@ -70,9 +76,13 @@
 
     <?php
 
-      $sql = "SELECT * FROM cms.CONTENT_AREAS ";
-      $sql .= "WHERE c_a_assocpage = ";
+      $sql = "SELECT CONTENT_AREAS.c_a_id, ";
+      $sql .= "CONTENT_AREAS.c_a_alias, ARTICLE.* ";
+      $sql .= "FROM cms.CONTENT_AREAS ";
+      $sql .= "INNER JOIN ARTICLE ON CONTENT_AREAS.c_a_id = ARTICLE.a_contentarea ";
+      $sql .= "WHERE a_assocpage = ";
       $sql .= $_GET['page'] . " ";
+      $sql .= "OR a_allpages = 1 ";
       $sql .= "ORDER BY c_a_order;";
 
       $result = mysqli_query($db, $sql);
@@ -82,29 +92,8 @@
     ?>
 
     <div class="<?php echo $row['c_a_alias']; ?>">
-
-      <?php
-
-        $sql = "SELECT * FROM cms.ARTICLE ";
-        $sql .= "WHERE (a_assocpage = " . $_GET['page'] . " ";
-        $sql .= "AND a_contentarea = " . $row['c_a_id'] . ") ";
-        $sql .= "OR a_allpages = 1 ";
-        $sql .= "ORDER BY a_creationdate;";
-        $articleResults = mysqli_query($db, $sql);
-
-        while($artRow = mysqli_fetch_assoc($articleResults)) {
-
-      ?>
-
-      <h3><?php echo $artRow['a_title']; ?></h3>
-      <article><?php echo $artRow['a_content']; ?></article>
-
-      <?php
-
-        } // while END
-
-      ?>
-
+      <h3><?php echo $row['a_title']; ?></h3>
+      <article><?php echo $row['a_content']; ?></article>
     </div>
 
     <?php
