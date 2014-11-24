@@ -86,8 +86,9 @@
       <?php
 
         $sql = "SELECT * FROM cms.ARTICLE ";
-        $sql .= "WHERE a_assocpage = " . $_GET['page'] . " ";
-        $sql .= "AND a_contentarea = " . $row['c_a_id'] . " ";
+        $sql .= "WHERE (a_assocpage = " . $_GET['page'] . " ";
+        $sql .= "AND a_contentarea = " . $row['c_a_id'] . ") ";
+        $sql .= "OR a_allpages = 1 ";
         $sql .= "ORDER BY a_creationdate;";
         $articleResults = mysqli_query($db, $sql);
 

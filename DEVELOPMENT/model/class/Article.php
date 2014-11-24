@@ -13,6 +13,7 @@ class Article {
   private $a_blurb;         // String
   private $a_content;       // String
   private $a_assocpage;     // Int
+  private $a_allpages;      // Bool
   private $a_createdby;     // Int
   private $a_creationdate;  // String
   private $a_modifiedby;    // Int
@@ -21,7 +22,7 @@ class Article {
 
   // Default Constructor
   public function __construct($in_id, $in_contentarea, $in_name, $in_title, $in_desc,
-                                $in_blurb, $in_content, $in_assocpage, $in_createdby,
+                   $in_blurb, $in_content, $in_assocpage, $in_allpages, $in_createdby,
                                   $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->a_id = $in_id;
@@ -32,6 +33,7 @@ class Article {
     $this->a_blurb = $in_blurb;
     $this->a_content = $in_content;
     $this->a_assocpage = $in_assocpage;
+    $this->a_allpages = $in_allpages;
     $this->a_createdby = $in_createdby;
     $this->a_creationdate = $in_creationdate;
     $this->a_modifiedby = $in_modifiedby;
@@ -137,6 +139,19 @@ class Article {
     return $this->a_assocpage;
 
   } // getAAssocpage END
+
+
+  // a_allpages GETTER/SETTER
+  public function setAllPages($a_allpages) {
+
+    $this->a_allpages = $a_allpages;
+
+  } // setAllPages END
+  public function getAllPages() {
+
+    return $this->a_allpages;
+
+  } // getAllPages END
 
 
   // a_createdby GETTER
