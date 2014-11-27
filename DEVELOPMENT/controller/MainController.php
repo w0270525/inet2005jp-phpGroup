@@ -49,23 +49,27 @@ class MainController
 
 
     function confirmUser($user, $pass)
-    { $x=$this->userController->model->getUserByUserName($user)->getPass();
-        $y= $this->userController->model->getUserByUserName($user)->getUsername();
+    {
+
         if($this->userController->model->getUserByUserName($user)->getPass()== $pass)
         {
             if( $this->userController->model->getUserByUserName($user)->getUsername())
         {
-           $_SESSION["logged"]=true;
+           $_SESSION["logged"]=serialize(true);
            $this->currentUser = $this->userController->model->getUserByUserName($user);
            $_SESSION["grants"]= $this->currentUser->getRoleId();
+
         }
     }
 
         else
         {
+            $_SESSION["user"]=null;
             $_SESSION["logged"]=false;
             $this->currentUser = null;
         }
+    //    $_SESSION["control"]=serialize($this);
+        $_SESSION["user"]=  serialize($this->currentUser );
         return $_SESSION["logged"];
     }
     // The current user of the site if  logged in

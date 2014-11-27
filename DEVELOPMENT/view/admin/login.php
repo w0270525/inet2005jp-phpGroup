@@ -8,7 +8,7 @@ if(!isset($_SESSION["logged"])||($_SESSION["logged"]==false))
 
     ?>
     <h1>Please enter you login credentials </h1>
-    <form action="#" method="post">
+    <form action="#" method="POST">
     <label>Username:<br>
     <input type="text" name="username"/>
     <br></label>
