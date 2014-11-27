@@ -1,3 +1,3 @@
-<h3>admin only page</h3>
+<h3>admin only page -> add styleView</h3>
 <?php
    echo $control->currentUser->getRoleId();

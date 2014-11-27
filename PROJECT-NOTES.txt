@@ -1,4 +1,22 @@
-THURSDAY MORNING
+
+THURSDAY PM
+
+Login in is finished, we can keep testing it as we continue but it seems to be fully functional. I added a bootstrap
+bar to the admin view so we can see who is logged in.
+The login process now uses session variables to persist the login. You can access the current user through the main control on
+any view that is loaded through the index.The main controller is a stored as a session variable  so query results should also peresit when the
+pages change. Access the login page with '/admin' after the site address.
+When a proper logout occurs all session variables are destroyed, controller reset, and the session file is deleted from the system
+
+if you rebuilt the database with the script or used the updated insert portion,  all login pass are "admin" user names should be admin, editor, and user
+
+Users  currently only can have have one role as getRoleId()returns an int, this will probably have to be changed to an array but I
+will try to find a workaround;
+
+
+
+
+Thursday MORNING
 
 LOGIN is almost functional
 to access the login type localhost:port/admin to add the login veiw to the index page

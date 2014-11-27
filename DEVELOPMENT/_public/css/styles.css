@@ -1,14 +1,14 @@
-#bodyMain{
-    color:blue;
-    top:60px;
+#cmsCmsAdminBar{
+   padding-bottom:15px;
+
 
 }
 .bodyMain{
-
+padding-top:10px;
 }
 #body{
 
 }
 .body{
-
+    margin-top:60px;
 }

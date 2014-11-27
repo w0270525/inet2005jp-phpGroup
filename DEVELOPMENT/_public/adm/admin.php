@@ -2,23 +2,33 @@
 
 
 <?php
+    // confirm loggin
    if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
    {
        include_once("../model/class/User.php");
+
+       //grab instance of current user
        $control->currentUser = unserialize($_SESSION["user"]);
        ?>
-       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-           <div class="container">
-               <span class="loginDiv" id="loginDiv">Logged in as :<?php  echo $control->currentUser->getUsername() ?> </span>
 
+       <!--BOOT STRAP ENABLED NAV BAR -->
+       <nav class="navbar navbar-default navbar-fixed-top" role="navigation" class="cmsCmsAdminBar" id="cmsCmsAdminBar" >
+           <div class="container-fluid">
+                <ul class="nav navbar-nav">
+
+                    <!--show current user -->
+                   <li> <a>username</a></li>
+                   <li class="active"> <a> <?php  echo $control->currentUser->getUsername()?></a></li>
+
+                    <!-- show logout button -->
+                   <li><a><form action="#" method="post" name="logout" id="logout" ><input type="submit" name="logout" id="logout" class="logout" value="logout" ></form></a></li>
+
+                </ul>
            </div>
        </nav>
-       <?php
+      <?php
 
-
-
-
-       // this switch statem can be usede to assign ceratin views to certain roleIDS
+       // this switch statement can be usede to assign ceratin views to certain roleIDS
        switch ( $control->currentUser->getRoleId())
        {
            case 1:

@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
- <body>
+<body>
     <div class="bodyMain" id="bodyMain">
         <?php
 
@@ -30,37 +30,62 @@
            $_SESSION["control"] = serialize(new  MainController());
         }
 
-        //creat local non serialize controller for use
+        // clears the current login
+        // resets all session variables resets controller and forces page reset
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+            if(isset($_POST["logout"]))
+            {
+                $sessionFile="../sessions/sess_".  $_SESSION["sessionId"] ;
+                $_SESSION["control"] = serialize(new  MainController());
+                $_SESSION["sessionid"] =  null;
+                $_SESSION["logged"]=false;
+                $_SESSION["grants"]=0;
+
+                // FIND THE SESSION FILE ND DELETE IT FROM THE SYSTEM
+                unlink($sessionFile);
+                header("refresh: 0;");
+        }
+
+
+        //create local non serialize controller for use
         $control = unserialize( $_SESSION["control"]);
 
         //add the session user to the unserilzed controller
         if(isset($_SESSION["user"])) $control->currentUser=$_SESSION["user"];
 
 
-
+        // SETS CURRENT PAGE  IF NOT SET
         if(!isset($_GET['page'] )||empty($_GET['page'] ))
         {
            $_GET['page'] =1;
         }
+
+
+        //HANDLES ADMIN LOGIN AND FUNCTIONALITY
         if($_SERVER["REQUEST_URI"]=="/admin")
         {
+            // login
             if(!empty($_POST["username"]) && !empty($_POST["password"]))
             {
                global $control ;
                 $_SESSION["logged"] =$control->confirmUser($_POST["username"],$_POST["password"]);
-          //      $_SESSION["control"]=serialize($control);
             }
+            //show login page
             if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
             include ("../view/admin/login.php");
         }
+
+        // DIRECT LINK TO VIEW PAGES
         //$control->userController()->displayAction();
-
         //$control->articleController()->displayAction();
-
         //$control->pageController()->displayAction();
-
         //$control->styleController()->displayAction();
-        include("./adm/admin.php");
+
+
+        // VIEWS TO DISPLAY
+
+        //user login view
+        if(isset($_SESSION["logged"]) && ($_SESSION["logged"])) include("./adm/admin.php");
         include("../view/displayPage.php");
 
     ?>
