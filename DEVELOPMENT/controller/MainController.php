@@ -49,18 +49,27 @@ class MainController
 
 
     function confirmUser($user, $pass)
-    {
-        $_SESSION["logged"]=$this->userController->model->getUserByUserName($user)->getPass()== $pass &&
-            $this->userController->model->getUserByUserName($user)->getUsername();
-        if($_SESSION["logged"])
-        $user = $this->userController->model->getUserByUserName($user);
+    { $x=$this->userController->model->getUserByUserName($user)->getPass();
+        $y= $this->userController->model->getUserByUserName($user)->getUsername();
+        if($this->userController->model->getUserByUserName($user)->getPass()== $pass)
+        {
+            if( $this->userController->model->getUserByUserName($user)->getUsername())
+        {
+           $_SESSION["logged"]=true;
+           $this->currentUser = $this->userController->model->getUserByUserName($user);
+           $_SESSION["grants"]= $this->currentUser->getRoleId();
+        }
+    }
 
-        if( $_SESSION["logged"])$_SESSION["grants"]=$user->getRoleId();
-        else $_SESSION["logged"]=false;
+        else
+        {
+            $_SESSION["logged"]=false;
+            $this->currentUser = null;
+        }
         return $_SESSION["logged"];
     }
     // The current user of the site if  logged in
-    public $currentUserName = NULL;
+    public $currentUser = NULL;
     // inACTIVE LOGOFF / COOKIE RESET
     private $userTimeOut = 60000;
 }

@@ -286,3 +286,7 @@ CREATE INDEX `u_r_l_d_idx` ON `cms`.`USER_ROLES` (`u_r_l_r_id` ASC);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+UPDATE `cms`.`USER_ROLES` SET `u_r_u_id`='3' WHERE `u_r_id`='3';
+UPDATE `cms`.`USER_ROLES` SET `u_r_u_id`='2' WHERE `u_r_id`='2';

@@ -4,7 +4,7 @@ if(!isset($_SESSION["logged"])||($_SESSION["logged"]==false))
     $_SESSION["logged"]=false;
     $_SESSION["user"]=null;
 
-    echo "please loging";
+    echo "please login to access CMS management";
 
     ?>
     <h1>Please enter you login credentials </h1>
@@ -20,6 +20,6 @@ if(!isset($_SESSION["logged"])||($_SESSION["logged"]==false))
 <?php
 
 }else{
-    echo"hello admin";
+    echo"place logout script here - this is from../view/admin/login.php";
 }
 

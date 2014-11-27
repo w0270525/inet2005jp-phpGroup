@@ -24,7 +24,7 @@ class User {
 //
 //      $this->__construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
 //          $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate);
-//      $this->u_r_id=$u_r_id;
+       $this->u_r_id=$u_r_id;
 //
 
 //  public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
@@ -167,7 +167,7 @@ class User {
     }
     public function getRoleId() {
 
-        return $this->u_modifieddate;
+        return $this->u_r_id;
 
     } // getUModifieddate END
 } // User END
