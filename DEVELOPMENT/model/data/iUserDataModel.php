@@ -12,7 +12,8 @@ interface iUserDataModel
 
     public function selectUsers();
     
-     public function selectUserById($custID);
+     public function selectUserById($userID);
+
 
      public function fetchUsers();
 
@@ -27,7 +28,6 @@ interface iUserDataModel
     public function fetchUserSalt($row);
     public function fetchUserPass($row);
     public function fetchUserModifiedBy($row);
-
 
 
 }

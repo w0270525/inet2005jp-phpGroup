@@ -19,6 +19,10 @@ class UserController
         include '../view/displayUser.php';
     }
 
+
+
+
+
       // updates the current user to the
 //     public function updateAction($userID)
 //     {

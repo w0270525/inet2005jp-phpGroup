@@ -75,7 +75,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
         }
     }
     
-    // returns the users of the Conent Managemtn System
+    // returns the users of the Content Management System
     public function fetchUsers()
     {
         try
@@ -88,6 +88,42 @@ class PDOMySQLUserDataModel implements iUserDataModel
             die('FetchUser failed : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
+
+    // SELSCT USERES BY USER NAME
+    public function selectUserByName($userName)
+    {
+        $selectStatement = "SELECT * FROM USER";
+        $selectStatement .= " LEFT JOIN USER_ROLES ON u_id = USER_ROLES.u_r_u_id";
+        $selectStatement .= " WHERE USER.u_username = :userName;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(':userName', $userName, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+        }
+        catch(PDOException $ex)
+        {
+            die('Select user by User Name failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+//    // returns the users of the Conent Managemtn System
+//    public function fetchUsers()
+//    {
+//        try
+//        {
+//            $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+//            return $this->result;
+//        }
+//        catch(PDOException $ex)
+//        {
+//            die('FetchUser failed : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+//        }
+//    }
+
+
 
     // updates the CMS user
     // need to add modified by param

@@ -16,11 +16,19 @@ class User {
   private $u_creationdate;
   private $u_modifiedby;
   private $u_modifieddate;
-
+  private $u_r_id;
 
   // Default Contructor
   public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
-                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
+                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate,$u_r_id){
+//
+//      $this->__construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
+//          $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate);
+//      $this->u_r_id=$u_r_id;
+//
+
+//  public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
+//                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->u_id = $in_id;
     $this->u_fname = $in_fname;
@@ -151,7 +159,17 @@ class User {
 
   } // getUModifieddate END
 
+    // role id GETTER/SETTER
+    public function setRoleId($u_modifieddate) {
 
+        $this->u_modifieddate = $u_modifieddate;
+
+    }
+    public function getRoleId() {
+
+        return $this->u_modifieddate;
+
+    } // getUModifieddate END
 } // User END
 
 

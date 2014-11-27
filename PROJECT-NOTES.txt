@@ -1,3 +1,11 @@
+THURSDAY MORNING
+
+LOGIN is almost functional
+to access the login type localhost:port/admin to add the login veiw to the index page
+updates scripts so new creation script has datetime value for all creation dates. Allow made some new
+users for testing useres. all passwords are "admin"\
+users are "admin", "editor", and "author"
+
 
 
 SAT - 4:00PM

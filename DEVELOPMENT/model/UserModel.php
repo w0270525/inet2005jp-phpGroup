@@ -53,6 +53,25 @@ class UserModel
 
         return $fetchedUser;
     }
+    // returns a single user fetched from the CMS
+
+
+    public function getUserByUserName($userName)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $this->m_DataAccess->selectUserByName($userName);
+
+        $record =  $this->m_DataAccess->fetchUsers();
+
+        $fetchedUser = $this->constructUser($record);
+
+        $this->m_DataAccess->closeDB();
+
+        return $fetchedUser;
+    }
+
+
 
     //  Updates a user in the CMS
     public function updateUser($userToUpdate)
@@ -81,7 +100,8 @@ class UserModel
             $this->m_DataAccess->fetchUserCreator($row),
             $this->m_DataAccess->fetchUserCreationDate($row),
             $this->m_DataAccess->fetchUserModifiedBy($row),
-            $this->m_DataAccess->fetchUserModifiedDate($row));
+            $this->m_DataAccess->fetchUserModifiedDate($row),
+            $this->m_DataAccess->fetchUserRoleID($row));
         return $currentUser;
     }
 }
