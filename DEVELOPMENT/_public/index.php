@@ -14,6 +14,7 @@
     <div class="bodyMain" id="bodyMain">
         <?php
 
+
         //init the user session
         //
         if(session_status()==PHP_SESSION_NONE) {
@@ -60,7 +61,26 @@
            $_GET['page'] =1;
         }
 
+        // Author login process
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+            if(isset($_POST["authorName"]))
+        {
+            if($control->confirmUser($_POST["authorName"],$_POST["password"]))
+            // only allow autors to login through main page, rediectb others to the admin login page
+            if($control->currentUser->getRoleId()!=3){
+                $_SESSION["user"]=null;$_SESSION["logged"]=false;
+                $_SESSION["controler"]= new MainController();
+                header("Location: /admin");
+            }
 
+         }
+
+
+
+
+        // show the pagelogin only if not logged in already
+        if(!isset($_SESSION["logged"]) || !$_SESSION["logged"])
+            include ("../view/admin/pageLoginMenuView.php");
         //HANDLES ADMIN LOGIN AND FUNCTIONALITY
         if($_SERVER["REQUEST_URI"]=="/admin")
         {
@@ -69,11 +89,14 @@
             {
                global $control ;
                 $_SESSION["logged"] =$control->confirmUser($_POST["username"],$_POST["password"]);
+
             }
             //show login page
             if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
             include ("../view/admin/login.php");
         }
+
+
 
         // DIRECT LINK TO VIEW PAGES
         //$control->userController()->displayAction();
