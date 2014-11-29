@@ -51,7 +51,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('select ARTICLES() failed : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+            die('selectArticles failed  in PDOMySQLPageArticleModel: : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
         }
 
     }
@@ -71,7 +71,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Articles by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByArticleId failed  in PDOMySQLPageArticleModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Articles by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByPageId failed  in PDOMySQLPageArticleModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Fetch Article failed : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+            die('fetchArticle failed  in PDOMySQLPageArticleModel: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 

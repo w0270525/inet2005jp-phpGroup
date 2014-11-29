@@ -153,27 +153,71 @@ class PDOMySQLUserDataModel implements iUserDataModel
 
     // updates the CMS user
     // need to add modified by param
-    public function updateUser($userID,$first_name,$last_name,$username)
+    public function updateUser($userID,$first_name,$last_name,$username,$userRoles, $userCreatedBy)
     {
-        $updateStatement = "UPDATE user";
-        $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
-        $updateStatement .= " WHERE u_id = :userID;";
+
+
+        $updateStatement="update USER SET  u_fname = :firstName, u_lname= :lastName, u_username = :userName WHERE u_id= :userID;";
+        $roles = $this->selectUserRoles($userID);
+        $rowCount=0;
+        $rowCountDeleted=0;
 
         try
-        {
-            $this->stmt = $this->dbConnection->prepare($updateStatement);
+        {   $this->stmt = $this->dbConnection->prepare($updateStatement);
             $this->stmt->bindParam(':firstName', $first_name, PDO::PARAM_STR);
             $this->stmt->bindParam(':lastName', $last_name, PDO::PARAM_STR);
             $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $this->stmt->bindParam(':userName', $username, PDO::PARAM_STR);
             $this->stmt->execute();
 
-            return $this->stmt->rowCount();
+
+            $rowCount = $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('Update failed  in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('Update failed on updateing userInfo in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
+        if($roles!=$userRoles){
+
+            //remove roles();
+            $updateStatement="DELETE  FROM USER_ROLES where u_r_u_id = :userID;";
+
+             try
+            {   $this->stmt = $this->dbConnection->prepare($updateStatement);
+                $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+                $this->stmt->execute();
+                $rowCountDeleted = $this->stmt->rowCount();
+
+            }
+            catch(PDOException $ex)
+            {
+                die('Update failed on delete user roles in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            }
+            $updateStatement=null;
+            foreach($userRoles as $role){
+               $updateStatement="INSERT INTO USER_ROLES VALUES(DEFAULT, :userID ,:role) ; ";
+
+                try
+                {   $this->stmt = $this->dbConnection->prepare($updateStatement);
+                    $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+                    $this->stmt->bindParam(':role', $role, PDO::PARAM_INT);
+                    $this->stmt->execute();
+                    $rowCount+= $this->stmt->rowCount();
+
+
+                }
+                catch(PDOException $ex)
+                {
+                    die('Update failed on adding new user roles in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+                }
+            }
+        }
+
+
+
+
+        return $rowCount;
+
     }
 
     // returns the user id

@@ -50,7 +50,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
         catch(PDOException $ex)
         {
-            die('select Styles() failed : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+            die('selectStyles failed in PDOMySQLStyleDataModel  : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
         }
 
     }
@@ -71,7 +71,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Pages() by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectStyleByPageId failed in PDOMySQLStyleDataModel  : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Pages by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectStyleByStyleId failed in PDOMySQLStyleDataModel  : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Fetch Article failed : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+            die('fetchstyle failed in PDOMySQLStyleDataModel  : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
         catch(PDOException $ex)
         {
-            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('updateStyle failed in PDOMySQLStyleDataModel : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
 

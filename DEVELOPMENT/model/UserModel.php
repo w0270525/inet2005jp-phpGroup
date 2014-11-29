@@ -96,10 +96,14 @@ class UserModel
     {
         $this->m_DataAccess->connectToDB();
 
-        $recordsAffected = $this->m_DataAccess->updateUser($userToUpdate->getID(),
+        $recordsAffected = $this->m_DataAccess->updateUser(
+            $userToUpdate->getID(),
             $userToUpdate->getFirstName(),
             $userToUpdate->getLastName(),
-            $userToUpdate->getUsername());
+            $userToUpdate->getUsername(),
+            $userToUpdate->getRoleId(),
+            $userToUpdate->getCreatedBy());
+
 
         return "$recordsAffected record(s) updated succesfully!";
     }

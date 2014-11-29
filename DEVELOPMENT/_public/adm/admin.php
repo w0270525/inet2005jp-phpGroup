@@ -10,6 +10,7 @@
    if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
    {
        include_once("../model/class/User.php");
+       include_once("miniViews/functions.php");
 
        //grab instance of current user
        $control->currentUser = unserialize($_SESSION["user"]);
@@ -112,7 +113,7 @@
                     // EDITOR CUSTOM MENU ITEMS
                     // EDITOR CUSTOM MENU ITEMS
                     // EDITOR CUSTOM MENU ITEMS
-                    if($control->currentUser->isAuthor())
+                    if($control->currentUser->isEditor())
                     {
                         ?>
 
@@ -124,7 +125,7 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li data-target="viewUsers" id="viewUserNav" ><a href="#">View Users</a></li>
+                                <li data-target="" id="viewUserNav" ><a href="#">View Users</a></li>
                                 <li data-target="addNewUser" id="addUsers"><a href="#"   >Add User</a></li>
                                 <li data-target="removeUser" id="removeUsers" ><a href="#" >Remove User</a></li>
                             </ul>
@@ -173,14 +174,29 @@
 
             if($_SERVER["REQUEST_METHOD"]=="GET")
             {
+                //custom handling with GET variable
                 if(isset($_GET["update"]) && !empty($_GET["update"]) &&   $_GET["update"]!=NULL )
                 {
                     $tempController->userController()->displayAdvancedAction($_GET["update"]);
                 }
             }
-            if($_SERVER["REQUEST_METHOD"]=="post")
+            if($_SERVER["REQUEST_METHOD"]=="POST")
             {
-                //custom handling with post variable
+                //custom handling with GET variable
+                if((isset($_GET["update"]) && (isset($_POST["updateId"]) && checkVar($_POST["updateId"]) && checkVar($_POST["userName"]) &&
+                        checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))
+                        && $_GET["update"]  == $_POST["updateId"]))
+                {
+                        $roles =array();
+                       if(isset($_POST["admin"]))
+                            $roles[]=1;
+                        if(isset($_POST["editor"]))
+                            $roles[]=2;
+                        if(isset($_POST["author"]))
+                            $roles[]=3;
+                    $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"],
+                        $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
+                }
             }
             ?>
             <!--CUSTOM ADMIN VIEWS -->

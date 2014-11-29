@@ -118,6 +118,14 @@ class User {
 
   } // getUCreatedby END
 
+    // u_createdby SETTER
+    public function setCreatedBy($creator) {
+
+        $this->u_createdby = $creator;
+
+    } // setUCreatedby END
+
+
 
   // u_creationdate GETTER
   public function getCreationDate() {
@@ -154,9 +162,9 @@ class User {
   } // getUModifieddate END
 
     // role id GETTER/SETTER
-    public function setRoleId($u_modifieddate) {
+    public function setRoleId($u_r_id) {
 
-        $this->u_modifieddate = $u_modifieddate;
+        $this->u_r_id = $u_r_id;
 
     }
     public function getRoleId() {

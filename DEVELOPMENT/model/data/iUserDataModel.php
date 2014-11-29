@@ -17,7 +17,7 @@ interface iUserDataModel
 
      public function fetchUsers();
 
-       public function updateUser($userID,$first_name,$last_name,$username);
+       public function updateUser($userID,$first_name,$last_name,$username,$userRoles,$userCreator);
 
     // field access functions
     public function fetchUserID($row);

@@ -50,7 +50,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('select Pages() failed : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+            die('selectPages failed  in PDOMySQLPageDataModel: Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
         }
 
     }
@@ -70,7 +70,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Pages() by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectPageById failed  in PDOMySQLPageDataModel: by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('Select Pages by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByPageId failed  in PDOMySQLPageDataModel: : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('Fetch Article failed : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByPageId failed  in PDOMySQLPageDataModel:  : Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -127,7 +127,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('updatePage failed  in PDOMySQLPageDataModel: Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
 
