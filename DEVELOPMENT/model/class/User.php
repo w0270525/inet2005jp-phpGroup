@@ -21,14 +21,8 @@ class User {
   // Default Contructor
   public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
                            $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate,$u_r_id){
-//
-//      $this->__construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
-//          $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate);
-       $this->u_r_id=$u_r_id;
-//
 
-//  public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
-//                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
+       $this->u_r_id=$u_r_id;
 
     $this->u_id = $in_id;
     $this->u_fname = $in_fname;
@@ -170,6 +164,55 @@ class User {
         return $this->u_r_id;
 
     } // getUModifieddate END
+
+
+    public function getRoleIds() {
+
+
+
+        return $this->u_r_id;
+
+    } // getUModifieddate END
+
+
+
+    // return true if user is admin
+    public function isAdmin()
+    {
+
+        foreach  ($this->u_r_id as $int)
+        {
+            if($int==1)
+                return true;
+        }
+        return false;
+    }
+
+    // retrun true if user is Author
+    public function isAuthor()
+    {
+        $int;
+        foreach  ( $this->u_r_id  as $int)
+        {
+            if($int==3)
+                return true;
+        }
+        return false;
+    }
+
+    // return true  if user is editor
+    public function isEditor()
+    {
+        $int;
+        foreach  ( $this->u_r_id   as $int )
+        {
+            if($int==2)
+                return true;
+        }
+        return false;
+    }
+
+
 } // User END
 
 

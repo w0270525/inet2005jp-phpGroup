@@ -16,10 +16,21 @@ class UserController
     {
         $arrayOfUsers = $this->model->getAllUsers();
 
-        include '../view/displayUser.php';
+        include '../view/admin/userviews/displayUser.php';
+    }
+
+    public function displayAdvancedAction($UserId)
+    {
+        $fetchedUser = $this->model->getUser($UserId);
+
+        include '../view/admin/userviews/userViewAdvanced.php';
     }
 
 
+    public function getUserRoles()
+    {
+
+    }
 
 
 

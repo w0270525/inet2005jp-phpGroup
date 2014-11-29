@@ -12,3 +12,38 @@ padding-top:10px;
 .body{
     margin-top:60px;
 }
+
+.hidden {
+    display:none;
+}
+
+/* override boot strap for menu fluidity */
+.btn-group{
+  /*   display: inline-block;*/
+}
+
+.table{
+
+
+}
+
+.glyphicon
+{
+
+    display:block;
+    text-align:center
+
+}
+.table
+{      display:block;
+    text-align:center;
+
+    border: 1px solid black;
+    margin-left:10%;
+    margin-right:10%;
+    width: 60%;
+}
+th, td
+{
+    border: 1px solid red;
+}

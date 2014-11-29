@@ -23,16 +23,18 @@ class UserModel
         $this->m_DataAccess->connectToDB();
 
         $arrayOfUserObjects = array();
+        $arrayOfUserObjects_  = array();
 
         $this->m_DataAccess->selectUsers();
 
         while($row =  $this->m_DataAccess->fetchUsers())
         {
-
-            $currentUser =$this->constructUser($row);
-            $arrayOfUserObjects[] = $currentUser;
+            $arrayOfUserObjects_[] = $row;
         }
-
+        foreach ($arrayOfUserObjects_  as $user){
+            $arrayOfUserObjects[]= $this->constructUser($user);
+        }
+       // $currentUser =$this->constructUser($row);
         $this->m_DataAccess->closeDB();
 
         return $arrayOfUserObjects;
@@ -61,6 +63,22 @@ class UserModel
         $this->m_DataAccess->connectToDB();
 
         $this->m_DataAccess->selectUserByName($userName);
+
+        $record =  $this->m_DataAccess->fetchUsers();
+
+        $fetchedUser = $this->constructUser($record);
+
+        $this->m_DataAccess->selectUserRoles($fetchedUser->getId());
+      //   $fetchedUser->setRoleId($this->m_DataAccess->selectUserRoles($fetchedUser->getId()));
+        $this->m_DataAccess->closeDB();
+        return $fetchedUser;
+
+    }
+    public function getUserRoleByUserIds($userId)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $this->m_DataAccess->selectUserRoles($userId);
 
         $record =  $this->m_DataAccess->fetchUsers();
 
@@ -101,7 +119,8 @@ class UserModel
             $this->m_DataAccess->fetchUserCreationDate($row),
             $this->m_DataAccess->fetchUserModifiedBy($row),
             $this->m_DataAccess->fetchUserModifiedDate($row),
-            $this->m_DataAccess->fetchUserRoleID($row));
+            //$this->m_DataAccess->fetchUserRoleID($row));
+        $this->m_DataAccess->selectUserRoles($this->m_DataAccess->fetchUserID($row)));
         return $currentUser;
     }
 }

@@ -1,5 +1,7 @@
 <html>
 <head>
+    <!-- Jquery -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- BOOTSTRAP  --->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <!-- Optional theme -->
@@ -8,51 +10,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 
+
+
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="bodyMain" id="bodyMain">
         <?php
-
-
         //init the user session
-        //
-        if(session_status()==PHP_SESSION_NONE) {
-            session_save_path("../sessions");
-            session_start();
-        }
-        require ("../controller/MainController.php");
+        include("sessionHandler.php");
 
-        // init the controller for the session
-        // must be serialized in session varible
-        $sessionID = session_id();
-        if (!isset($_SESSION["sessionId"]) ||!isset($_SESSION["control"])){
-           $_SESSION["sessionId"] =session_id();
-           $_SESSION["control"] = serialize(new  MainController());
-        }
-
-        // clears the current login
-        // resets all session variables resets controller and forces page reset
-        if($_SERVER["REQUEST_METHOD"]=="POST")
-            if(isset($_POST["logout"]))
-            {
-                $sessionFile="../sessions/sess_".  $_SESSION["sessionId"] ;
-                $_SESSION["control"] = serialize(new  MainController());
-                $_SESSION["sessionid"] =  null;
-                $_SESSION["logged"]=false;
-                $_SESSION["grants"]=0;
-
-                // FIND THE SESSION FILE ND DELETE IT FROM THE SYSTEM
-                unlink($sessionFile);
-                header("refresh: 0;");
-        }
-
-
-        //create local non serialize controller for use
-        $control = unserialize( $_SESSION["control"]);
-
-        //add the session user to the unserilzed controller
-        if(isset($_SESSION["user"])) $control->currentUser=$_SESSION["user"];
 
 
         // SETS CURRENT PAGE  IF NOT SET
@@ -66,8 +33,8 @@
             if(isset($_POST["authorName"]))
         {
             if($control->confirmUser($_POST["authorName"],$_POST["password"]))
-            // only allow autors to login through main page, rediectb others to the admin login page
-            if($control->currentUser->getRoleId()!=3){
+            // only allow authors to login through main page, rediectb others to the admin login page
+            if(!($control->currentUser->isAuthor())){
                 $_SESSION["user"]=null;$_SESSION["logged"]=false;
                 $_SESSION["controler"]= new MainController();
                 header("Location: /admin");

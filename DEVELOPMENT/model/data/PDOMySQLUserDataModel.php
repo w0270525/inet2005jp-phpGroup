@@ -31,21 +31,19 @@ class PDOMySQLUserDataModel implements iUserDataModel
 
     // gets all the Users from the database
     // returns an array with user information including roles
+
+
     public function selectUsers()
     {
         // hard-coding for first ten rows
-        $start = 0;
-        $count = 10;
+        global $userResult;
+        $selectStatement = "SELECT * FROM USER;";
 
-        $selectStatement = "SELECT * FROM USER";
-        $selectStatement .= " LEFT JOIN USER_ROLES ON u_id = USER_ROLES.u_r_u_id; ";
-        $selectStatement .= " LIMIT :start,:count;";
+     //   $selectStatement .= " LIMIT :start,:count;";
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement );
-            $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
-            $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
 
             $this->stmt->execute();
         }
@@ -59,8 +57,8 @@ class PDOMySQLUserDataModel implements iUserDataModel
     public function selectUserById($userID)
     {
         $selectStatement = "SELECT * FROM USER";
-        $selectStatement .= " LEFT JOIN user_roles ON u_r_i_id = user_roles.u_r_u_id";
-        $selectStatement .= " WHERE user.u_id = :userID;";
+       // $selectStatement .= " LEFT JOIN USER_ROLES ON u_r_i_id = USER_ROLES.u_r_u_id";
+        $selectStatement .= " WHERE USER.u_id = :userID;";
 
         try
         {
@@ -123,6 +121,34 @@ class PDOMySQLUserDataModel implements iUserDataModel
 //        }
 //    }
 
+    // returns an array of user roles based on a user id
+    public function selectUserRoles($userId)
+    {
+        $selectStatement="SELECT u_r_l_r_id FROM cms.USER_ROLES WHERE u_r_u_id = :userId;";
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+           // $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+
+            $rows= $this->stmt->rowCount();
+            $userRoles= array();;$counter = 0 ;
+
+
+            while ($row =$this->stmt->fetch(PDO::FETCH_ASSOC)) {
+               $userRoles[$counter]=$row["u_r_l_r_id"];
+                $counter++;
+            }
+
+            return $userRoles;
+        }
+        catch(PDOException $ex)
+        {
+            die('getUserRoles  failed in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
 
 
     // updates the CMS user
@@ -146,7 +172,7 @@ class PDOMySQLUserDataModel implements iUserDataModel
         }
         catch(PDOException $ex)
         {
-            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('Update failed  in PDOMySQLUserDataModel.php : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -168,11 +194,33 @@ class PDOMySQLUserDataModel implements iUserDataModel
        return $row['u_lname'];
     }
 
-    // returns the  user role id
+    // returns the   user role id
     public function fetchUserRoleID($row)
     {
-        return $row['u_r_u_id'];
+        return $row['u_r_l_r_id'];
     }
+
+        // returns all role ods for the user as an array
+    public function fetchUserRoleIDs($row)
+    {
+        try
+        {
+            $row;
+            $roles= array();$counter=0;
+            $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            foreach($row as  $this->result ){
+                $roles[$counter]=$row["u_r_l_r_id"];
+                $counter++;
+            }
+            return $roles;
+        }
+        catch(PDOException $ex)
+        {
+            die('Fetch userRoleIDs failed in PDOMySQLDataModel.php: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+        }
+
+    }
+
 
     // returns the user name
     public function fetchUserUsername($row)
@@ -216,6 +264,8 @@ class PDOMySQLUserDataModel implements iUserDataModel
     {
         return $row['u_modifieddate'];
     }
+
+
 }
 
 ?>
