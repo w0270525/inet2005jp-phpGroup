@@ -16,7 +16,7 @@ class ArticleController
     {
         $arrayOfArticles = $this->model->getAllArticles();
 
-        include '../view/displayArticles.php';
+        include '../view/admin/articleviews/displayArticlesView.php';
     }
 
     // updates the current user to the

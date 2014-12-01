@@ -38,7 +38,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         $count = 10;
 
         $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= " LEFT JOIN PAGE ON a_assocpage = PAGE.p_id ";
+        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
         $selectStatement .= " LIMIT :start,:count;";
 
         try
@@ -59,7 +59,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     public function selectArticleByArticleId($articleID)
     {
         $selectStatement = "SELECT * FROM ARTICLE";
-        $selectStatement .= " LEFT JOIN PAGE ON a_assocpage = PAGE.p_id ";
+        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
         $selectStatement .= " WHERE ARTICLE.a_id = :articleID;";
 
         try
@@ -75,12 +75,12 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
     }
 
-    // returns the Articles asscoiated with a specific page ID
+    // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM ARTICLE";
-        $selectStatement .= " LEFT JOIN PAGE ON a_assocpage = PAGE.p_id ";
-        $selectStatement .= " WHERE PAGE.p_id = :pageID;";
+        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
+        $selectStatement .= " WHERE PAGES.p_id = :pageID;";
 
         try
         {
@@ -176,7 +176,13 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         return $row['a_content'];
     }
 
-    // returns the Article asscoiated page
+    // returns pages in all articles
+    public function fetchArticleInAllPages($row)
+    {
+        return $row['a_allpages'];
+    }
+
+    // returns the Article asscoiated PAGES
     public function fetchArticleAssocPage($row)
     {
         return $row['a_assocpage'];

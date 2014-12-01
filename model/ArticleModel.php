@@ -87,6 +87,7 @@ class ArticleModel
             $this->m_DataAccess->fetchArticleBlurb($row),
             $this->m_DataAccess->fetchArticleContent($row),
             $this->m_DataAccess->fetchArticleAssocPage($row),
+            $this->m_DataAccess->fetchArticleInAllPages($row),
             $this->m_DataAccess->fetchArticleCreatedBy($row),
             $this->m_DataAccess->fetchArticleCreatedDate($row),
             $this->m_DataAccess->fetchArticleLastModifiedBy($row),

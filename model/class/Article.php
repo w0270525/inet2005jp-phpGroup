@@ -134,7 +134,7 @@ class Article {
     $this->a_assocpage = $a_assocpage;
 
   } // setAAssocpage END
-  public function getAssocpage() {
+  public function getAssocPage() {
 
     return $this->a_assocpage;
 
@@ -155,7 +155,7 @@ class Article {
 
 
   // a_createdby GETTER
-  public function getCreatedby() {
+  public function getCreatedBy() {
 
     return $this->a_createdby;
 
@@ -163,7 +163,7 @@ class Article {
 
 
   // a_creationdate GETTER
-  public function getCreationdate() {
+  public function getCreatedDate() {
 
     return $this->a_creationdate;
 
@@ -171,12 +171,12 @@ class Article {
 
 
   // a_modifiedby GETTER/SETTER
-  public function setModifiedby($a_modifiedby) {
+  public function setModifiedBy($a_modifiedby) {
 
     $this->a_modifiedby = $a_modifiedby;
 
   } // setAModifiedby END
-  public function getModifiedby() {
+  public function getModifiedBy() {
 
     return $this->a_modifiedby;
 
@@ -184,12 +184,12 @@ class Article {
 
 
   // a_modifieddate GETTER/SETTER
-  public function setModifieddate($a_modifieddate) {
+  public function setModifiedDate($a_modifieddate) {
 
     $this->a_modifieddate = $a_modifieddate;
 
   } // setAModifieddate END
-  public function getModifieddate() {
+  public function getModifiedDate() {
 
     return $this->a_modifieddate;
 
