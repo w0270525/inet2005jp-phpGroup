@@ -6,7 +6,7 @@ if(session_status()==PHP_SESSION_NONE) {
 session_save_path("../sessions");
 session_start();
 }
-require ("../controller/MainController.php");
+require("../controller/MainController.php");
 
 // init the controller for the session
 // must be serialized in session varible

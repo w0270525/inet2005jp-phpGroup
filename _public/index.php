@@ -61,7 +61,7 @@
 
         // show the pagelogin only if not logged in already
         if(!isset($_SESSION["logged"]) || !$_SESSION["logged"])
-            include ("../view/admin/pageLoginMenuView.php");
+            include("../view/admin/pageLoginMenuView.php");
 
 
         //HANDLES ADMIN LOGIN AND FUNCTIONALITY

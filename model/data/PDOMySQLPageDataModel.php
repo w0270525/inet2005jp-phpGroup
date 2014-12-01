@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-require_once  ('functions.php');
+require_once('functions.php');
 require_once 'iPageDataModel.php';
 class PDOMySQLPageDataModel implements iPageDataModel
 {

@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-include  ('functions.php');
+include('functions.php');
 require_once 'iUserDataModel.php';
 class PDOMySQLUserDataModel implements iUserDataModel
 {

@@ -85,7 +85,7 @@ function updateSecurity()
                     {
                        // $bnasd3432er   = md5(uniqid(rand(), true));
                         $bnasd3432er   = "";
-                        include ("../view/admin/userviews/resetpassword.php");
+                        include("../view/admin/userviews/resetpassword.php");
                     }
 
             }else if(!$pswReset)
@@ -112,7 +112,7 @@ function updateSecurity()
     public function login()
     {
         $bnasd3432er   = md5(uniqid(rand(), true));
-        include ("../view/admin/login.php");
+        include("../view/admin/login.php");
     }
 
 
