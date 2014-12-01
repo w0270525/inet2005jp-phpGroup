@@ -142,8 +142,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
                             <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
+                            <li data-target="viewContent"  id="viewContents" ><a href="#">View Content Areas</a></li>
+                            <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
                             <li data-target="addNewPage"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="removePage" id="removePage" ><a href="#" >Remove Page</a></li>
                         </ul>
@@ -153,6 +154,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                         {
                             $('#viewPages').hide();
                             $('#viewArticles').hide();
+                            $('#viewContent').hide();
                             $('#addNewPage').hide();
                             $('#removePage').hide();
 
@@ -286,7 +288,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="addNewPage"  class="containerAdmin"><?php
             $control->pageController()->addAction();
             ?></div>
-
+        <div id="viewContent"  class="containerAdmin"><?php
+            $control->contentController()->displayAction();
+            ?></div>
 
     <?php
     }

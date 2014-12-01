@@ -3,6 +3,7 @@ require_once "../controller/StyleController.php";
 require_once "../controller/UserController.php";
 require_once "../controller/ArticleController.php";
 require_once "../controller/PageController.php";
+require_once "../controller/ContentAreaController.php";
 
 class MainController
 {
@@ -15,12 +16,18 @@ class MainController
         $this->articleController = new ArticleController();
         $this->pageController = new PageController();
         $this->styleController= new StyleController();
+        $this->contentController= new ContentAreaController() ;
     }
-
+    // Main Controllers content area controoler
+    protected $contentController;
+    public function contentController()
+    {
+        return $this->contentController;
+    }
 
     // Main Controllers user controoler
     protected $userController;
-    function userController()
+    public function userController()
     {
         return $this->userController;
     }
@@ -28,21 +35,21 @@ class MainController
 
     // main Controllers Article controller
     protected $articleController;
-    function articleController()
+    public function articleController()
     {
         return $this->articleController;
     }
 
     //page controller
     protected $pageController;
-    function pageController()
+    public function pageController()
     {
         return $this->pageController;
     }
 
     //style controller
     protected $styleController;
-    function styleController(){
+    public function styleController(){
         return $this->styleController;
     }
 

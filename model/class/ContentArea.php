@@ -1,6 +1,6 @@
 <?php
 
-include_once("Article.php");
+include_once("ContentArea.php");
 
 class ContentArea {
 
@@ -105,6 +105,13 @@ class ContentArea {
 
   } // getArticles END
 
+    // c_a_articles setter
+    public function setArticles($articles) {
+
+         $this->c_a_articles=$articles;
+
+    } // getArticles END
+
 
   // c_a_assocpage GETTER/SETTER
   public function setAssocpage($c_a_assocpage) {
@@ -120,14 +127,14 @@ class ContentArea {
 
 
   // c_a_createdby GETTER
-  public function getCreatedby() {
+  public function getCreatedBy() {
 
     return $this->c_a_createdby;
 
   } // getCreatedby END
 
   // c_a_creationdate GETTER
-  public function getCreationdate() {
+  public function getCreatedDate() {
 
     return $this->c_a_creationdate;
 
@@ -135,12 +142,12 @@ class ContentArea {
 
 
   // c_a_modifiedby GETTER/SETTER
-  public function setModifiedby($c_a_modifiedby) {
+  public function setModifiedBy($c_a_modifiedby) {
 
     $this->c_a_modifiedby = $c_a_modifiedby;
 
   } // setModifiedby END
-  public function getModifiedby() {
+  public function getModifiedBy() {
 
     return $this->c_a_modifiedby;
 
@@ -148,12 +155,12 @@ class ContentArea {
 
 
   // c_a_modifieddate GETTER/SETTER
-  public function setModifieddate($c_a_modifieddate) {
+  public function setModifieddDate($c_a_modifieddate) {
 
     $this->c_a_modifieddate = $c_a_modifieddate;
 
   } // setModifieddate END
-  public function getModifieddate() {
+  public function getModifiedDate() {
 
     return $this->c_a_modifieddate;
 
