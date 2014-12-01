@@ -95,7 +95,7 @@ class Style {
 
   
   // s_createdby GETTER
-  public function getCreatedby() {
+  public function getCreatedBy() {
 
     return $this->s_createdby;
 
@@ -103,7 +103,7 @@ class Style {
 
 
   // s_creationdate GETTER
-  public function getCreationdate() {
+  public function getCreatedDate() {
 
     return $this->s_creationdate;
 
@@ -111,12 +111,12 @@ class Style {
 
 
   // s_modifiedby GETTER/SETTER
-  public function setModifiedby($s_modifiedby) {
+  public function setModifieBy($s_modifiedby) {
 
     $this->s_modifiedby = $s_modifiedby;
 
   } // setSModifiedby END
-  public function getModifiedby() {
+  public function getModifiedBy() {
 
     return $this->s_modifiedby;
 
@@ -124,12 +124,12 @@ class Style {
 
 
   // s_modifieddate GETTER/SETTER
-  public function setModifieddate($s_modifieddate) {
+  public function setModifiedDate($s_modifieddate) {
 
     $this->s_modifieddate = $s_modifieddate;
 
   } // setSModifieddate END
-  public function getModifieddate() {
+  public function getModifiedDate() {
 
     return $this->s_modifieddate;
 

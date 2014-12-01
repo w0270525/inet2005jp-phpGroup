@@ -145,6 +145,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
                             <li data-target="viewContent"  id="viewContents" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
+                            <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
                             <li data-target="addNewPage"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="removePage" id="removePage" ><a href="#" >Remove Page</a></li>
                         </ul>
@@ -291,7 +292,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="viewContent"  class="containerAdmin"><?php
             $control->contentController()->displayAction();
             ?></div>
-
+        <div id="viewStyles"   class="containerAdmin"><?php
+            $control->styleController()->displayAction();
+            ?></div>
     <?php
     }
 

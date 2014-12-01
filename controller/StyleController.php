@@ -16,7 +16,7 @@ class StyleController
     {
         $arrayOfStyles = $this->model->getAllStyles();
 
-        include '../view/displayStyles.php';
+        include '../view/admin/styleviews/displayStylesView.php';
     }
 
     // updates the current user to the

@@ -36,8 +36,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         // hard-coding for first ten rows
         $start = 0;
         $count = 10;
-        $selectStatement = "SELECT * FROM STYLE ";
-        $selectStatement .= " LEFT JOIN PAGE ON s_id = PAGE.p_style";
+        $selectStatement = "SELECT * FROM STYLE  LEFT JOIN USER ON s_createdby = USER.u_id";
         $selectStatement .= " LIMIT :start,:count;";
 
         try
@@ -55,12 +54,12 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
 
     }
 
-    //returns the styles based on page ID
+    //returns the styles based on PAGES ID
     public function selectStyleByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM STYLE ";
-        $selectStatement .= " LEFT JOIN PAGE ON s_id = PAGE.p_style";
-        $selectStatement .= " WHERE PAGE.p_id= :pageID;";
+        $selectStatement .= " LEFT JOIN PAGES ON s_id = PAGES.p_style";
+        $selectStatement .= " WHERE PAGES.p_id= :pageID;";
 
         try
         {
@@ -79,7 +78,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     public function selectStyleById($styleID)
     {
         $selectStatement = "SELECT * FROM STYLE ";
-        $selectStatement .= " LEFT JOIN PAGE ON s_id = PAGE.p_style";
+        $selectStatement .= " LEFT JOIN PAGES ON s_id = PAGES.p_style";
         $selectStatement .= " WHERE s_id= :styleID;";
         try
         {
@@ -94,7 +93,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         }
     }
 
-    // returns the Page  result query of the Content Managemtn System
+    // returns the PAGES  result query of the Content Managemtn System
     public function fetchStyles()
     {
         try
@@ -112,7 +111,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     // need to add modified by param
     public function updateStyle($userID,$first_name,$last_name,$username)
     {
-        $updateStatement = "UPDATE PAGE";
+        $updateStatement = "UPDATE PAGES";
         $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
         $updateStatement .= " WHERE u_id = :userID;";
 
@@ -176,7 +175,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
         return $row['s_creationdate'];
     }
 
-    // retrun page creator
+    // retrun PAGES creator
     public function fetchStyleCreatedBy($row)
     {
         return $row['s_createdby'];
