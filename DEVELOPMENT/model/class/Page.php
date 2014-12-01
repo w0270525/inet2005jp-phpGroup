@@ -20,15 +20,15 @@ class Page {
 
 
   // Default Constructor.
-  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_style,
-    $in_contentareas, $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
+  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_articles,
+     $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->p_id = $in_id;
     $this->p_name = $in_name;
     $this->p_alias = $in_alias;
     $this->p_desc = $in_desc;
-    $this->p_style = $in_style;
-    $this->p_contentareas = $in_contentareas;
+    $this->p_style = $in_articles;
+
     $this->p_createdby = $in_createdby;
     $this->p_creationdate = $in_creationdate;
     $this->p_modifiedby = $in_modifiedby;
@@ -106,7 +106,7 @@ class Page {
 
 
   // p_createdby GETTER
-  public function getCreatedby() {
+  public function getCreatedBy() {
 
     return $this->p_createdby;
 
@@ -114,7 +114,7 @@ class Page {
 
 
   // p_creationdate GETTER
-  public function getCreationdate() {
+  public function getCreatedDate() {
 
     return $this->p_creationdate;
 
@@ -122,12 +122,12 @@ class Page {
 
 
   // p_modifiedby GETTER/SETTER
-  public function setModifiedby($p_modifiedby) {
+  public function setModifiedBy($p_modifiedby) {
 
     $this->p_modifiedby = $p_modifiedby;
 
   } // setPModifiedby END
-  public function getModifiedby() {
+  public function getModifiedBy() {
 
     return $this->p_modifiedby;
 
@@ -135,12 +135,12 @@ class Page {
 
 
   // p_modifieddate GETTER/SETTER
-  public function setModifieddate($p_modifieddate) {
+  public function setModifiedDate($p_modifieddate) {
 
     $this->p_modifieddate = $p_modifieddate;
 
   } // setPModifieddate END
-  public function getModifieddate() {
+  public function getModifiedDate() {
 
     return $this->p_modifieddate;
 

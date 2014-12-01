@@ -16,9 +16,24 @@ class PageController
     {
         $arrayOfPages = $this->model->getAllPages();
 
-        include '../view/displayPages.php';
+        include '../view/admin/pageviews/displayPageView.php';
     }
 
+    public function updateAction($id)
+    {
+        $arrayOfPages = $this->model->getPage($id);
+
+        include '../view/admin/pageviews/editPageViews.php';
+    }
+
+
+
+    public function addAction()
+    {
+       // $arrayOfPages = $this->model->getAllPages();
+
+        include '../view/admin/pageviews/addPageView.php';
+    }
     // updates the current user to the
 //     public function updateAction($userID)
 //     {

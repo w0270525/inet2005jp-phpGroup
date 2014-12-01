@@ -17,10 +17,10 @@ class User {
   private $u_modifiedby;
   private $u_modifieddate;
   private $u_r_id;
-
+  private $u_key;
   // Default Contructor
   public function __construct($in_id, $in_fname, $in_lname, $in_username, $in_pass, $in_salt,
-                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate,$u_r_id){
+                           $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate,$u_r_id,$u_key){
 
        $this->u_r_id=$u_r_id;
 
@@ -34,7 +34,7 @@ class User {
     $this->u_creationdate = $in_creationdate;
     $this->u_modifiedby = $in_modifiedby;
     $this->u_modifieddate = $in_modifieddate;
-
+      $this->u_key = $u_key;
   } // Default Constructor END
 
 
@@ -187,7 +187,13 @@ class User {
     // return true if user is admin
     public function isAdmin()
     {
+        if($this->u_r_id==null )
+        {
+            $this->u_r_id =  array();
+            $this->u_r_id[]=0;
 
+
+        }
         foreach  ($this->u_r_id as $int)
         {
             if($int==1)
@@ -219,6 +225,47 @@ class User {
         }
         return false;
     }
+
+
+
+    public function setKey($key)
+    {
+        $this->u_key = $key;
+
+    }
+
+
+    public function getKey()
+    {
+        return $this->u_key ;
+
+    }
+
+
+    public function updateSecurity(){
+      $this->u_salt =  md5(uniqid(rand(), true));
+        $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
+        $passwordHashRaw = crypt ( $this->u_pass,$cryptPefix );
+        $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
+        $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
+        $this->u_pass=$passwordHash;
+
+
+
+    }
+
+
+    public function encrypt($input)
+    {
+        $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
+        $passwordHashRaw = crypt ( $input,$cryptPefix );
+        $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
+        $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
+        return $passwordHash;
+    }
+
+
+
 
 
 } // User END

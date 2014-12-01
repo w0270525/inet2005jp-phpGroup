@@ -1,4 +1,5 @@
-
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
     .hidden {
         display:none;
@@ -86,9 +87,9 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li data-target="viewUsers" id="viewUserNav" ><a href="#">View Users</a></li>
-                                    <li data-target="addNewUser" id="addUsers"><a href="#"   >Add User</a></li>
-                                    <li data-target="removeUser" id="removeUsers" ><a href="#" >Remove User</a></li>
+                                    <li data-target="" id="" ><a href="#">View Users</a></li>
+                                    <li data-target="" id=""><a href="#"   >Add User</a></li>
+                                    <li data-target="" id="" ><a href="#" >Remove User</a></li>
                                 </ul>
                             </div><!-- /btn-group -->
 
@@ -118,19 +119,22 @@
                         ?>
 
 
-                        <div class="btn-group">
+                        <div class="btn-group" id="btnGroup Editor">
                             <button type="button" class="btn btn-default">Manage Author Items</button>
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                 <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li data-target="" id="viewUserNav" ><a href="#">View Users</a></li>
-                                <li data-target="addNewUser" id="addUsers"><a href="#"   >Add User</a></li>
-                                <li data-target="removeUser" id="removeUsers" ><a href="#" >Remove User</a></li>
+                                <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
+                                <li data-target="addNewPage"   id="addNewPag"><a href="#"   >Add Page</a></li>
+                                <li data-target="removePage" id="removePage" ><a href="#" >Remove Page</a></li>
                             </ul>
                         </div><!-- /btn-group -->
+<script>
 
+
+</script>
                      <?php
 
                         // EDITOR CUSTOM GET AND POST VARIABLES
@@ -197,6 +201,21 @@
                     $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"],
                         $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
                 }
+              if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) &&
+                        checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
+                {
+                    $roles =array();
+                    if(isset($_POST["admin"]))
+                        $roles[]=1;
+                    if(isset($_POST["editor"]))
+                        $roles[]=2;
+                    if(isset($_POST["author"]))
+                        $roles[]=3;
+                    $_POST["roles"]=$roles;
+
+                    $tempController->userController()->confirmNewUser($control->currentUser);
+
+                }
             }
             ?>
             <!--CUSTOM ADMIN VIEWS -->
@@ -206,23 +225,50 @@
 
             <div id="viewUsers"  class="containerAdmin"><?php
                 $tempController->userController()->displayAction();
-            ?>
+            ?></div>
+
+           <div id="addNewUser"  class="containerAdmin"><?php
+                $tempController->userController()->addNewUser();
+           ?></div>
+          <?php //  <div id="deleteUser"  class="containerAdmin"><?php include("../view/admin/userviews/addUserView.php");?> </div>
+            <?php
+
+            //////////////////////// EDITOR VIEWS ///////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////
+            if($control->currentUser->isEditor())
+              {
+                  // CUSTOM EDITOR GET AN POST
+                  // CUSTOM EDITOR GET AN POST
+                  // CUSTOM EDITOR GET AN POST
 
 
-            </div>
-            <div id="addNewUser"  class="containerAdmin"><?php include("../view/admin/addNewUser.php");?> </div>
-            <div id="deleteUser"  class="containerAdmin"><?php include("../view/admin/addUserView.php");?> </div>
+                  if($_SERVER["REQUEST_METHOD"]=="GET")
+                  {
+                     if(isset($_GET["pageupdate"])){
+                         $control->pageController()->updateAction($_GET["pageupdate"]);
+                     }
 
 
 
+
+
+                  }
+                      ?>
             <!--CUSTOM EDITOR VIEWS -->
             <!--CUSTOM EDITOR VIEWS -->
             <!--CUSTOM EDITOR VIEWS -->
 
-            <!--         include("../view/admin/addContentView.php");
-                         include("../view/admin/addPageView.php");
-                         include("../view/admin/addStyleView.php");
-               -->
+           <div id="viewPages"  class="containerAdmin"><?php
+               $control->pageController()->displayAction();
+           ?></div>
+           <div id="addNewPage"  class="containerAdmin"><?php
+               $control->pageController()->addAction();
+           ?></div>
+
+
+                  <?php
+              }
+                  ?>
 
 
 
@@ -249,7 +295,7 @@
 <script>
 
 //menu handling script to show and hide areas as the menu options are clicked
-$(document).ready(function() {
+
 
     $('.containerAdmin').hide();
     $('.btn-group li').click(function(){
@@ -258,6 +304,7 @@ $(document).ready(function() {
         $(target).show();
     });
 
-});
+
 
 </script>
+</html>

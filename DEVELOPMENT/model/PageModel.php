@@ -25,13 +25,15 @@ class PageModel
         $arrayOfPageObjects = array();
 
         $this->m_DataAccess->selectPages();
+        $int=0;
 
         while($row =  $this->m_DataAccess-> fetchPage())
 
         {
 
             $currentPage =$this->constructPage($row);
-            $arrayOfPageObjects[] = $currentPage;
+            $arrayOfPageObjects[$int] = $currentPage;
+            $int++;
         }
 
         $this->m_DataAccess->closeDB();
@@ -82,7 +84,8 @@ class PageModel
             $this->m_DataAccess->fetchPageName($row),
             $this->m_DataAccess->fetchPageAlias($row),
             $this->m_DataAccess->fetchPageDescription($row),
-            $this->m_DataAccess->fetchPageStyle($row),
+             null,
+           // $this->m_DataAccess->fetchPageContentArea($row),
             $this->m_DataAccess->fetchPageCreatedBy($row),
             $this->m_DataAccess->fetchPageCreatedDate($row),
             $this->m_DataAccess->fetchPageLastModifiedBy($row),

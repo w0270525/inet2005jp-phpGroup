@@ -16,7 +16,7 @@ function confirmLogin()
 
     $sessionFile="../sessions/sess_".  $_SESSION["sessionId"] ;
     unlink($sessionFile);
-    header("refresh: 0;");
+
 }
 
 

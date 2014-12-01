@@ -1,7 +1,5 @@
 
 
-
-
 function checkForm()
         {
             var val = document.form.n.value;
@@ -26,5 +24,23 @@ function toggleElement($element){
     $($element).show();
     };
 
+
+
+function encode(control)
+{
+    var ckey = $("dfd34234324").val();
+    var y=document.getElementById(control).value;
+    var encrypted = CryptoJS.AES.encrypt(y, ckey);
+    document.getElementById("#sdeesef").value=encrypted;
+}
+
+function decode(control)
+{
+    var ckey = $("#dfd34234324").val();
+    var y=document.getElementById(control).value;
+    var decrypted = CryptoJS.AES.decrypt(y, ckey);
+    decrypted = decrypted.toString(CryptoJS.enc.Utf8);
+    document.getElementById("cryptoff").value=decrypted;
+}
 
 

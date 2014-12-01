@@ -29,6 +29,8 @@ class PDOMySQLPageDataModel implements iPageDataModel
         $this->connObject=null;
     }
 
+
+
     // gets all the Pages from the database
     // returns an array with Pages information
     public function selectPages()
@@ -36,9 +38,9 @@ class PDOMySQLPageDataModel implements iPageDataModel
         // hard-coding for first ten rows
         $start = 0;
         $count = 10;
-        $selectStatement = "SELECT * FROM PAGE ";
-        $selectStatement .= " LEFT JOIN ARTICLE ON PAGE.p_id = ARTICLE.a_assocpage ";
-        $selectStatement .= " LIMIT :start,:count;";
+        $selectStatement = "SELECT * FROM PAGES ";
+        $selectStatement .= "    JOIN USER  ON p_createdBy = USER.u_id;";
+
 
         try
         {
@@ -55,18 +57,62 @@ class PDOMySQLPageDataModel implements iPageDataModel
 
     }
 
+
+
+    // gets all the Articles from the database asscicated with a page
+
+    public function selectPageArticles($id)
+    {
+        // hard-coding for first ten rows
+        $start = 0;
+        $count = 10;
+        $selectStatement = "SELECT * FROM ARTICLE ";
+        $selectStatement .= " Where a_assocpage  = :p_id OR a_allpages=1 ;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement );
+            $this->stmt->bindParam(':p_id', $id, PDO::PARAM_INT);
+            $this->stmt->execute();
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('selectPagesArticles failed  in PDOMySQLPageDataModel: Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
+
+   // returns an array of page articles
+    public function fetchPageArticles()
+    {
+
+        $pageArticles= array();$counter = 0 ;
+        while ($row =$this->stmt->fetch(PDO::FETCH_ASSOC)) {
+            $pageArticles[$counter]=$row;
+            $counter++;
+        }
+        return  $pageArticles;
+    }
+
+
+
+
+
+    // selectPageByPageID
+    //
     public function selectPageById($pageID)
     {
-        $selectStatement = "SELECT * FROM PAGE";
-        $selectStatement .= " LEFT JOIN ARTICLE ON PAGE.p_id = ARTICLE.a_assocpage ";
-        $selectStatement .= " WHERE ARTICLE.a_id = :pageID;";
+        $selectStatement = "SELECT * FROM PAGES Join ARTICLE  on p_id = ARTICLE.a_assocpage  where p_id=:pageID OR a_allpages=1;";
+
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
             $this->stmt->bindParam(':pageID', $pageID, PDO::PARAM_INT);
-
             $this->stmt->execute();
+            return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
@@ -74,11 +120,11 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
     }
 
-    // returns the Articles asscoiated with a specific page ID
+    // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM PAGE";
-        $selectStatement .= " LEFT JOIN ARTICLE ON PAGE.p_id = ARTICLE.a_assocpage ";
+        $selectStatement .= " LEFT JOIN ARTICLE ON PAGES.p_id = ARTICLE.a_assocpage ";
         $selectStatement .= " WHERE ARTICLE.a_assocpage= :pageID;";
         try
         {
@@ -111,7 +157,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
     // need to add modified by param
      public function updatePage($userID,$first_name,$last_name,$username)
     {
-         $updateStatement = "UPDATE PAGE";
+         $updateStatement = "UPDATE PAGES";
         $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
        $updateStatement .= " WHERE u_id = :userID;";
 
@@ -186,6 +232,8 @@ class PDOMySQLPageDataModel implements iPageDataModel
     {
         return $row['p_modifieddate'];
     }
+
+
 }
 
 ?>

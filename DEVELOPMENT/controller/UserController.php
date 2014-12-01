@@ -59,10 +59,37 @@ class UserController
             include '../view/admin/userviews/loginToRefreshView.php';
             forceSessionLogout();
         }
+    }
+
+    public function addNewUser()
+    {
+
+          //  $bnasd3432er   = md5(uniqid(rand(), true));
+
+        $bnasd3432er   = md5(uniqid(rand(), true));
+
+            include("../view/admin/userviews/addNewUser.php");
+    }
+
+    public function confirmNewUser($currentUser)
+    {
+        date_default_timezone_set('UTC');
+        $array = array(null, $_POST['FirstName'],$_POST['LastName'], $_POST['userName'],"",md5(uniqid(rand(), true)),
+            $currentUser->getId(),date_default_timezone_get(),$currentUser->getId(),date_default_timezone_get(),$_POST["roles"]);
+        $this->model->constructUserArray($array);
+        $this->model->addUser(  $this->model->constructUserArray($array));
+
+
+
+
 
     }
 
 
+
 }
 
+
 ?>
+
+

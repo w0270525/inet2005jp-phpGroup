@@ -42,10 +42,6 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE UNIQUE INDEX `u_id_UNIQUE` ON `cms`.`USER` (`u_id` ASC);
 
-CREATE UNIQUE INDEX `u_name_UNIQUE` ON `cms`.`USER` (`u_username` ASC);
-
-CREATE UNIQUE INDEX `u_salt_UNIQUE` ON `cms`.`USER` (`u_salt` ASC);
-
 CREATE INDEX `u_createdby_idx` ON `cms`.`USER` (`u_createdby` ASC);
 
 CREATE INDEX `u_lastmodifiedby_idx` ON `cms`.`USER` (`u_lastmodifiedby` ASC);

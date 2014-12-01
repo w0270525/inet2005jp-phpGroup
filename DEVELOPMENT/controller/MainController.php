@@ -48,20 +48,53 @@ class MainController
 
 
 
+
+
+function updateSecurity()
+{
+   // $this->currentUser->updateSecurity();
+    $this->userController->model->updateUserSecurity( $this->currentUser);
+    $this->userController()->model->updateUser( $this->currentUser);
+}
+
+    // handle user login
     function confirmUser($user, $pass)
     {
+        $pswReset=false;
         $user=$this->userController->model->getUserByUserName($user);
-        if($user->getPass()== $pass)
+        $yy=$user->getPass();
+        $x=$user->getSalt();
+        if( $user->getPass()=="password" && $pass == "password")
         {
-            if( $user->getUsername())
-        {
-           $_SESSION["logged"]=serialize(true);
-           $this->currentUser = $user;
+            $pswReset=true;
 
-           $_SESSION["grants"]= $this->currentUser->getRoleId();
-
+        }else {
+            //$pass=$user->encrypt($pass);
         }
-    }
+
+
+        if( $pswReset||$user->getPass()== $pass)
+        {
+            if( ($user->getKey()!="inactive"))
+              {
+                  $_SESSION["logged"]=serialize(true);
+                   $this->currentUser = $user;
+
+                   $_SESSION["grants"]= $this->currentUser->getRoleId();
+                    if($pass=="password")
+                    {
+                       // $bnasd3432er   = md5(uniqid(rand(), true));
+                        $bnasd3432er   = "";
+                        include ("../view/admin/userviews/resetpassword.php");
+                    }
+
+            }else if(!$pswReset)
+            {
+                $this->currentUser->setPass($pass);
+                $this->updateSecurity();
+
+            }
+        }
 
         else
         {
@@ -73,8 +106,25 @@ class MainController
         $_SESSION["user"]=  serialize($this->currentUser );
         return $_SESSION["logged"];
     }
+
+
+    // login function
+    public function login()
+    {
+        $bnasd3432er   = md5(uniqid(rand(), true));
+        include ("../view/admin/login.php");
+    }
+
+
+
+
+
+
     // The current user of the site if  logged in
     public $currentUser = NULL;
     // inACTIVE LOGOFF / COOKIE RESET
     private $userTimeOut = 60000;
+
+
+
 }
