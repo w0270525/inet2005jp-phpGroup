@@ -90,3 +90,26 @@ function checkVar($any)
     return false;
 
 }
+
+
+
+function postRolesToArray()
+{
+    $roles =array();
+    if(isset($_POST["admin"]))
+        $roles[]=1;
+    if(isset($_POST["editor"]))
+        $roles[]=2;
+    if(isset($_POST["author"]))
+        $roles[]=3;
+    return $roles;
+}
+
+
+function checkPostUserNamePassword()
+{
+    if(!empty($_POST["userName"]) && !empty($_POST["password"]))    return true;
+    return false;
+
+
+}

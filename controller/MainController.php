@@ -122,7 +122,12 @@ function updateSecurity()
         include("../view/admin/login.php");
     }
 
+    public function displayAdmin($control)
+    {   $tempController= new MainController();
+        if(isset($this->currentUser) && isset($_SESSION["logged"]) && $_SESSION["logged"]   )
+            include("../_public/adm/admin.php");
 
+    }
 
 
 

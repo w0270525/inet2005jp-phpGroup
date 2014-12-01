@@ -158,8 +158,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             $('#viewContent').hide();
                             $('#addNewPage').hide();
                             $('#removePage').hide();
-
-
+                            $('#viewStyles').hide();
                         }
                     </script>
                     <?php
@@ -207,41 +206,24 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         {
             //custom handling with GET variable
             if(isset($_GET["update"]) && !empty($_GET["update"]) &&   $_GET["update"]!=NULL )
-            {
                 $tempController->userController()->displayAdvancedAction($_GET["update"]);
-            }
+
         }
+
+
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
+            $roles=postRolesToArray();
+            $_POST["roles"]=$roles;
             //custom handling with GET variable
             if((isset($_GET["update"]) && (isset($_POST["updateId"]) && checkVar($_POST["updateId"]) && checkVar($_POST["userName"]) &&
-                    checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))
-                && $_GET["update"]  == $_POST["updateId"]))
+                    checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
             {
-                $roles =array();
-                if(isset($_POST["admin"]))
-                    $roles[]=1;
-                if(isset($_POST["editor"]))
-                    $roles[]=2;
-                if(isset($_POST["author"]))
-                    $roles[]=3;
-                $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"],
-                    $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
+                $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
             }
-            if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) &&
-                    checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
+            if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) && checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
             {
-                $roles =array();
-                if(isset($_POST["admin"]))
-                    $roles[]=1;
-                if(isset($_POST["editor"]))
-                    $roles[]=2;
-                if(isset($_POST["author"]))
-                    $roles[]=3;
-                $_POST["roles"]=$roles;
-
                 $tempController->userController()->confirmNewUser($control->currentUser);
-
             }
         }
         ?>
@@ -315,7 +297,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
 
-        </div>
+
 
     <?php
 

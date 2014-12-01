@@ -20,6 +20,7 @@
         <?php
         //init the user session
         include("sessionHandler.php");
+        include_once("adm/miniViews/functions.php");
 
 
 
@@ -45,6 +46,8 @@
                 $tempController->userController()->model->getUserRoleByUserIds($_POST["userName"])->getUsername();
                 $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
                 $control->confirmUser($name,"password" );
+
+              //  for encryption
               //  $control->currentUser->setPass($_POST["password"]);
               //  $control->currentUser->setKey($_POST["dfd34234324"]);
               //  $control->updateSecurity();
@@ -68,31 +71,17 @@
         if($_SERVER["REQUEST_URI"]=="/admin")
         {
             // login
-            if(!empty($_POST["userName"]) && !empty($_POST["password"]))
-            {
-               global $control ;
-                $_SESSION["logged"] =$control->confirmUser($_POST["userName"],$_POST["password"]);
-
-            }
-            //show login page
+            if(checkPostUserNamePassword())
+                       $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
             if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
-                $control->login();
+                        $control->login();
 
         }
 
+        //show admin menu
+        $control->displayAdmin($control);
 
-
-        // DIRECT LINK TO VIEW PAGES
-        //$control->userController()->displayAction();
-        //$control->articleController()->displayAction();
-        //$control->pageController()->displayAction();
-        //$control->styleController()->displayAction();
-
-
-        // VIEWS TO DISPLAY
-
-        //user login view
-        if(isset($_SESSION["logged"]) && ($_SESSION["logged"])) include("./adm/admin.php");
+        // show the website
         include("../view/displayPage.php");
 
     ?>
