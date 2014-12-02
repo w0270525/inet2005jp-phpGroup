@@ -68,7 +68,7 @@ require_once('functions.php');
                 <td><?php tableGlyphs($user->isAdmin()) ?></td>
                 <td><?php tableGlyphs($user->isEditor()); ?></td>
                 <td><?php tableGlyphs($user->isAuthor()); ?></td>
-                <td><a href="?update= <?php echo $user->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+                <td><a href="?update=<?php echo $user->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
             </tr>
         <?php
