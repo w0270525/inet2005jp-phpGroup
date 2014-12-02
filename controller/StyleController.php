@@ -19,6 +19,13 @@ class StyleController
         include '../view/admin/styleviews/displayStylesView.php';
     }
 
+    public function addAction()
+    {
+
+
+        include '../view/admin/styleviews/addStyleView.php';
+    }
+
     // updates the current user to the
 //     public function updateAction($userID)
 //     {

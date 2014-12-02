@@ -23,7 +23,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             <ul class="nav navbar-nav">
 
                 <!--show current user -->
-                <li>Logged in as  <br/> <?php  echo $control->currentUser->getUsername()?> </li>
+                <li>Logged in as <br/> <?php  echo $control->currentUser->getUsername()?> </li>
 
 
             </ul>
@@ -101,9 +101,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="" id="" ><a href="#">View Users</a></li>
-                            <li data-target="" id=""><a href="#" >Add User</a></li>
-                            <li data-target="" id="" ><a href="#" >Remove User</a></li>
+                            <li data-target="" id="" ><a href="#">PLACEHOLDER</a></li>
+                            <li data-target="" id=""><a href="#" >PLACEHOLDER</a></li>
+                            <li data-target="" id="" ><a href="#">PLACEHOLDER</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
@@ -146,13 +146,15 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
-                            <li data-target="viewContents"  id="viewContent" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
-                            <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
-                            <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
+                            <li data-target="viewContents"  id="viewContent" ><a href="#">View Content Areas</a></li>
+                            <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
+                            <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
+                            <li data-target="addArticles"  id="addArticles" ><a href="#">Add Articles</a></li>
+                            <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
+                            <li data-target="addStyles"  id="addStyles" ><a href="#">Add Styles</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
@@ -165,6 +167,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             $('#addNewPages').hide();
                             $('#removePages').hide();
                             $('#viewStyles').hide();
+                            $('#addArticles').hide();
+                            $('#addStyles').hide();
                         }
                     </script>
                     <?php
@@ -296,8 +300,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->styleController()->displayAction();
             ?></div>
         <div id="addContentViews"   class="containerAdmin"><?php
-        $control->contentController()->addAction();
-        ?></div
+            $control->contentController()->addAction();
+            ?></div>
+        <div id="addArticles"   class="containerAdmin"><?php
+            $control->articleController()->addAction();
+            ?></div>
+        <div id="addStyles"   class="containerAdmin"><?php
+            $control->styleController()->addAction();
+            ?></div>
     <?php
     }
 

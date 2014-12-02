@@ -19,6 +19,13 @@ class ArticleController
         include '../view/admin/articleviews/displayArticlesView.php';
     }
 
+    public function addAction()
+    {
+
+
+        include '../view/admin/articleviews/addArticleView.php';
+    }
+
     // updates the current user to the
 //     public function updateAction($userID)
 //     {
