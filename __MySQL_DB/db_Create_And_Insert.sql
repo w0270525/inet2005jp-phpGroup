@@ -19,12 +19,13 @@ CREATE TABLE IF NOT EXISTS `cms`.`USER` (
   `u_fname` VARCHAR(45) NOT NULL,
   `u_lname` VARCHAR(45) NOT NULL,
   `u_username` VARCHAR(45) NOT NULL,
-  `u_pass` VARCHAR(128) NOT NULL,
-  `u_salt` VARCHAR(32) NOT NULL,
+  `u_pass` VARCHAR(512) NOT NULL,
+  `u_salt` VARCHAR(512) NOT NULL,
   `u_createddate` DATETIME NOT NULL ,
   `u_createdby` INT(11) NOT NULL,
   `u_modifieddate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
   `u_lastmodifiedby` INT(11) NULL DEFAULT NULL,
+  `u_key` VARCHAR(512) NULL DEFAULT NULL,
   PRIMARY KEY (`u_id`),
   CONSTRAINT `u_createdby`
     FOREIGN KEY (`u_createdby`)
@@ -41,10 +42,7 @@ AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 CREATE UNIQUE INDEX `u_id_UNIQUE` ON `cms`.`USER` (`u_id` ASC);
-
-CREATE UNIQUE INDEX `u_name_UNIQUE` ON `cms`.`USER` (`u_username` ASC);
-
-CREATE UNIQUE INDEX `u_salt_UNIQUE` ON `cms`.`USER` (`u_salt` ASC);
+CREATE UNIQUE INDEX `u_username_UNIQUE` ON `cms`.`USER` (`u_username` ASC);
 
 CREATE INDEX `u_createdby_idx` ON `cms`.`USER` (`u_createdby` ASC);
 
@@ -65,6 +63,7 @@ CREATE TABLE IF NOT EXISTS `cms`.`PAGES` (
   `p_creationdate` DATETIME NOT NULL ,
   `p_lastmodifiedby` INT(11) NULL DEFAULT NULL,
   `p_modifieddate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+ `p_style` TEXT NULL DEFAULT NULL ,
   PRIMARY KEY (`p_id`),
   CONSTRAINT `p_createdby`
     FOREIGN KEY (`p_createdby`)
@@ -89,6 +88,9 @@ CREATE UNIQUE INDEX `p_alias_UNIQUE` ON `cms`.`PAGES` (`p_alias` ASC);
 CREATE INDEX `p_createdby_idx` ON `cms`.`PAGES` (`p_createdby` ASC);
 
 CREATE INDEX `p_lastmodifiedby_idx` ON `cms`.`PAGES` (`p_lastmodifiedby` ASC);
+CREATE TRIGGER PAGES_ADD_TRIGGER BEFORE INSERT ON PAGES FOR EACH ROW   SET  NEW.p_creationdate = NOW(),NEW.p_modifieddate= NOW();
+CREATE TRIGGER PAGES_UPDATE_TRIGGER BEFORE UPDATE ON PAGES FOR EACH ROW   SET   NEW.p_modifieddate= NOW();
+
 
 
 -- -----------------------------------------------------
@@ -132,6 +134,8 @@ CREATE UNIQUE INDEX `h_desc_UNIQUE` ON `cms`.`CONTENT_AREAS` (`c_a_desc` ASC);
 CREATE INDEX `h_createdby_idx` ON `cms`.`CONTENT_AREAS` (`c_a_createdby` ASC);
 
 CREATE INDEX `h_lastmodifiedby_idx` ON `cms`.`CONTENT_AREAS` (`c_a_lastmodifiedby` ASC);
+CREATE TRIGGER CONTENT_AREA_INSERT_TRIGGER BEFORE INSERT ON CONTENT_AREAS FOR EACH ROW   SET   nEW.c_a_creationdate = NOW(),NEW.c_a_modifieddate= NOW();
+CREATE TRIGGER CONTENT_UPDATE_INSERT_TRIGGER BEFORE UPDATE ON CONTENT_AREAS FOR EACH ROW   SET   NEW.c_a_modifieddate= NOW();
 
 
 -- -----------------------------------------------------
@@ -193,6 +197,9 @@ CREATE INDEX `a_createdby_idx` ON `cms`.`ARTICLE` (`a_createdby` ASC);
 CREATE INDEX `a_lastmodifiedby_idx` ON `cms`.`ARTICLE` (`a_lastmodifiedby` ASC);
 
 CREATE INDEX `a_c_a_id_idx` ON `cms`.`ARTICLE` (`a_contentarea` ASC);
+CREATE TRIGGER ARTICLE_INSERT_TRIGGER BEFORE INSERT ON ARTICLE FOR EACH ROW   SET   nEW.a_creationdate = NOW(),NEW.a_modifieddate= NOW();
+CREATE TRIGGER ARTICLE_UPDATE_INSERT_TRIGGER BEFORE UPDATE ON ARTICLE FOR EACH ROW   SET   NEW.a_modifieddate= NOW();
+
 
 
 -- -----------------------------------------------------
@@ -294,69 +301,48 @@ INSERT INTO cms.LOOKUP_ROLES VALUES (2, 'editor');
 INSERT INTO cms.LOOKUP_ROLES VALUES (3, 'author');
 
 # u_id, u_fname, u_lname, u_username, u_pass, u_salt, u_createdby
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('admin', 'admin', 'admin', 'password', '1234567890', 1);
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('user', 'user', 'user', 'password', '1234567890', 1);
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('editor', 'editor', 'editor', 'password', '1234567890', 1);
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('author', 'author', 'author', 'password', '1234567890', 1);
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('Test', 'Testington', 'test', 'password', '1234567890', 1);
-INSERT INTO cms.USER (u_fname, u_lname, u_username, u_pass, u_salt, u_createdby) VALUES ('Jimmy', 'Bean', 'jimmy', 'password', '1234567890', 1);
-
+INSERT INTO cms.USER (u_id, u_fname, u_lname, u_username, u_pass, u_salt, u_createdby,u_createddate)
+ VALUES (1,'admin', 'User', 'admin', 'admin', 'salt', 1,NOW());
+INSERT INTO cms.USER (u_id,u_fname, u_lname, u_username, u_pass, u_salt, u_createdby,u_createddate)
+ VALUES (2,'editor', 'User', 'editor', 'admin', 'pepper', 1,NOW());
+INSERT INTO cms.USER (u_id,u_fname, u_lname, u_username, u_pass, u_salt, u_createdby,u_createddate)
+ VALUES (3,'author', 'User', 'author', 'admin', 'sugar', 1,NOW());
 
 # u_r_id, u_r_u_id, u_r_l_r_id
 INSERT INTO cms.USER_ROLES VALUES (1, 1, 1);
 INSERT INTO cms.USER_ROLES VALUES (2, 1, 2);
 INSERT INTO cms.USER_ROLES VALUES (3, 1, 3);
-INSERT INTO cms.USER_ROLES VALUES (4, 1, 2);
-INSERT INTO cms.USER_ROLES VALUES (5, 1, 3);
-INSERT INTO cms.USER_ROLES VALUES (3, 1, 3);
-INSERT INTO cms.USER_ROLES VALUES (3, 1, 3);
-
 
 # s_id, s_name, s_desc, s_style, s_active, s_createdby
-INSERT INTO cms.STYLE (s_id, s_name, s_desc, s_style, s_active, s_createdby)
- VALUES (1, 'Default', 'Default', 'body { display: block }', 1, 1);
-INSERT INTO cms.STYLE (s_id, s_name, s_desc, s_style, s_active, s_createdby)
- VALUES (2, 'Inverse', 'Colors inverted.', 'body { background-color: black; text-color: white }', 0, 1);
+INSERT INTO cms.STYLE (s_id, s_name, s_desc, s_style, s_active, s_createdby,s_creationdate)
+ VALUES (1, 'Default', 'Default Style Selection', 'body { display: block }', 1, 1,NOW());
+INSERT INTO cms.STYLE (s_id, s_name, s_desc, s_style, s_active, s_createdby,s_creationdate)
+ VALUES (2, 'Inverse', 'Colors inverted Style Selection.', 'body { background-color: black; text-color: white }', 0, 1,NOW());
 
 # p_id, p_name, p_alias, p_desc, p_style, p_createdby
-INSERT INTO cms.PAGE (p_id, p_name, p_alias, p_desc, p_style, p_createdby)
-		VALUES (1, 'Index', 'test1', 'First test page', 2, 1);
-INSERT INTO cms.PAGE (p_id, p_name, p_alias, p_desc, p_style, p_createdby)
-		VALUES (2, 'News', 'test2', 'Second test page', 1, 1);
+INSERT INTO cms.PAGES (p_id, p_name, p_alias, p_desc, p_createdby,p_creationdate)
+		VALUES (1, 'INDEX', 'index', 'This is the main page for all your content', 1,NOW());
+INSERT INTO cms.PAGES (p_id, p_name, p_alias, p_desc, p_createdby,p_creationdate)
+		VALUES (2, 'NEWS', 'news', 'This page is forn all your news and updates', 1,NOW());
 
-# c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (1, 'header1', 'header1', 'First Header', 1, 1, 1);
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (2, 'header2', 'header2', 'Second Header', 1, 2, 1);
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (3, 'article1', 'article1', 'First Article', 2, 1, 1);
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (4, 'article2', 'article2', 'Second Article', 2, 2, 1);
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (5, 'footer1', 'footer1', 'First footer', 3, 1, 1);
-INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_assocpage, c_a_createdby)
- VALUES (6, 'footer2', 'footer2', 'Second footer', 3, 2, 1);
+# c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_createdby
+INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_createdby,c_a_creationdate)
+ VALUES (1, 'Header', 'header', 'Header content area', 1, 1,NOW());
+INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_createdby,c_a_creationdate)
+ VALUES (2, 'Article', 'article', 'Article content area', 2, 1,NOW());
+INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order, c_a_createdby,c_a_creationdate)
+ VALUES (3, 'Footer', 'footer', 'Footer content area', 3, 1,NOW());
 
 # a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (1, 1, 'header1_test', 'Test1', '<h1>Test Header</h1>', 1, 1);
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (2, 2, 'header2_test', 'Test2', '<h1>Test Headerr</h1>', 2, 1);
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (3, 3, 'article1_test', 'Test3', '<h1>Test Article</h1>', 1, 1);
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (4, 4, 'article2_test', 'Test4', '<h1>Test Articler</h1>', 2, 1);
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (5, 5, 'footer1_test', 'Test5', '<h1>Test Footer</h1>', 1, 1);
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby)
- VALUES (6, 6, 'footer2_test', 'Test6', '<h1>Test Footerr</h1>', 2, 1);
-
-
-
-
-
-
-select * from users;
-
-select * from page;
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
+ VALUES (1, 1, 'header1_test', 'Test1', '<h1>Test Header</h1>', 1, 1,NOW());
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_codfhasj  hdajk hd hasjkh  hfjh hjkfhjk hhjhf fh jafh jkh fjkhf jkhjkfh jk hdhjksdh jkhdh jdh dsh khsdfk hfjkhdsfjkhsdfjkntent, a_assocpage, a_createdby,a_creationdate)
+ VALUES (2, 1, 'header2_test', 'Test2', '<h1>Test Headerr</h1>', 2, 1,NOW());
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
+ VALUES (3, 2, 'article1_test', 'Test3', '<h1>Test Article</h1>', 1, 1,NOW());
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
+ VALUES (4, 2, 'article2_test', 'Test4', '<h1>Test Articler</h1>', 2, 1,NOW());
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
+ VALUES (5, 3, 'footer1_test', 'Test5', '<h1>Test Footer</h1>', 1, 1,NOW());
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
+ VALUES (6, 3, 'footer2_test', 'Test6', '<h1>Test Footerr</h1>', 2, 1,NOW());

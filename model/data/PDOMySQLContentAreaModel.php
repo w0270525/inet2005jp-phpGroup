@@ -34,7 +34,7 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     //Returns a rowcount of the result
     public function selectContentArea()
     {
-          $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
+          $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id;";
 
         try
         {
@@ -54,7 +54,8 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     //Returns a rowcount of the result
     public function selectContentAreaByID($ContentAreaID)
     {
-        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
+
 
         $selectStatement .= " WHERE ContentArea.a_id = :ContentAreaID;";
 
@@ -76,7 +77,7 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     // selectsd content area by name
     public function selectContentAreaByName($name)
     {
-        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
 
         $selectStatement .= " WHERE c_c_name  = :name;";
 
@@ -98,7 +99,8 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     // returns the ContentAreas asscoiated with a specific PAGES ID
     public function selectContentAreaByPageId($pageID)
     {
-        $selectStatement = "SELECT * FROM ContentArea";
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
+
         $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
         $selectStatement .= " WHERE PAGES.p_id = :pageID;";
 

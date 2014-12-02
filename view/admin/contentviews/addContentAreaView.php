@@ -39,8 +39,8 @@ endif;
             <td><input oninput="resetBut()" type="text" name = "c_name" required /></td>
             <td><input oninput="resetBut()" type="text" name = "c_alias" required/></td>
             <td><input oninput="resetBut()" type="text" name = "c_desc" required/></td>
-            <td><input oninput="resetBut()" type="text" name = "c_order" required/></td>
-            <input type="hidden" name = "formSubmitNewContentArea" value="true" required/>
+            <td><input oninput="resetBut()" type="hidden" name = "c_order" value="null" required/></td>
+            <input type="hidden" name = "formSubmitNewContentArea" value="true" />
             <td><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span>
                 <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut(); " value ="Confirm" >  </td>
 

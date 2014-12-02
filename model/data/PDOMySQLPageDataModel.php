@@ -251,7 +251,7 @@ public function selectPagesByName($name)
     // returns the Page blurb
     public function fetchPageStyle($row)
     {
-        return $row['p_styles'];
+        return $row['p_style'];
 
     }
 

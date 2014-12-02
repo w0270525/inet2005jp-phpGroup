@@ -56,6 +56,35 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
 
     }
 
+
+    // gets all the Articles from the database
+    // returns an array with Articles information including roles
+    public function selectArticleByArticleName($name)
+    {
+
+
+        $selectStatement = "SELECT * FROM ARTICLE ";
+        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
+        $selectStatement .= " WHERE a_name = :name ;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement );
+            $this->stmt->bindParam(':name', $name, PDO::PARAM_STR);
+
+            $this->stmt->execute();
+            $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $this->result;
+        }
+        catch(PDOException $ex)
+        {
+            die('selectArticles failed  in PDOMySQLPageArticleModel: : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+        }
+
+    }
+
+
+    // selects the articles by id
     public function selectArticleByArticleId($articleID)
     {
         $selectStatement = "SELECT * FROM ARTICLE";
@@ -65,13 +94,13 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':$articleID', $articleID, PDO::PARAM_INT);
+            $this->stmt->bindParam(':articleID', $articleID, PDO::PARAM_INT);
 
             $this->stmt->execute();
         }
         catch(PDOException $ex)
         {
-            die('selectArticleByArticleId failed  in PDOMySQLPageArticleModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByArticleId failed  in PDOMySQLArticleDataModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -91,7 +120,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('selectArticleByPageId failed  in PDOMySQLPageArticleModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByPageId failed  in PDOMySQLArticleDataModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -105,10 +134,42 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('fetchArticle failed  in PDOMySQLPageArticleModel: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+            die('fetchArticle failed  in PDOMySQLArticleDataModel: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
+
+
+    // inserts an article into the cms database
+    // return row count of succsussful insert ie 1
+    public function insertArticle($article)
+    {
+
+
+
+        $insertStatement = "INSERT INTO  ARTICLE  VALUES (DEFAULT, :a_contentArea, :a_name, :a_title, :a_desc, :a_blurb, :a_content,  :a_pages , :a_createdby, default, :a_createdby, default , :a_allPages );";
+
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($insertStatement);
+            $this->stmt->bindParam(':a_name', $article->getName(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_contentArea', $article->getContentarea(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_desc', $article->getDesc(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':a_title', $article->getTitle(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':a_blurb', $article->getBlurb(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_content', $article->getContent(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':a_pages', $article->getAssocPage(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_createdby', $article->getCreatedBy(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_allPages', $article->getAllPages(), PDO::PARAM_INT);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('nsertArticle($article)  failed  in PDOMySQLArticleDataModel:\n'.$insertStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
     // updates the CMS user
     // need to add modified by param
 //    public function updateArticle($userID,$first_name,$last_name,$username)

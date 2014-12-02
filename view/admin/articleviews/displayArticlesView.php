@@ -22,17 +22,17 @@ endif;
 <table class="table">
     <thead>
     <tr>
+        <td>  Name </td>
+        <td> Title </td>
+        <td> Contentarea </td>
+        <td> Content </td>
+        <td> AssocPage </td>
+        <td> AllPages </td>
+        <td> Blurb </td>
+        <td> Desc </td>
 
-        <th>Name</th>
-        <th>Alias</th>
-        <th>Description</th>
-        <th>Created By</th>
-        <th>Created Date</th>
-        <th>Modified By</th>
-        <th>Modified Date</th>
     </tr>
-    </thead>
-    <tbody>
+
     <?php
     foreach($arrayOfArticles as $article):
 
@@ -47,11 +47,8 @@ endif;
             <td><?php echo $article->getAllPages(); ?></td>
             <td><?php echo $article->getBlurb(); ?></td>
             <td><?php echo $article->getDesc(); ?></td>
-            <td><?php echo $article->getCreatedBy(); ?></td>
-            <td><?php echo $article->getCreatedDate(); ?></td>
-            <td><?php echo $article->getModifiedBy(); ?></td>
-            <td><?php echo $article->getModifiedDate(); ?></td>
-            <td><a href="?pageupdate= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+
+            <td><a href="?articleupdate= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>
     <?php

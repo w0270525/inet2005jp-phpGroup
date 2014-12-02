@@ -152,12 +152,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
+                            <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
                         function closeEditor()
                         {
+                            $('#addArticlesViews').hide();
                             $('#viewPages').hide();
                             $('#addContentViews').hide();
                             $('#viewArticles').hide();
@@ -265,6 +267,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->contentController()->confirmAddAction( $control->currentUser);
 
             }
+            if(isset($_POST["formSubmitNewArticleConfirm"])&&  $_POST["formSubmitNewArticleConfirm"]=="true"){
+                $control->articleController()->confirmAddAction( $control->currentUser);
+
+            }
 
 
 
@@ -274,6 +280,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             if(isset($_GET["pageupdate"])){
                 $control->pageController()->updateAction($_GET["pageupdate"]);
             }
+            if(isset($_GET["articleupdate"])){
+                $control->articleController()->updateAction( $control->currentUser);
+
+        }
         }
 
 
@@ -289,15 +299,21 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="addNewPages"  class="containerAdmin"><?php
             $control->pageController()->addAction();
             ?></div>
+        <div id="addContentViews"   class="containerAdmin"><?php
+            $control->contentController()->addAction();
+
+            ?></div>
+        <div id="addArticlesViews"   class="containerAdmin"><?php
+            $control->articleController()->addAction();
+
+            ?></div>
         <div id="viewContents"  class="containerAdmin"><?php
             $control->contentController()->displayAction();
             ?></div>
         <div id="viewStyles"   class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
-        <div id="addContentViews"   class="containerAdmin"><?php
-        $control->contentController()->addAction();
-        ?></div
+
     <?php
     }
 
