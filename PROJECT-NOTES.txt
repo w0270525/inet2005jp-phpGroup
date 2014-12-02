@@ -1,3 +1,31 @@
+ TUESDAY
+
+ Got alot of the display views working, same with the a fiew edit views
+ content area edit view still need to be made
+ added some extra boot strap to hide uned form elements as well as a rest button on top that refreshes the admin options
+
+ Still need to add remove options for the items (prob just a button link from the current items editing form)
+ *** ** Still need to use all these models to generate a page from the controllers ** ***  the page generated is till the orriginal connecting directly to the dbase.
+ Need to add/finish all the forms verification as to spec
+ individual page styles is back in this is  p_style in the Pages table, Had to put it back in as It was half way integrated and it
+ was easier then  taking it completly out.  The default value is null and we do not have to actully use it in the assignment,
+ just be aware its there incase you get any errors.
+
+
+
+
+
+
+
+
+
+
+Some of the dwl statemnet are retrung more information then they need, try not to change this unless neccesay, It could work to our advantage
+
+
+
+
+
 
 THURSDAY PM
 
