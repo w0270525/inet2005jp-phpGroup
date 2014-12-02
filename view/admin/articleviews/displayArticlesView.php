@@ -11,32 +11,36 @@
 </style>
 
 <?php
-if(!empty($lastOperationResults)):
-    ?>
-    <h2><?php echo $lastOperationResults; ?></h2>
+  if(!empty($lastOperationResults)):
+?>
+<h2><?php echo $lastOperationResults; ?></h2>
 <?php
-endif;
+  endif;
 ?>
 <h1>Site Articles</h1>
 
 <table class="table">
     <thead>
     <tr>
-
         <th>Name</th>
-        <th>Alias</th>
+        <th>Title</th>
+        <th>Content Area</th>
+        <th>Content</th>
+        <th>Associated Page</th>
+        <th>All Pages</th>
+        <th>Blurb</th>
         <th>Description</th>
         <th>Created By</th>
         <th>Created Date</th>
         <th>Modified By</th>
         <th>Modified Date</th>
+        <th>Edit</th>
     </tr>
     </thead>
     <tbody>
     <?php
-    foreach($arrayOfArticles as $article):
-
-        ?>
+      foreach($arrayOfArticles as $article):
+    ?>
         <tr>
             <span id='articleId'><?php echo $article->getId(); ?></span>
             <td><?php echo $article->getName(); ?></td>
@@ -52,10 +56,9 @@ endif;
             <td><?php echo $article->getModifiedBy(); ?></td>
             <td><?php echo $article->getModifiedDate(); ?></td>
             <td><a href="?pageupdate=<?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
-
         </tr>
     <?php
-    endforeach;
+      endforeach;
     ?>
     </tbody>
     <tfoot></tfoot>
