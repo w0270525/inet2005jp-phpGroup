@@ -11,51 +11,39 @@
 </style>
 
 <?php
-if(!empty($lastOperationResults)):
-    ?>
-    <h2><?php echo $lastOperationResults; ?></h2>
-<?php
-endif;
+  if(!empty($lastOperationResults)):
 ?>
-<h1>Add  A New  CONTENT</h1>
+<h2><?php echo $lastOperationResults; ?></h2>
+<?php
+  endif;
+?>
+<h1>Add new Content Area</h1>
 <table class="table">
-    <thead>
+  <thead>
     <tr>
-
-        <th>Name</th>
-        <th>Alias</th>
-        <th>Description</th>
-        <th>Order</th>
+      <th>Name</th>
+      <th>Alias</th>
+      <th>Description</th>
+      <th>Order</th>
     </tr>
-    </thead>
-    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
-          action="#" method="post" value="addNewPageForm">
-        <tbody>
-
-
-
-        <tr>
-
-            <td><input oninput="resetBut()" type="text" name = "c_name" required /></td>
-            <td><input oninput="resetBut()" type="text" name = "c_alias" required/></td>
-            <td><input oninput="resetBut()" type="text" name = "c_desc" required/></td>
-            <td><input oninput="resetBut()" type="text" name = "c_order" required/></td>
-            <input type="hidden" name = "formSubmitNewContentArea" value="true" required/>
-            <td><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span>
-                <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut(); " value ="Confirm" >  </td>
-
-        </tr>
-        <tr>
-
-            <td></td>
-        </tr>
-
-
-
-
-        </tbody></form>
-    <tfoot></tfoot>
+  </thead>
+  <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addContentASubmit').hide();$('#verifyf').show()"
+        action="#" method="post" value="addNewPageForm">
+    <tbody>
+      <tr>
+        <td><input oninput="resetBut()" type="text" name ="c_name" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="c_alias" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="c_desc" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="c_order" required /></td>
+        <input type="hidden" name="formSubmitNewContentArea" value="true" required/>
+        <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
+        <input type="submit" class="btn btn-default" id="addContentASubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
+      </tr>
+    </tbody>
+  </form>
+  <tfoot></tfoot>
 </table>
+
 <script>
     function  verifyf()
     {
@@ -64,15 +52,15 @@ endif;
 //        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
 //    {
         $('#formConfirm').hide();
-        $('#addPageSubmit').show();
+        $('#addContentASubmit').show();
     }
 
 
-    $('#addPageSubmit').hide()
+    $('#addContentASubmit').hide()
 
     function resetBut()
     {
         $('#formConfirm').show();
-        $('#addPageSubmit').hide();
+        $('#addContentASubmit').hide();
     }
 </script>

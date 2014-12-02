@@ -35,7 +35,7 @@
         <td><input oninput="resetBut()" type="text" name ="p_desc" required /></td>
         <input type="hidden" name = "formSubmitNewPage" value="true" required />
         <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-        <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut();" value ="Confirm" /></td>
+        <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
       </tr>
     </tbody>
   </form>
