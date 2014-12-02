@@ -46,7 +46,7 @@ endif;
             <td><?php echo $page->getCreatedDate(); ?></td>
             <td><?php echo $page->getModifiedBy(); ?></td>
             <td><?php echo $page->getModifiedDate(); ?></td>
-             <td><a href="?pageupdate= <?php echo $page->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+             <td><a href="?pageupdate=<?php echo $page->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>
     <?php

@@ -48,7 +48,7 @@ endif;
             <td><?php echo $content->getDesc(); ?></td>
             <td><?php echo $content->getCreatedBy(); ?></td>
 
-            <td><a href="?pageupdate= <?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+            <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>
     <?php

@@ -54,7 +54,7 @@ endif;
                 endif; ?>
 
                 </td>
-            <td><span class="glyphicon glyphicon-pencil" ><a href="?styleupdate= <?php echo $style->getId() ; ?>"></a></span></td>
+            <td><span class="glyphicon glyphicon-pencil" ><a href="?styleupdate=<?php echo $style->getId() ; ?>"></a></span></td>
 
         </tr>
     <?php

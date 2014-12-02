@@ -51,7 +51,7 @@ endif;
             <td><?php echo $article->getCreatedDate(); ?></td>
             <td><?php echo $article->getModifiedBy(); ?></td>
             <td><?php echo $article->getModifiedDate(); ?></td>
-            <td><a href="?pageupdate= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+            <td><a href="?pageupdate=<?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>
     <?php
