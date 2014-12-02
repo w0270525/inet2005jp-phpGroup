@@ -11,34 +11,44 @@
 </style>
 
 <?php
-if(!empty($lastOperationResults)):
-  ?>
-  <h2><?php echo $lastOperationResults; ?></h2>
-<?php
-endif;
+  if(!empty($lastOperationResults)):
 ?>
-<h1>Add new Content Area</h1>
+<h2><?php echo $lastOperationResults; ?></h2>
+<?php
+  endif;
+?>
+<h1>Add new Article</h1>
 <table class="table">
   <thead>
-  <tr>
-    <th>Name</th>
-    <th>Alias</th>
-    <th>Description</th>
-    <th>Order</th>
-  </tr>
+    <tr>
+      <th>Content Area</th>
+      <th>Name</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Blurb</th>
+      <th>Content</th>
+      <th>Associated Page</th>
+    </tr>
   </thead>
-  <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addContentASubmit').hide();$('#verifyf').show()"
+  <form name="addNewArticle"  id="addNewArticle" class="addNewArticle" onclick ="$('#addArticleSubmit').hide();$('#verifyf').show()"
         action="#" method="post" value="addNewPageForm">
     <tbody>
-    <tr>
-      <td><input oninput="resetBut()" type="text" name ="c_name" required /></td>
-      <td><input oninput="resetBut()" type="text" name ="c_alias" required /></td>
-      <td><input oninput="resetBut()" type="text" name ="c_desc" required /></td>
-      <td><input oninput="resetBut()" type="text" name ="c_order" required /></td>
-      <input type="hidden" name="formSubmitNewContentArea" value="true" required/>
-      <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-        <input type="submit" class="btn btn-default" id="addContentASubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
-    </tr>
+      <tr>
+        <td><input oninput="resetBut()" type="text" name ="a_contentarea" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="a_name" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="a_title" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="a_desc" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="a_blurb" required /></td>
+
+        // TinyMCE WOULD GO HERE!
+        <td><input oninput="resetBut()" type="text" name ="a_content" required /></td>
+        // TinyMCE WOULD GO HERE!
+
+        <td><input oninput="resetBut()" type="text" name ="a_assocpage" required /></td>
+        <input type="hidden" name="formSubmitNewArticle" value="true" required/>
+        <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
+        <input type="submit" class="btn btn-default" id="addArticleSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
+      </tr>
     </tbody>
   </form>
   <tfoot></tfoot>
@@ -52,15 +62,15 @@ endif;
 //        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
 //    {
     $('#formConfirm').hide();
-    $('#addContentASubmit').show();
+    $('#addArticleSubmit').show();
   }
 
 
-  $('#addContentASubmit').hide()
+  $('#addArticleSubmit').hide()
 
   function resetBut()
   {
     $('#formConfirm').show();
-    $('#addContentASubmit').hide();
+    $('#addArticleSubmit').hide();
   }
 </script>
