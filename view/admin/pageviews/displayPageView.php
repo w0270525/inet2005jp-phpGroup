@@ -28,6 +28,7 @@
       <th>Created Date</th>
       <th>Modified By</th>
       <th>Modified Date</th>
+      <th>Edit</th>
     </tr>
   </thead>
   <tbody>
