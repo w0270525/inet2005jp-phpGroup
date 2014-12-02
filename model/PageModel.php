@@ -46,9 +46,10 @@ class PageModel
     {
         $this->m_DataAccess->connectToDB();
 
-        $this->m_DataAccess->selectPageById($pageID);
+  //      $this->m_DataAccess->selectPageById($pageID);
 
-        $record =  $this->m_DataAccess->fetchPage();
+   //     $record =  $this->m_DataAccess->fetchPage();
+        $record = $this->m_DataAccess->selectPageById($pageID);
 
         $fetchedPage = $this->constructPage($record);
 
@@ -75,7 +76,17 @@ class PageModel
         return "$recordsAffected record(s) updated succesfully!";
     }
 
+    public    function getPageByName($name)
+       {
+           $this->m_DataAccess->selectPagesByName($name);
+           return $this->constructPage($this->m_DataAccess->fetchPage());
+       }
 
+
+    public function addPage($row)
+    {
+        return   $this->m_DataAccess->insertPage($row);
+    }
 
     //forms a Article from the input array and returns it
     private function constructPage($row)
@@ -84,12 +95,13 @@ class PageModel
             $this->m_DataAccess->fetchPageName($row),
             $this->m_DataAccess->fetchPageAlias($row),
             $this->m_DataAccess->fetchPageDescription($row),
+            $this->m_DataAccess->fetchPageStyle($row),
              null,
-           // $this->m_DataAccess->fetchPageContentArea($row),
             $this->m_DataAccess->fetchPageCreatedBy($row),
             $this->m_DataAccess->fetchPageCreatedDate($row),
             $this->m_DataAccess->fetchPageLastModifiedBy($row),
-            $this->m_DataAccess->fetchPageLastModifiedDate($row));
+            $this->m_DataAccess->fetchPageLastModifiedDate($row),
+        $this->m_DataAccess->fetchPageStyle($row));
         return $currentPage;
 
 

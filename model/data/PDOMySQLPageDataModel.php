@@ -1,7 +1,10 @@
 <?php
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * PDOMySQLPageDataModel
+ * Used to retrieve information from the database regading site pages and there contents
+ *
+ * USES - Most functionality is done by running proper select method function then running the proper
+ * fetch info function immediaty after to retreive the data
  */
 require_once('functions.php');
 require_once 'iPageDataModel.php';
@@ -11,6 +14,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
     private $dbConnection;
     private $result;
     private $stmt;
+    private $SELECT =" SELECT * FROM PAGES ";
 
     // iCustomerDataAccess methods
     public function connectToDB()
@@ -31,43 +35,55 @@ class PDOMySQLPageDataModel implements iPageDataModel
 
 
 
-    // gets all the Pages from the database
-    // returns an array with Pages information
+    // gets all the Pages from the database and the user who created the page
+    // returns an count of the operation
     public function selectPages()
     {
-        // hard-coding for first ten rows
-        $start = 0;
-        $count = 10;
-        $selectStatement = "SELECT * FROM PAGES ";
-        $selectStatement .= "    JOIN USER  ON p_createdBy = USER.u_id;";
-
-
+        $selectStatement = $this->SELECT ;
+        $selectStatement .= "    JOIN USER  ON p_createdby = USER.u_id ";
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement );
-            $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
-            $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
+
 
             $this->stmt->execute();
+            return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('selectPages failed  in PDOMySQLPageDataModel: Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+            die('selectPages failed  in PDOMySQLPageDataModel:'.$selectStatement.' Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
         }
 
     }
 
 
+// gets   the Pages from the database with specific name
+// returns an count of the operation
+public function selectPagesByName($name)
+{
+
+    $selectStatement = $this->SELECT . "    JOIN USER  ON p_createdby = USER.u_id WHERE p_name = :name ";
+    try
+    {
+        $this->stmt = $this->dbConnection->prepare($selectStatement );
+        $this->stmt->bindParam(':name', $name, PDO::PARAM_STR);
+
+        $this->stmt->execute();
+        return $this->stmt->rowCount();
+    }
+    catch(PDOException $ex)
+    {
+        die('selectPagesByName failed  in PDOMySQLPageDataModel:'.$selectStatement.' Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+    }
+}
+
 
     // gets all the Articles from the database asscicated with a page
-
+    // returns the count of the result
     public function selectPageArticles($id)
     {
-        // hard-coding for first ten rows
-        $start = 0;
-        $count = 10;
-        $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= " Where a_assocpage  = :p_id OR a_allpages=1 ;";
+
+        $selectStatement = "SELECT * FROM ARTICLE  Where a_assocpage  = :p_id OR a_allpages=1 ;";
 
         try
         {
@@ -78,13 +94,12 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
         catch(PDOException $ex)
         {
-            die('selectPagesArticles failed  in PDOMySQLPageDataModel: Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+            die('selectPagesArticles failed  in PDOMySQLPageDataModel:'.$selectStatement .' Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
         }
     }
 
 
-
-   // returns an array of page articles
+   // returns an array of page articles  retrieved from selectPageArticles($id)
     public function fetchPageArticles()
     {
 
@@ -98,33 +113,35 @@ class PDOMySQLPageDataModel implements iPageDataModel
 
 
 
-
-
-    // selectPageByPageID
-    //
+    //  selectPageByPageID
+    //  returns information on a page including the associated articles
+    //  ** unlike most of the select methods, this one returns right away with the result
     public function selectPageById($pageID)
     {
-        $selectStatement = "SELECT * FROM PAGES Join ARTICLE  on p_id = ARTICLE.a_assocpage  where p_id=:pageID OR a_allpages=1;";
-
+        $selectStatement = $this->SELECT.'   where p_id = :id ;';
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':pageID', $pageID, PDO::PARAM_INT);
+            $this->stmt->bindParam(':id', $pageID, PDO::PARAM_INT);
             $this->stmt->execute();
-            return $this->stmt->rowCount();
+            $selectedPage= $this->stmt->fetch(PDO::FETCH_ASSOC);
         }
         catch(PDOException $ex)
         {
-            die('selectPageById failed  in PDOMySQLPageDataModel: by articles ID failed : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectPageById failed  in PDOMySQLPageDataModel find articles: '.$selectStatement.' : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
+
+        //assign the page articles then return
+        $this->selectPageArticles($pageID);
+        $selectedPage["p_articles"]=$this->fetchPageArticles();
+        return  $selectedPage;
     }
 
     // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
-        $selectStatement = "SELECT * FROM PAGE";
-        $selectStatement .= " LEFT JOIN ARTICLE ON PAGES.p_id = ARTICLE.a_assocpage ";
+        $selectStatement = $this->SELECT . " LEFT JOIN ARTICLE ON PAGES.p_id = ARTICLE.a_assocpage ";
         $selectStatement .= " WHERE ARTICLE.a_assocpage= :pageID;";
         try
         {
@@ -153,29 +170,59 @@ class PDOMySQLPageDataModel implements iPageDataModel
         }
     }
 
-    // updates the CMS user
-    // need to add modified by param
-     public function updatePage($userID,$first_name,$last_name,$username)
+    // updates the CMS page
+    //
+     public function updatePage($page)
     {
          $updateStatement = "UPDATE PAGES";
-        $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
+        $updateStatement .= " SET p_name = :firstName,p_alias=:lastName, p_desc =:descr , u_modifiedby = :mod,u_modifiedbdate = NOW()";
        $updateStatement .= " WHERE u_id = :userID;";
 
         try{
             $this->stmt = $this->dbConnection->prepare($updateStatement);
-            $this->stmt->bindParam(':firstName', $first_name, PDO::PARAM_STR);
-            $this->stmt->bindParam(':lastName', $last_name, PDO::PARAM_STR);
-            $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-            $this->stmt->bindParam(':userName', $username, PDO::PARAM_STR);
+            $this->stmt->bindParam(':p_name', $page->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':p_alias', $page->getAlias(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':descr', $page->getDesc(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':mod', $page->getModifedBy(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':mod', $page->getModifedBy(), PDO::PARAM_STR);
+
             $this->stmt->execute();
 
             return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('updatePage failed  in PDOMySQLPageDataModel: Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('updatePage failed  in PDOMySQLPageDataModel:\n '.$updateStatement.': Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+
+
+
+
+     public function insertPage($page)
+    {
+        $insertStatement = "INSERT INTO  PAGES  VALUES (DEFAULT,:p_name, :p_alais, :p_desc, :p_createdby , default,:p_modifiedby , default,null);";
+
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($insertStatement);
+            $this->stmt->bindParam(':p_name', $page->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':p_alais', $page->getAlias(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':p_desc', $page->getDesc(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':p_createdby', $page->getCreatedBy(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':p_modifiedby', $page->getCreatedBy(), PDO::PARAM_STR);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('insertpage  failed  in PDOMySQLPageDataModel:\n'.$insertStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
 
     // returns the Article id
     public function fetchPageID($row)
@@ -204,7 +251,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
     // returns the Page blurb
     public function fetchPageStyle($row)
     {
-        return $row['p_style'];
+        return $row['p_styles'];
 
     }
 

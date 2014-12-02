@@ -17,7 +17,7 @@ class ContentAreaModel
         // not doing anything at the moment
     }
 
-    // get all users from the CMS
+    // get all ContentAreas from the CMS
     public function getAllContentAreas()
     {
         $this->m_DataAccess->connectToDB();
@@ -57,7 +57,7 @@ class ContentAreaModel
         return $fetchedContentArea;
     }
 
-    //  Updates a user in the CMS
+    //  Updates a contentarea in the CMS
     public function updateContentArea($ContentAreaToUpdate)
     {
         $this->m_DataAccess->connectToDB();
@@ -77,10 +77,10 @@ class ContentAreaModel
 
 
 
-    //forms a Article from the input array and returns it
+    //forms a Content Area from the input array and returns it
     private function constructContentArea($row)
     {
-        $currentContentArea = new ContentArea($this->m_DataAccess->fetchContentAreaID($row),
+        $currentContentArea = new ContentArea(null,
             $this->m_DataAccess->fetchContentAreaName($row),
             $this->m_DataAccess->fetchContentAreaAlias($row),
             $this->m_DataAccess->fetchContentAreaDescription($row),
@@ -91,11 +91,25 @@ class ContentAreaModel
             $this->m_DataAccess->fetchContentAreaCreatedDate($row),
             $this->m_DataAccess->fetchContentAreaModifiedBy($row),
             $this->m_DataAccess->fetchContentAreaLastModifiedDate($row));
-        $this->m_DataAccess->selectContentAreaArticles($currentContentArea->getId());
-        $currentContentArea->setArticles($this->m_DataAccess->fetchContentAreaArticles($row));
+       // $this->m_DataAccess->selectContentAreaArticles($currentContentArea->getId());
+      //  $currentContentArea->setArticles($this->m_DataAccess->fetchContentAreaArticles($row));
         return $currentContentArea;
 
 
+
+    }
+
+
+
+    //adds a content are to the database
+    function addContentArea($contentArea){
+       return $this->m_DataAccess->insertContentArea($contentArea);
+
+    }
+
+    function getContentAreaByName($name){
+         $this->m_DataAccess->selectContentAreaByName($name);
+         return      $this->m_DataAccess->fetchContentAreas();
 
     }
 }

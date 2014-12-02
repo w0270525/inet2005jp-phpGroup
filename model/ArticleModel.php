@@ -43,9 +43,9 @@ class ArticleModel
     {
         $this->m_DataAccess->connectToDB();
 
-        $this->m_DataAccess->selectArticleById($articleID);
+        $this->m_DataAccess->selectArticleByArticleId($articleID);
 
-        $record =  $this->m_DataAccess->fetchArticles();
+        $record =  $this->m_DataAccess->fetchArticle();
 
         $fetchedArticle = $this->constructArticle($record);
 

@@ -27,13 +27,60 @@ class ContentAreaController
     }
 
 
-
+    // show the add content are form
     public function addAction()
     {
         // $arrayOfContentAreas = $this->model->getAllContentAreas();
 
         include '../view/admin/contentviews/addContentAreaView.php';
     }
+
+
+    // attemp to insert new content area into database
+    public function confirmAddAction($user)
+
+    {
+    $currentContents=Array();$bool=true;
+    $currentContents = $this->model->getAllContentAreas();
+    $lastOperationResults="";
+    if(isset($_POST["c_name"]) && isset($_POST["c_alias"]) && isset($_POST["c_desc"]) && isset($_POST["c_order"] ))
+    {
+        foreach($currentContents as $content)
+        {
+            if ($_POST["c_name"]  == $content->getName())
+            {
+            $bool=false;
+            $lastOperationResults.="Unable to complete request: ContentArea name detected in CMS database<br>";
+            }
+
+            if ($_POST["c_alias"]==$content->getAlias())
+            {
+                $bool=false;
+                $lastOperationResults.="Unable to complete request: ContentArea alias detected in CMS database<br>";
+
+            }
+        }
+
+        if($bool)
+
+            if(  $lastOperationResults=$this->model->addContentArea(new ContentArea(null,$_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],null,null,null,$user->getId(),null,$user->getId(),null)))
+            {
+                $arrayOfPages[0] = $this->model->getContentAreaByName($_POST["p_name"]);
+                include'../view/admin/pageviews/editPageViews.php';
+            }
+        }
+
+        else {
+
+            $arrayOfPages =$this->model->getAllContentAreas();
+            include '../view/admin/pageviews/displayPageView.php';
+
+        }
+    }
+
+
+
+
     // updates the current user to the
 //     public function updateAction($userID)
 //     {

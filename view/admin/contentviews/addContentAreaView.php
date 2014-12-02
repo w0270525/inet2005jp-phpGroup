@@ -17,7 +17,7 @@ if(!empty($lastOperationResults)):
 <?php
 endif;
 ?>
-<h1>Add  A New  Page</h1>
+<h1>Add  A New  CONTENT</h1>
 <table class="table">
     <thead>
     <tr>
@@ -25,23 +25,24 @@ endif;
         <th>Name</th>
         <th>Alias</th>
         <th>Description</th>
-
+        <th>Order</th>
     </tr>
     </thead>
-    <form name="addNewPageForm"  id="addNewPageForm" class="addNewPageForm" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
-        action="#" method="post" value="addNewPageForm">
-    <tbody>
+    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
+          action="#" method="post" value="addNewPageForm">
+        <tbody>
 
 
 
         <tr>
 
-            <td><input oninput="resetBut()" type="text" name = "p_name" required /></td>
-            <td><input oninput="resetBut()" type="text" name = "p_alias" required/></td>
-            <td><input oninput="resetBut()" type="text" name = "p_desc" required/></td>
-            <input type="hidden" name = "formSubmitNewPage" value="true" required/>
+            <td><input oninput="resetBut()" type="text" name = "c_name" required /></td>
+            <td><input oninput="resetBut()" type="text" name = "c_alias" required/></td>
+            <td><input oninput="resetBut()" type="text" name = "c_desc" required/></td>
+            <td><input oninput="resetBut()" type="text" name = "c_order" required/></td>
+            <input type="hidden" name = "formSubmitNewContentArea" value="true" required/>
             <td><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span>
-             <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut(); " value ="Confirm" >  </td>
+                <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut(); " value ="Confirm" >  </td>
 
         </tr>
         <tr>
@@ -52,7 +53,7 @@ endif;
 
 
 
-    </tbody></form>
+        </tbody></form>
     <tfoot></tfoot>
 </table>
 <script>

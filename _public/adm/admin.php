@@ -32,7 +32,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
                 <!-- Lougout button -->
                 <form action="#"    method="post" name="logout" id="logout" style="display:inline;" >
-                    <input type="submit" name="logout" id="logout" class="btn btn-warning pull-right"   value="logout" style="display:inline;right:0;" />
+                    <input type="submit" name="logout" id="logout" class="btn btn-primary pull-right"   value="logout" style="display:inline;right:0;" />
+                </form>
+                <!-- clears the current for 100% -->
+                <form action="#"    method="post" name="" id="" style="display:inline;" >
+                    <input type="submit" name="" id="" class="btn btn-success pull-right"   value="Reset" style="display:inline;right:0;" />
                 </form>
                 <?php
                 // ADMIN CUSTOM MENU
@@ -143,21 +147,23 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
-                            <li data-target="viewContent"  id="viewContents" ><a href="#">View Content Areas</a></li>
+                            <li data-target="viewContents"  id="viewContent" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
                             <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
-                            <li data-target="addNewPage"   id="addNewPag"><a href="#"  >Add New Page</a></li>
-                            <li data-target="removePage" id="removePage" ><a href="#" >Remove Page</a></li>
+                            <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
+                            <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
+                            <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
                         function closeEditor()
                         {
                             $('#viewPages').hide();
+                            $('#addContentViews').hide();
                             $('#viewArticles').hide();
-                            $('#viewContent').hide();
-                            $('#addNewPage').hide();
-                            $('#removePage').hide();
+                            $('#viewContents').hide();
+                            $('#addNewPages').hide();
+                            $('#removePages').hide();
                             $('#viewStyles').hide();
                         }
                     </script>
@@ -236,7 +242,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $tempController->userController()->displayAction();
             ?></div>
 
-        <div id="addNewUser"  class="containerAdmin"><?php
+        <div id="addNewUsers"  class="containerAdmin"><?php
             $tempController->userController()->addNewUser();
             ?></div>
         <?php //  <div id="deleteUser"  class="containerAdmin"><?php include("../view/admin/userviews/addUserView.php");?> </div>
@@ -250,7 +256,19 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // CUSTOM EDITOR GET AN POST
         // CUSTOM EDITOR GET AN POST
 
+        if($_SERVER["REQUEST_METHOD"]=="POST")
+        {
+            if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
+                $control->pageController()->confirmAddAction( $control->currentUser);
+            }
+            if(isset($_POST["formSubmitNewContentArea"])&&  $_POST["formSubmitNewContentArea"]=="true"){
+                $control->contentController()->confirmAddAction( $control->currentUser);
 
+            }
+
+
+
+        }
         if($_SERVER["REQUEST_METHOD"]=="GET")
         {
             if(isset($_GET["pageupdate"])){
@@ -268,15 +286,18 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="viewPages"  class="containerAdmin"><?php
             $control->pageController()->displayAction();
             ?></div>
-        <div id="addNewPage"  class="containerAdmin"><?php
+        <div id="addNewPages"  class="containerAdmin"><?php
             $control->pageController()->addAction();
             ?></div>
-        <div id="viewContent"  class="containerAdmin"><?php
+        <div id="viewContents"  class="containerAdmin"><?php
             $control->contentController()->displayAction();
             ?></div>
         <div id="viewStyles"   class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
+        <div id="addContentViews"   class="containerAdmin"><?php
+        $control->contentController()->addAction();
+        ?></div
     <?php
     }
 

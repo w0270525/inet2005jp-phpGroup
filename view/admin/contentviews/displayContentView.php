@@ -17,7 +17,7 @@ if(!empty($lastOperationResults)):
 <?php
 endif;
 ?>
-<h1>Site Articles</h1>
+<h1>Site Content</h1>
 
 <table class="table">
     <thead>
@@ -25,11 +25,12 @@ endif;
 
         <th>Name</th>
         <th>Alias</th>
+        <th>Order</th>
+
+        <th>Pages</th>
         <th>Description</th>
         <th>Created By</th>
-        <th>Created Date</th>
-        <th>Modified By</th>
-        <th>Modified Date</th>
+
     </tr>
     </thead>
     <tbody>
@@ -38,21 +39,15 @@ endif;
 
         ?>
         <tr>
-            <span id='articleId'><?php echo $content->getId(); ?></span>
+
             <td><?php echo $content->getName(); ?></td>
             <td><?php echo $content->getAlias(); ?></td>
+            <td><?php echo $content->getOrder(); ?></td>
 
-
-            <td><?php foreach ($content->getArticles() as $article)
-                    echo $article." ";
-                echo $content->getAssocPage(); ?></td>
-
-
+            <td> <?php echo $content->getAssocPage(); ?></td>
             <td><?php echo $content->getDesc(); ?></td>
             <td><?php echo $content->getCreatedBy(); ?></td>
-            <td><?php echo $content->getCreatedDate(); ?></td>
-            <td><?php echo $content->getModifiedBy(); ?></td>
-            <td><?php echo $content->getModifiedDate(); ?></td>
+
             <td><a href="?pageupdate= <?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>

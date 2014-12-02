@@ -30,14 +30,11 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     }
 
     // gets all the ContentAreas from the database
-
+    // Selects thw content REA BASED ON id
+    //Returns a rowcount of the result
     public function selectContentArea()
     {
-        // hard-coding for first ten rows
-
-
-        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
-
+          $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
 
         try
         {
@@ -52,6 +49,9 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
 
     }
 
+
+    // Selects thw content REA BASED ON id
+    //Returns a rowcount of the result
     public function selectContentAreaByID($ContentAreaID)
     {
         $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
@@ -71,6 +71,29 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
             die('selectContentAreaByContentAreaId failed  in PDOMySQLPageContentAreaModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+    // selectsd content area by name
+    public function selectContentAreaByName($name)
+    {
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN   USER ON c_a_createdby = USER.u_id ";
+
+        $selectStatement .= " WHERE c_c_name  = :name;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(':name', $name, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('selectContentAreaByPageId failed  in PDOMySQLPageContentAreaModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
 
     // returns the ContentAreas asscoiated with a specific PAGES ID
     public function selectContentAreaByPageId($pageID)
@@ -134,6 +157,39 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         }
     }
 
+    // adds a content aREA IN TO THE DATABSE
+    public function insertContentArea($contentArea)
+    {
+        try{
+            $this->stmt = $this->dbConnection->prepare(' SELECT  COUNT(*) FROM CONTENT_AREAS ');
+            $this->stmt->execute();
+        }
+        catch(PDOException $ex)
+        {
+            die('insertpage  failed retrieving vount of CONTENT_AREASTABLE in PDOMySQLPageDataModel:\n: Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+      $count = $this->stmt->fetch(PDO::FETCH_ASSOC);
+
+        $insertStatement = "INSERT INTO  CONTENT_AREAS  VALUES (DEFAULT, :c_name, :c_alais, :c_desc,  '.$count.' , :c_createdby , default,:c_modifiedby , default );";
+
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($insertStatement);
+            $this->stmt->bindParam(':c_name', $contentArea->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_alais', $contentArea->getAlias(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_desc', $contentArea->getDesc(), PDO::PARAM_INT);
+
+            $this->stmt->bindParam(':c_createdby', $contentArea->getCreatedBy(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_modifiedby', $contentArea->getCreatedBy(), PDO::PARAM_STR);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('insertpage  failed  in PDOMySQLPageDataModel:\n'.$insertStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
 
     //retruns ams array of content aread
     function fetchContentAreas()
@@ -248,7 +304,7 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     }
     public function fetchContentAreaOrder($row)
     {
-        return $row['c_a_modifieddate'];
+        return $row['c_a_order'];
     }
 
 }
