@@ -37,6 +37,7 @@
     foreach($arrayOfContentAreas as $content):
   ?>
     <tr>
+      <span id='tableid'><?php echo $content->getId(); ?></span>
       <td><?php echo $content->getName(); ?></td>
       <td><?php echo $content->getAlias(); ?></td>
       <td><?php echo $content->getDesc(); ?></td>
