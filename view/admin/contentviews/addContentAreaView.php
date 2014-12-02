@@ -28,7 +28,7 @@
     </tr>
   </thead>
   <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addContentASubmit').hide();$('#verifyf').show()"
-        action="#" method="post" value="addNewPageForm">
+        action="#" method="post" value="addNewContentAreaForm">
     <tbody>
       <tr>
         <td><input oninput="resetBut()" type="text" name ="c_name" required /></td>
