@@ -34,17 +34,19 @@
         action="#" method="post" value="addNewPageForm">
     <tbody>
       <tr>
-        <td><input oninput="resetBut()" type="text" name ="a_contentarea" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="a_name" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="a_title" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="a_desc" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="a_blurb" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_contentarea" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_name" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_title" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_desc" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_blurb" required /></td>
+
 
         // TinyMCE WOULD GO HERE!
-        <td><input oninput="resetBut()" type="text" name ="a_content" required /></td>
+        <td><input oninput="resetBut()" type="text" name="a_content" required /></td>
         // TinyMCE WOULD GO HERE!
 
-        <td><input oninput="resetBut()" type="text" name ="a_assocpage" required /></td>
+
+        <td><input oninput="resetBut()" type="text" name="a_assocpage" required /></td>
         <input type="hidden" name="formSubmitNewArticle" value="true" required/>
         <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
         <input type="submit" class="btn btn-default" id="addArticleSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>

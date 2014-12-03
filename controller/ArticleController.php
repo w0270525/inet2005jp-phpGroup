@@ -19,6 +19,14 @@ class ArticleController
         include '../view/admin/articleviews/displayArticlesView.php';
     }
 
+    public function updateAction($id)
+    {
+        $article =$this->model->getPage($id);
+
+
+        include '../view/admin/articleviews/editArticleView.php';
+    }
+
     public function addAction()
     {
 

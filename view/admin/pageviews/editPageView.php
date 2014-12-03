@@ -35,7 +35,7 @@
         <td><input oninput="resetBut()" type="text" name ="p_desc" value="<?php echo $page->getDesc(); ?>" required /></td>
 
         // No idea what this is for...
-        <input type="hidden" name = "formSubmitNewPage" value="true" required />
+        <input type="hidden" name = "formSubmitUpdatePage" value="true" required />
         // No idea what this is for...
 
         <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
