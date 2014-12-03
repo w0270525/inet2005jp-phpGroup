@@ -30,6 +30,7 @@
       <th>Modified Date</th>
       <th>Active</th>
       <th>Edit</th>
+	  <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -45,7 +46,8 @@
       <td><?php echo $style->getModifiedBy(); ?></td>
       <td><?php echo $style->getModifiedDate(); ?></td>
       <td><?php echo $style->getActive(); ?></td>
-      <td><span class="glyphicon glyphicon-pencil" ><a href="?styleupdate=<?php echo $style->getId() ; ?>"></a></span></td>
+      <td><a href="?styleupdate=<?php echo $style->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+	    <td><a href="?styleupdate=<?php echo $style->getId() ; ?>"><span class="glyphicon glyphicon-remove" ></span></a></td>
     </tr>
   <?php
     endforeach;
