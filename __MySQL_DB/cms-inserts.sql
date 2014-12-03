@@ -307,11 +307,16 @@ INSERT INTO cms.USER (u_id,u_fname, u_lname, u_username, u_pass, u_salt, u_creat
 VALUES (2,'editor', 'User', 'editor', 'admin', 'pepper', 1,NOW());
 INSERT INTO cms.USER (u_id,u_fname, u_lname, u_username, u_pass, u_salt, u_createdby,u_createddate)
 VALUES (3,'author', 'User', 'author', 'admin', 'sugar', 1,NOW());
+INSERT INTO cms.USER (u_id,u_fname, u_lname, u_username, u_pass, u_salt, u_createdby,u_createddate)
+VALUES (4,'dumbadmin', 'User', 'dumbAdmin', 'dumbAdmin', 'sugar', 1,NOW());
 
-# u_r_id, u_r_u_id, u_r_l_r_id
+# u_r_id, u_r_u_id, u_r_l_r_id changed to create unique users
 INSERT INTO cms.USER_ROLES VALUES (1, 1, 1);
-INSERT INTO cms.USER_ROLES VALUES (2, 1, 2);
-INSERT INTO cms.USER_ROLES VALUES (3, 1, 3);
+INSERT INTO cms.USER_ROLES VALUES (2, 2, 2);
+INSERT INTO cms.USER_ROLES VALUES (3, 3, 3);
+INSERT INTO cms.USER_ROLES VALUES (4, 1, 2);
+INSERT INTO cms.USER_ROLES VALUES (5, 1, 3);
+INSERT INTO cms.USER_ROLES VALUES (6, 4, 1);
 
 # s_id, s_name, s_desc, s_style, s_active, s_createdby
 INSERT INTO cms.STYLE (s_id, s_name, s_desc, s_style, s_active, s_createdby,s_creationdate)
