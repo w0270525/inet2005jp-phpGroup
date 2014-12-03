@@ -19,6 +19,14 @@ class StyleController
         include '../view/admin/styleviews/displayStylesView.php';
     }
 
+    public function updateAction($id)
+    {
+        $style =$this->model->getPage($id);
+
+
+        include '../view/admin/styleviews/editStyleView.php';
+    }
+
     public function addAction()
     {
 

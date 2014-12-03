@@ -21,12 +21,12 @@ class PageController
 
     public function updateAction($id)
     {
-
         $page =$this->model->getPage($id);
 
 
         include '../view/admin/pageviews/editPageView.php';
     }
+
     public function addAction()
     {
 
