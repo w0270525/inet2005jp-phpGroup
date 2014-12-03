@@ -1,4 +1,4 @@
-
+<?php if($_SESSION["logged"]==true):?>
 <style type="text/css">
     table
     {
@@ -17,62 +17,59 @@ if(!empty($lastOperationResults)):
 <?php
 endif;
 ?>
-<h1>Add  A New  CONTENT</h1>
-<table class="table">
-    <thead>
-    <tr>
+<h1>Add  A New  Content Area</h1>
 
-        <th>Name</th>
-        <th>Alias</th>
-        <th>Description</th>
-        <th>Order</th>
-    </tr>
-    </thead>
-    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
-          action="#" method="post" value="addNewPageForm">
-        <tbody>
+
+<div>
+    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 
 
 
-        <tr>
+            <label class="col-sm-2 control-label">Content Area Name</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_name"   class="form-control"required /></div>
+            <label class="col-sm-2 control-label">Content Sre Alias</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_alias"   class="form-control"required/></div>
+            <label class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc"   class="form-control"required/></div>
+            <label class="col-sm-2 control-label">Order</label>
 
-            <td><input oninput="resetBut()" type="text" name = "c_name" required /></td>
-            <td><input oninput="resetBut()" type="text" name = "c_alias" required/></td>
-            <td><input oninput="resetBut()" type="text" name = "c_desc" required/></td>
-            <td><input oninput="resetBut()" type="hidden" name = "c_order" value="null" required/></td>
-            <input type="hidden" name = "formSubmitNewContentArea" value="true" />
-            <td><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span>
-                <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut(); " value ="Confirm" >  </td>
-
-        </tr>
-        <tr>
-
-            <td></td>
-        </tr>
+                   <!--content order -- not sure if it can be impementred during the addition of a content area -->
+                <div class="col-sm-10"><input oninput="resetBut()" type="hidden" name = "c_order" value="null" /></div>
 
 
+            <div class="col-sm-10"> <input type="hidden" name = "formSubmitNewContentArea" value="true"  /></div>
 
 
-        </tbody></form>
-    <tfoot></tfoot>
-</table>
+             <div  class="btn btn-default" id="formConfirmAddNewContentArea" onclick="verifyAddArticle()"    class="form-control">Verify </div>
+             <input type="submit" class="btn btn-default" id="addContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
+
+
+</form>
+
+
 <script>
-    function  verifyf()
+    function  verifyAddArticle()
     {
-//        if (document.forms['addNewPageForm']['p_name'].value.length>5)
-//      if   (document.forms['addNewPageForm']['p_alias'].value.length>5)
-//        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
-//    {
-        $('#formConfirm').hide();
-        $('#addPageSubmit').show();
+        if (document.forms['addNewContentArea']['c_name'].value.length>5)
+            if(document.forms['addNewContentArea']['c_alias'].value.length>5)
+                if( document.forms['addNewContentArea']['c_desc'].value.length>20)
+        {
+            $('#formConfirmAddNewContentArea').hide();
+            $('#addContentAreaSubmitForm').show();
+
+        }
     }
 
 
-    $('#addPageSubmit').hide()
+    $('#addContentAreaSubmitForm').hide();
 
     function resetBut()
     {
-        $('#formConfirm').show();
-        $('#addPageSubmit').hide();
+        $('#formConfirmAddNewContentArea').show();
+        $('#addContentAreaSubmitForm').hide();
     }
 </script>
+    </div>
+
+<?php
+endif;
