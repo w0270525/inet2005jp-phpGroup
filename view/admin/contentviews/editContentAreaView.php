@@ -36,23 +36,26 @@
 
             <label class="col-sm-2 control-label">Content Area Name</label>
             <div class="col-sm-10">
-                   <input oninput="resetBut()" type="text" name = "c_name"  value = <?php echo $content->getName()?> class="form-control"required /></div>
+            <input oninput="resetBut()" type="text" name = "c_name"  value = <?php echo $content->getName()?> class="form-control"required /></div>
 
             <label class="col-sm-2 control-label">Content Sre Alias</label>
+
                     <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_alias"  value = <?php echo $content->getAlias()?>  class="form-control"  required/></div>
             <label class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc"   class="form-control"required/></div>
+
+                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"required/></div>
             <label class="col-sm-2 control-label">Order</label>
 
-            <div class="col-sm-10"><input oninput="resetBut()" type="text"  value = <?php echo $content->getOrder()?>   name="c_order" value="null" /></div>
+            <div class="col-sm-10">
+                    <input oninput="resetBut()" type="int"  value = <?php echo $content->getOrder()?>   name="c_order" /></div>
 
-            <div class="hidden"><input oninput="resetBut()" type="text"  value = <?php echo $content->getId()?>   name="c_order" value="null" /></div>
+
 
             <div class="col-sm-10"> <input type="hidden" name = "formSubmitNewContentArea" value="true"  /></div>
 
 
-            <div  class="btn btn-default" id="formConfirmEditContentArea" onclick="verifyAddArticle()"    class="form-control">Verify </div>
-            <input type="submit" class="btn btn-default" id="edeitContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
+            <div  class="btn btn-default form-control" id="formConfirmEditContentArea" onclick="verifyAddArticle()" ><span   class="" >Verify</span> </div>
+            <input type="submit" class="btn btn-default" id="editContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
 
 
         </form>
@@ -63,22 +66,22 @@
         <script>
             function  verifyAddArticle()
             {
-                if (document->forms['addNewContentArea']['c_name'].value.length>5)
-                    if(document.forms['addNewContentArea']['c_alias'].value.length>5)
-                        if( document.forms['addNewContentArea']['c_desc'].value.length>20)
+                if (document->forms['editContentArea']['c_name'].value.length>5)
+                    if(document.forms['editContentArea']['c_alias'].value.length>5)
+                        if( document.forms['editContentArea']['c_desc'].value.length>20)
                         {
-                            $('#formConfirmAddNewContentArea').hide();
+                            $('#formConfirmEditContentArea').hide();
                             $('#addContentAreaSubmitForm').show();
 
                         }
             }
 
 
-            $('#addContentAreaSubmitForm').hide();
+            $('#editContentAreaSubmitForm').hide();
 
             function resetBut()
             {
-                $('#formConfirmAddNewContentArea').show();
+                $('#editContentAreaSubmitForm').show();
                 $('#addContentAreaSubmitForm').hide();
             }
         </script>

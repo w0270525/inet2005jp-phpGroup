@@ -16,6 +16,11 @@
 <h2><?php echo $lastOperationResults; ?></h2>
 <?php
   endif;
+
+// grab the session user
+$user = unserialize($_SESSION["user"]);
+
+
 ?>
 <h1>Content Areas</h1>
 <table class="table">
@@ -25,16 +30,27 @@
       <th>Alias</th>
       <th>Description</th>
       <th>Order</th>
-      <th>Created By</th>
-      <th>Created Date</th>
-      <th>Modified By</th>
-      <th>Modified Date</th>
-      <th>Edit</th>
+        <?php
+
+        if($user->isAdmin()):
+        ?>
+
+
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th>Modified By</th>
+          <th>Modified Date</th>
+          <th>Edit</th>
+
+        <?php
+        endif;
+
+        ?>
     </tr>
-  </thead>
-  <tbody>
+
   <?php
     foreach($arrayOfContentAreas as $content):
+
 
   ?>
     <tr>
@@ -43,27 +59,20 @@
       <td><?php echo $content->getAlias(); ?></td>
       <td><?php echo $content->getDesc(); ?></td>
       <td><?php echo $content->getOrder(); ?></td>
+        <?php
+        if($user->isAdmin()):
+          ?>
       <td><?php echo $content->getCreatedBy(); ?></td>
       <td><?php echo $content->getCreatedDate(); ?></td>
       <td><?php echo $content->getModifiedBy(); ?></td>
       <td><?php echo $content->getModifiedDate(); ?></td>
-      <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
-    </tr>
-  <?php
-
-
+        <?php
+        endif;
         ?>
-        <tr>
 
-            <td><?php echo $content->getName(); ?></td>
-            <td><?php echo $content->getAlias(); ?></td>
-            <td><?php echo $content->getOrder(); ?></td>
 
-            <td> <?php echo $content->getAssocPage(); ?></td>
-            <td><?php echo $content->getDesc(); ?></td>
-            <td><?php echo $content->getCreatedBy(); ?></td>
-
-            <td><a href="?updateContentArea= <?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+        <!-- update link sent via get -->
+       <td><a href="?updateContentArea= <?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
 
         </tr>
     <?php
