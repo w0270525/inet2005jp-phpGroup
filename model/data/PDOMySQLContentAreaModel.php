@@ -34,7 +34,7 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     //Returns a rowcount of the result
     public function selectContentArea()
     {
-          $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id;";
+          $selectStatement = "SELECT * FROM CONTENT_AREAS  ;";
 
         try
         {

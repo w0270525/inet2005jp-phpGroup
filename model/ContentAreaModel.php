@@ -80,7 +80,7 @@ class ContentAreaModel
     //forms a Content Area from the input array and returns it
     private function constructContentArea($row)
     {
-        $currentContentArea = new ContentArea(null,
+        $currentContentArea = new ContentArea($this->m_DataAccess->fetchContentAreaID($row),
             $this->m_DataAccess->fetchContentAreaName($row),
             $this->m_DataAccess->fetchContentAreaAlias($row),
             $this->m_DataAccess->fetchContentAreaDescription($row),
