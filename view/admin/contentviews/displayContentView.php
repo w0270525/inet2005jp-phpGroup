@@ -72,7 +72,7 @@ $user = unserialize($_SESSION["user"]);
 
 
         <!-- update link sent via get -->
-       <td><a href="?updateContentArea= <?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+       <td><a href="?updateContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" > </span></a></td><td> <?php echo $content->getId() ;?></td>
 
         </tr>
     <?php

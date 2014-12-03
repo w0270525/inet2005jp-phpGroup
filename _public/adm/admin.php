@@ -35,7 +35,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                     <input type="submit" name="logout" id="logout" class="btn btn-primary pull-right"   value="logout" style="display:inline;right:0;" />
                 </form>
                 <!-- clears the current for 100% -->
-                <form action="#"    method="post" name="" id="" style="display:inline;" >
+                <form action="index.php"    method="post" name="" id="" style="display:inline;" >
                     <input type="submit" name="" id="" class="btn btn-success pull-right"   value="Reset" style="display:inline;right:0;" />
                 </form>
                 <?php
@@ -284,6 +284,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->articleController()->updateAction( $control->currentUser);
 
         }
+            if(isset($_GET["updateContentArea"]) &&$_GET["updateContentArea"]=="true"){
+          //      $_GET["contentupdate"]
+                $control->contentController()->updateAction( $control->currentUser);
+
+            }
         }
 
 
@@ -313,6 +318,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="viewStyles"   class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
+        <div id="viewArticles"  class="containerAdmin"><?php
+            $control->articleController()->displayAction();
+            ?></div>
+
 
     <?php
     }

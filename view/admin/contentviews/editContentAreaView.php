@@ -55,7 +55,7 @@
 
 
             <div  class="btn btn-default form-control" id="formConfirmEditContentArea" onclick="verifyAddArticle()" ><span   class="" >Verify</span> </div>
-            <input type="submit" class="btn btn-default" id="editContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
+            <input type="submit" class="btn btn-defaul form-controlt" id="editContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"    />
 
 
         </form>
