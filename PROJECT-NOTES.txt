@@ -1,3 +1,9 @@
+ Thurday
+ merge and push
+
+
+
+
  TUESDAY
 
  Got alot of the display views working, same with the a fiew edit views
