@@ -35,7 +35,7 @@
   <tbody>
   <?php
     foreach($arrayOfContentAreas as $content):
-<<<<<<< Temporary merge branch 1
+
   ?>
     <tr>
       <span id='tableid'><?php echo $content->getId(); ?></span>
@@ -50,7 +50,7 @@
       <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
     </tr>
   <?php
-=======
+
 
         ?>
         <tr>
@@ -67,7 +67,7 @@
 
         </tr>
     <?php
->>>>>>> Temporary merge branch 2
+
     endforeach;
   ?>
   </tbody>

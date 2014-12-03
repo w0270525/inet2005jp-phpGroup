@@ -77,9 +77,9 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     // selectsd content area by name
     public function selectContentAreaByName($name)
     {
-        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  ";
 
-        $selectStatement .= " WHERE c_c_name  = :name;";
+        $selectStatement .= " WHERE c_a_name  = :name;";
 
         try
         {
@@ -170,9 +170,9 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         {
             die('insertpage  failed retrieving vount of CONTENT_AREASTABLE in PDOMySQLPageDataModel:\n: Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
         }
-      $count = $this->stmt->fetch(PDO::FETCH_ASSOC);
+      $count =intval( $this->stmt->fetch(PDO::FETCH_ASSOC));
 
-        $insertStatement = "INSERT INTO  CONTENT_AREAS  VALUES (DEFAULT, :c_name, :c_alais, :c_desc,  '.$count.' , :c_createdby , default,:c_modifiedby , default );";
+        $insertStatement = "INSERT INTO  CONTENT_AREAS  VALUES (DEFAULT, :c_name, :c_alais, :c_desc,  '. $count.' , :c_createdby , default,:c_modifiedby , default );";
 
 
         try{

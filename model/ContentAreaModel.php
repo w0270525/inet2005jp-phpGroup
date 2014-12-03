@@ -105,11 +105,12 @@ class ContentAreaModel
     function addContentArea($contentArea){
        return $this->m_DataAccess->insertContentArea($contentArea);
 
+
     }
 
     function getContentAreaByName($name){
          $this->m_DataAccess->selectContentAreaByName($name);
-         return      $this->m_DataAccess->fetchContentAreas();
+         return     $this->constructContentArea ($this->m_DataAccess->fetchContentAreas());
 
     }
 }
