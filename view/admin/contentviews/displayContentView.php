@@ -11,31 +11,46 @@
 </style>
 
 <?php
-if(!empty($lastOperationResults)):
-    ?>
-    <h2><?php echo $lastOperationResults; ?></h2>
-<?php
-endif;
+  if(!empty($lastOperationResults)):
 ?>
-<h1>Site Content</h1>
-
+<h2><?php echo $lastOperationResults; ?></h2>
+<?php
+  endif;
+?>
+<h1>Content Areas</h1>
 <table class="table">
-    <thead>
+  <thead>
     <tr>
-
-        <th>Name</th>
-        <th>Alias</th>
-        <th>Order</th>
-
-        <th>Pages</th>
-        <th>Description</th>
-        <th>Created By</th>
-
+      <th>Name</th>
+      <th>Alias</th>
+      <th>Description</th>
+      <th>Order</th>
+      <th>Created By</th>
+      <th>Created Date</th>
+      <th>Modified By</th>
+      <th>Modified Date</th>
+      <th>Edit</th>
     </tr>
-    </thead>
-    <tbody>
-    <?php
+  </thead>
+  <tbody>
+  <?php
     foreach($arrayOfContentAreas as $content):
+<<<<<<< Temporary merge branch 1
+  ?>
+    <tr>
+      <span id='tableid'><?php echo $content->getId(); ?></span>
+      <td><?php echo $content->getName(); ?></td>
+      <td><?php echo $content->getAlias(); ?></td>
+      <td><?php echo $content->getDesc(); ?></td>
+      <td><?php echo $content->getOrder(); ?></td>
+      <td><?php echo $content->getCreatedBy(); ?></td>
+      <td><?php echo $content->getCreatedDate(); ?></td>
+      <td><?php echo $content->getModifiedBy(); ?></td>
+      <td><?php echo $content->getModifiedDate(); ?></td>
+      <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+    </tr>
+  <?php
+=======
 
         ?>
         <tr>
@@ -52,8 +67,9 @@ endif;
 
         </tr>
     <?php
+>>>>>>> Temporary merge branch 2
     endforeach;
-    ?>
-    </tbody>
-    <tfoot></tfoot>
+  ?>
+  </tbody>
+  <tfoot></tfoot>
 </table>
