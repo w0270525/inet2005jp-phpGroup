@@ -1,3 +1,8 @@
+Wed
+Jonathan
+Made a quick update to the SQL script to add another user and give some unique roles for testing purposes, admin still is all powerful.
+dumbadmin is just an admin
+editor is an editor and author is an author (obv.).
 
 THURSDAY PM
 
