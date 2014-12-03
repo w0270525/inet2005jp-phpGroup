@@ -40,12 +40,14 @@ $user = unserialize($_SESSION["user"]);
           <th>Created Date</th>
           <th>Modified By</th>
           <th>Modified Date</th>
-          <th>Edit</th>
 
         <?php
         endif;
 
         ?>
+
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
   <?php
@@ -72,9 +74,11 @@ $user = unserialize($_SESSION["user"]);
 
 
         <!-- update link sent via get -->
-       <td><a href="?updateContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" > </span></a></td><td> <?php echo $content->getId() ;?></td>
+       <td><a href="?updateContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" > </span></a></td>
+        <td><a href="?deleteContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-remove" ></span></a></td>
 
-        </tr>
+
+    </tr>
     <?php
 
     endforeach;

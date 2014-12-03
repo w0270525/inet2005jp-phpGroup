@@ -36,14 +36,14 @@
 
             <label class="col-sm-2 control-label">Content Area Name</label>
             <div class="col-sm-10">
-            <input oninput="resetBut()" type="text" name = "c_name"  value =  <?php echo $content->getName()?> class="form-control"required /></div>
+            <input oninput="resetBut()" type="text" name = "c_name"  value =  <?php echo $content->getName()?> class="form-control" required /></div>
 
             <label class="col-sm-2 control-label">Content Sre Alias</label>
 
                     <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_alias"  value = <?php echo $content->getAlias()?>  class="form-control"  required/></div>
             <label class="col-sm-2 control-label">Description</label>
 
-                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"required/></div>
+                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"/></div>
             <label class="col-sm-2 control-label">Order</label>
 
             <div class="col-sm-10">
