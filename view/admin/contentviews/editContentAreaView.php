@@ -33,7 +33,7 @@
       <tr>
         <td><input oninput="resetBut()" type="text" name ="c_name" value="<?php echo $contentarea->getName(); ?>" required /></td>
         <td><input oninput="resetBut()" type="text" name ="c_alias" value="<?php echo $contentarea->getAlias(); ?>" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="c_desc" value="<?php echo $contentarea->getDesc(); ?>" required /></td>
+        <td><input oninput="resetBut()" type="text" name ="c_desc" value="<?php echo $contentarea->getDesc(); ?>"  /></td>
         <td><input oninput="resetBut()" type="text" name ="c_order" value="<?php echo $contentarea->getOrder(); ?>" required /></td>
 
 

@@ -30,6 +30,7 @@
       <th>Modified By</th>
       <th>Modified Date</th>
       <th>Edit</th>
+	  <th>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +48,8 @@
       <td><?php echo $content->getModifiedBy(); ?></td>
       <td><?php echo $content->getModifiedDate(); ?></td>
       <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+	    <!-- need to find out where this is going. Icon/link there, not pointed anywhere special, along with the edit-->
+	  <td><a href="?pageupdate=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-remove" ></span></a></td>
     </tr>
   <?php
     endforeach;
