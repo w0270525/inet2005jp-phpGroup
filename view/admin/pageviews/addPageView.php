@@ -17,7 +17,7 @@
 <?php
   endif;
 ?>
-<h1>Add  A New  Page</h1>
+<h1>Add A New Page</h1>
 <table class="table">
   <thead>
     <tr>
