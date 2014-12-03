@@ -284,7 +284,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->articleController()->updateAction( $control->currentUser);
 
         }
-            if(isset($_GET["updateContentArea"]) &&$_GET["updateContentArea"]=="true"){
+            if(isset($_GET["updateContentArea"])){
           //      $_GET["contentupdate"]
                 $control->contentController()->updateAction( $control->currentUser);
 

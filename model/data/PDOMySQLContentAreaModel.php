@@ -57,12 +57,12 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
 
 
-        $selectStatement .= " WHERE ContentArea.a_id = :ContentAreaID;";
+        $selectStatement .= " WHERE CONTENT_AREAS.c_a_id = :ContentAreaID;";
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':$ContentAreaID', $ContentAreaID, PDO::PARAM_INT);
+            $this->stmt->bindParam(':ContentAreaID', $ContentAreaID, PDO::PARAM_INT);
 
             $this->stmt->execute();
             return $this->stmt->rowCount();

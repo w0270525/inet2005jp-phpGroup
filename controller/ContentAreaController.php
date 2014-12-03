@@ -21,9 +21,9 @@ class ContentAreaController
 
     public function updateAction($id)
     {
-        $arrayOfContentAreas = $this->model->getContentArea($id);
+        $arrayOfContentAreas = $this->model->getContentArea($_GET["updateContentArea"]);
 
-        include '../view/admin/contentviews/editContentAreaViews.php';
+        include '../view/admin/contentviews/editContentAreaView.php';
     }
 
 
