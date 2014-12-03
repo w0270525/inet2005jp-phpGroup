@@ -65,8 +65,8 @@ class ContentAreaController
 
             if(  $lastOperationResults=$this->model->addContentArea(new ContentArea(null,$_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],null,null,null,$user->getId(),null,$user->getId(),null)))
             {
-                $arrayOfPages[0] = $this->model->getContentAreaByName($_POST["p_name"]);
-                include'../view/admin/pageviews/editPageViews.php';
+                $arrayOfPages[0] = $this->model->getContentAreaByName($_POST["c_name"]);
+                include'../view/admin/contentviews/editContentViews.php';
             }
         }
 
