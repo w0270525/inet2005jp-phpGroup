@@ -38,14 +38,12 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         $count = 10;
 
         $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
-        $selectStatement .= " LIMIT :start,:count;";
+        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ;";
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement );
-            $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
-            $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
+
 
             $this->stmt->execute();
         }
