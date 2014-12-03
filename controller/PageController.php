@@ -21,12 +21,12 @@ class PageController
 
     public function updateAction($id)
     {
-        $arrayOfPages = array();
-        $arrayOfPages[]=$this->model->getPage($id);
+        $page =$this->model->getPage($id);
 
 
-        include '../view/admin/pageviews/editPageViews.php';
+        include '../view/admin/pageviews/editPageView.php';
     }
+
     public function addAction()
     {
 
@@ -63,7 +63,7 @@ class PageController
            if(  $lastOperationResults=$this->model->addPage(new Page(null,$_POST["p_name"],$_POST["p_alias"],$_POST["p_desc"],null,null,$user->getId(),null,$user->getId(),null.null)))
             {
             $arrayOfPages[0] = $this->model->getPageByName($_POST["p_name"]);
-            include'../view/admin/pageviews/editPageViews.php';
+            include '../view/admin/pageviews/editPageView.php';
         }
         }
 
