@@ -146,15 +146,15 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
-                            <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
-                            <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
-                            <li data-target="viewContents"  id="viewContent" ><a href="#">View Content Areas</a></li>
-                            <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
-                            <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
-                            <li data-target="addArticles"  id="addArticles" ><a href="#">Add Articles</a></li>
-                            <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
-                            <li data-target="addStyles"  id="addStyles" ><a href="#">Add Styles</a></li>
+                            <li data-target="viewPages" id="viewPage" ><a href="#">View Pages</a></li>
+                            <li data-target="addNewPages" id="addNewPage"><a href="#">Add New Page</a></li>
+                            <li data-target="removePages" id="removePage" ><a href="#" >Remove Page</a></li>
+                            <li data-target="viewContents" id="viewContent" ><a href="#">View Content Areas</a></li>
+                            <li data-target="addContentAreas" id="addContentArea"><a href="#" >Add Content Area</a></li>
+                            <li data-target="viewArticles" id="viewArticle" ><a href="#">View Articles</a></li>
+                            <li data-target="addArticles" id="addArticle" ><a href="#">Add Articles</a></li>
+                            <li data-target="viewStyles" id="viewStyle" ><a href="#">View Styles</a></li>
+                            <li data-target="addStyles" id="addStyle" ><a href="#">Add Styles</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
