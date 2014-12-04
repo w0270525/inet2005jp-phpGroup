@@ -47,28 +47,20 @@
     </style>
   </head>
   <body>
-
-    <?php
-
-      $sql = "SELECT * FROM cms.PAGES";
-      $result = mysqli_query($db, $sql);
-
-    ?>
-
     <ul>
 
     <?php
 
-      while($row = mysqli_fetch_assoc($result)) {
+      foreach ($navArray as $page) {
 
     ?>
 
-      <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo $row['p_id']; ?>">
-          <?php echo $row['p_name']; ?></a></li>
+      <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo $page->getId(); ?>">
+          <?php echo $page->getName(); ?></a></li>
 
     <?php
 
-      } // while END
+      } // foreach END
 
     ?>
 

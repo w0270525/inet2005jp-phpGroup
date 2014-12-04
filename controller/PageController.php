@@ -72,13 +72,32 @@ class PageController
                 $arrayOfPages =$this->model->getAllPages();
                 include '../view/admin/pageviews/displayPageView.php';
 
+            }
     }
-    }
+
+    public function displayPage($id) {
+
+      // Nav Array;
+      $navArray = $this->model->getAllPages();
+
+      // Get the active style and make a style object out of it.
+        // (So call the style controller?)
+
+      // Get an array of all articles which belong to this page or appear on all pages.
+
+      // Create an array of all the Content Areas;
+
+      // Loop through content areas and add articles associated with that area to
+      // that areas article array using the array_push function.
+
+      // Create the current page, call it,
+      // $currentPage
 
 
+      // show the website
+      include '../view/displayPage.php';
 
-
-
+    } // displayPage END
 }
 
 ?>
