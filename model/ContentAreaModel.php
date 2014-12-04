@@ -60,7 +60,7 @@ class ContentAreaModel
     //  Updates a contentarea in the CMS
     public function updateContentAreaOld($id,$name, $alias, $desc,$order, $userid)
     {
-        $ca = new ContentArea($_GET["updateContentArea"],$name, $alias,$desc,$order,null,$page,null,null,$userid,null);
+        $ca = new ContentArea($$id,$name, $alias,$desc,$order,null,$page,null,null,$userid,null);
         $this->m_DataAccess->connectToDB();
 
         $recordsAffected = $this->m_DataAccess->updateContentArea($ca);

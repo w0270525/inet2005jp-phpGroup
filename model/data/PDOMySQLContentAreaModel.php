@@ -211,23 +211,24 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
     // need to add modified by param
     public function updateContentArea($contentArea)
     {
-        $updateStatement = "UPDATE CONTENT_AREA SET c_a_name = :name , c_a_alias = :alis, c_a_order=:order ,c_a_lastmadifieddate=:mod,  c_a_moddate = NOW()  WHERE c_a_id = :id;";
+        $updateStatement = "UPDATE CONTENT_AREAS SET c_a_name = :name , c_a_alias = :alis, c_a_desc = :desc,  c_a_order=:order ,c_a_lastmodifiedby=:mod,  c_a_modifieddate = NOW()  WHERE c_a_id = :id;";
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($updateStatement);
             $this->stmt->bindParam(':name', $contentArea->getName(), PDO::PARAM_STR);
-            $this->stmt->bindParam(':c_a_alias', $contentArea->getAlias(), PDO::PARAM_STR);
-            $this->stmt->bindParam(':c_a_order', $contentArea->getOrder(), PDO::PARAM_INT);
-            $this->stmt->bindParam(':mod', $contentArea->setModifiedBy(), PDO::PARAM_INT);
-
+            $this->stmt->bindParam(':alis', $contentArea->getAlias(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':mod', $contentArea->getModifiedBy(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':desc', $contentArea->getDesc(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':order', $contentArea->getOrder(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':id', $contentArea->getId(), PDO::PARAM_INT);
             $this->stmt->execute();
 
             return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('Update failed  in PDOMySQLContentAreaModel.php :'. $updateStatement. ' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -255,24 +256,7 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         return $row['c_a_desc'];
     }
 
-    // returns the ContentArea blurb
-//    public function fetchContentAreaBlurb($row)
-//    {
-//        return $row['a_blurb'];
-//
-//    }
 
-    // returns the ContentArea cotnent
-//    public function fetchContentAreaContent($row)
-//    {
-//        return $row['a_content'];
-//    }
-
-    // returns pages in all ContentAreas
-//    public function fetchContentAreaInAllPages($row)
-//    {
-//        return $row['a_allpages'];
-//    }
 
     // returns the ContentArea asscoiated PAGE  id
     public function fetchContentAreaAssocPage($row)
