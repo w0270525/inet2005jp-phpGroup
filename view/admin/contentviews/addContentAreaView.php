@@ -18,8 +18,8 @@ if(!empty($lastOperationResults)):
 endif;
 ?>
 
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">  Add  A New  Content Area </button>
-<div id="demo" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#newcontentaqdd">  Add  A New  Content Area </button>
+<div id="newcontentaqdd" class="collapse in">
 
     <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 

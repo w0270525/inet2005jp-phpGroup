@@ -15,7 +15,10 @@
 <?php
   endif;
 ?>
-<h1>Site Articles</h1>
+
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#viewarticlestable">View Article </button>
+<div id="viewarticlestable" class="collapse in">
+
 <table class="table" ><tbody style="width:100%">
 
 
@@ -66,3 +69,5 @@
   </tbody>
   <tfoot></tfoot>
 </table>
+
+ </div><!-- end boot strap div -->

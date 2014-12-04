@@ -9,8 +9,8 @@
         border: 1px solid red;
     }
 </style>
-<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">View Content Areas </button>
-<div id="demo" class="collapse in">
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#contentArticleTable">View Content Areas </button>
+<div id="contentArticleTable" class="collapse in">
 <?php
   if(!empty($lastOperationResults)):
 ?>

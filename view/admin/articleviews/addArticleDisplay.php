@@ -18,7 +18,7 @@ if(!empty($lastOperationResults)):
 endif;
 ?>
 
-<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#formArticle">Add  New Article  </button>
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formArticle">Add  New Article  </button>
 <div id="formArticle" class="collapse in">
 
  

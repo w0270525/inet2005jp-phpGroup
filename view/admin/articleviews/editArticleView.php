@@ -21,8 +21,8 @@ foreach($arrayOfArticles as $article):
 ?>
 
 
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Edit Article <?php echo $article->getName(); ?></button>
-<div id="demo" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editArtform_">Edit Article <?php echo $article->getName(); ?></button>
+<div id="editArtform_" class="collapse in">
     <form name="formUpdateArticleConfirm"  id="formUpdateArticleConfirm" class="form" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
           action="#" method="post" value="addNewPageForm">
 

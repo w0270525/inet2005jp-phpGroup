@@ -25,8 +25,8 @@
         <h1></h1>
 
 
-        <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">Delete Content Area <?php echo $content->getName()?></button>
-        <div id="demo" class="collapse in">
+<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#deletecontentarea_">Delete Content Area <?php echo $content->getName()?></button>
+<div id="deletecontentarea_" class="collapse in">
 
             <form name="deleteContentAreaForm"  id="deleteContentAreaForm" class="deleteContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 

@@ -18,8 +18,8 @@ if(!empty($lastOperationResults)):
 endif;
 ?>
 
-<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#demo">Delete Article <?php echo $article->getName(); ?></button>
-<div id="demo" class="collapse in">
+<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#deleteArticelform_">Delete Article <?php echo $article->getName(); ?></button>
+<div id="deleteArticelform_" class="collapse in">
 
     <table class="table">
         <thead>
