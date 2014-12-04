@@ -87,7 +87,8 @@ class ContentAreaController
         $allCA =$this->model->getAllContentAreas();
         foreach($allCA as $content)
         {
-            if ($content->getName()==$ca_name) $true=false;
+            if ($content->getName()==$ca_name)
+                if($content->getId()!=$_POST["id"]) $true=false;
         }
         if($true):
             $lastOperationResults = "";
