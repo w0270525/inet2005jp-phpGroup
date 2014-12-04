@@ -30,12 +30,6 @@ foreach(  $arrayOfContentAreas  as $content):
         <form name="editContentAreaForm"  id="editContentArea" class="editContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 
 
-
-
-
-
-
-
             <label class="col-sm-2 control-label">Content Area Name</label>
             <div class="col-sm-10">
             <input oninput="resetBut()" type="text" name = "c_name"  value =  <?php echo $content->getName()?> class="form-control" required /></div>

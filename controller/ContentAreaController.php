@@ -92,20 +92,23 @@ class ContentAreaController
         }
         if($true):
             $lastOperationResults = "";
-            $currentCA = $this->model->getContentArea(["updatestyle"]);
-            $currentCA->setName($s_name);
-            $currentCA->setDesc($s_desc);
-            $currentCA->setAlias($s_style);
-
+            $currentCA = $this->model->getContentArea($_POST["id"]);
+            $currentCA->setName($ca_name);
+            $currentCA->setDesc($ca_desc);
+            $currentCA->setAlias($_POST["c_alias"]);
+            $currentCA->setOrder($ca_order);
             $user= unserialize($_SESSION["user"]);
             $currentCA->setModifiedBy($user->getId());
-            $lastOperationResults = $this->model->updateContentAreaOld($_GET["updateContentArea"],$ca_name,$ca_desc, $ca_style, $ca_order,$user->getId());
+
+           // $lastOperationResults = $this->model->updateContentAreaOld($_GET["updateContentArea"],$ca_name,$ca_desc, $ca_style, $ca_order,$user->getId());
+            $lastOperationResults = $this->model->updateContentArea($currentCA);
+
             $_POST=null;
             $_GET=null;
-            $arrayOfContentAreas[] =$this->model->getContentArea($currentCA);
+            $arrayOfContentAreas[] =$this->model->getContentArea($currentCA->getId());
             if($lastOperationResults)$lastOperationResults= " You have updated  the Conastnr area successfulyy";
             else $lastOperationResults = "Unable to update the record, please try again";
-            include '../view/admin/styleviews/editStyleView.php';
+            include '../view/admin/contentviews/editContentAreaView.php';
         else: $lastOperationResults="That name is already in use, Please try another";
         endif;
 
