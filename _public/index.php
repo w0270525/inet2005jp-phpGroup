@@ -81,8 +81,8 @@
         //show admin menu
         $control->displayAdmin($control);
 
-        // show the website
-        include("../view/displayPage.php");
+
+        $control->pageController()->displayPage($_GET['page']);
 
     ?>
     </div>

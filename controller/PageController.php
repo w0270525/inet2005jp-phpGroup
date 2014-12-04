@@ -72,13 +72,19 @@ class PageController
                 $arrayOfPages =$this->model->getAllPages();
                 include '../view/admin/pageviews/displayPageView.php';
 
+            }
     }
-    }
+
+    public function displayPage($id) {
+
+      $navArray = $this->model->getAllPages();
+      // $currentPage
 
 
+      // show the website
+      include '../view/displayPage.php';
 
-
-
+    } // displayPage END
 }
 
 ?>
