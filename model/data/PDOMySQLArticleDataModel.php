@@ -33,9 +33,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns an array with Articles information including roles
     public function selectArticles()
     {
-        // hard-coding for first ten rows
-        $start = 0;
-        $count = 10;
+
 
         $selectStatement = "SELECT * FROM ARTICLE ";
         $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ;";
@@ -226,13 +224,13 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns the Article content ares
     public function fetchArticleContentArea($row)
     {
-        return $row['a_blurb'];
+        return $row['a_contentarea'];
 
     }
     // returns the Article cotnent
     public function fetchArticleContent($row)
     {
-        return $row['a_contentarea'];
+        return $row['a_content'];
     }
 
     // returns pages in all articles
