@@ -77,6 +77,25 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     }/// end get style by int id
 
 
+    public function selectActiveStyle() {
+
+      // prepare statement
+      $selectStatement = "SELECT * FROM STYLE ";
+      $selectStatement .= "WHERE s_active = 1;";
+
+      try
+      {   // execute statement
+        $this->stmt = $this->dbConnection->prepare($selectStatement);
+        $this->stmt->execute();
+        return $this->stmt->rowCount();
+      }
+      catch(PDOException $ex)
+      {
+        die('selectActiveStyle failed in PDOMySQLStyleDataModel  : '.$selectStatement.' : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+      }
+
+    } // selectActiveStyle END
+
 
     //selects a style from the databse base on the name
     // returns the row count
