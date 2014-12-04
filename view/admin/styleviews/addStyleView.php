@@ -18,47 +18,47 @@
   endif;
 ?>
 <h1>Add new Style</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Style</th>
-    </tr>
-  </thead>
-  <form name="addNewStyle"  id="addNewStyle" class="addNewStyle" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
+
+
+  <form name="addNewStyleFORM"  id="addNewStyleFORM" class="addNewStyleFORM" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
         action="#" method="post" value="addNewStyleForm">
-    <tbody>
-      <tr>
-        <td><input oninput="resetBut()" type="text" name ="s_name" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="s_alias" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="s_desc" required /></td>
-        <input type="hidden" name="formSubmitNewStyle" value="true" required/>
-        <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-          <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
-      </tr>
-    </tbody>
+      <label>Name</label>
+            <input oninput="resetButStyleAdd()" type="text" name ="s_name"  class="form-control" required />
+
+      <label> Description</label>
+            <input oninput="resetButStyleAdd()" type="text" name ="s_desc"  class="form-control" required />
+
+      <label>CSS</label>
+            <textarea  class="form-control" rows="13"    oninput="resetButStyleAdd()" type="text" name ="s_style" value = "" required >cSS HERE</textarea>
+
+      <!-- USED FOR BACKEND FORM VERIFICATION -->
+      <input type="hidden" name="formSubmitNewStyle" value="true" required/>
+
+
+      <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
+      <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
+
   </form>
-  <tfoot></tfoot>
-</table>
+
 
 <script>
-  function  verifyf()
+  function  verifyFormAddStyle()
   {
-//        if (document.forms['addNewPageForm']['p_name'].value.length>5)
-//      if   (document.forms['addNewPageForm']['p_alias'].value.length>5)
-//        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
-//    {
-    $('#formConfirm').hide();
+        if (document.forms['addNewStyleFORM']['s_name'].value.length>5)
+      if   (document.forms['addNewStyleFORM']['s_desc'].value.length>5)
+        if( document.forms['addNewStyleFORM']['s_style'].value.length>10)
+    {
+    $('#formAddStyleConfirm').hide();
     $('#addStyleSubmit').show();
+  }
   }
 
 
   $('#addStyleSubmit').hide()
 
-  function resetBut()
+  function resetButStyleAdd()
   {
-    $('#formConfirm').show();
+    $('#formAddStyleConfirm').show();
     $('#addStyleSubmit').hide();
   }
 </script>

@@ -55,6 +55,33 @@ class StyleModel
         return $fetchedPage;
     }
 
+
+    // gets an style by name and returns it right away
+    public function getStyleByName($name)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $record = $this->m_DataAccess->selectStyleByName($name);
+
+        $fetchedArticle = $this->constructStyle($record);
+
+        $this->m_DataAccess->closeDB();
+
+        return $fetchedArticle;
+    }
+
+
+
+    // attempts to insert a style into the databse and will return 1 if success
+    public function addStyle($s_name,   $s_desc, $s_style ,$userId )
+    {
+
+        $currentStyle = new Style(null,$s_name,  $s_desc,$s_style,  0, $userId, null ,$userId ,null);
+        return $this->m_DataAccess->insertStyle($currentStyle);
+    }
+
+
+
     //  Updates a Style in the CMS
     public function updatePage($styleToUpdate)
     {

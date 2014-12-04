@@ -61,9 +61,6 @@ class ArticleModel
 
         $record = $this->m_DataAccess->selectArticleByArticleName($name);
 
-
-
-
         $fetchedArticle = $this->constructArticle($record);
 
         $this->m_DataAccess->closeDB();

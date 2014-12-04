@@ -153,13 +153,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
                             <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
-                            <li data-target="addStyleViews"  id="addStylepag" ><a href="#">Add Styles</a></li>
+                            <li data-target="addNewStyleViews"  id="addStylepag" ><a href="#">Add Styles</a></li>
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
                         function closeEditor()
                         {
+                            $('#addNewStyleViews').hide();
                             $('#addArticlesViews').hide();
                             $('#viewPages').hide();
                             $('#addContentViews').hide();
@@ -263,19 +264,28 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // CALLS TO  PROCESS THE UPDAET FORMS
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
+            //process new page form
             if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
                 $control->pageController()->confirmAddAction( $control->currentUser);
             }
+
+            // process new content are form
             if(isset($_POST["formSubmitNewContentArea"])&&  $_POST["formSubmitNewContentArea"]=="true"){
                 $control->contentController()->confirmAddAction( $control->currentUser);
 
             }
+
+            // process new articel area form
             if(isset($_POST["formSubmitNewArticleConfirm"])&&  $_POST["formSubmitNewArticleConfirm"]=="true"){
                 $control->articleController()->confirmAddAction( $control->currentUser);
 
             }
 
+            // process new style form
+            if(isset($_POST["formSubmitNewStyle"])&&  $_POST["formSubmitNewStyle"]=="true"){
+                $control->styleController()->confirmAddAction( $control->currentUser);
 
+            }
 
         }
 
@@ -332,10 +342,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="addStyleViews"  class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
-                                                                                                                                            <!-- load  add style form -->
-    <div id="addStyleViews"  class="containerAdmin"><?php
+
+        <!-- load styles form -->                                                                                                                                    <!-- load  add style form -->
+    <div id="addNewStyleViews"  class="containerAdmin"><?php
         $control->styleController()->addAction();
-        ?></div>a
+        ?></div>
 
         <!--  view  All ContentsAreas  -->
         <div id="viewContents"  class="containerAdmin"><?php
