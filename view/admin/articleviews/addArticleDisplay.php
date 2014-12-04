@@ -17,7 +17,10 @@ if(!empty($lastOperationResults)):
 <?php
 endif;
 ?>
-<h1>Add  A New  Article</h1>
+
+<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#formArticle">Add  New Article  </button>
+<div id="formArticle" class="collapse in">
+
  
  
     <form name="formSubmitNewArticle"  id="formSubmitNewArticle" class="form" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
@@ -28,47 +31,56 @@ endif;
                 <div class="col-sm-10">
                     <input oninput="resetBut()" type="text" name = "a_name"  class="form-control" required />
                  </div>
-                 <label class="col-sm-2 control-label">Article</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_title"  class="form-control" required/>
+           <label class="col-sm-2 control-label">Article</label>
+                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_title"  class="form-control" required/>
                      </div>
-                    <label class="col-sm-2 control-label">Description</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_desc"  class="form-control"  required/>
+            <label class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_desc"  class="form-control"  required/>
+                    </div>
+            <label class="col-sm-2 control-label">Blurb</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_blurb"  class="form-control" required/>
+            </div>
 
+        <label class="col-sm-2 control-label">Article Body (Content)</label>
+                <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"></textarea>
+                </div>
+         <label class="col-sm-2 control-label">Content Area</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" required/>
+                </div>
+            <label class="col-sm-2 control-label">Page</label>
+                <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" required/>
             </div>
-            <label class="col-sm-2 control-label">Blurb</label> <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_blurb"  class="form-control" required/>
-            </div>
-
-        <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"></textarea>
-        </div>
-         <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" required/>
-            </div>
-            <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" required/>
-            </div>
-            <label class="col-sm-2 control-label">All Page</label> <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" required/>
+            <label class="col-sm-2 control-label">All Page</label>
+        <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" />
         </div>
 
         <input type="hidden" name = "formSubmitNewArticleConfirm" value="true" required/>
-            <label><div class="col-sm-10"><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span>
-                <input type="submit" class="btn btn-default" id="addNewArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
-        </div>
-        </form>
+          <label><div class="col-sm-10"><span  class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify </span></div>
+              <input type="submit" class="btn btn-default" id="addNewArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
 
 
-        <script>
+    </form>
+
+
+ </div>
+ <script>
     function  verifyf()
     {
-//        if (document.forms['addNewPageForm']['p_name'].value.length>5)
-//      if   (document.forms['addNewPageForm']['p_alias'].value.length>5)
-//        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
-//    {
-        $('#formConfirm').hide();
-        $('#addPageSubmit').show();
+            if (document.forms['formSubmitNewArticle']['a_name'].value.length>5)
+                  if   (document.forms['formSubmitNewArticle']['a_alias'].value.length>5)
+                         if( document.forms['formSubmitNewArticle']['a_desc'].value.length>20)
+        {
+            $('#formConfirm').hide();
+            $('#addNewArticle').show();
+        }
     }
 
 
-    $('#addPageSubmit').hide()
+    $('#addNewArticle').hide()
 
     function resetBut()
     {
         $('#formConfirm').show();
-        $('#addPageSubmit').hide();
+        $('#addNewArticle').hide();
     }
 </script>

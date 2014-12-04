@@ -46,8 +46,10 @@ endif;
             // TinyMCE WOULD GO HERE!
 
 
-            <td><input oninput="resetBtnArtForm()" type="text" name="a_assocpage" required /></td>
+            <td><input oninput="resetBtnArtForm()" type="text" name="a_assocpage"  /></td>
             <input type="hidden" name="formSubmitNewArticle" value="true" required/>
+
+
             <td>
                 <div class="btn btn-default" id="formAddArticleConfirm" onclick="verifyFormSubmiotArticle()" >Verify</div>
                 <input type="submit" class="btn btn-default" id="addArticleSubmitVerified" onclick="verifyFormSubmiotArticle();resetBtnArtForm();" value="Confirm" />

@@ -90,10 +90,10 @@ class ArticleModel
     }
 
     // attempts to insert a recod into the databse and will return 1 if success
-    public function addArticle($a_name,$a_title, $a_desc, $a_blurb, $a_content,$all_pages,$userId )
+    public function addArticle($conentArea,$a_name,$a_title, $a_desc, $a_blurb, $a_content, $a_page, $all_pages,$userId )
     {
        $arrya =array(1,2,3);
-       $currentArticle = new Article(null,null,$a_name,$a_title, $a_desc, $a_blurb, $a_content,null,$all_pages,$userId ,null,$userId,null);
+       $currentArticle = new Article(null,$conentArea,$a_name,$a_title, $a_desc, $a_blurb, $a_content,$a_page,$all_pages,$userId ,null,$userId,null);
       return $this->m_DataAccess->insertArticle($currentArticle);
     }
 

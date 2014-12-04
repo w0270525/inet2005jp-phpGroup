@@ -17,7 +17,10 @@ if(!empty($lastOperationResults)):
 <?php
 endif;
 ?>
-<h1>Add new Article</h1>
+
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">Delete Article <?php echo $article->getName(); ?></button>
+<div id="demo" class="collapse in">
+
 <table class="table">
     <thead>
     <tr>
@@ -46,7 +49,7 @@ endif;
             // TinyMCE WOULD GO HERE!
 
 
-            <td><input oninput="resetBtnArtForm()" type="text" name="a_assocpage" required /></td>
+            <td><input oninput="resetBtnArtForm()" type="text" name="a_assocpage"  /></td>
             <input type="hidden" name="formSubmitNewArticle" value="true" required/>
             <td>
                 <div class="btn btn-default" id="formAddArticleConfirm" onclick="verifyFormSubmiotArticle()" >Verify</div>
@@ -60,6 +63,8 @@ endif;
         </tbody></form>
 
 </table>
+
+ </div>
 
 <script>
     alert("");

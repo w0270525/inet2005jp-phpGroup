@@ -150,7 +150,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
 
         try{
             $this->stmt = $this->dbConnection->prepare($insertStatement);
-            $this->stmt->bindParam(':a_name', $article->getName(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_name', $article->getName(), PDO::PARAM_STR);
             $this->stmt->bindParam(':a_contentArea', $article->getContentarea(), PDO::PARAM_INT);
             $this->stmt->bindParam(':a_desc', $article->getDesc(), PDO::PARAM_STR);
             $this->stmt->bindParam(':a_title', $article->getTitle(), PDO::PARAM_STR);
@@ -232,7 +232,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns the Article cotnent
     public function fetchArticleContent($row)
     {
-        return $row['a_content'];
+        return $row['a_contentarea'];
     }
 
     // returns pages in all articles

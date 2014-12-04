@@ -38,7 +38,7 @@
 
             <td><?php echo $article->getName(); ?><br/>
             <?php echo $article->getTitle(); ?></td>
-            <td><?php echo $article->getContentarea(); ?><<br/>
+            <td><?php echo $article->getContentarea(); ?><br/>
              <?php echo $article->getContent(); ?></td>
 
             <!-- show icon for all pages or show page number -->

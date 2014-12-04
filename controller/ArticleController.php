@@ -68,7 +68,7 @@ class ArticleController
 
             if(isset($_POST["all_pages"]) && $_POST["all_pages"]=="on")$_POST["all_pages"]=1;
             else $_POST["all_pages"] = 0;
-            if($this->model->addArticle( $_POST['a_name'] , $_POST['a_title'] , $_POST['a_desc'], $_POST['a_blurb'], $_POST['a_content'] ,$_POST['all_pages'] ,$user->getId() ))
+            if($this->model->addArticle( $_POST['a_contentarea'] ,$_POST['a_name'] , $_POST['a_title'] , $_POST['a_desc'], $_POST['a_blurb'], $_POST['a_content'] ,$_POST['a_page'] ,$_POST['all_pages'] ,$user->getId() ))
             {//success
                 $lastOperationResults="You have successfully added a new article<br>";
                 $arrayOfArticles[0] = $this->model->getArticleByName($_POST['a_name'] );
