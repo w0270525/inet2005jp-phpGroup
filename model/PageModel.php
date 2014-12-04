@@ -46,9 +46,6 @@ class PageModel
     {
         $this->m_DataAccess->connectToDB();
 
-  //      $this->m_DataAccess->selectPageById($pageID);
-
-   //     $record =  $this->m_DataAccess->fetchPage();
         $record = $this->m_DataAccess->selectPageById($pageID);
 
         $fetchedPage = $this->constructPage($record);

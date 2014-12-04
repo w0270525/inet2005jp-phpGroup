@@ -56,17 +56,22 @@
 
       $result = mysqli_query($db, $sql);
 
-      while($row = mysqli_fetch_assoc($result)) {
+      //while($row = mysqli_fetch_assoc($result)) {
+      foreach ($currentPage->getContentAreas() as $ca) {
+
+        foreach ($ca->getArticles() as $a) {
 
     ?>
 
-    <div class="<?php echo $row['c_a_alias']; ?>">
-      <h3><?php echo $row['a_title']; ?></h3>
-      <article><?php echo $row['a_content']; ?></article>
+    <div class="<?php echo $ca->getAlias(); ?>">
+      <h3><?php echo $a->getTitle(); ?></h3>
+      <article><?php echo $a->getContent(); ?></article>
     </div>
 
     <?php
 
+
+        }
       } // while END
 
 

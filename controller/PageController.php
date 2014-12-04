@@ -91,14 +91,31 @@ class PageController
       $articleControl = new ArticleModel();
       $arrayOfArticles = $articleControl->getAllArticlesByPageId($id);
 
-
       // Create an array of all the Content Areas;
+      $contentAreaControl = new ContentAreaModel();
+      $arrayOfContentAreas = $contentAreaControl->getAllContentAreas();
 
       // Loop through content areas and add articles associated with that area to
       // that areas article array using the array_push function.
+      foreach ($arrayOfContentAreas as $ca) {
 
+        $tempArray = array();
 
+        foreach ($arrayOfArticles as $a) {
 
+          if ($a->getContentarea() == $ca->getId()) {
+
+            array_push($tempArray, $a);
+
+          } // if END
+        } // foreach (a) END
+
+        $ca->setArticles($tempArray);
+
+      } // foreach (ca) END
+
+      // Set the content area array to the current page;
+      $currentPage->setContentAreas($arrayOfContentAreas);
 
       // show the website
       include '../view/displayPage.php';

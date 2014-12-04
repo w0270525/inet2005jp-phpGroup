@@ -104,12 +104,12 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     public function selectArticleByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= "WHERE a_assocpage = :pageID OR a_allpages = 1;";
+        $selectStatement .= "WHERE a_assocpage = ? OR a_allpages = 1;";
 
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':$pageID', $pageID, PDO::PARAM_INT);
+            $this->stmt->bindParam(1, $pageID, PDO::PARAM_INT);
 
             $this->stmt->execute();
         }
