@@ -53,7 +53,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li data-target="viewUsers" id="viewUserNav" ><a href="#">View Users</a></li>
-                            <li data-target="addNewUser" id="addUsers"><a href="#"   >Add User</a></li>
+                            <li data-target="addNUser" id="addUsers"><a href="#"   >Add User</a></li>
                             <li data-target="removeUser" id="removeUsers" ><a href="#" >Remove User</a></li>
 
                         </ul>
@@ -246,7 +246,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $tempController->userController()->displayAction();
             ?></div>
 
-        <div id="addNewUsers"  class="containerAdmin"><?php
+        <div id="addNUser"  class="containerAdmin"><?php
             $tempController->userController()->addNewUser();
             ?></div>
         <?php //  <div id="deleteUser"  class="containerAdmin"><?php include("../view/admin/userviews/addUserView.php");?> </div>
