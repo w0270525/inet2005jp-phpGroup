@@ -91,17 +91,17 @@ class PageModel
     //forms a Article from the input array and returns it
     private function constructPage($row)
     {
-        $currentPage = new Page($this->m_DataAccess->fetchPageID($row),
+        $currentPage = new Page(
+            $this->m_DataAccess->fetchPageID($row),
             $this->m_DataAccess->fetchPageName($row),
             $this->m_DataAccess->fetchPageAlias($row),
             $this->m_DataAccess->fetchPageDescription($row),
-            $this->m_DataAccess->fetchPageStyle($row),
+             null,
              null,
             $this->m_DataAccess->fetchPageCreatedBy($row),
             $this->m_DataAccess->fetchPageCreatedDate($row),
             $this->m_DataAccess->fetchPageLastModifiedBy($row),
-            $this->m_DataAccess->fetchPageLastModifiedDate($row),
-        $this->m_DataAccess->fetchPageStyle($row));
+            $this->m_DataAccess->fetchPageLastModifiedDate($row));
         return $currentPage;
 
 

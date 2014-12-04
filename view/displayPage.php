@@ -10,38 +10,15 @@
 
         die('Could not connect to the Sakila Database: ' . mysqli_error($db));
 
-      } else {
-
-        $sql = "SELECT * FROM cms.PAGES ";
-        $sql .= "WHERE p_id = ";
-        if(!empty($_GET['page']))
-          $sql .= $_GET['page'] . ";";
-        else
-          $sql .= "1;";
-        $result = mysqli_query($db, $sql);
-
-      } // if else END
-
-      if(!$result) {
-
-        die ('Could not retrieve records from the Sakila Database: ' . mysqli_error($db));
-
-      } // if END
-
-      $row = mysqli_fetch_assoc($result);
+      }
 
     ?>
 
-    <title><?php echo $row['p_name']; ?></title>
+    <title><?php echo $currentPage->getName(); ?></title>
     <style>
       <?php
 
-        $sql = "SELECT s_style FROM cms.STYLE";
-        $sql .= "WHERE s_active = 1;";
-        $result = mysqli_query($db, $sql);
-        $row = mysqli_fetch_assoc($result);
-
-        echo $row['s_style'];
+        echo $currentPage->getStyle()->getStyle();
 
       ?>
     </style>

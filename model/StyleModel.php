@@ -26,7 +26,7 @@ class StyleModel
 
         $this->m_DataAccess->selectStyles();
 
-        while($row =  $this->m_DataAccess-> fetchStyles())
+        while($row =  $this->m_DataAccess->fetchStyles())
 
         {
 
@@ -38,6 +38,24 @@ class StyleModel
 
         return $arrayOfPageObjects;
     }
+
+    // Retrieve the current style;
+    public function getActiveStyle() {
+
+      // Open DB;
+      $this->m_DataAccess->connectToDB();
+      // Select;
+      $this->m_DataAccess->selectActiveStyle();
+      // Get row;
+      $row = $this->m_DataAccess->fetchStyles();
+      // Construct Style Object;
+      $currentStyle = $this->constructStyle($row);
+      // Close DB;
+      $this->m_DataAccess->closeDB();
+      // Return Object;
+      return $currentStyle;
+
+    } // getActiveStyle END
 
 
     // Style = getStyle(Int styleId);
