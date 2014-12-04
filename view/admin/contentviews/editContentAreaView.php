@@ -1,30 +1,32 @@
 <?php if($_SESSION["logged"]==true):?>
-    <style type="text/css">
-        table
-        {
-            border: 1px solid purple;
-        }
-        th, td
-        {
-            border: 1px solid red;
-        }
-    </style>
+<style type="text/css">
+    table
+    {
+        border: 1px solid purple;
+    }
+    th, td
+    {
+        border: 1px solid red;
+    }
+</style>
 
-    <?php
-    if(!empty($lastOperationResults)):
-        ?>
-        <h2><?php echo $lastOperationResults; ?></h2>
-    <?php
-    endif;
-
-    $content = $arrayOfContentAreas  ;
-
+<?php
+if(!empty($lastOperationResults)):
     ?>
+    <h2><?php echo $lastOperationResults; ?></h2>
+<?php
+endif;
 
-    <h1>Edit  Content Area</h1>
+foreach(  $arrayOfContentAreas  as $content):
 
 
-    <div>
+?>
+
+<h1></h1>
+
+
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo"> Edit  Content Area   <?php echo $content->getName()?></button>
+<div id="demo" class="collapse in">
         <form name="editContentAreaForm"  id="editContentArea" class="editContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 
 
@@ -47,20 +49,24 @@
             <label class="col-sm-2 control-label">Order</label>
 
             <div class="col-sm-10">
-                    <input oninput="resetBut()" type="int"  value = <?php echo $content->getOrder()?>   name="c_order" /></div>
+                    <input oninput="resetBut()" type="int"  value =<?php echo $content->getOrder()?>   name="c_order" /></div>
+
+            <!-- content area id for back end use -->
+            <input  type="hidden"  value =<?php echo $content->getId()?>   name="id" />
 
 
+            <div class="col-sm-10"> <input type="hidden" name = "formSubmitEditContentArea" value="true"   class="form-control"/></div>
 
-            <div class="col-sm-10"> <input type="hidden" name = "formSubmitEditContentArea" value="true"  /></div>
 
-
-            <div  class="btn btn-default  " id="formConfirmEditContentArea" onclick="verifyeditArticle()" > Verify  </div>
+            <div  class="btn btn-default  " id="formConfirmEditContentArea" onclick="verifyeditArticle()"  class="form-control" > Verify  </div>
            <input  type="submit" class="btn btn-default" id="editContentAreaSubmitForm" onclick="verifyeditArticle();resetBut(); " value ="Confirm" />
 
         </form>
-    </div>
-<?php
 
+ <!-- close boot strap  div -->
+ </div>
+<?php
+endforeach;
  ?>
         <script>
 

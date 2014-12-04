@@ -172,15 +172,15 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         }
       $count =intval( $this->stmt->fetch(PDO::FETCH_ASSOC));
 
-        $insertStatement = "INSERT INTO  CONTENT_AREAS  VALUES (DEFAULT, :c_name, :c_alais, :c_desc,  '. $count.' , :c_createdby , default,:c_modifiedby , default );";
+        $insertStatement = "INSERT INTO  CONTENT_AREAS  VALUES (DEFAULT, :c_name, :c_alais, :c_desc,  :c_order, :c_createdby , default,:c_modifiedby , default );";
 
 
         try{
             $this->stmt = $this->dbConnection->prepare($insertStatement);
             $this->stmt->bindParam(':c_name', $contentArea->getName(), PDO::PARAM_STR);
             $this->stmt->bindParam(':c_alais', $contentArea->getAlias(), PDO::PARAM_STR);
-            $this->stmt->bindParam(':c_desc', $contentArea->getDesc(), PDO::PARAM_INT);
-
+            $this->stmt->bindParam(':c_desc', $contentArea->getDesc(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_order', $contentArea->getOrder(), PDO::PARAM_INT);
             $this->stmt->bindParam(':c_createdby', $contentArea->getCreatedBy(), PDO::PARAM_STR);
             $this->stmt->bindParam(':c_modifiedby', $contentArea->getCreatedBy(), PDO::PARAM_STR);
             $this->stmt->execute();
@@ -209,28 +209,27 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
 
     // updates the CMS user
     // need to add modified by param
-//    public function updateContentArea($userID,$first_name,$last_name,$username)
-//    {
-//        $updateStatement = "UPDATE user";
-//        $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
-//        $updateStatement .= " WHERE u_id = :userID;";
-//
-//        try
-//        {
-//            $this->stmt = $this->dbConnection->prepare($updateStatement);
-//            $this->stmt->bindParam(':firstName', $first_name, PDO::PARAM_STR);
-//            $this->stmt->bindParam(':lastName', $last_name, PDO::PARAM_STR);
-//            $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-//            $this->stmt->bindParam(':userName', $username, PDO::PARAM_STR);
-//            $this->stmt->execute();
-//
-//            return $this->stmt->rowCount();
-//        }
-//        catch(PDOException $ex)
-//        {
-//            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
-//        }
-//    }
+    public function updateContentArea($contentArea)
+    {
+        $updateStatement = "UPDATE CONTENT_AREA SET c_a_name = :name , c_a_alias = :alis, c_a_order=:order ,c_a_lastmadifieddate=:mod,  c_a_moddate = NOW()  WHERE c_a_id = :id;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($updateStatement);
+            $this->stmt->bindParam(':name', $contentArea->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_a_alias', $contentArea->getAlias(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':c_a_order', $contentArea->getOrder(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':mod', $contentArea->setModifiedBy(), PDO::PARAM_INT);
+
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
 
     // returns the ContentArea id
     public function fetchContentAreaID($row)

@@ -58,23 +58,26 @@ class ContentAreaModel
     }
 
     //  Updates a contentarea in the CMS
-    public function updateContentArea($ContentAreaToUpdate)
+    public function updateContentAreaOld($id,$name, $alias, $desc,$order, $userid)
     {
+        $ca = new ContentArea($_GET["updateContentArea"],$name, $alias,$desc,$order,null,$page,null,null,$userid,null);
         $this->m_DataAccess->connectToDB();
 
-        $recordsAffected = $this->m_DataAccess->updateContentArea($ContentAreaToUpdate-> getID(),
-            $ContentAreaToUpdate->getName(),
-            $ContentAreaToUpdate->getContentArea(),
-            $ContentAreaToUpdate->getAlias(),
-            $ContentAreaToUpdate->getDesc(),
-            $ContentAreaToUpdate->getStyle(),
-            $ContentAreaToUpdate->getCreatedby(),
-            $ContentAreaToUpdate->getModifiedby(),
-            $ContentAreaToUpdate->getAModifieddate());
+        $recordsAffected = $this->m_DataAccess->updateContentArea($ca);
 
         return "$recordsAffected record(s) updated succesfully!";
     }
 
+
+    //  Updates a contentarea in the CMS
+    public function updateContentArea($ContentAreaToUpdate)
+    {
+        $this->m_DataAccess->connectToDB();
+
+        $recordsAffected = $this->m_DataAccess->updateContentArea($ContentAreaToUpdate);
+
+        return "$recordsAffected record(s) updated succesfully!";
+    }
 
 
     //forms a Content Area from the input array and returns it
