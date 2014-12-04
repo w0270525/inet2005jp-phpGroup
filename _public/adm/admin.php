@@ -153,6 +153,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
                             <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
+                            <li data-target="addStyleViews"  id="addStylepag" ><a href="#">Add Styles</a></li>
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
                         </ul>
                     </div><!-- /btn-group -->
@@ -258,6 +259,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // CUSTOM EDITOR GET AN POST
         // CUSTOM EDITOR GET AN POST
 
+
+        // CALLS TO  PROCESS THE UPDAET FORMS
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
             if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
@@ -275,21 +278,28 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
         }
+
+        // GETS THE UPDATE ACTIONS
         if($_SERVER["REQUEST_METHOD"]=="GET")
-        {
-            if(isset($_GET["pageupdate"])){
-                $control->pageController()->updateAction($_GET["pageupdate"]);
-            }
+
+            // load article form
             if(isset($_GET["articleupdate"])){
                 $control->articleController()->updateAction( $control->currentUser);
 
-        }
+            }
+            // load  content areaq form
             if(isset($_GET["updateContentArea"])){
           //      $_GET["contentupdate"]
                 $control->contentController()->updateAction( $control->currentUser);
 
             }
-        }
+
+          // load update sykle
+            if(isset($_GET["styleupdate"])){
+                $control->articleController()->updateAction( $control->currentUser);
+
+            }
+
 
 
 
@@ -298,26 +308,46 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <!--CUSTOM EDITOR VIEWS -->
         <!--CUSTOM EDITOR VIEWS -->
 
+        <!--  view all pages -->
         <div id="viewPages"  class="containerAdmin"><?php
             $control->pageController()->displayAction();
             ?></div>
+
+        <!--  ad new pages  form -->
         <div id="addNewPages"  class="containerAdmin"><?php
             $control->pageController()->addAction();
             ?></div>
+
+        <!--  add new contentarea  form -->
         <div id="addContentViews"   class="containerAdmin"><?php
             $control->contentController()->addAction();
 
             ?></div>
+        <!--  add article form -->
         <div id="addArticlesViews"   class="containerAdmin"><?php
             $control->articleController()->addAction();
-
             ?></div>
+
+        <!-- load  add style form -->
+        <div id="addStyleViews"  class="containerAdmin"><?php
+            $control->styleController()->displayAction();
+            ?></div>
+                                                                                                                                            <!-- load  add style form -->
+    <div id="addStyleViews"  class="containerAdmin"><?php
+        $control->styleController()->addAction();
+        ?></div>a
+
+        <!--  view  All ContentsAreas  -->
         <div id="viewContents"  class="containerAdmin"><?php
             $control->contentController()->displayAction();
             ?></div>
+
+        <!--  view all Stylers -->
         <div id="viewStyles"   class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
+
+        <!--  view all Articles -->
         <div id="viewArticles"  class="containerAdmin"><?php
             $control->articleController()->displayAction();
             ?></div>
@@ -352,6 +382,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
 <?php
+
 } //  NOTHING ABOVE THIS BRACE WILL BE ACTIVE OR VISIBLE IF USER IS NOT LOGGED IN
 ?>
 
