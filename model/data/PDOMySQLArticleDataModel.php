@@ -103,9 +103,8 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
-        $selectStatement = "SELECT * FROM ARTICLE";
-        $selectStatement .= " LEFT JOIN PAGES ON a_assocpage = PAGES.p_id ";
-        $selectStatement .= " WHERE PAGES.p_id = :pageID;";
+        $selectStatement = "SELECT * FROM ARTICLE ";
+        $selectStatement .= "WHERE a_assocpage = :pageID OR a_allpages = 1;";
 
         try
         {

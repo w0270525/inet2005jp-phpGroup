@@ -38,6 +38,29 @@ class ArticleModel
         return $arrayOfArticleObjects;
     }
 
+    // Get all articles associated with given page;
+    public function getAllArticlesByPageId($pageId) {
+
+      // Open DB;
+      $this->m_DataAccess->connectToDB();
+      // Define Array;
+      $arrayOfArticles = array();
+      // Select;
+      $this->m_DataAccess->selectArticleByPageId($pageId);
+      // Loop through, and populate;
+      while($row = $this->m_DataAccess->fetchArticle()) {
+
+        $currentArticle = $this->constructArticle($row);
+        $arrayOfArticles[] = $currentArticle;
+
+      } // while END
+      // Close DB;
+      $this->m_DataAccess->closeDB();
+      // Return Array;
+      return $arrayOfArticles;
+
+    } // getAllArticlesByPageId END
+
     // returns a single Article fetched from the CMS
     public function getArticle($articleID)
     {

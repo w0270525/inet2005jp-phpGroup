@@ -80,15 +80,17 @@ class PageController
       // Nav Array;
       $navArray = $this->model->getAllPages();
 
-      // Create the current page, call it,
+      // Create the current page;
       $currentPage = $this->model->getPage($id);
       // Current Style;
       $styleControl = new StyleModel();
       $currentStyle = $styleControl->getActiveStyle();
       $currentPage->setStyle($currentStyle);
 
+      // Get an array of all articles which belong to this page or appear on all pages;
+      $articleControl = new ArticleModel();
+      $arrayOfArticles = $articleControl->getAllArticlesByPageId($id);
 
-      // Get an array of all articles which belong to this page or appear on all pages.
 
       // Create an array of all the Content Areas;
 
