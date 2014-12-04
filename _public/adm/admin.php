@@ -300,9 +300,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             }
 
-            // process style delete form
-            if(isset($_POST["deleteFormConfirm"]))
-                $control->styleController()->removeActionConfirm($_POST["deleteFormConfirm"]);
+
+                // process delete content area fornm
+            if(isset($_POST["formDeleteContentArea"]) && ($_POST["formDeleteContentArea"] ="'true"))
+                $control->contentController()->removeActionConfirm($_POST["id"]);
 
 
 
@@ -336,7 +337,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
         }
 
+        // loads contnetn area delete form
+        if(isset($_GET["deleteContentArea"])){
+            $control->contentController()->removeAction( $_GET["deleteContentArea"]);
 
+        }
 
         ?>
         <!--CUSTOM EDITOR VIEWS -->

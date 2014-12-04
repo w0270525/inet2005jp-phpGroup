@@ -116,5 +116,13 @@ class ContentAreaModel
          return     $this->constructContentArea ($this->m_DataAccess->fetchContentAreas());
 
     }
+
+    // removes a style from the databsee
+    function removeContent($id)
+    {
+        $currentStyle=  $this->getContentArea($id);
+        return $this->m_DataAccess->deleteContentArea($currentStyle)  ;
+    }
+
 }
 ?>

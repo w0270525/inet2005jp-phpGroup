@@ -9,7 +9,8 @@
         border: 1px solid red;
     }
 </style>
-
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#demo">View Content Areas </button>
+<div id="demo" class="collapse in">
 <?php
   if(!empty($lastOperationResults)):
 ?>
@@ -22,6 +23,7 @@ $user = unserialize($_SESSION["user"]);
 
 
 ?>
+
 <h1>Content Areas</h1>
 <table class="table">
   <thead>
@@ -86,3 +88,5 @@ $user = unserialize($_SESSION["user"]);
   </tbody>
   <tfoot></tfoot>
 </table>
+
+</div><!-- close boot strap div -->

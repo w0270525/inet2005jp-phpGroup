@@ -232,6 +232,33 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         }
     }
 
+
+
+
+    // Integer deleteContentArea(ContentArea contentArea);
+    // removes a Content Area from the database and returns the row count.
+    public function deleteContentArea($contentArea)
+    {
+
+
+        $deleteStatement = "DELETE FROM CONTENT_AREAS   ";
+        $deleteStatement .= " WHERE c_a_id = :C_ID;";
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($deleteStatement);
+            $this->stmt->bindParam(':C_ID', $contentArea->getId(), PDO::PARAM_INT);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('deleteContentArea  Style failed in PDOMySQLContentAreeDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
+
     // returns the ContentArea id
     public function fetchContentAreaID($row)
     {

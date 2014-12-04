@@ -119,25 +119,26 @@ class ContentAreaController
     // shows content deletion forme
     public function removeAction($id)
     {
-        $arrayOfStyles[]= $this->model->getStyle($id);
-        include '../view/admin/styleviews/deleteStyleView.php';
+        $arrayOfContentAreas[]= $this->model->getContentArea($id);
+        include '../view/admin/contentviews/deleteContentAreaView.php';
     }
 
     // removes style from database\\\
     public function removeActionConfirm($id)
     {
-        $result= $this->model->removeStyle($id);
+        $result= $this->model->removeContent($id);
         if($result=0) $lastOperationResults = "Unable to delete the record, please try again";
         else if($result=9999) $lastOperationResults = "Unable to delete the record, please remove it as active";
         else $lastOperationResults=$result.  " rows effectedf";
 
         if($result!=0):
-            $arrayOfStyles= $this->model->getAllStyles();
+            $arrayOfContentAreas= $this->model->getAllContentAreas();
             $this->displayAction();
             $_GET=null;$_POST=NULL;
         else:
-            $arrayOfStyles= $this->model->getStyle($id);
-            include "../view/admin/styleviews/deleteStyleView.php";
+
+            $arrayOfContentAreas[]= $this->model->getContentArea($id);
+            include "../view/admin/contentviews/deleteContentAreaView.php";
         endif;
 
     }
