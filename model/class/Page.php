@@ -17,18 +17,18 @@ class Page {
   private $p_creationdate;  // String
   private $p_modifiedby;    // Int
   private $p_modifieddate;  // String
-  private $p_articles;  // String
+
 
   // Default Constructor.
-  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_style,$in_articles,
+  public function __construct($in_id, $in_name, $in_alias, $in_desc, $in_style,$in_contentareas,
      $in_createdby, $in_creationdate, $in_modifiedby, $in_modifieddate) {
 
     $this->p_id = $in_id;
     $this->p_name = $in_name;
     $this->p_alias = $in_alias;
     $this->p_desc = $in_desc;
-    $this->p_articles = $in_articles;
-    $this->p_styles = $in_style;
+    $this->p_style = $in_style;
+    $this->p_contentareas = $in_contentareas;
     $this->p_createdby = $in_createdby;
     $this->p_creationdate = $in_creationdate;
     $this->p_modifiedby = $in_modifiedby;
@@ -97,7 +97,12 @@ class Page {
   } // getPStyle END
 
 
-  // p_contentareas GETTER
+  // p_contentareas GETTER/SETTER
+  public function setContentAreas($p_contentareas) {
+
+    $this->p_contentareas = $p_contentareas;
+
+  } // setContentAreas END
   public function getContentAreas() {
 
     return $this->p_contentareas;

@@ -80,8 +80,13 @@ class PageController
       // Nav Array;
       $navArray = $this->model->getAllPages();
 
-      // Get the active style and make a style object out of it.
-        // (So call the style controller?)
+      // Create the current page, call it,
+      $currentPage = $this->model->getPage($id);
+      // Current Style;
+      $styleControl = new StyleModel();
+      $currentStyle = $styleControl->getActiveStyle();
+      $currentPage->setStyle($currentStyle);
+
 
       // Get an array of all articles which belong to this page or appear on all pages.
 
@@ -90,8 +95,7 @@ class PageController
       // Loop through content areas and add articles associated with that area to
       // that areas article array using the array_push function.
 
-      // Create the current page, call it,
-      // $currentPage
+
 
 
       // show the website
