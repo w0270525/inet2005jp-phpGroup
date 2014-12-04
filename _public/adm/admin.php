@@ -270,6 +270,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             }
 
             // process new content are form
+            if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+                $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+
+            }
+
+            // process new content are form
             if(isset($_POST["formSubmitNewContentArea"])&&  $_POST["formSubmitNewContentArea"]=="true"){
                 $control->contentController()->confirmAddAction( $control->currentUser);
 

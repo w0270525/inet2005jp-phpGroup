@@ -21,53 +21,52 @@ class ContentAreaController
 
     public function updateAction($id)
     {
-        $arrayOfContentAreas = $this->model->getContentArea($_GET["updateContentArea"]);
+        $arrayOfContentAreas[] = $this->model->getContentArea($_GET["updateContentArea"]);
 
         include '../view/admin/contentviews/editContentAreaView.php';
     }
 
 
-    // show the add content are form
+    // void addAction();
+    // show the add content areA form
     public function addAction()
     {
-        // $arrayOfContentAreas = $this->model->getAllContentAreas();
 
         include '../view/admin/contentviews/addContentAreaView.php';
     }
 
-
-    // attemp to insert new content area into database
+    // void confirmAddAction(User user);         -> creates accsible DOM content area object array containing the new Content Panel Object
+    // atttemps to insert new content area into database with the current user as the modiferr
     public function confirmAddAction($user)
 
     {
-    $currentContents=Array();$bool=true;
-    $currentContents = $this->model->getAllContentAreas();
-    $lastOperationResults="";
-    if(isset($_POST["c_name"]) && isset($_POST["c_alias"]) && isset($_POST["c_desc"]) && isset($_POST["c_order"] ))
-    {
-        foreach($currentContents as $content)
+        $currentContents=Array();$bool=true;
+        $currentContents = $this->model->getAllContentAreas();
+        $lastOperationResults="";
+
+         // verify data befor entry and check for duplicates
+        if(isset($_POST["c_name"]) && isset($_POST["c_alias"]) && isset($_POST["c_desc"]) && isset($_POST["c_order"] ))
         {
-            if ($_POST["c_name"]  == $content->getName())
+            foreach($currentContents as $content)
             {
-            $bool=false;
-            $lastOperationResults.="Unable to complete request: ContentArea name detected in CMS database<br>";
-            }
-
-            if ($_POST["c_alias"]==$content->getAlias())
-            {
+                if ($_POST["c_name"]  == $content->getName())
+                {
                 $bool=false;
-                $lastOperationResults.="Unable to complete request: ContentArea alias detected in CMS database<br>";
-
+                $lastOperationResults.="Unable to complete request: ContentArea name detected in CMS database<br>";
+                }
+                if ($_POST["c_alias"]==$content->getAlias())
+                {
+                    $bool=false;
+                    $lastOperationResults.="Unable to complete request: ContentArea alias detected in CMS database<br>";
+                }
             }
-        }
 
         if($bool)
 
-            if(  $lastOperationResults=$this->model->addContentArea(new ContentArea(null,$_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],null,null,null,$user->getId(),null,$user->getId(),null)))
+            if(  $lastOperationResults=$this->model->addContentArea(new ContentArea(null,$_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"],null,null,$user->getId(),null,$user->getId(),null)))
             {
                 $arrayOfContentAreas[0] = $this->model->getContentAreaByName($_POST["c_name"]);
-                    $lastOperationResults="Content Area Has Been added";
-
+                $lastOperationResults="Content Area Has Been added";
                 include '../view/admin/contentviews/editContentAreaView.php';
             }
         }
@@ -82,31 +81,62 @@ class ContentAreaController
 
 
 
+    public function confirmUpdateAction($ca_name,$ca_desc, $ca_style, $ca_order)
+    {
+        $true=true;
+        $allCA =$this->model->getAllContentAreas();
+        foreach($allCA as $content)
+        {
+            if ($content->getName()==$ca_name) $true=false;
+        }
+        if($true):
+            $lastOperationResults = "";
+            $currentCA = $this->model->getContentArea(["updatestyle"]);
+            $currentCA->setName($s_name);
+            $currentCA->setDesc($s_desc);
+            $currentCA->setAlias($s_style);
 
-    // updates the current user to the
-//     public function updateAction($userID)
-//     {
-//        $currentUser = $this->model->getUser($userID);
-//
-//        include '../view/editCustomer.php';
-//     }
-//
-//    public function commitUpdateAction($custID,$fName,$lName)
-//    {
-//        $lastOperationResults = "";
-//
-//        $currentCustomer = $this->model->getCustomer($custID);
-//
-//        $currentCustomer->setFirstName($fName);
-//        $currentCustomer->setLastName($lName);
-//
-//        $lastOperationResults = $this->model->updateCustomer($currentCustomer);
-//
-//        $arrayOfCustomers = $this->model->getAllCustomers();
-//
-//        include '../view/displayCustomers.php';
-//    }
+            $user= unserialize($_SESSION["user"]);
+            $currentCA->setModifiedBy($user->getId());
+            $lastOperationResults = $this->model->updateContentAreaOld($_GET["updateContentArea"],$ca_name,$ca_desc, $ca_style, $ca_order,$user->getId());
+            $_POST=null;
+            $_GET=null;
+            $arrayOfContentAreas[] =$this->model->getContentArea($currentCA);
+            if($lastOperationResults)$lastOperationResults= " You have updated  the Conastnr area successfulyy";
+            else $lastOperationResults = "Unable to update the record, please try again";
+            include '../view/admin/styleviews/editStyleView.php';
+        else: $lastOperationResults="That name is already in use, Please try another";
+        endif;
 
+    }
+
+
+
+    // shows content deletion forme
+    public function removeAction($id)
+    {
+        $arrayOfStyles[]= $this->model->getStyle($id);
+        include '../view/admin/styleviews/deleteStyleView.php';
+    }
+
+    // removes style from database\\\
+    public function removeActionConfirm($id)
+    {
+        $result= $this->model->removeStyle($id);
+        if($result=0) $lastOperationResults = "Unable to delete the record, please try again";
+        else if($result=9999) $lastOperationResults = "Unable to delete the record, please remove it as active";
+        else $lastOperationResults=$result.  " rows effectedf";
+
+        if($result!=0):
+            $arrayOfStyles= $this->model->getAllStyles();
+            $this->displayAction();
+            $_GET=null;$_POST=NULL;
+        else:
+            $arrayOfStyles= $this->model->getStyle($id);
+            include "../view/admin/styleviews/deleteStyleView.php";
+        endif;
+
+    }
 
 }
 

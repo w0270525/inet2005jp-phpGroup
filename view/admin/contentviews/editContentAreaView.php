@@ -17,7 +17,8 @@
     <?php
     endif;
 
-    $content = $arrayOfContentAreas  ;
+   foreach(  $arrayOfContentAreas  as $content):
+
 
     ?>
 
@@ -47,7 +48,7 @@
             <label class="col-sm-2 control-label">Order</label>
 
             <div class="col-sm-10">
-                    <input oninput="resetBut()" type="int"  value = <?php echo $content->getOrder()?>   name="c_order" /></div>
+                    <input oninput="resetBut()" type="int"  value =<?php echo $content->getOrder()?>   name="c_order" /></div>
 
 
 
@@ -60,7 +61,7 @@
         </form>
     </div>
 <?php
-
+endforeach;
  ?>
         <script>
 
