@@ -14,7 +14,9 @@ interface iStyleDataModel
 
     public function fetchStyles();
 
-    public function updateStyle($userID,$first_name,$last_name,$username);
+    //public function updateStyle($userID,$first_name,$last_name,$username);
+    public function updateStyle($style);
+
 
     // field access functions
     public function fetchStyleID($row);

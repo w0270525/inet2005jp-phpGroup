@@ -39,21 +39,18 @@ class StyleModel
         return $arrayOfPageObjects;
     }
 
-    // returns a single Style fetched from the CMS
+
+    // Style = getStyle(Int styleId);
+    // returns a single Style fetched from the last select query that was run
     public function getStyle($styleID)
     {
         $this->m_DataAccess->connectToDB();
-
-        $this->m_DataAccess->selectStyleById($styleID);
-
-        $record =  $this->m_DataAccess->fetchStyle();
-
+        $this->m_DataAccess->selectStyleByIntId($styleID);
+        $record =  $this->m_DataAccess->fetchStyles();
         $fetchedPage = $this->constructStyle($record);
-
         $this->m_DataAccess->closeDB();
-
         return $fetchedPage;
-    }
+    } // end getStyle
 
 
     // gets an style by name and returns it right away
@@ -83,22 +80,10 @@ class StyleModel
 
 
     //  Updates a Style in the CMS
-    public function updatePage($styleToUpdate)
+    public function updateStyle($styleToUpdate)
     {
-        $this->m_DataAccess->connectToDB();
+        return $this->m_DataAccess->updateStyle($styleToUpdate);
 
-        $recordsAffected = $this->m_DataAccess->updateStyle($styleToUpdate-> getID(),
-            $styleToUpdate->getName(),
-            $styleToUpdate->getStyle(),
-            $styleToUpdate->getDesc(),
-            $styleToUpdate->getStyle(),
-            $styleToUpdate->getCreatedby(),
-            $styleToUpdate->getActve(),
-            $styleToUpdate->getCreateDate(),
-            $styleToUpdate->getModifiedby(),
-            $styleToUpdate->getAModifieddate());
-
-        return "$recordsAffected record(s) updated succesfully!";
     }
 
 
@@ -118,6 +103,14 @@ class StyleModel
         return $currentStyle;
 
 
+    }
+
+
+
+    function removeStyle($id)
+    {
+        $currentStyle=  $this->getStyle($id);
+        return $this->m_DataAccess->deleteStyle($currentStyle)  ;
     }
 }
 ?>

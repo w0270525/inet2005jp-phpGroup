@@ -54,25 +54,29 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
 
     }
 
-    //returns the styles based on PAGES ID
-    public function selectStyleByPageId($pageID)
+    // int = selectStyleByPageId (Integer pageId);
+    // selects styles based on  ID where pageid is an int. returns the row count of the query result
+    public function selectStyleByIntId($styleId)
     {
+        // prepare statement
         $selectStatement = "SELECT * FROM STYLE ";
         $selectStatement .= " LEFT JOIN PAGES ON s_id = PAGES.p_style";
-        $selectStatement .= " WHERE PAGES.p_id= :pageID;";
+        $selectStatement .= " WHERE s_id = :id;";
 
         try
-        {
+        {   // execute statement
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':pageID', $pageID, PDO::PARAM_INT);
+            $this->stmt->bindParam(':id', $styleId, PDO::PARAM_INT);
             $this->stmt->execute();
             return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('selectStyleByPageId failed in PDOMySQLStyleDataModel  : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectStyleByPageId failed in PDOMySQLStyleDataModel  : '.$selectStatement.' : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
-    }
+    }/// end get style by int id
+
+
 
     //selects a style from the databse base on the name
     // returns the row count
@@ -97,23 +101,25 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     }
 
 
-
-    // returns the Style based  on ID
-    public function selectStyleById($styleID)
+    //  int = selectStyleById (Style style);
+    // returns the Style based  on ID of style sent in
+    public function selectStyleById($style)
     {
+        // prepeare the statment
         $selectStatement = "SELECT * FROM STYLE ";
         $selectStatement .= " LEFT JOIN PAGES ON s_id = PAGES.p_style";
         $selectStatement .= " WHERE s_id= :styleID;";
         try
         {
+            // bind and execute
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':styleID', $styleID, PDO::PARAM_INT);
+            $this->stmt->bindParam(':styleID', $style->getId(), PDO::PARAM_INT);
             $this->stmt->execute();
             return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
         {
-            die('selectStyleByStyleId failed in PDOMySQLStyleDataModel  : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectStyleByStyleId failed in PDOMySQLStyleDataModel: ".$selectStatement ."  : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -164,21 +170,20 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
 
 
 
-
-    // updates the CMS user
-    // need to add modified by param
-    public function updateStyle($userID,$first_name,$last_name,$username)
+    // itn = updateStyle (Style style);
+    //Updates the style object and returns row count
+    public function updateStyle($style)
     {
-        $updateStatement = "UPDATE PAGES";
-        $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
-        $updateStatement .= " WHERE u_id = :userID;";
+        $updateStatement = "UPDATE STYLE  SET s_name= :name ,s_desc= :desc, s_style = :style, s_lastmodifiedby = :modifiedby ";
+       $updateStatement .= " WHERE s_id = :styleId;";
 
         try{
             $this->stmt = $this->dbConnection->prepare($updateStatement);
-            $this->stmt->bindParam(':firstName', $first_name, PDO::PARAM_STR);
-            $this->stmt->bindParam(':lastName', $last_name, PDO::PARAM_STR);
-            $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-            $this->stmt->bindParam(':userName', $username, PDO::PARAM_STR);
+            $this->stmt->bindParam(':name', $style->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':desc', $style->getDesc(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':style', $style->getStyle(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':modifiedby', $style->getModifiedBy(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':styleId', $style->getId(), PDO::PARAM_INT);
             $this->stmt->execute();
 
             return $this->stmt->rowCount();
@@ -188,6 +193,31 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
             die('updateStyle failed in PDOMySQLStyleDataModel : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+    // Integer deleteStyle(Style styleId);
+    // removes a style from the database and returns the row count.
+    // returns 9999 is style is active and will not delete
+    public function deleteStyle($style)
+    {
+
+        if($style->getActive() ==1) return 9999;// active style, dont dlete
+        $deleteStatement = "DELETE FROM STYLE   ";
+        $deleteStatement .= " WHERE s_id = :styleId;";
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($deleteStatement);
+            $this->stmt->bindParam(':styleId', $style->getId(), PDO::PARAM_INT);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('udeletem Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
 
     // returns the Style id
     public function fetchStyleID($row)

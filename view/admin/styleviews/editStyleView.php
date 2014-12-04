@@ -1,70 +1,74 @@
 
 <style type="text/css">
-  table
-  {
-    border: 1px solid purple;
-  }
-  th, td
-  {
-    border: 1px solid red;
-  }
+    table
+    {
+        border: 1px solid purple;
+    }
+    th, td
+    {
+        border: 1px solid red;
+    }
 </style>
 
 <?php
-  if(!empty($lastOperationResults)):
-?>
-<h2><?php echo $lastOperationResults; ?></h2>
+if(!empty($lastOperationResults)):
+    ?>
+    <h2><?php echo $lastOperationResults; ?></h2>
 <?php
-  endif;
+endif;
+foreach($arrayOfStyles as $style):
 ?>
-<h1>Update Style</h1>
-<table class="table">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Style</th>
-  </tr>
-  </thead>
-  <form name="updateContentAreaForm"  id="updateContentAreaForm" class="updateContentAreaForm" onclick ="$('#updateContentAreaSubmit').hide();$('#verifyf').show()"
-        action="#" method="post" value="updateContentAreaForm">
-    <tbody>
-    <tr>
-      <td><input oninput="resetBut()" type="text" name ="s_name" value="<?php echo $style->getName(); ?>" required /></td>
-      <td><input oninput="resetBut()" type="text" name ="s_alias" value="<?php echo $style->getAlias(); ?>" required /></td>
-      <td><input oninput="resetBut()" type="text" name ="s_desc" value="<?php echo $style->getDesc(); ?>" required /></td>
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">  Edit Style <?php echo $style->getName(); ?></button>
+<div id="demo" class="collapse in">
 
 
-      // No idea what this is for...
-      <input type="hidden" name = "formSubmitUpdateContentArea" value="true" required />
-      // No idea what this is for...
+
+<form name="addNewStyleFORM"  id="addNewStyleFORM" class="addNewStyleFORM" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
+      action="#" method="post" value="addNewStyleForm">
+    <label>Name</label>
+    <input oninput="resetButStyleAdd()" type="text" name ="s_name"  class="form-control" required value="<?php echo $style->getName(); ?>"/>
+
+    <label> Description</label>
+    <input oninput="resetButStyleAdd()" type="text" name ="s_desc"  class="form-control" required / value="<?php echo $style->getdesc(); ?>" >
+
+    <label>CSS</label><pre>
+    <textarea  class="form-control" rows="13"    oninput="resetButStyleAdd()" type="text" name ="s_style"   required >
+            <?php echo $style->getStyle(); ?>
+    </textarea></pre>
+    <!-- USED FOR BACKEND FORM VERIFICATION -->
+    <input type="hidden" name="formUpdateStyle" value="true" required/>
 
 
-      <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-        <input type="submit" class="btn btn-default" id="updateContentAreaSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
-    </tr>
-    </tbody>
-  </form>
-  <tfoot></tfoot>
-</table>
+    <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
+    <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
+
+</form>
+ </div>
+<?php
+endforeach;
+?>
 
 <script>
-  function  verifyf()
-  {
-//        if (document.forms['updateContentAreaForm']['p_name'].value.length>5)
-//      if   (document.forms['updateContentAreaForm']['p_alias'].value.length>5)
-//        if( document.forms['updateContentAreaForm']['p_desc'].value.length>20)
-//    {
-    $('#formConfirm').hide();
-    $('#updateContentAreaSubmit').show();
-  }
+    function  verifyFormAddStyle()
+    {
+        if (document.forms['addNewStyleFORM']['s_name'].value.length>5)
+            if   (document.forms['addNewStyleFORM']['s_desc'].value.length>5)
+                if( document.forms['addNewStyleFORM']['s_style'].value.length>10)
+                {
+                    $('#formAddStyleConfirm').hide();
+                    $('#addStyleSubmit').show();
+                }
+    }
 
 
-  $('#updateContentAreaSubmit').hide()
+    $('#addStyleSubmit').hide()
 
-  function resetBut()
-  {
-    $('#formConfirm').show();
-    $('#updateContentAreaSubmit').hide();
-  }
+    function resetButStyleAdd()
+    {
+        $('#formAddStyleConfirm').show();
+        $('#addStyleSubmit').hide();
+    }
 </script>
+
+
+

@@ -35,7 +35,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                     <input type="submit" name="logout" id="logout" class="btn btn-primary pull-right"   value="logout" style="display:inline;right:0;" />
                 </form>
                 <!-- clears the current for 100% -->
-                <form action="index.php"    method="post" name="" id="" style="display:inline;" >
+                <form action="index.php"    method="post" name="" id="resetButton" style="display:inline;" >
                     <input type="submit" name="" id="" class="btn btn-success pull-right"   value="Reset" style="display:inline;right:0;" />
                 </form>
                 <?php
@@ -287,6 +287,20 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             }
 
+              // process new style form
+            if(isset($_POST["formUpdateStyle"])&&  $_POST["formUpdateStyle"]=="true"){
+                $control->styleController()->updateActionConfirm($_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
+
+
+            }
+
+            // process style delete form
+            if(isset($_POST["deleteFormConfirm"]))
+                $control->styleController()->removeActionConfirm($_POST["deleteFormConfirm"]);
+
+
+
+
         }
 
         // GETS THE UPDATE ACTIONS
@@ -304,12 +318,17 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             }
 
-          // load update sykle
-            if(isset($_GET["styleupdate"])){
-                $control->articleController()->updateAction( $control->currentUser);
+          // load update style
+            if(isset($_GET["updatestyle"])){
+                $control->styleController()->updateAction( $control->currentUser);
 
             }
 
+        // loads style delete form
+        if(isset($_GET["deleteStyle"])){
+            $control->styleController()->removeAction( $_GET["deleteStyle"]);
+
+        }
 
 
 

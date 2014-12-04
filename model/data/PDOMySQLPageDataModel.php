@@ -170,8 +170,8 @@ public function selectPagesByName($name)
         }
     }
 
-    // updates the CMS page
-    //
+    // int = updatePage (Page page);
+    // updates the page and returns the row count
      public function updatePage($page)
     {
          $updateStatement = "UPDATE PAGES";
@@ -194,7 +194,7 @@ public function selectPagesByName($name)
         {
             die('updatePage failed  in PDOMySQLPageDataModel:\n '.$updateStatement.': Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
-    }
+    }// end page updtAe
 
 
 
