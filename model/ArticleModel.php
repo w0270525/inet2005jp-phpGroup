@@ -141,5 +141,10 @@ class ArticleModel
 
     }
 
+
+        public function removeArticle($article){
+             return $this->m_DataAccess->deleteArticle($article);
+
+        }
 }
 ?>

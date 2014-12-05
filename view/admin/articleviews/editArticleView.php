@@ -27,7 +27,7 @@ foreach($arrayOfArticles as $article):
           action="#" method="post" value="addNewPageForm">
 
 
-        <label class="col-sm-2 control-label">Name</label><input type="hidden" name="a_id" value=""<?php echo $article->getId()?> />
+        <label class="col-sm-2 control-label">Name</label><input type="hidden" name="a_id" value=<?php echo $article->getId()?> />
             <div class="col-sm-10">
             <input oninput="resetBut()" type="text" name = "a_name"  class="form-control" value =<?php echo $article->getName() ?> required />
         </div>

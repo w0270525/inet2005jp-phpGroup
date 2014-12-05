@@ -165,6 +165,32 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             die('nsertArticle($article)  failed  in PDOMySQLArticleDataModel:\n'.$insertStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+
+
+    // Integer deleteStyle(Style styleId);
+    // removes a style from the database and returns the row count.
+    // returns 9999 is style is active and will not delete
+    public function deleteArticle($article)
+    {
+
+
+        $deleteStatement = "DELETE FROM ARTICLE    WHERE a_id = :article ";
+
+        try{
+            $this->stmt = $this->dbConnection->prepare($deleteStatement);
+            $this->stmt->bindParam(':article', $article->getId(), PDO::PARAM_INT);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('udeletem Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
     // updates the CMS user
     // need to add modified by param
 //    public function updateArticle($userID,$first_name,$last_name,$username)

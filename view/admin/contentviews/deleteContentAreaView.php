@@ -35,14 +35,16 @@
                 <div class="col-sm-10">
                     <input oninput="resetButStyleAdd()" type="text" name = "c_name"  value =  <?php echo $content->getName()?> class="form-control" required /></div>
 
-                <label class="col-sm-2 control-label">Content Sre Alias</label>
+                <label class="col-sm-2 control-label">Content Area Alias</label>
 
-                <div class="col-sm-10"><input oninput="resetButStyleAdd()" type="text" name = "c_alias"  value = <?php echo $content->getAlias()?>  class="form-control"  required/></div>
-                <label class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-10">
+                    <input oninput="resetButStyleAdd()" type="text" name = "c_alias"  value = <?php echo $content->getAlias()?>  class="form-control"  required/></div>
 
-                <div class="col-sm-10"><input oninput="resetButStyleAdd()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"/></div>
+                <label class="col-sm-2 control-label">Content Area Description</label>
+                <div class="col-sm-10">
+                     <input oninput="resetButStyleAdd()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"/> </div>
+
                 <label class="col-sm-2 control-label">Order</label>
-
                 <div class="col-sm-10">
                     <input oninput="resetButStyleAdd()" type="int"  value =<?php echo $content->getOrder()?>   name="c_order" /></div>
 
@@ -50,7 +52,7 @@
                 <input  type="hidden"  value =<?php echo $content->getId()?>   name="id" />
 
 
-                <div class="col-sm-10"> <input type="hidden" name = "formDelete" value="true"   class="form-control"/></div>
+                <div  > <input type="hidden" name = "formDelete" value="true"   class="form-control"/></div>
 
 
 

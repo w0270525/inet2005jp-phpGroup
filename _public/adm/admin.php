@@ -275,6 +275,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             }
 
+
             // process new content are form
             if(isset($_POST["formSubmitNewContentArea"])&&  $_POST["formSubmitNewContentArea"]=="true"){
                 $control->contentController()->confirmAddAction( $control->currentUser);
@@ -302,10 +303,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
                 // process delete content area fornm
-            if(isset($_POST["formDeleteContentArea"]) && ($_POST["formDeleteContentArea"] ="'true"))
-                $control->contentController()->removeActionConfirm($_POST["id"]);
+         //   if(isset($_POST["formDelteeConfirm"]) && ($_POST["formDelteeConfirm"] ="'true"))
+           //     $control->contentController()->removeActionConfirm($_POST["id"]);
 
+            if(isset($_POST["formDelteeConfirm"])){
 
+                $control->articleController()->removeActionConfirm( $_POST["id"]);
+
+            }
 
 
         }
@@ -342,6 +347,17 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->contentController()->removeAction( $_GET["deleteContentArea"]);
 
         }
+
+        // loads article area delete form
+        if(isset($_GET["articleremove"])){
+            $control->articleController()->removeAction( $_GET["articleremove"]);
+
+        }
+    }
+
+
+
+
 
         ?>
         <!--CUSTOM EDITOR VIEWS -->
@@ -399,7 +415,22 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
     if($control->currentUser->isAuthor())
-    {      ?>
+    {
+        // process ontent are form
+        if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+            $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+
+        }
+
+        // process new style form
+        if(isset($_POST["formUpdateStyle"])&&  $_POST["formUpdateStyle"]=="true"){
+            $control->styleController()->updateActionConfirm($_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
+
+
+
+
+
+            ?>
 
 
 

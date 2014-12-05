@@ -137,7 +137,7 @@ class ContentAreaController
             $_GET=null;$_POST=NULL;
         else:
 
-            $arrayOfContentAreas[]= $this->model->getContentArea($id);
+            $arrayOfContentAreas = $this->model->getContentArea($id);
             include "../view/admin/contentviews/deleteContentAreaView.php";
         endif;
 

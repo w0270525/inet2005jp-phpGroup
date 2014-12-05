@@ -25,7 +25,7 @@ foreach(  $arrayOfContentAreas  as $content):
 <h1></h1>
 
 
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editconetnformbs"> Edit  Content Area   <?php echo $content->getName()?></button>
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editconetnformbs"  id="editcontentareaBSbutton"> Edit  Content Area   <?php echo $content->getName()?></button>
 <div id="editconetnformbs" class="collapse in">
         <form name="editContentAreaForm"  id="editContentArea" class="editContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 
