@@ -8,7 +8,7 @@
       ?>
     </style>
   </head>
-  <body>
+
     <ul>
     <?php
       foreach ($navArray as $page) {
@@ -35,5 +35,5 @@
     <?php
       } // foreach ($ca) END
     ?>
-  </body>
+
 </html>
