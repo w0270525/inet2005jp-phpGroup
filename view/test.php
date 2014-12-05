@@ -8,6 +8,6 @@
     <script>
         $('#styleeditidbsbutton').click();
     </script>
-</div>
+
 
 
