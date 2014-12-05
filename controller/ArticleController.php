@@ -101,20 +101,24 @@ class ArticleController
         $result = $this->model->removeArticle($article);
         if($result!=0 ){
             // success
-            $lastOperationResults =" Article has been deleted ". $result ." rows affected";
+            $lastOperationResults ="<p class = 'result'> Article has been deleted ". $result ." rows affected</p>";
             $this->displayAction();
+            $_POST=NULL;$_GET=NULL;
 
         }else{
             // failed to delete
             $lastOperationResults = "We were Unable to remove that article at this time";
-            $result= $this->model->getArticle($ID);
-            if($result>0){
-                ?>There seems to be a problem removing the article, please check dependencies<?php
+            if(!$this->model->getArticle($ID)){ //$result=0;
+
+                $lastOperationResults  = "<p class= 'error'> There seems to be a problem removing the article, please check dependencies</p>";
+                $this->displayAction();
+
             }else{
-                ?>That Article no longer lives in the CMS databse<?php
+                $lastOperationResults = "<p   class='error'> That Article no longer lives in the CMS databse </p>";
+                $_POST=NULL;$_GET=NULL;
+                $arrayOfArticles=$this->model->getAllArticles();
+                include '../view/admin/articleviews/displayArticlesView.php';
 
-
-            $this->displayAction();
             }
 
 
