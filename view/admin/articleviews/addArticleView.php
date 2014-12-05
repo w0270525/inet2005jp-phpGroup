@@ -39,13 +39,7 @@ endif;
             <td><input oninput="resetBtnArtForm()" type="text" name="a_title" required /></td>
             <td><input oninput="resetBtnArtForm()" type="text" name="a_desc" required /></td>
             <td><input oninput="resetBtnArtForm()" type="text" name="a_blurb" required /></td>
-
-
-            // TinyMCE WOULD GO HERE!
-            <td><input oninput="resetBtnArtForm()" type="text" name="a_content" required /></td>
-            // TinyMCE WOULD GO HERE!
-
-
+            <td><textarea oninput="resetBtnArtForm()" type="text" name="a_content" required ></textarea></td>
             <td><input oninput="resetBtnArtForm()" type="text" name="a_assocpage"  /></td>
             <input type="hidden" name="formSubmitNewArticle" value="true" required/>
 

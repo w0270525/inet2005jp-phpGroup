@@ -3,6 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+  <!-- tinyMCE -->
+  <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript">
+    tinymce.init({
+      selector: "textarea",
+      theme: "modern",
+      plugins: "code"
+    });
+  </script>
     <!-- Jquery -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!-- BOOTSTRAP  --->
@@ -12,14 +21,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-    <!-- tinyMCE -->
-    <script type="text/javascript" src="../_public/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-    <script type="text/javascript">
-      tinymce.init({
-        selector: "textarea",
-        theme: "modern"
-      });
-    </script>
+
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
