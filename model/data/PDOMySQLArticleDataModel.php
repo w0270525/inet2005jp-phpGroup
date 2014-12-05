@@ -139,12 +139,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // return row count of succsussful insert ie 1
     public function insertArticle($article)
     {
-
-
-
         $insertStatement = "INSERT INTO  ARTICLE  VALUES (DEFAULT, :a_contentArea, :a_name, :a_title, :a_desc, :a_blurb, :a_content,  :a_pages , :a_createdby, default, :a_createdby, default , :a_allPages );";
-
-
         try{
             $this->stmt = $this->dbConnection->prepare($insertStatement);
             $this->stmt->bindParam(':a_name', $article->getName(), PDO::PARAM_STR);
@@ -157,7 +152,6 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             $this->stmt->bindParam(':a_createdby', $article->getCreatedBy(), PDO::PARAM_INT);
             $this->stmt->bindParam(':a_allPages', $article->getAllPages(), PDO::PARAM_INT);
             $this->stmt->execute();
-
             return $this->stmt->rowCount();
         }
         catch(PDOException $ex)
@@ -174,10 +168,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns 9999 is style is active and will not delete
     public function deleteArticle($article)
     {
-
-
-        $deleteStatement = "DELETE FROM ARTICLE    WHERE a_id = :article ";
-
+        $deleteStatement = "DELETE FROM ARTICLE WHERE a_id = :article ";
         try{
             $this->stmt = $this->dbConnection->prepare($deleteStatement);
             $this->stmt->bindParam(':article', $article->getId(), PDO::PARAM_INT);
@@ -187,34 +178,42 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
         catch(PDOException $ex)
         {
-            die('udeletem Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            die('deleteArticle($article) Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
 
-    // updates the CMS user
-    // need to add modified by param
-//    public function updateArticle($userID,$first_name,$last_name,$username)
-//    {
-//        $updateStatement = "UPDATE user";
-//        $updateStatement .= " SET u_fname = :firstName,u_lname=:lastName, u_username=:username";
-//        $updateStatement .= " WHERE u_id = :userID;";
-//
-//        try
-//        {
-//            $this->stmt = $this->dbConnection->prepare($updateStatement);
-//            $this->stmt->bindParam(':firstName', $first_name, PDO::PARAM_STR);
-//            $this->stmt->bindParam(':lastName', $last_name, PDO::PARAM_STR);
-//            $this->stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-//            $this->stmt->bindParam(':userName', $username, PDO::PARAM_STR);
-//            $this->stmt->execute();
-//
-//            return $this->stmt->rowCount();
-//        }
-//        catch(PDOException $ex)
-//        {
-//            die('Update failed : Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
-//        }
-//    }
+
+
+
+    // updateArticle(Article article);
+    // updates the article in th cms to match the article sent in.
+    // return the row count of  the update query
+    public function updateArticle($articleToUpdate)
+    {
+
+        $updateStatement=" UPDATE ARTICLE SET a_blurb=:blurb, a_desc = :desc, a_allpages= :allPages , a_contentarea = :ca, a_name = :name, a_title =:title, a_content = :content, a_assocpage = :page, a_lastmodifiedby = :userId , a_modifieddate = NOW()  WHERE a_id = :articleId ;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($updateStatement);
+            $this->stmt->bindParam(':ca', $articleToUpdate->getContentarea(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':name', $articleToUpdate->getName(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':title', $articleToUpdate->getTitle(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':content', $articleToUpdate->getContent(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':page', $articleToUpdate->getAssocpage(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':userId', getUser()->getId(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':allPages', $articleToUpdate->getAllpages(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':articleId', $articleToUpdate->getId(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':desc', $articleToUpdate->getDesc(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':blurb', $articleToUpdate->getBlurb(), PDO::PARAM_INT);
+            $this->stmt->execute();
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('Update failed  in PDOMySQLArticleDataModel :'.$updateStatement.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
 
     // returns the Article id
     public function fetchArticleID($row)

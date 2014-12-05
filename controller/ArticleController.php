@@ -2,6 +2,7 @@
 
 require_once('../model/ArticleModel.php');
 
+require_once('../model/data/functions.php');
 class ArticleController
 {
     public $model;
@@ -35,6 +36,17 @@ class ArticleController
     }
 
 
+    // updateAction(Int id, String name , String title,  String desc , String blurb, String content, String allPages, String title, String contentArea, String page )
+    // updates an articel in the database;
+
+    public function updateActionConfirm($a_id, $a_name , $a_title,  $a_desc , $a_blurb,$a_content, $a_allPages,  $a_contentArea, $a_page )
+    {   // verify artilce exissts
+        if($currentArticle = $this->model->getArticle($a_id)):
+                $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,getUser()->getId(),null);
+                return $this->model->updateArticle($articleToUpdate);
+            else: return 0;
+            endif;
+    }
 
 
 
@@ -42,13 +54,11 @@ class ArticleController
 
     public function confirmAddAction($user)
     {
-
         $result=null;
          // validate info befor adding a record
         if(isset ($_POST["a_name"]) &&    isset($_POST["a_title"]) && isset($_POST["a_desc"])   &&isset($_POST["formSubmitNewArticleConfirm"]) &&
             $_POST["formSubmitNewArticleConfirm"] ==true      &&  $user->isEditor())
         {
-
             // check if name or title  already in use
             $allArticles = array();$true=true;
             $allArticles = $this->model->getAllArticles();
@@ -59,13 +69,10 @@ class ArticleController
                 if($article->getTitle() ==$_POST["a_title"] )
                     $result .= "Name allready in user , Unable to add article";
                 if($result!=null)  $true = false;
-
-
             }
         if ($true) {
 
         // complete update acction
-
             if(isset($_POST["all_pages"]) && $_POST["all_pages"]=="on")$_POST["all_pages"]=1;
             else $_POST["all_pages"] = 0;
             if($this->model->addArticle( $_POST['a_contentarea'] ,$_POST['a_name'] , $_POST['a_title'] , $_POST['a_desc'], $_POST['a_blurb'], $_POST['a_content'] ,$_POST['a_page'] ,$_POST['all_pages'] ,$user->getId() ))
@@ -81,15 +88,13 @@ class ArticleController
 
             include '../view/admin/articleviews/addArticleDisplay.php';
         }
-
-
     }
 
 
       //loads the remove articel foorm
       public function removeAction($ID)
       {
-          $arrayOfArticles[] = $this->model->getArticle($ID);
+        $arrayOfArticles[] = $this->model->getArticle($ID);
         include '../view/admin/articleviews/deleteArticleView.php';
       }
 

@@ -5,6 +5,8 @@
     <style>
       <?php
         echo $currentPage->getStyle()->getStyle();
+         $arrayOfStyles = array();
+      include "test.php";
       ?>
     </style>
   </head>
@@ -15,6 +17,7 @@
     ?>
       <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo $page->getId(); ?>">
           <?php echo $page->getName(); ?></a></li>
+
     <?php
       } // foreach END
     ?>

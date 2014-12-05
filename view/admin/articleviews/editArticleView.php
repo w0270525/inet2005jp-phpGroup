@@ -41,16 +41,17 @@ foreach($arrayOfArticles as $article):
 
         <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"><?php echo $article->getContent()?></textarea>
         </div>
-        <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" value =<?php echo $article->getContentArea()?>/>
+        <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" value ="<?php echo $article->getContentArea()?>"/>
         </div>
-        <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" alue =<?php echo $article->getAssocPage()?>/>
+        <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage()?>"/>
         </div>
-        <label class="col-sm-2 control-label">All Page</label> <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" alue =<?php echo $article->getAllPages()?>/>
+        <label class="col-sm-2 control-label">All Page</label> <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" value ="<?php echo $article->getAllPages()?>"/>
+
         </div>
 
-        <input type="hidden" name = "formSubmitNewArticleConfirm" value="true" required/>
+        <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
         <div class="col-sm-10">  <label><span  class="btn btn-default" onclick="verifyf()" id="formConfirm">Verify </span>
-                <input type="submit" class="btn btn-default" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
+        <input type="submit" class="btn btn-default" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
         </div>
     </form>
  </div>

@@ -34,3 +34,10 @@ class connect{
 
 
 }
+
+
+
+function getUser()
+{
+    return unserialize($_SESSION["user"]);
+}

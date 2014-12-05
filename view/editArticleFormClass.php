@@ -46,7 +46,7 @@ PUBLIC  function __construct($uniqueId,$article){
                       <label class="col-sm-2 control-label">All Page</label> <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" alue =<?php echo $this->article->getAllPages()?>/>
                       </div>
 
-                      <input type="hidden" name = "formSubmitNewArticleConfirm" value="true" required/>
+                      <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
                       <div class="col-sm-10">  <label><span  class="btn btn-default" onclick="verifyf<?php echo $this->id ?>()" id="formConfirm<?php echo $this->id ?>">Verify </span>
                               <input type="submit" class="btn btn-default" id="updateArticle<?php echo $this->id ?>" onclick="verifyf()<?php echo $this->id ?>;resetBut(); " value ="true" >  </label>
                       </div>

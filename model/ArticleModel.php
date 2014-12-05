@@ -92,11 +92,18 @@ class ArticleModel
     }
 
 
+//  Updates a article in the CMS
+public function updateArticle($articleToUpdate)
+{
+   return  $this->m_DataAccess->updateArticle($articleToUpdate);
+}
+
+
     //  Updates a article in the CMS
-    public function updateArticle($articleToUpdate)
+    public function updatetArticle($articleToUpdate)
     {
         $this->m_DataAccess->connectToDB();
-        $a=new Article();$a->
+
         $recordsAffected = $this->m_DataAccess->updateArticle($articleToUpdate->getId(),
             $articleToUpdate->getName(),
             $articleToUpdate->getContentArea(),

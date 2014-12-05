@@ -302,6 +302,15 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             }
 
 
+            if(isset($_POST["formEditArticleConfirm"])&&  $_POST["formEditArticleConfirm"]=="true")
+            {
+                if(!isset($_POST["all_page"]))
+                    $_POST["all_page"] = 0;
+                else if($_POST["all_page"]=0)$_POST["all_page"]=1;
+                $control->articleController()->updateActionConfirm($_POST['a_id'], $_POST['a_name'] , $_POST['a_title'], $_POST['a_desc'],$_POST['a_blurb'],$_POST['a_content'],$_POST['all_page'],$_POST['a_contentarea'],$_POST['a_page']);
+            }
+
+
                 // process delete content area fornm
          //   if(isset($_POST["formDelteeConfirm"]) && ($_POST["formDelteeConfirm"] ="'true"))
            //     $control->contentController()->removeActionConfirm($_POST["id"]);

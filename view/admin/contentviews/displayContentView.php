@@ -26,7 +26,7 @@ $user = unserialize($_SESSION["user"]);
 
 <h1>Content Areas</h1>
 <table class="table">
-  <thead>
+  <thead class="thead">
     <tr>
       <th>Name</th>
       <th>Alias</th>
@@ -51,7 +51,8 @@ $user = unserialize($_SESSION["user"]);
         <th>Edit</th>
         <th>Delete</th>
     </tr>
-
+</thead>
+    <tbody>
   <?php
     foreach($arrayOfContentAreas as $content):
 
