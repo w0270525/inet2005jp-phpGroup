@@ -30,7 +30,12 @@
         <?php
         //init the user session
         include("sessionHandler.php");
+
+
+        // gran functions for from various layers for usability
         include_once("adm/miniViews/functions.php");
+        include_once("../model/data/functions.php");
+
 
 
 

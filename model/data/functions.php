@@ -35,8 +35,37 @@ class connect{
 
 }
 
+// Boolean  = CMS_checkEditor();
+//  returns the current useres editor status
+function CMS_checkEditor()
+{
+    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && getUser()->isEditor())
+        return true;
+    return false;
+}
+CMS
+
+// Boolean  = CMS_checkAdmin();
+//  returns the current user Admin status
+function CMS_checkAdmin()
+{
+    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && getUser()->isAdmin())
+        return true;
+    return false;
+}
 
 
+// Boolean = CMS_checkAuthor();
+//  returns the current users author status
+function CMS_checkAuthor()
+{
+    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && getUser()->isAuthor())
+        return true;
+    return false;
+}
+
+// User = getUser();
+// returns the current user
 function getUser()
 {
     return unserialize($_SESSION["user"]);

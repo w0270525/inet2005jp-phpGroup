@@ -55,7 +55,7 @@ endif;
                 <div class="btn btn-default" id="formAddArticleConfirm" onclick="verifyFormSubmiotArticle()" >Verify</div>
                 <input type="submit" class="btn btn-default" id="addArticleSubmitVerified" onclick="verifyFormSubmiotArticle();resetBtnArtForm();" value="Confirm" />
             </td>
-
+<!---->
 
 
         </tr>

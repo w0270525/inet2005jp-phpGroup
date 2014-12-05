@@ -6,7 +6,7 @@
       <?php
         echo $currentPage->getStyle()->getStyle();
          $arrayOfStyles = array();
-      include "test.php";
+         if(CMS_checkAuthor()) include "frontPageEditStyle.php";
       ?>
     </style>
   </head>
