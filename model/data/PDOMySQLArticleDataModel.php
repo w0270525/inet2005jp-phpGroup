@@ -201,7 +201,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             $this->stmt->bindParam(':title', $articleToUpdate->getTitle(), PDO::PARAM_INT);
             $this->stmt->bindParam(':content', $articleToUpdate->getContent(), PDO::PARAM_STR);
             $this->stmt->bindParam(':page', $articleToUpdate->getAssocpage(), PDO::PARAM_INT);
-            $this->stmt->bindParam(':userId', getUser()->getId(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':userId', CMS_getUser()->getId(), PDO::PARAM_INT);
             $this->stmt->bindParam(':allPages', $articleToUpdate->getAllpages(), PDO::PARAM_INT);
             $this->stmt->bindParam(':articleId', $articleToUpdate->getId(), PDO::PARAM_INT);
             $this->stmt->bindParam(':desc', $articleToUpdate->getDesc(), PDO::PARAM_STR);

@@ -17,48 +17,51 @@
 <?php
   endif;
 ?>
-<h1>Add new Style</h1>
+
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formArticleaddNewStylxeeFORM">Add  New Style </button>
+<div id="formArticleaddNewStylxeeFORM" class="collapse in">
 
 
-  <form name="addNewStyleFORM"  id="addNewStyleFORM" class="addNewStyleFORM" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
-        action="#" method="post" value="addNewStyleForm">
+
+<form name="addNewStylxeeFORM"  id="addNewStylxeeFORM" class="addNewStylxeeFORM"    action="#" method="post"  >
       <label>Name</label>
-            <input oninput="resetButStyleAdd()" type="text" name ="s_name"  class="form-control" required />
+            <input oninput="verifyFormAddStylebtn()" type="text" name ="s_name"  class="form-control" required />
 
       <label> Description</label>
-            <input oninput="resetButStyleAdd()" type="text" name ="s_desc"  class="form-control" required />
+            <input oninput="verifyFormAddStylebtn()" type="text" name ="s_desc"  class="form-control" required />
 
       <label>CSS</label>
-            <textarea  class="form-control" rows="13"    oninput="resetButStyleAdd()" type="text" name ="s_style" value = "" required >cSS HERE</textarea>
+            <textarea  class="form-control" rows="13"    oninput="verifyFormAddStylebtn()" type="text" name ="s_style"  required >CSS ...</textarea>
 
       <!-- USED FOR BACKEND FORM VERIFICATION -->
       <input type="hidden" name="formSubmitNewStyle" value="true" required/>
 
 
-      <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
-      <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
+      <div class="btn btn-default" id="formAddStyleConfirmbtn" onclick="verifyFormAddStylebtn()">Verify</div>
+      <input type="submit" class="btn btn-default" id="addStyleSubmitbtnbtn" onclick="verifyFormAddStylebtn();verifyFormAddStylebtn_add();" value="Confirm" />
 
   </form>
 
-
+</div>
 <script>
-  function  verifyFormAddStyle()
-  {
-        if (document.forms['addNewStyleFORM']['s_name'].value.length>5)
-      if   (document.forms['addNewStyleFORM']['s_desc'].value.length>5)
-        if( document.forms['addNewStyleFORM']['s_style'].value.length>10)
+
+    function  verifyFormAddStylebtn()
     {
-    $('#formAddStyleConfirm').hide();
-    $('#addStyleSubmit').show();
-  }
-  }
+        if (document.forms['addNewStylxeeFORM']['s_name'].value.length>5)
+            if ( document.forms['addNewStylxeeFORM']['s_desc'].value.length>5)
+                   // need to add MVC validation
+                    {
+                        $('#formAddStyleConfirmbtn').hide();
+                        $('#addStyleSubmitbtnbtn').show();
+
+                 }
+    }
 
 
-  $('#addStyleSubmit').hide()
-
-  function resetButStyleAdd()
-  {
-    $('#formAddStyleConfirm').show();
-    $('#addStyleSubmit').hide();
-  }
+    $('#addStyleSubmitbtnbtn').hide();
+    function verifyFormAddStylebtn_add()
+    {
+        $('#formAddStyleConfirmbtn').hide();
+        $('#addStyleSubmitbtnbtn').show();
+    }
 </script>

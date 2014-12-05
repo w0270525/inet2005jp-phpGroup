@@ -46,13 +46,24 @@ $user=unserialize($_SESSION["user"]);
       <td><?php echo $style->getName(); ?></td>
       <td><?php echo $style->getDesc(); ?></td>
       <td><?php echo $style->getStyle(); ?></td>
-        <td><?php if($style->getActive()):
-                ?><span class="glyphicon glyphicon-check"></span><?php
-            else: ?><span class="glyphicon  glyphicon-stop"></span>
+      <td>
+      <!--  // create a linke to set active for editors only -->
+      <?php  if(CMS_checkEditor()):?>  <span id="activateStyle"><a href="?activateStyle='<?php echo $style->getId()?>" > <?php     endif; ?>
+
+       <?php if($style->getActive()):
+              ?>
+                <span class="glyphicon glyphicon-check"></span><?php else: ?>
+                <span class="glyphicon  glyphicon-stop"></span>
             <?php
             endif; ?>
 
-        </td>
+
+       <?php  if(CMS_checkEditor()):?> </a> <?php     endif; ?>
+
+
+      </td>
+
+
         <?php if ($user->isAdmin()):   ?>
       <td><?php echo $style->getCreatedBy(); ?></td>
       <td><?php echo $style->getCreatedDate(); ?></td>

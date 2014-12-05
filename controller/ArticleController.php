@@ -42,7 +42,7 @@ class ArticleController
     public function updateActionConfirm($a_id, $a_name , $a_title,  $a_desc , $a_blurb,$a_content, $a_allPages,  $a_contentArea, $a_page )
     {   // verify artilce exissts
         if($currentArticle = $this->model->getArticle($a_id)):
-            $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,getUser()->getId(),null);
+            $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,CMS_getUser()->getId(),null);
 
             // get update result and show display
             if($result = $this->model->updateArticle($articleToUpdate)):

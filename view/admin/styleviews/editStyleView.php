@@ -18,8 +18,8 @@ if(!empty($lastOperationResults)):
 endif;
 foreach($arrayOfStyles as $style):
 ?>
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editstyleforbs" id="styleeditidbsbutton">  Edit Style <?php echo $style->getName(); ?></button>
-<div id="editstyleforbs" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editstyleforbsaddNewStyleFORM" id="styleeditidbsbutton">  Edit Style <?php echo $style->getName(); ?></button>
+<div id="editstyleforbsaddNewStyleFORM" class="collapse in">
 
 
 
@@ -37,6 +37,7 @@ foreach($arrayOfStyles as $style):
     </textarea></pre>
     <!-- USED FOR BACKEND FORM VERIFICATION -->
     <input type="hidden" name="formUpdateStyle" value="true" required/>
+    <input type="hidden" name="s_id" value="<?php echo $style->getId()?>" required/>
 
 
     <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>

@@ -48,7 +48,7 @@ endif;
     function  verifyAddArticle()
     {
         if (document.forms['addNewContentArea']['c_name'].value.length>5)
-	        if ( document.forms['addNewContentArea']['c_alias'] )
+
              if(document.forms['addNewContentArea']['c_alias'].value.length>5)
                 if( document.forms['addNewContentArea']['c_desc'].value.length>20)
         {

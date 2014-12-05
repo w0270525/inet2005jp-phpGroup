@@ -296,7 +296,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
               // process new style form
             if(isset($_POST["formUpdateStyle"])&&  $_POST["formUpdateStyle"]=="true"){
-                $control->styleController()->updateActionConfirm($_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
+                $control->styleController()->updateActionConfirm($_POST["s_id"],$_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
 
 
             }
@@ -325,7 +325,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         }
 
         // GETS THE UPDATE ACTIONS
-        if($_SERVER["REQUEST_METHOD"]=="GET")
+        if($_SERVER["REQUEST_METHOD"]=="GET"){
 
             // load article form
             if(isset($_GET["articleupdate"])){
@@ -429,11 +429,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
             $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
 
+
+
         }
 
-        // process new style form
-        if(isset($_POST["formUpdateStyle"])&&  $_POST["formUpdateStyle"]=="true"){
-            $control->styleController()->updateActionConfirm($_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
 
 
 

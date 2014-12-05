@@ -77,6 +77,9 @@ class PageController
 
     public function displayPage($id) {
 
+
+      if($id==null )$id=1;
+
       // Nav Array;
       $navArray = $this->model->getAllPages();
       // Create the current page;

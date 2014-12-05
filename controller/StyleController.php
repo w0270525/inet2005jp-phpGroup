@@ -71,6 +71,7 @@ class StyleController
                 {//success
                     $lastOperationResults="You have successfully added a new Style<br>";
                     $arrayOfStyles[0] = $this->model->getStyleByName($_POST['s_name'] );
+
                 }
             }
         }else
@@ -86,27 +87,42 @@ class StyleController
 
 
 
-    public function updateActionConfirm($s_name,$s_desc, $s_style)
+    public function updateActionConfirm($s_id, $s_name,$s_desc, $s_style)
     {
         $true=true;
         $allStyles =$this->model->getAllStyles();
-        foreach($allStyles as $style)
-        {
-            if ($style->getName()==$s_name) $true=false;
-        }
-        if($true):
-            $lastOperationResults = "";
-            $currentStyle = $this->model->getStyle($_GET["updatestyle"]);
-            $currentStyle->setName($s_name);
-            $currentStyle->setDesc($s_desc);
-            $currentStyle->setStyle($s_style);
+        $styleToUpdate= $this->model->getStyle($s_id);
 
-            $user= unserialize($_SESSION["user"]);
-            $currentStyle->setModifieBy($user->getId());
-            $lastOperationResults = $this->model->updateStyle($currentStyle);
-            $_POST=null;
-            $_GET=null;
-            $arrayOfStyles[] =$this->model->getStyle($currentStyle->getId());
+        // verify name doesnt exist
+
+        if($this->model->getStyleByName($s_name)->getId()==$styleToUpdate->getId())
+            if($otherStyle->getId()!=$styleToUpdate->getId()):
+                $true=false;
+
+                // show message and display form
+                $lastOperationResults="<div class='warning'>That file name is already in use please a different name</div>";
+
+                $arrayOfStyles[]=$this->model->getStyle(intval($s_id));
+                include '../view/admin/styleviews/editStyleView.php';
+            endif;
+
+
+        // call to do update
+        if($true):
+
+            // prepare
+            $lastOperationResults = "";
+            $styleToUpdate->setName($s_name);
+            $styleToUpdate->setDesc($s_desc);
+            $styleToUpdate->setStyle($s_style);
+            $styleToUpdate->setModifieBy(CMS_getUser()->getId());
+
+            // update
+            $lastOperationResults = $this->model->updateStyle($styleToUpdate);
+
+            //reset
+            CMS_postGetReset();
+            $arrayOfStyles[] =$this->model->getStyle($styleToUpdate->getId());
             if($lastOperationResults)$lastOperationResults= " You have updated  the style successfulyy";
             else $lastOperationResults = "Unable to update the record, please try again";
             include '../view/admin/styleviews/editStyleView.php';

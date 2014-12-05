@@ -102,7 +102,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     public function selectStyleByName($name)
     {
 
-        $selectStatement = "SELECT * FROM STYLE  LEFT JOIN USER ON s_createdby = USER.u_id WHERE s_name = :name ;";
+        $selectStatement = "SELECT * FROM STYLE  JOIN USER ON s_createdby = USER.u_id WHERE s_name = :name ;";
 
 
         try
