@@ -12,6 +12,14 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+    <!-- tinyMCE -->
+    <script type="text/javascript" src="../_public/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script type="text/javascript">
+      tinymce.init({
+        selector: "textarea",
+        theme: "modern"
+      });
+    </script>
 
     <link rel="stylesheet" href="css/styles.css">
 </head>
