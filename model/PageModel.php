@@ -73,7 +73,7 @@ class PageModel
         return "$recordsAffected record(s) updated succesfully!";
     }
 
-    public    function getPageByName($name)
+    public function getPageByName($name)
        {
            $this->m_DataAccess->selectPagesByName($name);
            return $this->constructPage($this->m_DataAccess->fetchPage());
@@ -84,6 +84,50 @@ class PageModel
     {
         return   $this->m_DataAccess->insertPage($row);
     }
+
+    // Constructs the current page defined by the given ID;
+    public function constructDisplayPage($id) {
+
+      // Create the current page;
+      $currentPage = $this->getPage($id);
+      // Current Style;
+      $styleControl = new StyleModel();
+      $currentStyle = $styleControl->getActiveStyle();
+      $currentPage->setStyle($currentStyle);
+
+      // Get an array of all articles which belong to this page or appear on all pages;
+      $articleControl = new ArticleModel();
+      $arrayOfArticles = $articleControl->getAllArticlesByPageId($id);
+
+      // Create an array of all the Content Areas;
+      $contentAreaControl = new ContentAreaModel();
+      $arrayOfContentAreas = $contentAreaControl->getAllContentAreas();
+
+      // Loop through content areas and add articles associated with that area to
+      // that areas article array using the array_push function.
+      foreach ($arrayOfContentAreas as $ca) {
+
+        $tempArray = array();
+
+        foreach ($arrayOfArticles as $a) {
+
+          if ($a->getContentarea() == $ca->getId()) {
+
+            array_push($tempArray, $a);
+
+          } // if END
+        } // foreach (a) END
+
+        $ca->setArticles($tempArray);
+
+      } // foreach (ca) END
+
+      // Set the content area array to the current page;
+      $currentPage->setContentAreas($arrayOfContentAreas);
+
+      return $currentPage;
+
+    } // constructDisplayPage END
 
     //forms a Article from the input array and returns it
     private function constructPage($row)
@@ -100,7 +144,6 @@ class PageModel
             $this->m_DataAccess->fetchPageLastModifiedBy($row),
             $this->m_DataAccess->fetchPageLastModifiedDate($row));
         return $currentPage;
-
 
     }
 }
