@@ -86,6 +86,40 @@ class ArticleController
     }
 
 
+      //loads the remove articel foorm
+      public function removeAction($ID)
+      {
+          $arrayOfArticles[] = $this->model->getArticle($ID);
+        include '../view/admin/articleviews/deleteArticleView.php';
+      }
+
+
+    // processes the delte article form
+    public function removeActionConfirm($ID)
+    {
+        $article = $this->model->getArticle($ID);
+        $result = $this->model->removeArticle($article);
+        if($result!=0 ){
+            // success
+            $lastOperationResults =" Article has been deleted ". $result ." rows affected";
+            $this->displayAction();
+
+        }else{
+            // failed to delete
+            $lastOperationResults = "We were Unable to remove that article at this time";
+            $result= $this->model->getArticle($ID);
+            if($result>0){
+                ?>There seems to be a problem removing the article, please check dependencies<?php
+            }else{
+                ?>That Article no longer lives in the CMS databse<?php
+
+
+            $this->displayAction();
+            }
+
+
+        }
+    }
 
 
 

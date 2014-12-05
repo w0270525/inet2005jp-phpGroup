@@ -302,10 +302,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
                 // process delete content area fornm
-            if(isset($_POST["formDeleteContentArea"]) && ($_POST["formDeleteContentArea"] ="'true"))
-                $control->contentController()->removeActionConfirm($_POST["id"]);
+         //   if(isset($_POST["formDelteeConfirm"]) && ($_POST["formDelteeConfirm"] ="'true"))
+           //     $control->contentController()->removeActionConfirm($_POST["id"]);
 
+            if(isset($_POST["formDelteeConfirm"])){
 
+                $control->articleController()->removeActionConfirm( $_POST["id"]);
+
+            }
 
 
         }
@@ -342,6 +346,16 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->contentController()->removeAction( $_GET["deleteContentArea"]);
 
         }
+
+        // loads article area delete form
+        if(isset($_GET["articleremove"])){
+            $control->articleController()->removeAction( $_GET["articleremove"]);
+
+        }
+
+
+
+
 
         ?>
         <!--CUSTOM EDITOR VIEWS -->
