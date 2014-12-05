@@ -42,10 +42,22 @@ class ArticleController
     public function updateActionConfirm($a_id, $a_name , $a_title,  $a_desc , $a_blurb,$a_content, $a_allPages,  $a_contentArea, $a_page )
     {   // verify artilce exissts
         if($currentArticle = $this->model->getArticle($a_id)):
-                $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,getUser()->getId(),null);
-                return $this->model->updateArticle($articleToUpdate);
-            else: return 0;
+            $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,getUser()->getId(),null);
+
+            // get update result and show display
+            if($result = $this->model->updateArticle($articleToUpdate)):
+
+                    // On Succes reload update form
+                    $lastOperationResults="Article has been updated ". $result ." effected";
+                    $arrayOfArticles[0]=$this->model->getArticle($_GET["articleupdate"]);
+                    include "../view/admin/articleviews/editArticleView.php";
+            else:
+                    // on fail display all articles
+                    $lastOperationResults="We were unable to update that article, please try again";
+                    $arrayOfArticles[0]=$this->model->getAllArticles();
+                    include "../view/admin/articleviews/displayArticlesView.php";
             endif;
+         endif;
     }
 
 
