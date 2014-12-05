@@ -35,6 +35,13 @@ class User {
     $this->u_modifiedby = $in_modifiedby;
     $this->u_modifieddate = $in_modifieddate;
       $this->u_key = $u_key;
+      if(  $this->u_r_id==null)
+      {
+          // insures a null role id is set to an empty array to avoid errors
+          $this->u_r_id =  array();
+          $this->u_r_id[]=0;
+
+      }
   } // Default Constructor END
 
 

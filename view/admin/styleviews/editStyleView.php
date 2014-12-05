@@ -18,8 +18,8 @@ if(!empty($lastOperationResults)):
 endif;
 foreach($arrayOfStyles as $style):
 ?>
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">  Edit Style <?php echo $style->getName(); ?></button>
-<div id="demo" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editstyleforbs" id="styleeditidbsbutton">  Edit Style <?php echo $style->getName(); ?></button>
+<div id="editstyleforbs" class="collapse in">
 
 
 
