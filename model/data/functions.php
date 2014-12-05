@@ -43,7 +43,7 @@ function CMS_checkEditor()
         return true;
     return false;
 }
-CMS
+
 
 // Boolean  = CMS_checkAdmin();
 //  returns the current user Admin status
