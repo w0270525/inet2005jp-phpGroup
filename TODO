@@ -1,0 +1,110 @@
+REQ 001     Administrator/Editor User Login
+YAY  Login to backend of website for users defined as ADMIN / EDITOR
+YAY  Logout button on every screen.
+
+REQ 002     Managing Users
+  Users can be added by ADMIN.
+  Password is hashed and a unique salt is generated.
+  Created/Modified fields populated correctly.
+  First name, last name, username, and password are all editable.
+  Client side validation ensures no blank fields and username of at least 8 chars.
+  Users can not be deleted, they can only be made inactive by removing their permissions.
+
+REQ-003     Managing User Privileges
+  User rights will be assigned in the back-end utility.
+  A user can be assigned multiple permissions (or none).
+  Only the ADMIN can manage.
+
+REQ-004     Managing Site Pages
+  Only the EDITOR can manage.
+  Addable and Editable.
+  Created/Modified fields populated correctly.
+  When deleted should remove all references to itself in the Article table.
+  No blank fields except for description which is optional and that alias contains no spaces.
+
+REQ-005     Managing Articles
+  Only the EDITOR can manage.
+  Addable and Editable.
+  Created/Modified fields populated correctly.
+  Article content uses TinyMCE.
+  Can't be deleted, they only have their associated page FK removed.
+  Supports an indicator that they belong on all pages.
+  No blank fields except for description which is optional.
+
+REQ-006     Managing Content Areas
+  Only the EDITOR can manage.
+  Addable and Editable.
+  Created/Modified fields populated correctly.
+  When deleted should remove all references to itself in the Article table.
+  No blank fields except for description which is optional and that alias contains no spaces.
+
+REQ-007     Managing CSS Templates
+  Only the EDITOR can manage.
+  Addable and Editable.
+  Created/Modified fields populated correctly.
+  Only one can be active at a time.
+  No blank fields except for description which is optional.
+
+REQ-008     Display of Generated Website
+YAY  Web page is dynamically generated from the DB.
+YAY  A nav featuring all site pages is generated.
+  If multiple articles for a particular content area, newer articles will show up first.
+
+REQ-009     Prompt for Author User Login
+  Author login appears on every generated page.
+  When logged in, given the option to logout on every page.
+
+REQ-0010    Editing Existing Articles
+  Only the AUTHOR can edit.
+  Every article appearing on the front end features a button allowing editing.
+  Author can only edit Title, Content (with TinyMCE), and Description.
+  Modified fields update correctly.
+  No blank fields except for description which is optional.
+
+REQ-0011    Moving Articles
+  Only the AUTHOR can edit.
+  Author can also change a_assocpage and a_contentarea.
+  Modified fields update correctly.
+
+REQ-0012    Removing Articles
+  Only the AUTHOR can edit.
+  Author can also choose to leave a_assocpage and a_contentarea blank.
+  Modified fields update correctly.
+
+REQ-0013    Adding New Articles
+  Only the AUTHOR can add.
+  Button on every page to allow adding of article.
+  Created/Modified fields populated correctly.
+  No blank fields except for description which is optional.
+
+REQ-0014    Adding an Innovative INTERACTIVE Feature in the Web Site
+  ASSIGNMENT 2  IGNORE FOR NOW
+
+REQ-0015    Limiting Access to Authorized Users
+  Only ADMIN/EDITOR can access backend.
+  Only AUTHOR has access to frontend adding/editing.
+  Password field is masked by asteriks.
+  At least 3000 rounds of SHA-512 hasing with a unique salt.
+  Each page features a logout button.
+
+REQ-0016    Sanitizing User Input
+YAY  Raw user input is not entered into the DB.
+
+REQ-0017    Employing Least Privilege
+  A seperate DB user for the backend and frontend.
+  Neither of which is ROOT.
+
+REQ-0018    Database Modification logging
+  Created/Modified fields updated correctly.
+
+REQ-0019    Separate Presentation, Business, and Data Functionality
+YAY  Built using MVC.
+
+REQ-0020    Entity Relationship Diagram for Custom CMS Database
+YAY  ERD for the database.
+
+REQ-0021    MySQL Workbench Data Model
+YAY  ERD implemented as MySQL Workbench Data Model.
+
+REQ-0022    Using Source Control
+YAY  Team uses the same GitHub repo.
