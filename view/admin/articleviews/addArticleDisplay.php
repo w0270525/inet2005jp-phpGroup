@@ -42,7 +42,7 @@ endif;
             </div>
 
         <label class="col-sm-2 control-label">Article Body (Content)</label>
-                <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name="a_content" class="form-control"></textarea>
+                <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name="a_content" class="form-control" id="html-content"></textarea>
                 </div>
          <label class="col-sm-2 control-label">Content Area</label>
                 <div class="col-sm-10"><input oninput="resetBut()" type="text" name="a_contentarea"  class="form-control" required/>
