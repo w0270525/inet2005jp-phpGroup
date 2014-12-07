@@ -336,7 +336,7 @@ INSERT INTO cms.CONTENT_AREAS (c_a_id, c_a_name, c_a_alias, c_a_desc, c_a_order,
 # a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby
 INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
  VALUES (1, 1, 'header1_test', 'Test1', '<h1>Test Header</h1>', 1, 1,NOW());
-INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_codfhasj  hdajk hd hasjkh  hfjh hjkfhjk hhjhf fh jafh jkh fjkhf jkhjkfh jk hdhjksdh jkhdh jdh dsh khsdfk hfjkhdsfjkhsdfjkntent, a_assocpage, a_createdby,a_creationdate)
+INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
  VALUES (2, 1, 'header2_test', 'Test2', '<h1>Test Headerr</h1>', 2, 1,NOW());
 INSERT INTO cms.ARTICLE (a_id, a_contentarea, a_name, a_title, a_content, a_assocpage, a_createdby,a_creationdate)
  VALUES (3, 2, 'article1_test', 'Test3', '<h1>Test Article</h1>', 1, 1,NOW());
