@@ -46,8 +46,10 @@ require_once('functions.php');
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Creator</th>
+            <th>Created By</th>
             <th>Creation Date</th>
+            <th>Modified By</th>
+            <th>Modified Date</th>
             <th>Admin</th>
             <th>Editor</th>
             <th>Author</th>
@@ -64,7 +66,9 @@ require_once('functions.php');
                 <td><?php echo $user->getFirstName(); ?></td>
                 <td><?php echo $user->getLastName(); ?></td>
                 <td><?php echo $user->getCreatedby(); ?></td>
-                <td><?php echo $user->getCreationDate() ; ?></td>
+                <td><?php echo $user->getCreationDate(); ?></td>
+                <td><?php echo $user->getModifiedBy(); ?></td>
+                <td><?php echo $user->getModifiedDate(); ?></td>
                 <td><?php tableGlyphs($user->isAdmin()) ?></td>
                 <td><?php tableGlyphs($user->isEditor()); ?></td>
                 <td><?php tableGlyphs($user->isAuthor()); ?></td>
