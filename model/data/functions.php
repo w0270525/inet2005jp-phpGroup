@@ -6,20 +6,35 @@ class connect{
     protected $dbConnection;
 
     // conects to the cms
-    public function connectToDB()
-    {
-        try
-        {
-            $this->dbConnection = new PDO("mysql:host=localhost;dbname=cms","root","inet2005");
-            $this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $ex)
-        {
-            die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
-        }
+	public function connectToDB()
+	{
+		if (CMS_checkAdmin() || CMS_checkEditor()) {
+			try {
+				$this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "backend", "inet2005");
+				$this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $ex) {
+				die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
+			}
+		}
+		else if (CMS_checkAuthor())
+		{
+			try {
+				$this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "frontend", "inet2005");
+				$this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $ex) {
+				die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
+			}
+		} else {
+			try {
+				$this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "frontend", "inet2005");
+				$this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $ex) {
+				die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
+			}
+		}
 
-    }
-    function getConnection()
+	}
+  function getConnection()
     {
         return $this->dbConnection;
     }
