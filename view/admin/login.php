@@ -23,6 +23,8 @@
 
 <h3>LOGIN into CMS</h3>
 <h4>If you have just been registered by an administrator your passwsord is "password"<h4>
+        username="superuser" pass="aaronali"
+
 
 
 <form    name="login" id="login" class="newPass" action="#" method="post" >
