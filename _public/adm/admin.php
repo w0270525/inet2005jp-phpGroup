@@ -533,7 +533,6 @@ endif;// if user.admin/edior
 
     //menu handling script to show and hide areas as the menu options are clicked
 
-
     $('.containerAdmin').hide();
     $('.btn-group li').click(function(){
         var target = "#" + $(this).data("target");

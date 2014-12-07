@@ -13,17 +13,14 @@ PUBLIC  function __construct($uniqueId,$article){
 
 
 
-
           function showEditContentForm()
           {
               $article= $this->article;
 
 ?>
-
               <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editArtform_<?php echo $this->id ?>">Edit Article <?php echo $this->article->getName(); ?></button>
               <div id="editArtform_<?php echo $this->id ?>" class="collapse in">
-                  <form name="formUpdateArticleConfirm<?php echo $this->id ?>"  id="formUpdateArticleConfirm" class="form" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
-                        action="#" method="post" value="addNewPageForm">
+                  <form name="formUpdateArticleConfirm<?php echo $this->id ?>"  id="formUpdateArticleConfirm" class="form"   action="#" method="post" value="addNewPageForm">
 
                       <label class="col-sm-2 control-label">Name</label><input type="hidden" name="a_id" value=<?php echo $article->getId()?> />
                       <div class="col-sm-10">
@@ -36,6 +33,8 @@ PUBLIC  function __construct($uniqueId,$article){
                       </div>
                       <label class="col-sm-2 control-label">Blurb</label> <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_blurb"  class="form-control" value ="<?php echo $article->getBlurb()?>" />
                       </div>
+
+
 
                       <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"><?php echo $article->getContent()?></textarea>
                       </div>
@@ -57,39 +56,40 @@ PUBLIC  function __construct($uniqueId,$article){
 
 
 
-
-
-
                        <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
-                      <div class="col-sm-10">  <label><span  class="btn btn-default form-control" onclick="verifyf<?php echo $this->id ?>()" id="formConfirm<?php echo $this->id ?>">Verify </span>
-                      <input type="submit" class="btn btn-default form-control" id="updateArticle<?php echo $this->id ?>" onclick="verifyf()<?php echo $this->id ?>;resetBut(); " value ="true" >  </label>
+                      <div class="col-sm-10">  <label><span  class="btn btn-default form-control" onclick="verifyff()" id="formConfirm<?php echo $this->id ?>()">Verify </span>
+                      <input type="submit" class="btn btn-default form-control" id="updateArticle<?php echo $this->id ?>" onclick="verifyff();resetBut(); " value ="true" >  </label>
                       </div>
-                  </form>
+
+
+<script>
+ /*  hide the divs */
+$('.collapse').collapse();
+
+
+function  verifyff()
+{
+if (document.forms['formUpdateArticleConfirm<?php echo $this->id ?>']['a_name'].value.length>5)
+if   (document.forms['formUpdateArticleConfirm<?php echo $this->id ?>']['a_alias'].value.length>5)
+if      ( document.forms['formUpdateArticleConfirm<?php echo $this->id ?>']['a_desc'].value.length>20)
+{
+
+$("#formConfirm<?php echo $this->id ?>()").hide();
+$("#updateArticle<?php echo $this->id ?>").show();
+}
+}
+
+$("#updateArticle<?php echo $this->id ?>" ).hide();
+
+function resetBut()
+{
+$('#formConfirm<?php echo $this->id ?>').show();
+$('#updateArticle<?php echo $this->id ?>').hide();
+}
+
+</script>
+              </form>
               </div>
-
-
-                <script>
-               $('#meditArtform_<?php echo $this->id ?>').collapse(hide);
-               //       $('.collapse').collapse()
-                function  verifyf<?php echo $this->id ?>()
-                {
-                if (document.forms['formUpdateArticleConfirm<?php echo $this->id ?>"']['a_name'].value.length>5)
-                if   (document.forms['formUpdateArticleConfirm<?php echo $this->id ?>"']['a_alias'].value.length>5)
-                if( document.forms['formUpdateArticleConfirm<?php echo $this->id ?>"']['a_desc'].value.length>20)
-                {
-                  $('#formConfirm').hide();
-                  $('#addPageSubmit').show();
-                }
-
-
-                $('#addPageSubmit<?php echo $this->id ?>').hide()
-
-                function resetBut()
-                {
-                  $('#formConfirm<?php echo $this->id ?>').show();
-                  $('#addPageSubmit<?php echo $this->id ?>').hide();
-                }
-                </script>
 
                 <?php
 }// end show ffomr
