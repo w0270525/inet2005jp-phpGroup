@@ -1,17 +1,16 @@
 <br/><br/><br/><br/><br/><br/><br/>
-<h3>YOU MUST SET YOUR PASSWORD BEFOR CONTINUEING</h3>
+<h3>YOU MUST SET YOUR PASSWORD BEFORE CONTINUING</h3>
 
 
-<form    name="newPass" id="newPass" class="newPass" action="#" method="post" >
-     <input type="hidden" name="dfd34234324" id="dfd34234324" value = <?php echo $bnasd3432er?>/>
+<form name="newPass" id="newPass" class="newPass" action="#" method="post" >
+    <input type="hidden" name="dfd34234324" id="dfd34234324" value = <?php echo $bnasd3432er?>/>
     <input type="hidden" name="userName" id="userName" value = <?php echo  $user->getId()?>  >
    <span id="formBody" onclick="formChange()">
-       <input type="text" name="sdeesef" id="sdeesef" value =""/>
-
+     <input type="text" name="sdeesef" id="sdeesef" value =""/>
     <input type="password" name="pass" id="pass" onkeyup="encode(this.id)" required />
     <input type="password" name="passVerify" id="passVerify"  required / ></span>
     <div type="button" class="btn btn-default" id="verifyBut" onclick="verifyPassword();clear()"  >Done</div>
-    <input class=""  onsubmit="clear()" type="submit" id="SetPassword" name="submit"  value="Confirm" required / >
+    <input class="" onsubmit="clear()" type="submit" id="SetPassword" name="submit"  value="Confirm" required / >
 </form>
 
 <script>
