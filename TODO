@@ -83,7 +83,7 @@ REQ-0014    Adding an Innovative INTERACTIVE Feature in the Web Site
 REQ-0015    Limiting Access to Authorized Users
   Only ADMIN/EDITOR can access backend.
   Only AUTHOR has access to frontend adding/editing.
-  Password field is masked by asteriks.
+YAY  Password field is masked by asteriks.
   At least 3000 rounds of SHA-512 hasing with a unique salt.
   Each page features a logout button.
 
