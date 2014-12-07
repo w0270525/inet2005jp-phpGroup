@@ -3,8 +3,8 @@
 // include this file to handle session varibles and handle persistant controler.
 // access the controler and sesion vaibles after this file is includefl
 if(session_status()==PHP_SESSION_NONE) {
-session_save_path("../sessions");
-session_start();
+    session_save_path("../sessions");
+    session_start();
 }
 require("../controller/MainController.php");
 
