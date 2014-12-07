@@ -1,7 +1,7 @@
 Sunday
 -modified function to include frontend and backend user. UPDATE YOUR USERS IN MYSQL. This should satisfy the least user priviledge.
-user frontend has insert and select
-user backend has insert select delete
+user frontend has insert  update and select
+user backend has insert update select and delete
 that may not be the whole list of things needed. checking slides.
 
  Thurday
