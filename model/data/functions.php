@@ -1,6 +1,16 @@
 <?php
 //this file contains basic functions  and classes that can be shared between different PDO's
 
+
+
+// Boolean CMS_hideAuthor();
+// return whether or not author has selected to hide main page display buttons
+function CMS_hideAuthor(){
+    if(isset($_COOKIE["hideAuthor"]) && $_COOKIE["hideAuthor"]==true) return true;
+    return false;
+
+}
+
 // DATA BASE CONNECTION OBJECT
 class connect{
     protected $dbConnection;

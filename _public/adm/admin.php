@@ -15,12 +15,21 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
     include_once("../model/class/User.php");
     include_once("miniViews/functions.php");
 
+    // using for  page clean up
+
+    if(isset($_POST["HideAuthor"]) && $_POST["HideAuthor"]=="Hide Author Buttons") $_COOKIE["hideAuthor"] = true;
+        else $_COOKIE["hideAuthor"] = false;
+
+
+
+
+
     //grab instance of current user
     $control->currentUser = unserialize($_SESSION["user"]);
     ?>
 
     <!--BOOT STRAP ENABLED NAV BAR -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" class="cmsCmsAdminBar" id="cmsCmsAdminBar" >
+    <nav class="navbar navbar-default navbar-fixed-top cmsCmsAdminBar" role="navigation"  id="cmsCmsAdminBar" >
         <div class="container-fluid">
             <ul class="nav navbar-nav">
 
@@ -165,6 +174,24 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
                         </ul>
                     </div><!-- /btn-group -->
+
+
+
+
+                    <!-- hide the suthor menus if user is more then author  -->
+
+                    <?php if(CMS_checkAuthor()):?>
+                    <form action=""    method="post" name="" id="HideAuthorNav" style="display:inline;" >
+                        <input type="submit" name="HideAuthor" id="HideAuthor" class="btn btn-success pull-right"   value="Hide Author Buttons" style="display:inline;right:0;" />
+                    </form>
+                    <?php endif;?>
+
+
+
+
+
+
+
                     <script>
                         function closeEditor()
                         {

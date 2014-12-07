@@ -11,8 +11,9 @@
     </style>
   </head>
  <?php
+
   $arrayOfStyles = array();
-  if(CMS_checkAuthor()) include "frontPageEditStyle.php";
+  if(CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageEditStyle.php";
  ?>
     <ul>
     <?php
