@@ -9,7 +9,7 @@
         border: 1px solid red;
     }
 </style>
-<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#contentArticleTable">View Content Areas </button>
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#contentArticleTable">View Content Areas</button>
 <div id="contentArticleTable" class="collapse in">
 <?php
   if(!empty($lastOperationResults)):
@@ -18,10 +18,8 @@
 <?php
   endif;
 
-// grab the session user
-$user = unserialize($_SESSION["user"]);
-
-
+  // grab the session user
+  $user = unserialize($_SESSION["user"]);
 ?>
 
 <h1>Content Areas</h1>
@@ -33,8 +31,7 @@ $user = unserialize($_SESSION["user"]);
       <th>Description</th>
       <th>Order</th>
         <?php
-
-        if($user->isAdmin()):
+          if($user->isAdmin()):
         ?>
 
 
@@ -44,8 +41,7 @@ $user = unserialize($_SESSION["user"]);
           <th>Modified Date</th>
 
         <?php
-        endif;
-
+          endif;
         ?>
 
         <th>Edit</th>
@@ -77,13 +73,12 @@ $user = unserialize($_SESSION["user"]);
 
 
         <!-- update link sent via get -->
-       <td><a href="?updateContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-pencil" > </span></a></td>
-        <td><a href="?deleteContentArea=<?php echo $content->getId() ; ?>"><span class="glyphicon glyphicon-remove" ></span></a></td>
+       <td><a href="?updateContentArea=<?php echo $content->getId(); ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+        <td><a href="?deleteContentArea=<?php echo $content->getId(); ?>"><span class="glyphicon glyphicon-remove" ></span></a></td>
 
 
     </tr>
-    <?php
-
+  <?php
     endforeach;
   ?>
   </tbody>
