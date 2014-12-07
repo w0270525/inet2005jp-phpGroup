@@ -17,8 +17,6 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
     //grab instance of current user
     $control->currentUser = unserialize($_SESSION["user"]);
-
-
     ?>
 
     <!--BOOT STRAP ENABLED NAV BAR -->
@@ -105,9 +103,15 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="" id="" ><a href="#">View Users</a></li>
-                            <li data-target="" id=""><a href="#" >Add User</a></li>
-                            <li data-target="" id="" ><a href="#" >Remove User</a></li>
+                            <li data-target="viewArticles"  id="viewArticlAuthorBut" ><a href="#">View Articles</a></li>
+                            <li data-target="viewContents"  id="viewContentAuthorBut" ><a href="#">View Content Areas</a></li>
+                            <li data-target="viewPages"  id="viewPageAuthorBut" ><a href="#">View Pages</a></li>
+                            <li data-target="viewStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
+                       <!--     <li data-target="addNewPages"   id="addNewPagAuthorBut"><a href="#"  >Add New Page</a></li>
+                            <li data-target="addContentViews"   id="addNewPagAuthorBut"><a href="#"  >Add Content Area</a></li>
+                            <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
+                            <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
+                            <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>   -->
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
@@ -387,10 +391,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <!--CUSTOM EDITOR VIEWS -->
         <!--CUSTOM EDITOR VIEWS -->
 
-        <!--  view all pages -->
-        <div id="viewPages"  class="containerAdmin"><?php
-            $control->pageController()->displayAction();
-            ?></div>
+
 
         <!--  ad new pages  form -->
         <div id="addNewPages"  class="containerAdmin"><?php
@@ -417,20 +418,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         $control->styleController()->addAction();
         ?></div>
 
-        <!--  view  All ContentsAreas  -->
-        <div id="viewContents"  class="containerAdmin"><?php
-            $control->contentController()->displayAction();
-            ?></div>
 
-        <!--  view all Stylers -->
-        <div id="viewStyles"   class="containerAdmin"><?php
-            $control->styleController()->displayAction();
-            ?></div>
-
-        <!--  view all Articles -->
-        <div id="viewArticles"  class="containerAdmin"><?php
-            $control->articleController()->displayAction();
-            ?></div>
 
 
     <?php
@@ -464,6 +452,21 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <div id="viewArticles"  class="containerAdmin"><?php
             $control->articleController()->displayAction();
             ?></div>
+        <!--  view  All ContentsAreas  -->
+        <div id="viewContents"  class="containerAdmin"><?php
+            $control->contentController()->displayAction();
+            ?></div>
+
+        <!--  view all Stylers -->
+        <div id="viewStyles"   class="containerAdmin"><?php
+            $control->styleController()->displayAction();
+            ?></div>
+
+        <!--  view all Articles -->
+        <div id="viewArticles"  class="containerAdmin"><?php
+            $control->articleController()->displayAction();
+            ?>
+       </div>
 
 
 
@@ -472,7 +475,23 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
     <?php
 
     }// END OF AUTHOR CUSTOM VIEWS
+
+     ////////////////////////////////
+     // VIEWS FOR EVRYNEWONE
+    ////////////////////////////////////
     ?>
+
+    <!--  view all pages -->
+        <div id="viewPages"  class="containerAdmin"><?php
+            $control->pageController()->displayAction();?>
+        </div>
+
+
+
+
+
+
+
 
 
 <?php
