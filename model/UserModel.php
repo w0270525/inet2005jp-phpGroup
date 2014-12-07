@@ -90,8 +90,11 @@ class UserModel
     }
 function updateUserSecurity($user)
 {
-    return $this ->m_DataAccess->updateSecurity($user);
+    $this->m_DataAccess->connectToDB();
+    $user->updateSecurity();
+    $this->m_DataAccess->closeDB();
 
+    return $this ->m_DataAccess->updateSecurity($user);
 
 
 }
@@ -158,12 +161,10 @@ function updateUserSecurity($user)
 
         public function getUserById($userId)
     {
+
         $this->m_DataAccess->connectToDB();
-
         $this->m_DataAccess->selectUserById($userId);
-
         $record =  $this->m_DataAccess->fetchUsers();
-
         $fetchedUser = $this->constructUser($record);
 
         $this->m_DataAccess->selectUserRoles($fetchedUser->getId());
@@ -172,6 +173,41 @@ function updateUserSecurity($user)
         return $fetchedUser;
 
     }
+
+
+    // boolean confirmUser($ussr, $pass)
+    // returns true of the user is equal to the user from the databse, based on username , password and salt
+    public function confirmUser($user)
+    {
+
+        // Query
+        $this->m_DataAccess->connectToDB();
+        $this->m_DataAccess->selectUserByName($user->getUsername());
+
+        $fetchedUser =  $this->m_DataAccess->fetchUsers();
+        $this->m_DataAccess->closeDB();
+        $currentUser = $this->constructUser($fetchedUser);
+
+        // password reset
+        if($currentUser->getPass()==="password" && $user->getPass()==="password")
+            return true;
+
+        // passwords test
+        return $currentUser->comparePass($user->getPass());
+    }
+
+
+    public function updateSecurity($user)
+    {
+        $this->m_DataAccess->connectToDB();
+        $user->updateSecurity();
+        $this->m_DataAccess->updateSecurity($user);
+        $this->m_DataAccess->closeDB();
+
+
+
+    }
+
 
 
 }

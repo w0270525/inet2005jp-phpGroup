@@ -56,62 +56,50 @@ class MainController
 
 
 
-
-function updateSecurity()
+// resets the user pasword
+function resetPassword($id, $pass)
 {
-   // $this->currentUser->updateSecurity();
-    $this->userController->model->updateUserSecurity( $this->currentUser);
-    $this->userController()->model->updateUser( $this->currentUser);
+    $attemptedUser = new User($id, null, null, null, $pass, null, null, null, null, null,null,null);
+    $this->userController->updateUserSecurity($attemptedUser);
+
 }
 
-    // handle user login
-    function confirmUser($user, $pass)
+ // void = confirmUser(String username);
+ // handle user login
+ function confirmUser($userName, $pass)
     {
-        $pswReset=false;
-        $user=$this->userController->model->getUserByUserName($user);
-        $yy=$user->getPass();
-        $x=$user->getSalt();
-        if( $user->getPass()=="password" && $pass == "password")
+        $attemptedUser = new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null);
+        if($this->userController()->confirmUser($attemptedUser)==true)
         {
-            $pswReset=true;
+                $_SESSION["logged"]=serialize(true);
+                $attemptedUser=$this->userController()->model->getUserByUserName($attemptedUser->getUsername());
+                $_SESSION["grants"]= $attemptedUser->getRoleId();
+                 $_SESSION["user"]=serialize($attemptedUser);
+                  $this->currentUser=$attemptedUser;
 
-        }else {
-            //$pass=$user->encrypt($pass);
+                if($attemptedUser->getPass()==="password")
+                {
+                    $_SESSION["grants"]=Array(0);
+                    $_SESSION["user"]=serialize($attemptedUser);
+                    $user=$attemptedUser;
+                    include "../view/admin/userviews/resetpassword.php" ;
+                    $_SESSION["logged"]=false;
+                }else return;
         }
-
-
-        if( $pswReset||$user->getPass()== $pass)
-        {
-            if( ($user->getKey()!="inactive"))
-              {
-                  $_SESSION["logged"]=serialize(true);
-                   $this->currentUser = $user;
-
-                   $_SESSION["grants"]= $this->currentUser->getRoleId();
-                    if($pass=="password")
-                    {
-                       // $bnasd3432er   = md5(uniqid(rand(), true));
-                        $bnasd3432er   = "";
-                        include("../view/admin/userviews/resetpassword.php");
-                    }
-
-            }else if(!$pswReset)
-            {
-                $this->currentUser->setPass($pass);
-                $this->updateSecurity();
-
-            }
-        }
-
         else
         {
-            $_SESSION["user"]=null;
-            $_SESSION["logged"]=false;
-            $this->currentUser = null;
+        $_SESSION["user"]=null;
+        $_SESSION["logged"]=false;
+        $this->currentUser = new User(null, null, null, null, null, null, null, null, null, null,null,null);
+
+
+//          $_SESSION["user"]=  serialize(new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) );
+//            $currentUser=new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) ;
+             $_SESSION["user"]= serialize($this->currentUser);
         }
-    //    $_SESSION["control"]=serialize($this);
-        $_SESSION["user"]=  serialize($this->currentUser );
-        return $_SESSION["logged"];
+
+        $_SESSION["user"]= serialize($this->currentUser );
+        return false;
     }
 
 
@@ -140,3 +128,5 @@ function updateSecurity()
 
 
 }
+
+

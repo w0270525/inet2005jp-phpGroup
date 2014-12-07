@@ -27,10 +27,6 @@ class UserController
     }
 
 
-    public function getUserRoles()
-    {
-
-    }
 
 
 
@@ -83,7 +79,39 @@ class UserController
 
 
 
+
     }
+
+
+    // boolean confirmUser(User user)
+    // returns true of false if the user is equal to the user in the databse
+    public function confirmUser($user)
+    {
+        if(!$this->model->confirmUser($user) ) return true;
+        return false;
+    }
+
+
+
+    //Updaes user password and salt;
+    public function updateUserSecurity($user)
+    {
+        $this->model->updateUserSecurity($user);
+
+
+    }
+
+
+    public function resetPass($user,$pass)
+    {
+
+
+
+    }
+
+
+
+
 
 
 

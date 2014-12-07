@@ -59,14 +59,12 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     public function selectStyleByIntId($styleId)
     {
         // prepare statement
-        $selectStatement = "SELECT * FROM STYLE ";
-        $selectStatement .= " LEFT JOIN PAGES ON s_id = PAGES.p_style";
-        $selectStatement .= " WHERE s_id = :id;";
-
+        $selectStatement = "SELECT * FROM STYLE  WHERE s_id = :id;";
+        $Id =intval($styleId);
         try
         {   // execute statement
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':id', $styleId, PDO::PARAM_INT);
+            $this->stmt->bindParam(':id', $Id, PDO::PARAM_INT);
             $this->stmt->execute();
             return $this->stmt->rowCount();
         }
@@ -193,7 +191,7 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     //Updates the style object and returns row count
     public function updateStyle($style)
     {
-        $updateStatement = "UPDATE STYLE  SET s_name= :name ,s_desc= :desc, s_style = :style, s_lastmodifiedby = :modifiedby ";
+        $updateStatement = "UPDATE STYLE  SET s_name= :name ,s_desc= :desc, s_style = :style, s_lastmodifiedby = :modifiedby , s_active=:s_active";
        $updateStatement .= " WHERE s_id = :styleId;";
 
         try{
@@ -201,8 +199,9 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
             $this->stmt->bindParam(':name', $style->getName(), PDO::PARAM_STR);
             $this->stmt->bindParam(':desc', $style->getDesc(), PDO::PARAM_STR);
             $this->stmt->bindParam(':style', $style->getStyle(), PDO::PARAM_STR);
-            $this->stmt->bindParam(':modifiedby', $style->getModifiedBy(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':modifiedby', CMS_getUser()->getId(), PDO::PARAM_INT);
             $this->stmt->bindParam(':styleId', $style->getId(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':s_active', $style->getActive(), PDO::PARAM_INT);
             $this->stmt->execute();
 
             return $this->stmt->rowCount();
@@ -235,6 +234,47 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
             die('udeletem Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+    // Integer = deactivateStyle()
+    // sets the active style to inactive
+    public function deactivateStyles()
+    {
+        $updateStatement = "UPDATE STYLE  SET s_active = 0 , s_lastmodifiedby = ".CMS_getUser()->getId()."  , s_modifieddate = NOW() WHERE s_active = 1;  ";
+        try{
+            $this->stmt = $this->dbConnection->prepare($updateStatement);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('deactivateStyles Style failed in PDOMySQLStyleDataModel : '. $updateStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+
+    }
+
+    // Integer = activateStyle(Integer styleId);
+    // activate a style from the databse
+    public function activateStyles($id)
+    {
+        $updateStatement = "UPDATE STYLE  SET s_active = 1  , s_lastmodifiedby = :userId ,s_modifieddate = NOW()  WHERE s_id = :id ; ";
+        try{
+            $id=intval($id);
+            $this->stmt = $this->dbConnection->prepare($updateStatement);
+            $this->stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $this->stmt->bindParam(':userId', CMS_getUser()->getId(), PDO::PARAM_INT);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('activateStyles Style failed in PDOMySQLStyleDataModel : '. $updateStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+
+    }
+
 
 
 
@@ -297,6 +337,9 @@ class PDOMySQLStyleDataModel implements iStyleDataModel
     public function fetchStyleActive($row){
         return $row['s_active'];
     }
+
+
+
 }
 
 ?>

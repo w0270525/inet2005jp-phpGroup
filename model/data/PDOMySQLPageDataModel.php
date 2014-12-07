@@ -156,6 +156,10 @@ public function selectPagesByName($name)
         }
     }
 
+
+
+
+
     // returns the Page  result query of the Content Managemtn System
     public function fetchPage()
     {

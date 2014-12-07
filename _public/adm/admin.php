@@ -7,6 +7,8 @@
 </style>
 
 <?php
+if(CMS_checkAdmin()||CMS_checkEditor()||CMS_checkAuthor()):
+
 // confirm loggin
 if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 {
@@ -15,6 +17,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
     //grab instance of current user
     $control->currentUser = unserialize($_SESSION["user"]);
+
+
     ?>
 
     <!--BOOT STRAP ENABLED NAV BAR -->
@@ -283,8 +287,13 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             }
 
             // process new articel area form
-            if(isset($_POST["formSubmitNewArticleConfirm"])&&  $_POST["formSubmitNewArticleConfirm"]=="true"){
-                $control->articleController()->confirmAddAction( $control->currentUser);
+            if(isset ($_POST["a_name"]) &&  isset($_POST["a_title"]) && isset($_POST["a_desc"])   &&isset($_POST["formSubmitNewArticleConfirm"]) &&
+                $_POST["formSubmitNewArticleConfirm"] ==true ){
+                $_POST=CMS_postFormHelperFunction($_POST);
+
+
+                $control->articleController()->confirmAddAction($_POST['a_contentarea'], $_POST['a_name'], $_POST['a_title'] , $_POST['a_desc'] ,
+                    $_POST['a_blurb'], $_POST['a_content'], $_POST['a_contentarea'], $_POST['all_page'], $_POST["a_inactive"]);
 
             }
 
@@ -304,10 +313,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             if(isset($_POST["formEditArticleConfirm"])&&  $_POST["formEditArticleConfirm"]=="true")
             {
-                if(!isset($_POST["all_page"]))
-                    $_POST["all_page"] = 0;
-                else if($_POST["all_page"]=0)$_POST["all_page"]=1;
-                $control->articleController()->updateActionConfirm($_POST['a_id'], $_POST['a_name'] , $_POST['a_title'], $_POST['a_desc'],$_POST['a_blurb'],$_POST['a_content'],$_POST['all_page'],$_POST['a_contentarea'],$_POST['a_page']);
+               $_POST=  $_POST=CMS_postFormHelperFunction($_POST);
+                $control->articleController()->updateActionConfirm($_POST['a_id'], $_POST['a_name'] , $_POST['a_title'], $_POST['a_desc'],$_POST['a_blurb'],$_POST['a_content'],$_POST['all_page'],$_POST['a_contentarea'],$_POST['a_page'],$_POST["a_inactive"]);
             }
 
 
@@ -327,7 +334,14 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // GETS THE UPDATE ACTIONS
         if($_SERVER["REQUEST_METHOD"]=="GET"){
 
-            // load article form
+            // activate  style
+            if(isset($_GET["activateStyle"])){
+                if ($control->styleController()->getStyle($_GET["activateStyle"])->getId()!=null)
+                $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
+            }
+
+
+                // load article form
             if(isset($_GET["articleupdate"])){
                 $control->articleController()->updateAction( $control->currentUser);
 
@@ -464,6 +478,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 <?php
 
 } //  NOTHING ABOVE THIS BRACE WILL BE ACTIVE OR VISIBLE IF USER IS NOT LOGGED IN
+endif;// if user.admin/edior
 ?>
 
 

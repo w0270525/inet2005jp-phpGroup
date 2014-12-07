@@ -79,6 +79,32 @@ function CMS_postGetReset()
     $_POST=null;$_GET=null;
 }
 
+
+
+// String = CMS_getMainStyle();
+// returns the value of  styleController()->getActiveStyle()->getStyle();
+function CMS_getMainStyle()
+{
+    $control = unserialize($_SESSION["control"]);
+    $mainStyle = $control->styleController()->getActiveStyle()->getStyle();
+    if($mainStyle!=null) return $mainStyle;
+    return "";
+
+}
+
+
+// Boolean endsWith(String checkString, String compareString);
+// returns true if the compare checkString ends with the compareString
+function CMS_STR_endsWith($checkString, $compareString)
+{
+    $length = strlen($compareString);
+    if ($length == 0) {
+        return true;
+    }
+
+    return (substr($checkString, -$length) === $compareString);
+}
+
 // $var = CMS_ID(AnyType any)
 // returns the value of ->getId or returns NULL
 // if (CMS_ID{$x)) currentId = $x CMS_ID($x);
@@ -91,3 +117,14 @@ function CMS_postGetReset()
 //        return NULL;
 //    }
 //}
+
+// $_POST = CMS_postFormHelperFunction($_POST)
+// process the $_Post gloabls a_inactive add all_pageto int
+function CMS_postFormHelperFunction($post)
+{
+    if(!isset($post["all_page"]))$post["all_page"] = 0;
+    else if($post["all_page"]=="on" ) $post["all_page"] = 1;
+    if(!isset($post["a_inactive"]))$post["a_inactive"] = 0;
+    else if($post["a_inactive"]=="on" ) $post["a_inactive"] = 1;
+    return $post;
+}

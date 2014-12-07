@@ -12,11 +12,17 @@ class StyleController
 
     }
 
+    // retus a style by id
+    public function getStyle($Id)
+    {
+        return $this->model->getStyle($Id);
+    }
+
+
     // displays  all the current styles
     public function displayAction()
     {
         $arrayOfStyles = $this->model->getAllStyles();
-
         include '../view/admin/styleviews/displayStylesView.php';
     }
 
@@ -32,6 +38,41 @@ class StyleController
             include '../view/admin/styleviews/editStyleView.php';
         endif;
     } // end update action
+
+
+
+    // void actionActivate(Integer styleId);
+    // activates a style from the database
+    public function activateAction($style)
+    {
+        $lastOperationResults="";$true=true;
+
+        // remove current active style
+       if( $result = $this->model->deactivate()):
+           $lastOperationResults="<p class ='message'>current style has been removed<p><br/>";
+       endif;
+        $style->setActive(1);
+        $result = $this->model->updateStyle($style);
+       // set new active style
+       if($result>0 ):
+           // success
+           $lastOperationResults.="<p class='message'>A new style have been activatedf<p><br/>";
+           //fail
+               $arrayOfStyles[]=$this->model->getStyle($style->getId());
+               // show the style edit for the sytle being added
+               include '../view/admin/styleviews/editStyleView.php';
+                return;
+
+       endif;
+       if($lastOperationResults=="")
+            $lastOperationResults="<p class ='message'> We were unable to update the style as requested</p>";
+        $arrayOfStyles = $this->model->getAllStyles();
+        include '../view/admin/styleviews/displayStylesView.php';
+
+
+
+    }
+
 
 
     // void addAction();

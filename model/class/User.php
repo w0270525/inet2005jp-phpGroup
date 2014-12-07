@@ -249,8 +249,13 @@ class User {
     }
 
 
+
+    // void  updateSecurity()
+    // create a uniqyes salt, takes the users password and creats a salted password
     public function updateSecurity(){
-      $this->u_salt =  md5(uniqid(rand(), true));
+
+        // create a uniquy salt
+        $this->u_salt =  md5(uniqid(rand(), true));
         $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
         $passwordHashRaw = crypt ( $this->u_pass,$cryptPefix );
         $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
@@ -262,13 +267,18 @@ class User {
     }
 
 
-    public function encrypt($input)
+
+
+    // Boolean = comparePass(String password)
+    // compares the password to the encrypted ssalted version
+    // returns tru if pass words are a match
+    public function comparePass($input)
     {
         $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
         $passwordHashRaw = crypt ( $input,$cryptPefix );
         $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
         $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
-        return $passwordHash;
+        return $passwordHash === $this->getPass();
     }
 
 

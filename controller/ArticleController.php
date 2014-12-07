@@ -36,20 +36,20 @@ class ArticleController
     }
 
 
-    // updateAction(Int id, String name , String title,  String desc , String blurb, String content, String allPages, String title, String contentArea, String page )
+    // updateAction(Int id, String name , String title,  String desc , String blurb, String content, Integer allPages, String title, Integer contentArea, Integer page , Integer acitive )
     // updates an articel in the database;
 
-    public function updateActionConfirm($a_id, $a_name , $a_title,  $a_desc , $a_blurb,$a_content, $a_allPages,  $a_contentArea, $a_page )
+    public function updateActionConfirm($a_id, $a_name , $a_title,  $a_desc , $a_blurb,$a_content, $a_allPages,  $a_contentArea, $a_page, $a_active )
     {   // verify artilce exissts
         if($currentArticle = $this->model->getArticle($a_id)):
-            $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,CMS_getUser()->getId(),null);
+            $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,CMS_getUser()->getId(),null,$a_active);
 
             // get update result and show display
             if($result = $this->model->updateArticle($articleToUpdate)):
 
                     // On Succes reload update form
                     $lastOperationResults="Article has been updated ". $result ." effected";
-                    $arrayOfArticles[0]=$this->model->getArticle($_GET["articleupdate"]);
+                    $arrayOfArticles[0]=$this->model->getArticle($a_id);
                     include "../view/admin/articleviews/editArticleView.php";
             else:
                     // on fail display all articles
@@ -64,53 +64,42 @@ class ArticleController
 
 
 
-    public function confirmAddAction($user)
-    {
+    public function confirmAddAction($contentArea, $name, $title, $desc, $blurb, $content,$page,$allPages,$inactive)
+{
+        $articleToAdd=new Article(null,$contentArea, $name, $title, $desc, $blurb, $content,$page,$allPages,CMS_getUser()->getId(),null,CMS_getUser()->getId(),null,$inactive);
+
         $result=null;
-         // validate info befor adding a record
-        if(isset ($_POST["a_name"]) &&  isset($_POST["a_title"]) && isset($_POST["a_desc"])   &&isset($_POST["formSubmitNewArticleConfirm"]) &&
-            $_POST["formSubmitNewArticleConfirm"] ==true      &&  $user->isEditor())
-        {
-            // check if name or title  already in use
-            $allArticles = array();$true=true;
-            $allArticles = $this->model->getAllArticles();
 
-            // create error messages for user
-            foreach($allArticles as $article)
-            {
-                if($article->getName() ==$_POST["a_name"] )
-                    $result .= "Name already in user , Unable to add article";
-                if($article->getTitle() ==$_POST["a_title"] )
-                    $result .= "Name already in user , Unable to add article";
-                if($result!=null)  $true = false;
-            }
-        if ($true) {
+        // check if name or title  already in use
+        $allArticles = array();
+        $allArticles = $this->model->getAllArticles();
 
-            // complete update action
-            if(isset($_POST["all_pages"]) && $_POST["all_pages"]=="on")$_POST["all_pages"]=1;
-            else $_POST["all_pages"] = 0;
-            if($this->model->addArticle( $_POST['a_contentarea'] ,$_POST['a_name'] , $_POST['a_title'] , $_POST['a_desc'], $_POST['a_blurb'], $_POST['a_content'] ,$_POST['a_page'] ,$_POST['all_pages'] ,$user->getId() ))
+
+        $tempArticle= $this->model->getArticleByName($name);
+        if ($tempArticle->getId()==null) {
+
+           $result=$this->model->insertArticle($articleToAdd );
+           if($result>0)
             {//success
                 $lastOperationResults="You have successfully added a new article<br>";
                 $arrayOfArticles[0] = $this->model->getArticleByName($_POST['a_name'] );
             }
         }
-        }else
+        else
         // cancel update action  not enough info or user authorization error
         {
-    $lastOperationResults  =$result;
-
-            include '../view/admin/articleviews/addArticleDisplay.php';
+            $arrayOfArticles[0] = $this->model->getArticleByName($_POST['a_name'] );
+            include '../view/admin/articleviews/editArticleView.php';
         }
     }
 
 
-      //loads the remove articel foorm
-      public function removeAction($ID)
+    //loads the remove articel foorm
+    public function removeAction($ID)
       {
         $arrayOfArticles[] = $this->model->getArticle($ID);
         include '../view/admin/articleviews/deleteArticleView.php';
-      }
+    }
 
 
     // processes the delte article form

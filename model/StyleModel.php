@@ -124,11 +124,33 @@ class StyleModel
     }
 
 
-
-    function removeStyle($id)
+    //  Integer = removeStyle(Integer styleId);
+    //  returns the row count from the query attempting to remove an article from the database
+    public function removeStyle($id)
     {
         $currentStyle=  $this->getStyle($id);
         return $this->m_DataAccess->deleteStyle($currentStyle)  ;
     }
+
+    // Integer  = deactivate()
+    // returns a count if the style is set to inactive
+    public function deactivate()
+    {
+        $this->m_DataAccess->connectToDB();
+        $result = $this->m_DataAccess->deactivateStyles();
+        $this->m_DataAccess->closeDB();
+        return $result;
+    }
+
+    // Integer = setActiveStyle(Integer styleId)
+    // sets the current active style
+    public function setActiveStyle($id)
+    {
+
+        return $this->m_DataAccess->activateStyles($id);
+
+    }
+
+
 }
 ?>

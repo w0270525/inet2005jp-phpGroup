@@ -1,16 +1,19 @@
 <br/><br/><br/><br/><br/><br/><br/>
-<h3>YOU MUST SET YOUR PASSWORD BEFOR CONTINUEING</h3>
+<h3>YOU MUST SET YOUR PASSWORD BEFORE YOU CONINUE</h3>
+
+<p>Both password must match to continue</p>
+<form    class="form" name="newPass" id="newPass"  action="#" method="post" >
+
+    <input type="hidden" name="passwordReset" id="passwordReset" value = "true"/>
+
+    <input  type="hidden" name="userName" id="userId" value = <?php echo  $user->getId()?>  >
 
 
-<form    name="newPass" id="newPass" class="newPass" action="#" method="post" >
-     <input type="hidden" name="dfd34234324" id="dfd34234324" value = <?php echo $bnasd3432er?>/>
-    <input type="hidden" name="userName" id="userName" value = <?php echo  $user->getId()?>  >
-   <span id="formBody" onclick="formChange()">
-       <input type="text" name="sdeesef" id="sdeesef" value =""/>
-
-    <input type="password" name="pass" id="pass" onkeyup="encode(this.id)" required />
-    <input type="password" name="passVerify" id="passVerify"  required / ></span>
-    <div type="button" class="btn btn-default" id="verifyBut" onclick="verifyPassword();clear()"  >Done</div>
+    <label>Password</label>
+    <input class = "form-control" type="password" name="pass" id="pass"   required />
+    <label>verify Password</label>
+    <input class = "form-control" type="password" name="passVerify" id="passVerify"  required / >
+    <div  type="button" class="btn btn-default" id="verifyBut" onclick="verifyPassword();clear()"  >Done</div>
     <input class=""  onsubmit="clear()" type="submit" id="SetPassword" name="submit"  value="Confirm" required / >
 </form>
 
@@ -19,7 +22,7 @@
     function clear()
     {
        // encode( document.forms["newPass"]["pass"]);
-        document.forms["newPass"]["pass"].value="**********";
+        document.forms["newPass"]["password"].value="**********";
         document.forms["newPass"]["passVerify"].value="**********";
         $('#formBody').hide();
     }
@@ -55,13 +58,13 @@
 
         return false;
     }
-    function encode(control)
-    {
-        var ckey = $("#dfd34234324").val();
-        var y=document.getElementById(control).value;
-        var encrypted = CryptoJS.AES.encrypt(y, ckey);
-        document.getElementById("sdeesef").value=encrypted;
-    }
+//    function encode(control)
+//    {
+//        var ckey = $("#dfd34234324").val();
+//        var y=document.getElementById(control).value;
+//        var encrypted = CryptoJS.AES.encrypt(y, ckey);
+//        document.getElementById("sdeesef").value=encrypted;
+//    }
 
 //    function decode(control)
 //    {

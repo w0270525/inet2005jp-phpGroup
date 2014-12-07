@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+
 
 
     <link rel="stylesheet" href="css/styles.css">
@@ -35,7 +35,7 @@
         // gran functions for from various layers for usability
         include_once("adm/miniViews/functions.php");
         include_once("../model/data/functions.php");
-
+        $debug=true;
 
 
 
@@ -52,33 +52,56 @@
             if($control->confirmUser($_POST["authorName"],$_POST["password"]))
                 // only allow authors to login through main page, rediectb others to the admin login page
                 if(!($control->currentUser->isAuthor())){
-                    $_SESSION["user"]=null;$_SESSION["logged"]=false;
+                    $_SESSION["logged"]=null;;
                     $_SESSION["controler"]= new MainController();
                     header("Location: /admin");
                 }
         }
-            if(isset($_POST["password"]) && isset($_POST["dfd34234324"])){
-                $tempController->userController()->model->getUserRoleByUserIds($_POST["userName"])->getUsername();
-                $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
-                $control->confirmUser($name,"password" );
+        if(isset($_POST["password"]) && isset($_POST["dfd34234324"])){
 
-              //  for encryption
-              //  $control->currentUser->setPass($_POST["password"]);
-              //  $control->currentUser->setKey($_POST["dfd34234324"]);
-              //  $control->updateSecurity();
 
-                $_SESSION["user"]=null;$_SESSION["logged"]=false;
-                $_SESSION["controler"]= new MainController();
+                if(!$control->confirmUser($_POST["userName"],"password" )){
+                    // un verified login
+                    $_SESSION["user"]=null;$_SESSION["logged"]=false;
+                    //$_SESSION["controler"]= new MainController();
+                    $_SESSION["control"] = unserialize(new  MainController());
+                    $_SESSION["sessionid"] =  null;
+                    $_SESSION["logged"]=false;
 
+                if ($debug) echo 'alert("login test on index set   $debug=false");';
+
+                }else
+                {
+                    if ($debug) echo 'alert("login test on in e;se-> set $debug=false");';
+                    $currentUser=CMS_getUser();
+                    $control->confirmUser($_POST["userName"],$_POST["password"]);
+                }
+
+            if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
+            {
+                $control->login();
                 header("Location: /admin");
+            }
+
 
          }
+
+        if(isset($_POST["passwordReset"]) && isset($_POST["passVerify"])){
+            $control->resetPassword($_POST["userName"],$_POST["pass"]);
+            header("Location: /admin");
+            echo" tank you";
+
+
+
+        }
+
+
 
 
 
 
         // show the pagelogin only if not logged in already
-        if(!isset($_SESSION["logged"]) || !$_SESSION["logged"])
+        if(!isset($_SESSION["logged"]) || $_SESSION["logged"]!=true || $_SESSION["logged"]==null)
             include("../view/admin/pageLoginMenuView.php");
 
 
@@ -94,6 +117,7 @@
         }
 
         //show admin menu
+
         $control->displayAdmin($control);
 
 

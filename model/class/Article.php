@@ -17,13 +17,13 @@ class Article {
   private $a_createdby;     // Int
   private $a_creationdate;  // String
   private $a_modifiedby;    // Int
-  private $a_modifieddate;  // String
-
+  private $a_modifieddate;  // string
+  private $a_inactive;  //  int tiny
 
   // Default Constructor
   public function __construct($in_id, $in_contentarea, $in_name, $in_title, $in_desc,
                    $in_blurb, $in_content, $in_assocpage, $in_allpages, $in_createdby,
-                                  $in_creationdate, $in_modifiedby, $in_modifieddate) {
+                                  $in_creationdate, $in_modifiedby, $in_modifieddate,$a_inactive) {
 
     $this->a_id = $in_id;
     $this->a_contentarea = $in_contentarea;
@@ -38,6 +38,8 @@ class Article {
     $this->a_creationdate = $in_creationdate;
     $this->a_modifiedby = $in_modifiedby;
     $this->a_modifieddate = $in_modifieddate;
+
+    $this->a_inactive  = $a_inactive;
 
   } // Default Constructor END
 
@@ -142,9 +144,8 @@ class Article {
 
 
   // a_allpages GETTER/SETTER
-  public function setAllPages($a_allpages) {
-
-    $this->a_allpages = $a_allpages;
+  public function setAllPages($bool) {
+    $this->a_allpages = $bool;
 
   } // setAllPages END
   public function getAllPages() {
@@ -194,6 +195,29 @@ class Article {
     return $this->a_modifieddate;
 
   } // getAModifieddate END
+
+
+
+
+    // Boolean = getActive();
+    // returns the status of the article
+    function getActive()
+    {
+        return $this->a_inactive;
+    }
+
+
+
+    // void setActive(Boolean status);
+    // sets the status of the article to inactive
+    function setActive($bool)
+    {
+
+        $this->a_inactive=$bool;
+
+    }
+
+
 
 
 } // Article END

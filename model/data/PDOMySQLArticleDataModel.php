@@ -119,6 +119,30 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
         }
     }
 
+
+    //  Integer selectActiveArticlesByPageId (Integer pageId)
+    // returns the ACTIVE Articles associated  with a specific PAGES ID
+    public function selectActiveArticlesByPageId($pageID)
+    {
+        $selectStatement = "SELECT * FROM ARTICLE ";
+        $selectStatement .= "WHERE (a_assocpage = ? OR a_allpages = 1 )AND (a_inactive=1);";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(1, $pageID, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+        }
+        catch(PDOException $ex)
+        {
+            die('selectArticleByPageId failed  in PDOMySQLArticleDataModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
+
+
     // returns the Articles  result query of the Content Managemtn System
     public function fetchArticle()
     {
@@ -139,8 +163,9 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // return row count of succsussful insert ie 1
     public function insertArticle($article)
     {
-        $insertStatement = "INSERT INTO  ARTICLE  VALUES (DEFAULT, :a_contentArea, :a_name, :a_title, :a_desc, :a_blurb, :a_content,  :a_pages , :a_createdby, default, :a_createdby, default , :a_allPages );";
+        $insertStatement = "INSERT INTO  ARTICLE  VALUES (DEFAULT, :a_contentArea, :a_name, :a_title, :a_desc, :a_blurb, :a_content,  :a_pages , :a_createdby, default, :a_createdby, default , :a_allPages, :a_active );";
         try{
+
             $this->stmt = $this->dbConnection->prepare($insertStatement);
             $this->stmt->bindParam(':a_name', $article->getName(), PDO::PARAM_STR);
             $this->stmt->bindParam(':a_contentArea', $article->getContentarea(), PDO::PARAM_INT);
@@ -151,6 +176,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             $this->stmt->bindParam(':a_pages', $article->getAssocPage(), PDO::PARAM_INT);
             $this->stmt->bindParam(':a_createdby', $article->getCreatedBy(), PDO::PARAM_INT);
             $this->stmt->bindParam(':a_allPages', $article->getAllPages(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':a_active', $article->getActive(), PDO::PARAM_INT);
             $this->stmt->execute();
             return $this->stmt->rowCount();
         }
@@ -167,19 +193,20 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // removes a style from the database and returns the row count.
     // returns 9999 is style is active and will not delete
     public function deleteArticle($article)
-    {
-        $deleteStatement = "DELETE FROM ARTICLE WHERE a_id = :article ";
-        try{
-            $this->stmt = $this->dbConnection->prepare($deleteStatement);
-            $this->stmt->bindParam(':article', $article->getId(), PDO::PARAM_INT);
-            $this->stmt->execute();
+    {   if(!$article->getActive()):
+            $deleteStatement = "DELETE FROM ARTICLE WHERE a_id = :article ;";
+            try{
+                $this->stmt = $this->dbConnection->prepare($deleteStatement);
+                $this->stmt->bindParam(':article', $article->getId(), PDO::PARAM_INT);
+                $this->stmt->execute();
 
-            return $this->stmt->rowCount();
-        }
-        catch(PDOException $ex)
-        {
-            die('deleteArticle($article) Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
-        }
+                return $this->stmt->rowCount();
+            }
+            catch(PDOException $ex)
+            {
+                die('deleteArticle($article) Style failed in PDOMySQLStyleDataModel : '. $deleteStatement .'not select records from CMS  Database via PDO: ' . $ex->getMessage());
+            }
+        endif;
     }
 
 
@@ -191,7 +218,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     public function updateArticle($articleToUpdate)
     {
 
-        $updateStatement=" UPDATE ARTICLE SET a_blurb=:blurb, a_desc = :desc, a_allpages= :allPages , a_contentarea = :ca, a_name = :name, a_title =:title, a_content = :content, a_assocpage = :page, a_lastmodifiedby = :userId , a_modifieddate = NOW()  WHERE a_id = :articleId ;";
+        $updateStatement=" UPDATE ARTICLE SET a_blurb=:blurb, a_desc = :desc, a_allpages= :allPages , a_contentarea = :ca, a_name = :name, a_title =:title, a_content = :content, a_assocpage = :page, a_lastmodifiedby = :userId , a_modifieddate = NOW() ,a_inactive =:inactive  WHERE a_id = :articleId ;";
 
         try
         {
@@ -205,7 +232,8 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             $this->stmt->bindParam(':allPages', $articleToUpdate->getAllpages(), PDO::PARAM_INT);
             $this->stmt->bindParam(':articleId', $articleToUpdate->getId(), PDO::PARAM_INT);
             $this->stmt->bindParam(':desc', $articleToUpdate->getDesc(), PDO::PARAM_STR);
-            $this->stmt->bindParam(':blurb', $articleToUpdate->getBlurb(), PDO::PARAM_INT);
+            $this->stmt->bindParam(':blurb', $articleToUpdate->getBlurb(), PDO::PARAM_STR);
+            $this->stmt->bindParam(':inactive', $articleToUpdate->getActive(), PDO::PARAM_INT);
             $this->stmt->execute();
             return $this->stmt->rowCount();
         }
@@ -292,6 +320,13 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     {
         return $row['a_modifieddate'];
     }
+
+    public function fetchArticleInActive($row)
+    {
+        return $row["a_inactive"];
+    }
+
+
 }
 
 ?>

@@ -45,12 +45,24 @@ foreach($arrayOfArticles as $article):
         </div>
         <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage()?>"/>
         </div>
-        <label class="col-sm-2 control-label">All Page</label> <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name = "all_page"  class="form-control" value ="<?php echo $article->getAllPages()?>"/>
 
-        </div>
+
+        <label >All Page
+            <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="all_page"    value ="<?php echo $article->getAllPages()?>"/>
+            </div>
+        </label>
+        <label>Inactive
+            <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"  value ="<?php echo $article->getActive()?>"  />
+            </div>
+        </label>
+
+
+
+
+
 
         <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
-        <div class="col-sm-10">  <label><span  class="btn btn-default" onclick="verifyf()" id="formConfirm">Verify </span>
+        <div class="col-sm-10"><span  class="btn btn-default" onclick="verifyf()" id="formConfirm">Verify </span>
         <input type="submit" class="btn btn-default" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
         </div>
     </form>

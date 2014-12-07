@@ -114,23 +114,26 @@ public function updateArticle($articleToUpdate)
             $articleToUpdate->getAssocPage(),
             $articleToUpdate->getCreatedBy(),
             $articleToUpdate->getModifiedBy(),
-            $articleToUpdate->getModifieDate());
-
+            $articleToUpdate->getModifieDate(),
+            $articleToUpdate->getActive());
+        $this->m_DataAccess->closeDB();
         return "$recordsAffected record(s) updated succesfully!";
     }
 
-    // attempts to insert a recod into the databse and will return 1 if success
-    public function addArticle($conentArea,$a_name,$a_title, $a_desc, $a_blurb, $a_content, $a_page, $all_pages,$userId )
+    // attempts to update a recod into the databse and will return 1 if success
+    public function insertArticle($article)
     {
-       $arrya =array(1,2,3);
-       $currentArticle = new Article(null,$conentArea,$a_name,$a_title, $a_desc, $a_blurb, $a_content,$a_page,$all_pages,$userId ,null,$userId,null);
-      return $this->m_DataAccess->insertArticle($currentArticle);
+        $this->m_DataAccess->connectToDB();
+       $article->setModifiedBy(CMS_getUser()->getid());
+        return $this->m_DataAccess->insertArticle($article) ;
+        $this->m_DataAccess->closeDB();
     }
 
+    // Article = contructArticle(Array[QueryResult] $row);
     //forms a article from the input array and returns it
     private function constructArticle($row)
     {
-        $currentUser = new Article($this->m_DataAccess->fetchArticleID($row),
+        $currentArticle = new Article($this->m_DataAccess->fetchArticleID($row),
             $this->m_DataAccess->fetchArticleContentArea($row),
             $this->m_DataAccess->fetchArticleName($row),
             $this->m_DataAccess->fetchArticleTitle($row),
@@ -142,10 +145,9 @@ public function updateArticle($articleToUpdate)
             $this->m_DataAccess->fetchArticleCreatedBy($row),
             $this->m_DataAccess->fetchArticleCreatedDate($row),
             $this->m_DataAccess->fetchArticleLastModifiedBy($row),
-            $this->m_DataAccess->fetchArticleLastModifiedDate($row));
-        return $currentUser;
-
-
+            $this->m_DataAccess->fetchArticleLastModifiedDate($row),
+            $this->m_DataAccess->fetchArticleInActive($row));
+        return $currentArticle;
     }
 
 

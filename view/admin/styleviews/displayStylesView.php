@@ -18,6 +18,11 @@
   endif;
 $user=unserialize($_SESSION["user"]);
 ?>
+
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formAdeleterticle">Add  New Article  </button>
+<div id="formAdeleterticle" class="collapse in">
+
+
 <h1>Site Styles</h1>
 <table class="table">
   <thead>
@@ -48,7 +53,7 @@ $user=unserialize($_SESSION["user"]);
       <td><?php echo $style->getStyle(); ?></td>
       <td>
       <!--  // create a linke to set active for editors only -->
-      <?php  if(CMS_checkEditor()):?>  <span id="activateStyle"><a href="?activateStyle='<?php echo $style->getId()?>" > <?php     endif; ?>
+      <?php  if(CMS_checkEditor()):?>  <span id="activateStyle"><a href="?activateStyle=<?php echo $style->getId()?>" class="confirmation"> <?php     endif; ?>
 
        <?php if($style->getActive()):
               ?>
@@ -85,3 +90,16 @@ $user=unserialize($_SESSION["user"]);
   </tbody>
   <tfoot></tfoot>
 </table>
+<div id="null" class="hidden"></div>
+</div><!--bootstrap div -->
+<script>
+ var savedHtml;
+
+     $('.confirmation').on('click', function () {
+         return confirm('Are you sure you want to change the style?');
+     });
+
+
+
+}
+</script>

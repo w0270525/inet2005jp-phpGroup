@@ -4,13 +4,16 @@
     <title><?php echo $currentPage->getName(); ?></title>
     <style>
       <?php
-        echo $currentPage->getStyle()->getStyle();
-         $arrayOfStyles = array();
-         if(CMS_checkAuthor()) include "frontPageEditStyle.php";
+     //   echo CMS_getMainStyle();
+         echo $currentPage->getStyle()->getStyle();
+
       ?>
     </style>
   </head>
-
+ <?php
+  $arrayOfStyles = array();
+  if(CMS_checkAuthor()) include "frontPageEditStyle.php";
+ ?>
     <ul>
     <?php
       foreach ($navArray as $page) {
