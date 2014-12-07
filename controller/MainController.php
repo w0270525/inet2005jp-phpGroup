@@ -69,14 +69,14 @@ function resetPassword($id, $pass)
  function confirmUser($userName, $pass)
     {
         $attemptedUser = new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null);
-        if($this->userController()->confirmUser($attemptedUser)==true)
+        if($this->userController()->confirmUser($attemptedUser)===1)
         {
                 $_SESSION["logged"]=serialize(true);
                 $attemptedUser=$this->userController()->model->getUserByUserName($attemptedUser->getUsername());
                 $_SESSION["grants"]= $attemptedUser->getRoleId();
                  $_SESSION["user"]=serialize($attemptedUser);
                   $this->currentUser=$attemptedUser;
-
+            //$_SESSION["controller"]= serialize(($this));
                 if($attemptedUser->getPass()==="password")
                 {
                     $_SESSION["grants"]=Array(0);
@@ -84,7 +84,7 @@ function resetPassword($id, $pass)
                     $user=$attemptedUser;
                     include "../view/admin/userviews/resetpassword.php" ;
                     $_SESSION["logged"]=false;
-                }else return;
+                }else return $_SESSION["logged"];
         }
         else
         {
@@ -112,7 +112,7 @@ function resetPassword($id, $pass)
 
     public function displayAdmin($control)
     {   $tempController= new MainController();
-        if(isset($this->currentUser) && isset($_SESSION["logged"]) && $_SESSION["logged"]   )
+        if(isset($this->currentUser) && isset($_SESSION["logged"]) && $_SESSION["logged"]==true   )
             include("../_public/adm/admin.php");
 
     }

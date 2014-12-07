@@ -87,8 +87,9 @@ class UserController
     // returns true of false if the user is equal to the user in the databse
     public function confirmUser($user)
     {
-        if(!$this->model->confirmUser($user) ) return true;
-        return false;
+        if($this->model->confirmUser($user) )
+            return 1;
+        return 0;
     }
 
 

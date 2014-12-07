@@ -46,33 +46,34 @@
         }
 
         // Author login process
+        // Allows oonly those wiht author privvleges to lofin to the login bar.
         if($_SERVER["REQUEST_METHOD"]=="POST")
             if(isset($_POST["authorName"]))
         {
             if($control->confirmUser($_POST["authorName"],$_POST["password"]))
                 // only allow authors to login through main page, rediectb others to the admin login page
                 if(!($control->currentUser->isAuthor())){
-                    $_SESSION["logged"]=null;;
+                    $_SESSION["user"]=null;$_SESSION["logged"]=false;
                     $_SESSION["controler"]= new MainController();
                     header("Location: /admin");
                 }
         }
-        if(isset($_POST["password"]) && isset($_POST["dfd34234324"])){
-
-
+            if(isset($_POST["password"]) && isset($_POST["passwordReset"])){
+                $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
+                $control->confirmUser($name,"password" );
                 if(!$control->confirmUser($_POST["userName"],"password" )){
                     // un verified login
                     $_SESSION["user"]=null;$_SESSION["logged"]=false;
                     //$_SESSION["controler"]= new MainController();
                     $_SESSION["control"] = unserialize(new  MainController());
-                    $_SESSION["sessionid"] =  null;
+
                     $_SESSION["logged"]=false;
 
-                if ($debug) echo 'alert("login test on index set   $debug=false");';
 
                 }else
                 {
-                    if ($debug) echo 'alert("login test on in e;se-> set $debug=false");';
+                    $_SESSION["logged"]=true;
+
                     $currentUser=CMS_getUser();
                     $control->confirmUser($_POST["userName"],$_POST["password"]);
                 }
@@ -111,7 +112,8 @@
             // login
             if(checkPostUserNamePassword())
                        $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
-            if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
+
+            if( !isset($_SESSION["logged"]) || $_SESSION["logged"]==null || $_SESSION["logged"]==false)
                         $control->login();
 
         }

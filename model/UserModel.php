@@ -8,86 +8,72 @@ class UserModel
     private $m_DataAccess;
 
     public function __construct()
-    {
-        $this->m_DataAccess = new PDOMySQLUserDataModel();
-    }
+    {        $this->m_DataAccess = new PDOMySQLUserDataModel();    }
 
     public function __destruct()
-    {
-        // not doing anything at the moment
-    }
+    {         }
 
-    // get all users from the CMS
+
+    // Array(User user) = getAllUsers();
+    // Runs a quey against the db for all the users
+    // returns the an array of User object based on the query
     public function getAllUsers()
     {
         $this->m_DataAccess->connectToDB();
-
         $arrayOfUserObjects = array();
         $arrayOfUserObjects_  = array();
-
         $this->m_DataAccess->selectUsers();
 
+        // build an array of users
         while($row =  $this->m_DataAccess->fetchUsers())
         {
             $arrayOfUserObjects_[] = $row;
         }
+        // construct an arry of users
         foreach ($arrayOfUserObjects_  as $user){
             $arrayOfUserObjects[]= $this->constructUser($user);
         }
-       // $currentUser =$this->constructUser($row);
         $this->m_DataAccess->closeDB();
 
+        // return the array of User Objects
         return $arrayOfUserObjects;
     }
 
+    // User = fetUser(Integer $userID)
     // returns a single user fetched from the CMS
     public function getUser($userID)
     {
         $this->m_DataAccess->connectToDB();
-
         $this->m_DataAccess->selectUserById($userID);
-
         $record =  $this->m_DataAccess->fetchUsers();
-
         $fetchedUser = $this->constructUser($record);
-
         $this->m_DataAccess->closeDB();
-
         return $fetchedUser;
     }
+
+
+    // User = fetUser(String $userName)
     // returns a single user fetched from the CMS
-
-
     public function getUserByUserName($userName)
     {
         $this->m_DataAccess->connectToDB();
-
         $this->m_DataAccess->selectUserByName($userName);
-
         $record =  $this->m_DataAccess->fetchUsers();
-
         $fetchedUser = $this->constructUser($record);
-
         $this->m_DataAccess->selectUserRoles($fetchedUser->getId());
-      //   $fetchedUser->setRoleId($this->m_DataAccess->selectUserRoles($fetchedUser->getId()));
         $this->m_DataAccess->closeDB();
         return $fetchedUser;
 
     }
-    public function getUserRoleByUserIds($userId)
-    {
-        $this->m_DataAccess->connectToDB();
-
-        $this->m_DataAccess->selectUserRoles($userId);
-
-        $record =  $this->m_DataAccess->fetchUsers();
-
-        $fetchedUser = $this->constructUser($record);
-
-        $this->m_DataAccess->closeDB();
-
-        return $fetchedUser;
-    }
+//    public function getUserRoleByUserIds($userId)
+//    {
+//        $this->m_DataAccess->connectToDB();
+//        $this->m_DataAccess->selectUserRoles($userId);
+//        $record =  $this->m_DataAccess->fetchUsers();
+//        $fetchedUser = $this->constructUser($record);
+//        $this->m_DataAccess->closeDB();
+//        return $fetchedUser;
+//    }
 function updateUserSecurity($user)
 {
     $this->m_DataAccess->connectToDB();
@@ -159,7 +145,7 @@ function updateUserSecurity($user)
 
 
 
-        public function getUserById($userId)
+    public function getUserById($userId)
     {
 
         $this->m_DataAccess->connectToDB();
@@ -190,10 +176,12 @@ function updateUserSecurity($user)
 
         // password reset
         if($currentUser->getPass()==="password" && $user->getPass()==="password")
-            return true;
+            return 1;
 
         // passwords test
-        return $currentUser->comparePass($user->getPass());
+        if( $currentUser->comparePass($user->getPass()))
+            return 1;
+        return 0;
     }
 
 

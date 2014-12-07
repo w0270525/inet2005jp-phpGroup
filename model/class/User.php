@@ -278,7 +278,9 @@ class User {
         $passwordHashRaw = crypt ( $input,$cryptPefix );
         $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
         $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
-        return $passwordHash === $this->getPass();
+        if( strcmp($passwordHash,$this->getPass()))
+            return 1;
+        return 0;
     }
 
 
