@@ -30,14 +30,10 @@
         action="#" method="post" value="updatePageForm">
     <tbody>
       <tr>
-        <td><input oninput="resetBut()" type="text" name ="p_name" value="<?php echo $page->getName(); ?>" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_alias" value="<?php echo $page->getAlias(); ?>" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_desc" value="<?php echo $page->getDesc(); ?>" required /></td>
-
-        // No idea what this is for...
-        <input type="hidden" name = "formSubmitUpdatePage" value="true" required />
-        // No idea what this is for...
-
+        <td><input oninput="resetBut()" type="text" name="p_name" value="<?php echo $page->getName(); ?>" required /></td>
+        <td><input oninput="resetBut()" type="text" name="p_alias" value="<?php echo $page->getAlias(); ?>" required /></td>
+        <td><input oninput="resetBut()" type="text" name="p_desc" value="<?php echo $page->getDesc(); ?>" /></td>
+        <input type="hidden" name="formSubmitUpdatePage" value="true" required />
         <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
           <input type="submit" class="btn btn-default" id="updatePageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
       </tr>
