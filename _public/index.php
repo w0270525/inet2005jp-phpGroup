@@ -52,7 +52,7 @@
         {
             if($control->confirmUser($_POST["authorName"],$_POST["password"]))
                 // only allow authors to login through main page, rediectb others to the admin login page
-                if(!($control->currentUser->isAuthor())){
+                if( !($control->currentUser->isAuthor())){
                     $_SESSION["user"]=null;$_SESSION["logged"]=false;
                     $_SESSION["controler"]= new MainController();
                     header("Location: /admin");

@@ -289,7 +289,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
     //////////////////////// EDITOR VIEWS ///////////////////////////////////
     /////////////////////////////////////////////////////////////////////////
-    if($control->currentUser->isEditor())
+    if(CMS_checkEditor())
     {
         // CUSTOM EDITOR GET AN POST
         // CUSTOM EDITOR GET AN POST
@@ -441,7 +441,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             ?></div>
 
         <!-- load styles form -->                                                                                                                                    <!-- load  add style form -->
-    <div id="addNewStyleViews"  class="containerAdmin"><?php
+           <div id="addNewStyleViews"  class="containerAdmin"><?php
         $control->styleController()->addAction();
         ?></div>
 
@@ -476,25 +476,6 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <!--CUSTOM Author VIEWS -->
 
 
-        <div id="viewArticles"  class="containerAdmin"><?php
-            $control->articleController()->displayAction();
-            ?></div>
-        <!--  view  All ContentsAreas  -->
-        <div id="viewContents"  class="containerAdmin"><?php
-            $control->contentController()->displayAction();
-            ?></div>
-
-        <!--  view all Stylers -->
-        <div id="viewStyles"   class="containerAdmin"><?php
-            $control->styleController()->displayAction();
-            ?></div>
-
-        <!--  view all Articles -->
-        <div id="viewArticles"  class="containerAdmin"><?php
-            $control->articleController()->displayAction();
-            ?>
-       </div>
-
 
 
 
@@ -515,6 +496,25 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
 
+
+    <div id="viewArticles"  class="containerAdmin"><?php
+        $control->articleController()->displayAction();
+        ?></div>
+    <!--  view  All ContentsAreas  -->
+    <div id="viewContents"  class="containerAdmin"><?php
+        $control->contentController()->displayAction();
+        ?></div>
+
+    <!--  view all Stylers -->
+    <div id="viewStyles"   class="containerAdmin"><?php
+        $control->styleController()->displayAction();
+        ?></div>
+
+    <!--  view all Articles -->
+    <div id="viewArticles"  class="containerAdmin"><?php
+        $control->articleController()->displayAction();
+        ?>
+    </div>
 
 
 
