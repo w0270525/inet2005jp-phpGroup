@@ -101,9 +101,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-target="" id="" ><a href="#">View Users</a></li>
-                            <li data-target="" id=""><a href="#" >Add User</a></li>
-                            <li data-target="" id="" ><a href="#" >Remove User</a></li>
+                            <li data-target="" id=""><a href="#">PLACEHOLDER</a></li>
+                            <li data-target="" id=""><a href="#">PLACEHOLDER</a></li>
+                            <li data-target="" id=""><a href="#">PLACEHOLDER</a></li>
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
