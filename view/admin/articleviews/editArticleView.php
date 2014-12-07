@@ -62,8 +62,8 @@ foreach($arrayOfArticles as $article):
 
 
         <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
-        <div class="col-sm-10"><span  class="btn btn-default" onclick="verifyf()" id="formConfirm">Verify </span>
-        <input type="submit" class="btn btn-default" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
+        <div class="col-sm-10"><span  class="btn btn-default form-control" onclick="verifyf()" id="formConfirm">Verify </span>
+        <input type="submit" class="btn btn-default form-control" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
         </div>
     </form>
  </div>
@@ -75,12 +75,13 @@ endforeach;
 <script>
     function  verifyf()
     {
-//        if (document.forms['addNewPageForm']['p_name'].value.length>5)
-//      if   (document.forms['addNewPageForm']['p_alias'].value.length>5)
-//        if( document.forms['addNewPageForm']['p_desc'].value.length>20)
-//    {
+        if (document.forms['addNewPageForm']['p_name'].value.length>5)
+        if   (document.forms['addNewPageForm']['p_alias'].value.length>5)
+
+    {
         $('#formConfirm').hide();
         $('#addPageSubmit').show();
+    }
     }
 
 
