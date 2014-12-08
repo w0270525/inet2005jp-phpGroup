@@ -16,7 +16,7 @@
  $articleCounter=0;
 
   $arrayOfStyles = array();
-  if(CMS_checkEditor() ) include "frontPageEditStyle.php";
+  if(isset($_SESSION["user"]) && CMS_checkEditor() ) include "frontPageEditStyle.php";
  ?>
     <ul>
     <?php
@@ -41,7 +41,7 @@
 
             // author edit current article opption
 
-            if(CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageEditArticle.php";
+            if(isset($_SESSION["user"]) && CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageEditArticle.php";
 
     ?>
         <h3><?php echo $a->getTitle(); ?></h3>

@@ -17,6 +17,7 @@ class MainController
         $this->pageController = new PageController();
         $this->styleController= new StyleController();
         $this->contentController= new ContentAreaController() ;
+        $this->currentUser=NEW User(null,null,null,null,null,null,null,null,null,null,null,null);
     }
     // Main Controllers content area controoler
     protected $contentController;
@@ -91,7 +92,7 @@ function resetPassword($id, $pass)
  // handle user login
  function confirmUser($userName, $pass)
     {
-        $tryUser = new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null);
+        $tryUser = new User(null, null, null, $userName, $pass, null, null,  null, null, null,array(0,0,0),null);
         if($this->userController()->confirmUser($tryUser)===1)
         {
                 $_SESSION["logged"]=serialize(true);

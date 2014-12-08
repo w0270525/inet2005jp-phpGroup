@@ -6,7 +6,7 @@ class connect{
 // conects to the cms
     public function connectToDB()
     {
-        if (CMS_checkAdmin() || CMS_checkEditor()) {
+        if (isset($_SESSION["user"]) && CMS_checkEditor()) {
             try {
                 $this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "backend", "inet2005");
                 $this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -14,7 +14,7 @@ class connect{
                 die('Could not connect to the Content Management System via PDO: ' . $ex->getMessage());
             }
         }
-        else if (CMS_checkAuthor())
+        else if (isset($_SESSION["user"]) && CMS_checkAuthor())
         {
             try {
                 $this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "frontend", "inet2005");
@@ -54,7 +54,7 @@ function CMS_checkEditor()
 // returns the current user Admin status
 function CMS_checkAdmin()
 {
-    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && CMS_getUser()->isAdmin())
+    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && isset($_SESSION["user"])&& isset($_SESSION["control"])&& CMS_getUser()->isAdmin())
         return true;
     return false;
 }
@@ -62,7 +62,7 @@ function CMS_checkAdmin()
 // returns the current users author status
 function CMS_checkAuthor()
 {
-    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true && CMS_getUser()->isAuthor())
+    if(isset ($_SESSION["logged"]) && $_SESSION["logged"]==true  && isset($_SESSION["user"])&& isset($_SESSION["control"]) && CMS_getUser()->isAuthor())
         return true;
     return false;
 }

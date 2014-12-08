@@ -57,9 +57,11 @@ foreach($arrayOfArticles as $article):
 
       <label class="col-sm-2 control-label">All Pages</label>
       <div class="col-sm-10">
-        <input oninput="resetBut()" type="checkbox" name="all_page" class="form-control" value="<?php echo $article->getAllPages()?>" required />
+        <input oninput="resetBut()" type="checkbox" name="all_page" class="form-control" value="<?php echo $article->getAllPages()?>"  />
       </div>
-
+        <label class="col-sm-2 control-label">Inactive</label>
+            <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"    />
+            </div>
       <input type="hidden" name="formEditArticleConfirm" value="true" required/>
       <div class="col-sm-10">
         <label>

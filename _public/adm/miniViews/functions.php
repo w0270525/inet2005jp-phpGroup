@@ -4,8 +4,10 @@
 // if user is not logged they are redirected to main page
 function confirmLogin()
 {
-  $control = unserialize($_SESSION["user"]);
-  $control->currentUser = unserialize($_SESSION["user"]);
+
+     $control = unserialize($_SESSION["user"]);
+    $control->currentUser = unserialize($_SESSION["user"]);
+
   if(isset($_SESSION["logged"]) &&  $_SESSION["logged"])
       if($control->currentUser->isAdmin()
       || $control->currentUser->isEditor()
@@ -58,22 +60,6 @@ Are You Sure you Want To Perform This Action
 }
 
 
-// adds a confirm dialogue where inserted
-function showConfirmAction()
-{
-?>
-Are You Sure you Want To Perform This Action
-<button value="yes" onclick="returnThis(true)">Yes</button>
-<button value="no" onclick="returnThis(false)">No</button>
-<script>
-  // script function used to return the value clicked above
-  function returnThis($any)
-  {
-      return  $any;
-  }
-</script>
-<?php
-}
 
 
 // confirms a variable has a value of some sort

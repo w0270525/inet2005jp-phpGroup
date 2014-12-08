@@ -26,13 +26,15 @@
     <div class="bodyMain" id="bodyMain">
         <?php
         //init the user session
-        include("sessionHandler.php");
 
-
-        // gran functions for from various layers for usability
         include_once("adm/miniViews/functions.php");
+        include "sessionHandler.php";
+        // gran functions for from various layers for usability
+
         include_once("../model/data/functions.php");
         $debug=true;
+
+
 
 
 
@@ -47,87 +49,71 @@
 
         // Author login process
         // Allows oonly those wiht author privvleges to lofin to the login bar.
-        if($_SERVER["REQUEST_METHOD"]=="POST")
-            if(isset($_POST["authorName"])&& isset($_POST["passwordAuthor"]))
-            {
-                if($control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"])){
-                    $_SESSION["logged"] = $control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"]);
-               }
-            }
-            else if(isset($_POST["userName"])&& isset($_POST["password"]))
-            {
-
-                $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
-
-            }
-
-            else   if(isset($_POST["password"]) && isset($_POST["passwordReset"]))
-            {
-                $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
-                if(!$control->confirmUser($_POST["userName"],"password" )){
-                // un verified login
-                $_SESSION["user"]=null;$_SESSION["logged"]=false;
-                //$_SESSION["controller"]= new MainController();
-                $_SESSION["control"] = unserialize(new  MainController());
-
-                $_SESSION["logged"]=false;
-                }else
-                {
-                    $_SESSION["logged"]=true;
-
-                    $currentUser=CMS_getUser();
-                    $control->confirmUser($_POST["userName"],$_POST["password"]);
-                }
-
-            if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
-            {
-                $control->login();
-                header("Location: /admin");
-            }
-
-
-         }
-
-        if(isset($_POST["passwordReset"]) && isset($_POST["passVerify"])){
-            $control->resetPassword($_POST["userName"],$_POST["pass"]);
-            header("Location: /admin");
-            echo" tank you";
-
-
-
-        }
-
-
-
-
-
-
-        // show the pagelogin only if not logged in already
-        if(!isset($_SESSION["logged"]) || $_SESSION["logged"]!=true || $_SESSION["logged"]==null)
-            include("../view/admin/pageLoginMenuView.php");
+//        if($_SERVER["REQUEST_METHOD"]=="POST")
+//            if(isset($_POST["authorName"])&& isset($_POST["passwordAuthor"]))
+//            {
+//                if($control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"])){
+//                    $_SESSION["logged"] = $control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"]);
+//               }
+//            }
+//            else if(isset($_POST["userName"])&& isset($_POST["password"]))
+//            {
+//
+//                $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
+//
+//            }
+//
+//            else   if(isset($_POST["password"]) && isset($_POST["passwordReset"]))
+//            {
+//                $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
+//                if(!$control->confirmUser($_POST["userName"],"password" )){
+//                // un verified login
+//                $_SESSION["user"]=null;$_SESSION["logged"]=false;
+//                //$_SESSION["controller"]= new MainController();
+//                $_SESSION["control"] = unserialize(new  MainController());
+//
+//                $_SESSION["logged"]=false;
+//                }else
+//                {
+//                    $_SESSION["logged"]=true;
+//
+//                    $currentUser=CMS_getUser();
+//                    $control->confirmUser($_POST["userName"],$_POST["password"]);
+//                }
+//
+//            if (!isset($_SESSION["logged"] )||$_SESSION["logged"]==false)
+//            {
+//                $control->login();
+//                header("Location: /admin");
+//            }
+//
+//
+//         }
+//
+//        if(isset($_POST["passwordReset"]) && isset($_POST["passVerify"])){
+//            $control->resetPassword($_POST["userName"],$_POST["pass"]);
+//            header("Location: /admin");
+//            echo" tank you";
+//
+//
+//
+//        }
+//
+//
 
 
 
-
-
-
-
-
-        //HANDLES ADMIN LOGIN AND FUNCTIONALITY
-        if($_SERVER["REQUEST_URI"]=="/admin")
-        {
-            // login
-            if(checkPostUserNamePassword())
-                       $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
-
-            if( !isset($_SESSION["logged"]) || $_SESSION["logged"]==null || $_SESSION["logged"]==false)
-                        $control->login();
-
-        }
-
-        //show admin menu
 
         $control->displayAdmin($control);
+
+
+
+
+
+        //w the admin login bar
+        if($showLoginBar) include("../view/admin/pageLoginMenuView.php");
+
+
 
 
         $control->pageController()->displayPage($_GET['page']);
