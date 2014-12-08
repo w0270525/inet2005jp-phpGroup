@@ -117,8 +117,10 @@ function updateUserSecurity($user)
             $this->m_DataAccess->fetchUserCreationDate($row),
             $this->m_DataAccess->fetchUserModifiedBy($row),
             $this->m_DataAccess->fetchUserModifiedDate($row),
-        $this->m_DataAccess->selectUserRoles($this->m_DataAccess->fetchUserID($row)),
+            $this->m_DataAccess->selectUserRoles($this->m_DataAccess->fetchUserID($row)),
              $this->m_DataAccess->fetchUserKey($row));
+
+
         return $currentUser;
     }
 
@@ -129,8 +131,7 @@ function updateUserSecurity($user)
 
         $currentUser = new User($row[0],$row[1],$row[2],$row[3], $row[4],$row[5],$row[6],
            $row[7],$row[8],$row[9],$row[10],"");
-           // $this->m_DataAccess->selectUserRoles($this->m_DataAccess->fetchUserID($row)));
-
+             $this->m_DataAccess->selectUserRoles($this->m_DataAccess->fetchUserID($row));
         return $currentUser;
     }
 
@@ -138,7 +139,7 @@ function updateUserSecurity($user)
     function addUser($user)
     {
         $this->m_DataAccess->connectToDB();
-        $this->m_DataAccess->addUser($user);
+        $this->m_DataAccess->insertUser($user);
         $this->m_DataAccess->closeDB();
     }
 
@@ -154,7 +155,7 @@ function updateUserSecurity($user)
         $fetchedUser = $this->constructUser($record);
 
         $this->m_DataAccess->selectUserRoles($fetchedUser->getId());
-        //   $fetchedUser->setRoleId($this->m_DataAccess->selectUserRoles($fetchedUser->getId()));
+          $fetchedUser->setRoleId($this->m_DataAccess->selectUserRoles($fetchedUser->getId()));
         $this->m_DataAccess->closeDB();
         return $fetchedUser;
 

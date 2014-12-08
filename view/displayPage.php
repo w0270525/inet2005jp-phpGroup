@@ -4,7 +4,9 @@
     <title><?php echo $currentPage->getName(); ?></title>
     <style>
       <?php
+     //   echo CMS_getMainStyle();
          echo $currentPage->getStyle()->getStyle();
+
       ?>
     </style>
   </head>

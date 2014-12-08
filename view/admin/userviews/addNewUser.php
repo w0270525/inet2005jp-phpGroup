@@ -3,26 +3,7 @@
 <div id="aduSerbutt_" class="collapse in">
 
 
- 
-  <!--   <script src="functions.js"></script>1-->
 
-    <style type="text/css">
-        .glyphicon
-        {
-
-            display:block;
-            text-align:center
-
-        }
-        table
-        {
-            border: 1px solid purple;
-        }
-        th, td
-        {
-            border: 1px solid red;
-        }
-    </style>
  
 <?php
 

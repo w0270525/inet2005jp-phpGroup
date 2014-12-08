@@ -1,15 +1,4 @@
 
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
-
 <?php
   if(!empty($lastOperationResults)):
 ?>
@@ -19,8 +8,8 @@
 $user=unserialize($_SESSION["user"]);
 ?>
 
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formAdeleterticle">Add  New Article  </button>
-<div id="formAdeleterticle" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#viewserwertylefds">view Styles </button>
+<div id="viewserwertylefds" class="collapse in">
 
 
 <h1>Site Styles</h1>
@@ -95,8 +84,4 @@ $user=unserialize($_SESSION["user"]);
      $('.confirmation').on('click', function () {
          return confirm('Are you sure you want to change the style?');
      });
-
-
-
-}
 </script>

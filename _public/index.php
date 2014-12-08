@@ -42,31 +42,35 @@
            $_GET['page'] =1;
         }
 
+
+
+
         // Author login process
         // Allows oonly those wiht author privvleges to lofin to the login bar.
         if($_SERVER["REQUEST_METHOD"]=="POST")
-            if(isset($_POST["authorName"]))
-        {
-            if($control->confirmUser($_POST["authorName"],$_POST["password"]))
-                // only allow authors to login through main page, rediectb others to the admin login page
-                if( !($control->currentUser->isAuthor())){
-                    $_SESSION["user"]=null;$_SESSION["logged"]=false;
-                    $_SESSION["controler"]= new MainController();
-                    header("Location: /admin");
-                }
-        }
-            if(isset($_POST["password"]) && isset($_POST["passwordReset"])){
+            if(isset($_POST["authorName"])&& isset($_POST["passwordAuthor"]))
+            {
+                if($control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"])){
+                    $_SESSION["logged"] = $control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"]);
+               }
+            }
+            else if(isset($_POST["userName"])&& isset($_POST["password"]))
+            {
+
+                $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
+
+            }
+
+            else   if(isset($_POST["password"]) && isset($_POST["passwordReset"]))
+            {
                 $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
-                $control->confirmUser($name,"password" );
                 if(!$control->confirmUser($_POST["userName"],"password" )){
-                    // un verified login
-                    $_SESSION["user"]=null;$_SESSION["logged"]=false;
-                    //$_SESSION["controler"]= new MainController();
-                    $_SESSION["control"] = unserialize(new  MainController());
+                // un verified login
+                $_SESSION["user"]=null;$_SESSION["logged"]=false;
+                //$_SESSION["controller"]= new MainController();
+                $_SESSION["control"] = unserialize(new  MainController());
 
-                    $_SESSION["logged"]=false;
-
-
+                $_SESSION["logged"]=false;
                 }else
                 {
                     $_SESSION["logged"]=true;
@@ -101,6 +105,12 @@
         // show the pagelogin only if not logged in already
         if(!isset($_SESSION["logged"]) || $_SESSION["logged"]!=true || $_SESSION["logged"]==null)
             include("../view/admin/pageLoginMenuView.php");
+
+
+
+
+
+
 
 
         //HANDLES ADMIN LOGIN AND FUNCTIONALITY

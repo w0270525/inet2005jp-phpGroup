@@ -97,7 +97,7 @@ function CMS_getMainStyle()
 {
     $control = unserialize($_SESSION["control"]);
     $mainStyle = $control->styleController()->getActiveStyle()->getStyle();
-    if($mainStyle!=null) return $mainStyle;
+    if($mainStyle!=null) echo  $mainStyle;
     return "";
 
 }
@@ -136,5 +136,11 @@ function CMS_postFormHelperFunction($post)
     else if($post["all_page"]=="on" ) $post["all_page"] = 1;
     if(!isset($post["a_inactive"]))$post["a_inactive"] = 0;
     else if($post["a_inactive"]=="on" ) $post["a_inactive"] = 1;
+    if(!isset($post["admin"]))$post["admin"] = 0;
+    else if($post["admin"]=="on" ) $post["admin"] = 1;
+    if(!isset($post["editor"]))$post["editor"] = 0;
+    else if($post["editor"]=="on")$post["editor"] = 1;
+    if(!isset($post["author"]))$post["author"] = 0;
+    else if($post["author"]=="on")$post["author"] = 1;
     return $post;
 }

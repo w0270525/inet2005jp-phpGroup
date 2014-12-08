@@ -141,18 +141,16 @@ public function selectPagesByName($name)
     // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
-        $selectStatement = $this->SELECT . " LEFT JOIN ARTICLE ON PAGES.p_id = ARTICLE.a_assocpage ";
-        $selectStatement .= " WHERE ARTICLE.a_assocpage= :pageID;";
+        $selectStatement="select * From ARTICLE  JOIN PAGES ON PAGES.p_id = a_assocpage  WHERE ARTICLE.a_assocpage= :ID ;";
         try
         {
             $this->stmt = $this->dbConnection->prepare($selectStatement);
-            $this->stmt->bindParam(':$pageID', $pageID, PDO::PARAM_INT);
-
+            $this->stmt->bindParam(':ID', $pageID, PDO::PARAM_INT);
             $this->stmt->execute();
         }
         catch(PDOException $ex)
         {
-            die('selectArticleByPageId failed  in PDOMySQLPageDataModel: : Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+            die('selectArticleByPageId failed  in PDOMySQLPageDataModel: '.$selectStatement.': Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
 
@@ -226,6 +224,46 @@ public function selectPagesByName($name)
             die('insertpage  failed  in PDOMySQLPageDataModel:\n'.$insertStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+    // remove page
+    public function deletePage($id)
+    {
+        $count=$this->selectPages();
+        if($id==1)
+            $new=$count;
+        else $new=1;
+            $updateStatement = "UPDATE ARTICLE set a_assocpage =:new , a_inactive=1 WHERE a_assocpage=:id;";
+      try{
+
+
+          $this->stmt = $this->dbConnection->prepare($updateStatement);
+          $this->stmt->bindParam(':new', $count, PDO::PARAM_INT);
+          $this->stmt->bindParam(':id', $id, PDO::PARAM_INT);
+          $this->stmt->execute();
+          $result= $this->stmt->rowCount();
+
+      }
+      catch(PDOException $ex)
+      {
+          die('deletePage  failed removing articles in PDOMySQLPageDataModel:\n'.$updateStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+      }
+      $deleteStatement = " DELETE  From PAGES wherE p_id=:pid";
+      try{
+
+            $this->stmt = $this->dbConnection->prepare($deleteStatement);
+            $this->stmt->bindParam(':pid', $id, PDO::PARAM_INT);
+            $this->stmt->execute();
+            $result += $this->stmt->rowCount();
+          return $result;
+
+      }
+        catch(PDOException $ex)
+        {
+            die('deletePage  failed delteign pagees in PDOMySQLPageDataModel:\n'.$deleteStatement.' Could not insert records from CMS  Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
 
 
     // returns the Article id

@@ -1,33 +1,6 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-<head>
 
-    <title>Edit User</title>
     <script src="functions.js"></script>
 
-    <style type="text/css">
-        .glyphicon
-        {
-
-            display:block;
-            text-align:center
-
-        }
-        table
-        {
-            border: 1px solid purple;
-        }
-        th, td
-        {
-            border: 1px solid red;
-        }
-    </style>
-</head>
-<body>
 <?php
 
 require_once('functions.php');

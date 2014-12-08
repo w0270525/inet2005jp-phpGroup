@@ -1,4 +1,7 @@
 
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#deletePageFormBt">Delete A Page </button>
+<div id="deletePageFormBt" class="collapse in">
+
 <style type="text/css">
     table
     {
@@ -16,8 +19,9 @@ if(!empty($lastOperationResults)):
     <h2><?php echo $lastOperationResults; ?></h2>
 <?php
 endif;
+$page=$arrayOfPagObjects[0];
 ?>
-<<h1>Update Page</h1>
+<<h1>Remove Page</h1>
 <table class="table">
     <thead>
     <tr>
@@ -26,20 +30,20 @@ endif;
         <th>Description</th>
     </tr>
     </thead>
-    <form name="updatePageForm"  id="updatePageForm" class="updatePageForm" onclick ="$('#updatePageSubmit').hide();$('#verifyf').show()"
-          action="#" method="post" value="updatePageForm">
+    <form name="updatePageForm"  id="updatePageForm" class="updatePageForm" action="#" method="post" >
         <tbody>
         <tr>
-            <td><input oninput="resetBut()" type="text" name ="p_name" value="<?php echo $page->getName(); ?>" required /></td>
-            <td><input oninput="resetBut()" type="text" name ="p_alias" value="<?php echo $page->getAlias(); ?>" required /></td>
-            <td><input oninput="resetBut()" type="text" name ="p_desc" value="<?php echo $page->getDesc(); ?>" required /></td>
+            <td><input oninput="resetBut()" type="text" name ="p_name" value="<?php echo $page->getName(); ?>"  /></td>
+            <td><input oninput="resetBut()" type="text" name ="p_alias" value="<?php echo $page->getAlias(); ?>"  /></td>
+            <td><input oninput="resetBut()" type="text" name ="p_desc" value="<?php echo $page->getDesc(); ?>"  /></td>
 
-            // No idea what this is for...
-            <input type="hidden" name = "formSubmitUpdatePage" value="true" required />
-            // No idea what this is for...
+            <td><input type="hidden" name ="id" value="<?php echo $page->getId(); ?>"  /></td>
 
-            <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-                <input type="submit" class="btn btn-default" id="updatePageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
+            <input type="hidden" name = "formSubmitDeletePage" value="true" required />
+
+
+            <td><span class="btn btn-warning form-control" id="formConfirm" onclick="verifydeletepagef()" >Verify</span>
+                <input type="submit" class="btn btn-danger form-control" id="DeletePageSubmit" onclick="resetBut();" value="Confirm" /></td>
         </tr>
         </tbody>
     </form>
@@ -47,22 +51,21 @@ endif;
 </table>
 
 <script>
-    function  verifyf()
+    function  verifydeletepagef()
     {
-//        if (document.forms['updatePageForm']['p_name'].value.length>5)
-//      if   (document.forms['updatePageForm']['p_alias'].value.length>5)
-//        if( document.forms['updatePageForm']['p_desc'].value.length>20)
-//    {
+
         $('#formConfirm').hide();
-        $('#updatePageSubmit').show();
+        $('#DeletePageSubmit').show();
     }
 
 
-    $('#updatePageSubmit').hide()
+    $('#DeletePageSubmit').hide()
 
     function resetBut()
     {
         $('#formConfirm').show();
-        $('#updatePageSubmit').hide();
+        $('#DeletePageSubmit').hide();
     }
 </script>
+
+</div>

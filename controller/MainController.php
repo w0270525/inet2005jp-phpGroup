@@ -53,7 +53,20 @@ class MainController
         return $this->styleController;
     }
 
+    //adds am article
+    public function addArticle()
+    {
+        if(isset($_POST["p_name"]) && isset($_POST["p_alias"]) && isset($_POST["p_desc"]))
+            $this->pageController->confirmAddAction($_POST["p_name"] ,$_POST["p_alias"] ,$_POST["p_desc"]);
+    }
 
+
+    //removes am article
+    public function removeArticle()
+    {
+        if(isset( $_POST["id"]))
+            $this->pageController->removeConfirmAction( $_POST["id"]);
+    }
 
 
 // resets the user pasword
@@ -68,13 +81,13 @@ function resetPassword($id, $pass)
  // handle user login
  function confirmUser($userName, $pass)
     {
-        $attemptedUser = new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null);
-        if($this->userController()->confirmUser($attemptedUser)===1)
+        $tryUser = new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null);
+        if($this->userController()->confirmUser($tryUser)===1)
         {
                 $_SESSION["logged"]=serialize(true);
-                $attemptedUser=$this->userController()->model->getUserByUserName($attemptedUser->getUsername());
+                $attemptedUser=$this->userController()->model->getUserByUserName($tryUser->getUsername());
                 $_SESSION["grants"]= $attemptedUser->getRoleId();
-                 $_SESSION["user"]=serialize($attemptedUser);
+                $_SESSION["user"]=serialize($attemptedUser);
                   $this->currentUser=$attemptedUser;
             //$_SESSION["controller"]= serialize(($this));
                 if($attemptedUser->getPass()==="password")
@@ -88,18 +101,17 @@ function resetPassword($id, $pass)
         }
         else
         {
-        $_SESSION["user"]=null;
-        $_SESSION["logged"]=false;
-        $this->currentUser = new User(null, null, null, null, null, null, null, null, null, null,null,null);
-
-
+            $this->currentUser=$tryUser;
+            $_SESSION["user"]=null;
+            $_SESSION["logged"]=false;
+ //           $this->currentUser = new User(null, null, null, null, null, null, null, null, null, null,null,null);
 //          $_SESSION["user"]=  serialize(new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) );
 //            $currentUser=new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) ;
              $_SESSION["user"]= serialize($this->currentUser);
         }
 
         $_SESSION["user"]= serialize($this->currentUser );
-        return false;
+        return $_SESSION["logged"];
     }
 
 
@@ -112,12 +124,10 @@ function resetPassword($id, $pass)
 
     public function displayAdmin($control)
     {   $tempController= new MainController();
-        if(isset($this->currentUser) && isset($_SESSION["logged"]) && $_SESSION["logged"]==true   )
+        if(isset($this->currentUser) && isset($_SESSION["logged"]) && $_SESSION["logged"]==serialize(true)   )
             include("../_public/adm/admin.php");
 
     }
-
-
 
 
     // The current user of the site if  logged in
