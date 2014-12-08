@@ -21,7 +21,7 @@ endif;
 <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#newcontentaqdd">  Add  A New  Content Area </button>
 <div id="newcontentaqdd" class="collapse in">
 
-    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea"           action="#" method="post">
+    <form name="addNewContentArea"  id="addNewContentArea" class="addNewContentArea" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
 
             <label class="col-sm-2 control-label">Content Area Name</label>
                 <div class="col-sm-10"><input onkeyup="resetBut()" type="text" name = "c_name"   class="form-control"required /></div>
@@ -37,8 +37,8 @@ endif;
             <div class="col-sm-10"> <input type="hidden" name = "formSubmitNewContentArea" value="true"  /></div>
 
 
-             <div  class="btn btn-default form-control" id="formConfirmAddNewContentArea" onclick="verifyAddArticle()"    class="form-control">Verify </div>
-             <input type="submit" class="btn btn-default form-control" id="addContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
+             <div  class="btn btn-default" id="formConfirmAddNewContentArea" onclick="verifyAddArticle()"    class="form-control">Verify </div>
+             <input type="submit" class="btn btn-default" id="addContentAreaSubmitForm" onclick="verifyAddArticle();resetBut(); " value ="Confirm"   class="form-control" />
 
     </form>
 <!-- close bootstrap hiding div -->

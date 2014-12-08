@@ -12,25 +12,24 @@
 
 
 
-<form name="addNewStylxeeFORM"  id="addNewStylxeeFORM" class="addNewStylxeeFORM"    action="#" method="post"  >
-      <label>Name</label>
-            <input oninput="verifyFormAddStylebtn()" type="text" name ="s_name"  class="form-control" required />
+<form name="addNewStylxeeFORM" id="addNewStylxeeFORM" class="addNewStylxeeFORM" action="#" method="post"  >
 
-      <label> Description</label>
-            <input oninput="verifyFormAddStylebtn()" type="text" name ="s_desc"  class="form-control" required />
+  <label>Name</label>
+  <input oninput="verifyFormAddStylebtn()" type="text" name ="s_name"  class="form-control" required />
 
-      <label>CSS</label>
-            <textarea  class="form-control" rows="13"    oninput="verifyFormAddStylebtn()" type="text" name ="s_style"  required >CSS ...</textarea>
+  <label> Description</label>
+  <input oninput="verifyFormAddStylebtn()" type="text" name ="s_desc"  class="form-control" />
 
-      <!-- USED FOR BACKEND FORM VERIFICATION -->
-      <input type="hidden" name="formSubmitNewStyle" value="true" required/>
+  <label>CSS</label>
+  <textarea class="form-control" rows="13" oninput="verifyFormAddStylebtn()" type="text" name="s_style" required>CSS ...</textarea>
 
+  <!-- USED FOR BACKEND FORM VERIFICATION -->
+  <input type="hidden" name="formSubmitNewStyle" value="true" required/>
 
-      <div class="btn btn-default" id="formAddStyleConfirmbtn" onclick="verifyFormAddStylebtn()">Verify</div>
-      <input type="submit" class="btn btn-default" id="addStyleSubmitbtnbtn" onclick="verifyFormAddStylebtn();verifyFormAddStylebtn_add();" value="Confirm" />
+  <div class="btn btn-default" id="formAddStyleConfirmbtn" onclick="verifyFormAddStylebtn()">Verify</div>
+  <input type="submit" class="btn btn-default" id="addStyleSubmitbtnbtn" onclick="verifyFormAddStylebtn();verifyFormAddStylebtn_add();" value="Confirm" />
 
-  </form>
-
+</form>
 </div>
 <script>
 

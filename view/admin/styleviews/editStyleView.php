@@ -11,27 +11,28 @@ foreach($arrayOfStyles as $style):
 <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editstyleforbsaddNewStyleFORM" id="styleeditidbsbutton">  Edit Style <?php echo $style->getName(); ?></button>
 <div id="editstyleforbsaddNewStyleFORM" class="collapse in">
 
-
-
 <form name="addNewStyleFORM"  id="addNewStyleFORM" class="addNewStyleFORM" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
       action="#" method="post" value="addNewStyleForm">
-    <label>Name</label>
-    <input oninput="resetButStyleAdd()" type="text" name ="s_name"  class="form-control" required value="<?php echo $style->getName(); ?>"/>
 
-    <label> Description</label>
-    <input oninput="resetButStyleAdd()" type="text" name ="s_desc"  class="form-control" required / value="<?php echo $style->getdesc(); ?>" >
+  <label>Name</label>
+  <input oninput="resetButStyleAdd()" type="text" name="s_name" class="form-control" value="<?php echo $style->getName(); ?>" required />
 
-    <label>CSS</label><pre>
-    <textarea  class="form-control" rows="13"    oninput="resetButStyleAdd()" type="text" name ="s_style"   required >
-            <?php echo $style->getStyle(); ?>
-    </textarea></pre>
-    <!-- USED FOR BACKEND FORM VERIFICATION -->
-    <input type="hidden" name="formUpdateStyle" value="true" required/>
-    <input type="hidden" name="s_id" value="<?php echo $style->getId()?>" required/>
+  <label> Description</label>
+  <input oninput="resetButStyleAdd()" type="text" name="s_desc" class="form-control" value="<?php echo $style->getdesc(); ?>" />
 
+  <label>CSS</label>
+  <pre>
+    <textarea class="form-control" rows="13" oninput="resetButStyleAdd()" type="text" name="s_style" required >
+      <?php echo $style->getStyle(); ?>
+    </textarea>
+  </pre>
 
-    <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
-    <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
+  <!-- USED FOR BACKEND FORM VERIFICATION -->
+  <input type="hidden" name="formUpdateStyle" value="true" required/>
+  <input type="hidden" name="s_id" value="<?php echo $style->getId()?>" required/>
+
+  <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
+  <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
 
 </form>
  </div>
