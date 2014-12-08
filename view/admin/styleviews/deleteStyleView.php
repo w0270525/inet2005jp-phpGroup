@@ -7,7 +7,7 @@ if(!empty($lastOperationResults)):
 endif;
 foreach($arrayOfStyles as $style):
     ?>
-    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">  Edit Style <?php echo $style->getName(); ?></button>
+    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#demo">  Delete Style <?php echo $style->getName(); ?></button>
     <div id="demo" class="collapse in">
 
 

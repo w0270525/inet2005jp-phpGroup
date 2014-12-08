@@ -104,7 +104,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     public function selectArticleByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= "WHERE a_assocpage = ? OR a_allpages = 1;";
+        $selectStatement .= "WHERE (a_assocpage = ? OR a_allpages = 1 )AND (a_inactive=0);";
 
         try
         {
@@ -125,7 +125,7 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     public function selectActiveArticlesByPageId($pageID)
     {
         $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= "WHERE (a_assocpage = ? OR a_allpages = 1 )AND (a_inactive=1);";
+        $selectStatement .= "WHERE (a_assocpage = ? OR a_allpages = 1 )AND (a_inactive=0);";
 
         try
         {

@@ -30,10 +30,13 @@
         <td> Blurb </td>
         <td> Desc </td>
      <!-- editor specific items -->
-      <?php if(CMS_checkEditor()):?>
+      <?php if(CMS_checkAuthor()):?>
         <td> Edit </td>
+      <?php endif;
+      if(CMS_checkEditor()):?>
         <td> Delete </td>
-     <?php endif;?>
+        <?php endif;?>
+
 
      <!-- admin items =-->
      <?php if(CMS_checkAdmin()):?>
@@ -78,10 +81,15 @@
             <td><?php echo $article->getDesc(); ?></td>
 
             <!-- update and delete links -->
-            <?php if(CMS_checkEditor()):?>
+            <?php if(CMS_checkAuthor()):?>
             <td><a href="?articleupdate= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-            <td><a href="?articleremove= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
-            <?php endif;
+            <?php endif; if(CMS_checkEditor()):?>
+                <td><a href="?articleremove= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
+            <?php
+            endif;
+
+
+
             if (CMS_checkAdmin()):?>
             <td><?php echo $article->getCreatedBy();?></td>
              <td><?php echo $article->getCreatedDate();?></td>

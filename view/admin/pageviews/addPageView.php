@@ -1,15 +1,3 @@
-<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#addapagestabl">Add A new Page </button>
-<div id="addapagestabl" class="collapse in">
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
 
 <?php
   if(!empty($lastOperationResults)):
@@ -18,8 +6,10 @@
 <?php
   endif;
 ?>
-<h1>Add A New Page</h1>
-<table class="table">
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#addapagestabl">Add A new Page </button>
+    <div id="addapagestabl" class="collapse in">
+
+    <table class="table">
   <thead>
   <tr>
     <th>Name</th>
@@ -42,7 +32,7 @@
   </form>
   <tfoot></tfoot>
 </table>
-
+    </div>
 <script>
     function  verifyf()
     {
@@ -64,4 +54,4 @@
     }
 </script>
 
-</div>
+

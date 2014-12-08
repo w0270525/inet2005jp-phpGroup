@@ -1,4 +1,7 @@
 
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#viewservxcvxcvxcwertylefds">Edit Styles </button>
+<div id="viewservxcvxcvxcwertylefds" class="collapse in">
+
 
 <?php
 if(!empty($lastOperationResults)):
@@ -39,7 +42,7 @@ foreach($arrayOfStyles as $style):
 <?php
 endforeach;
 ?>
-
+</div>
 <script>
     function  verifyFormAddStyle()
     {

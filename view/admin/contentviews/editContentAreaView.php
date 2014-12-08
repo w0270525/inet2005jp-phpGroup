@@ -1,15 +1,5 @@
 <?php if($_SESSION["logged"]==true):?>
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
-
+b
 <?php
 if(!empty($lastOperationResults)):
     ?>

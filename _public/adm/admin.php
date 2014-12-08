@@ -1,10 +1,4 @@
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style>
-    .hidden {
-        display:none;
-    }
-</style>
+
 
 <?php
 if(CMS_checkAdmin()||CMS_checkEditor()||CMS_checkAuthor()):
@@ -115,8 +109,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewArticles"  id="viewArticlAuthorBut" ><a href="#">View Articles</a></li>
                             <li data-target="viewContents"  id="viewContentAuthorBut" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPageAuthorBut" ><a href="#">View Pages</a></li>
-                            <li data-target="viewStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
-                           <li data-target="addNewPages"   id="addNewPagAuthorBut"><a href="#"  >Add New Page</a></li>
+                     <!--       <li data-target="viewStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
+                      -->     <li data-target="addArticlesViews"   id="addNewPagAuthorBut"><a href="#"  >Add New Article</a></li>
                             <!--       <li data-target="addContentViews"   id="addNewPagAuthorBut"><a href="#"  >Add Content Area</a></li>
                           <!--    <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
                                   <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
@@ -171,8 +165,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
                             <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
                             <li data-target="addNewStyleViews"  id="addStylepag" ><a href="#">Add Styles</a></li>
-                            <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>
-                        </ul>
+                             </ul>
                     </div><!-- /btn-group -->
 
 
@@ -252,6 +245,13 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             //custom handling with GET variable
             if(isset($_GET["update"]) && !empty($_GET["update"]) &&   $_GET["update"]!=NULL )
                 $tempController->userController()->displayAdvancedAction($_GET["update"]);
+
+        }
+
+
+        if(isset($_GET["pagedelete"])){
+            $control->pageController->removeAction($_GET["pagedelete"]);
+
 
         }
 
@@ -374,12 +374,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->articleController()->updateAction( $control->currentUser);
 
             }
-            // load  content areaq form
-            if(isset($_GET["updateContentArea"])){
-          //      $_GET["contentupdate"]
-                $control->contentController()->updateAction( $control->currentUser);
 
-            }
 
           // load update style
             if(isset($_GET["updatestyle"])){
@@ -461,7 +456,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->articleController()->addAction();
             ?></div>
 
-        <!-- load  add style form -->
+        <!-- load  add styles -->
         <div id="addStyleViews"  class="containerAdmin"><?php
             $control->styleController()->displayAction();
             ?></div>
@@ -574,4 +569,3 @@ endif;// if user.admin/edior
 
 
 </script>
-</html>

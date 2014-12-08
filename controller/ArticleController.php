@@ -135,7 +135,10 @@ class ArticleController
         }
     }
 
-
+    public function getAllActiveArticlesByPageId($id)
+    {
+        return $this->model->getAllArticlesByPageId($id);
+    }
 
 }
 

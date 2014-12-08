@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
+
     <title><?php echo $currentPage->getName(); ?></title>
     <style>
       <?php
@@ -9,7 +7,7 @@
 
       ?>
     </style>
-  </head>
+
  <?php
 
 

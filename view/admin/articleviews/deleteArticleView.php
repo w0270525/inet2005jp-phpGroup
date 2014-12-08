@@ -1,14 +1,4 @@
 
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
 
 <?php
 if(!empty($lastOperationResults)):
@@ -21,7 +11,7 @@ endif;
 foreach($arrayOfArticles as $article):
     ?>
 
-    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formAdeleterticle">Add  New Article  </button>
+    <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#formAdeleterticle">Delete an Article</button>
     <div id="formAdeleterticle" class="collapse in">
 
 

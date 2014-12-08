@@ -91,5 +91,4 @@ if(verifyAdmin())
 <?php
 }// end if admin
 ?>
-</body>
-</html>
+

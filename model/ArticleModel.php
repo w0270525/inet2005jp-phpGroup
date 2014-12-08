@@ -125,8 +125,8 @@ public function updateArticle($articleToUpdate)
     {
         $this->m_DataAccess->connectToDB();
        $article->setModifiedBy(CMS_getUser()->getid());
-        return $this->m_DataAccess->insertArticle($article) ;
         $this->m_DataAccess->closeDB();
+        return $this->m_DataAccess->insertArticle($article) ;
     }
 
     // Article = contructArticle(Array[QueryResult] $row);
@@ -152,8 +152,30 @@ public function updateArticle($articleToUpdate)
 
 
         public function removeArticle($article){
-             return $this->m_DataAccess->deleteArticle($article);
+            $this->m_DataAccess->connectToDB();
+             $array= $this->m_DataAccess->deleteArticle($article);
+            $this->m_DataAccess->closeDB();
+            return $array;
+
 
         }
+
+    public function getAllActiveArticlesByPageId($article){
+        $this->m_DataAccess->connectToDB();$arrayOfArticles = array();
+         $this->m_DataAccess->selectActiveArticlesByPageId($article);
+        while($row = $this->m_DataAccess->fetchArticle()) {
+
+            $currentArticle = $this->constructArticle($row);
+            $arrayOfArticles[] = $currentArticle;
+
+        } // while END
+        $this->m_DataAccess->closeDB();
+        return $arrayOfArticles;
+
+
+    }
+
+
+
 }
 ?>

@@ -85,6 +85,9 @@ class PageModel
         return   $this->m_DataAccess->insertPage($row);
     }
 
+
+
+
     // Constructs the current page defined by the given ID;
     public function constructDisplayPage($id) {
 
@@ -97,7 +100,9 @@ class PageModel
 
       // Get an array of all articles which belong to this page or appear on all pages;
       $articleControl = new ArticleModel();
-      $arrayOfArticles = $articleControl->getAllArticlesByPageId($id);
+
+      $arrayOfArticles = $articleControl->getAllActiveArticlesByPageId($id);
+       //   getAllArticlesByPageId($id);
 
       // Create an array of all the Content Areas;
       $contentAreaControl = new ContentAreaModel();

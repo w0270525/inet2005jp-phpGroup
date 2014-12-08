@@ -2,16 +2,6 @@
 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#deletePageFormBt">Delete A Page </button>
 <div id="deletePageFormBt" class="collapse in">
 
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
 
 <?php
 if(!empty($lastOperationResults)):

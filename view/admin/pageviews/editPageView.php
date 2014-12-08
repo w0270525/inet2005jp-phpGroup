@@ -7,7 +7,9 @@
 <?php
   endif;
 ?>
-<h1>Update Page</h1>
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#viewsitepafsdfsdfsdfweArticleTable">Edit Page </button>
+<div id="viewsitepafsdfsdfsdfweArticleTable" class="collapse in">
+
 <table class="table">
   <thead>
   <tr>

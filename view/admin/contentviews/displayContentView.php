@@ -1,14 +1,4 @@
 
-<style type="text/css">
-    table
-    {
-        border: 1px solid purple;
-    }
-    th, td
-    {
-        border: 1px solid red;
-    }
-</style>
 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#contentArticleTable">View Content Areas </button>
 <div id="contentArticleTable" class="collapse in">
 <?php
@@ -39,7 +29,7 @@ $user = unserialize($_SESSION["user"]);
         <th>Modified Date</th>
       <?php
       endif;
-      if ($user->isEditor()):
+      if (CMS_checkEditor()):
         ?>
         <th>Edit</th>
         <th>Delete</th>
@@ -57,6 +47,7 @@ $user = unserialize($_SESSION["user"]);
         <td><?php echo $content->getDesc(); ?></td>
         <td><?php echo $content->getOrder(); ?></td>
         <?php if($user->isAdmin()): ?>
+
           <td><?php echo $content->getCreatedBy(); ?></td>
           <td><?php echo $content->getCreatedDate(); ?></td>
           <td><?php echo $content->getModifiedBy(); ?></td>
@@ -64,7 +55,7 @@ $user = unserialize($_SESSION["user"]);
         <?php
         endif;
         // Only show delete and edit if user is editor;
-        if($user->isEditor()):
+        if(CMS_checkEditor()):
           ?>
           <!-- update link sent via get -->
           <td><a href="?updateContentArea=<?php echo $content->getId(); ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
