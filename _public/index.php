@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- tinyMCE -->
   <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
     tinymce.init({
-      selector: "textarea",
+      selector: "textarea#html-content",
       theme: "modern",
       plugins: "code"
     });
   </script>
-    <!-- Jquery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- BOOTSTRAP  --->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- Jquery -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- BOOTSTRAP  --->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-
-
-    <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="bodyMain" id="bodyMain">

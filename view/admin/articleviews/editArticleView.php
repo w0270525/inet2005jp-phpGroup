@@ -26,45 +26,57 @@ foreach($arrayOfArticles as $article):
     <form name="formUpdateArticleConfirm"  id="formUpdateArticleConfirm" class="form" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
           action="#" method="post" value="addNewPageForm">
 
+      <input type="hidden" name="a_id" value=<?php echo $article->getId()?> />
 
-        <label class="col-sm-2 control-label">Name</label><input type="hidden" name="a_id" value=<?php echo $article->getId()?> />
-            <div class="col-sm-10">
-            <input oninput="resetBut()" type="text" name = "a_name"  class="form-control" value =<?php echo $article->getName() ?> required />
-        </div>
-        <label class="col-sm-2 control-label">Article</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_title"  class="form-control" value =<?php echo $article->getTitle()?> required/>
-        </div>
-        <label class="col-sm-2 control-label">Description</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_desc"  class="form-control"  value =<?php echo $article->getDesc()?>required/>
+      <label class="col-sm-2 control-label">Name</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_name" class="form-control" value="<?php echo $article->getName() ?>" required />
+      </div>
 
-        </div>
-        <label class="col-sm-2 control-label">Blurb</label> <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_blurb"  class="form-control" value =<?php echo $article->getBlurb()?> />
-        </div>
+      <label class="col-sm-2 control-label">Article</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_title" class="form-control" value="<?php echo $article->getTitle()?>" required />
+      </div>
 
-        <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"><?php echo $article->getContent()?></textarea>
-        </div>
-        <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" value ="<?php echo $article->getContentArea()?>"/>
-        </div>
-        <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage()?>"/>
-        </div>
+      <label class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_desc" class="form-control" value="<?php echo $article->getDesc()?>" />
+      </div>
 
+      <label class="col-sm-2 control-label">Blurb</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_blurb" class="form-control" value="<?php echo $article->getBlurb()?>" />
+      </div>
 
-        <label >All Page
-            <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="all_page"    value ="<?php echo $article->getAllPages()?>"/>
-            </div>
+      <label class="col-sm-2 control-label">Article Body (Content)</label>
+      <div class="col-sm-10">
+        <textarea oninput="resetBut()" rows="20" cols="120" name="a_content" id="html-content" class="form-control" required>
+          <?php echo $article->getContent()?>
+        </textarea>
+      </div>
+
+      <label class="col-sm-2 control-label">Content Area</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_contentarea" class="form-control" value="<?php echo $article->getContentArea()?>" required />
+      </div>
+
+      <label class="col-sm-2 control-label">Page</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="text" name="a_page" class="form-control" value="<?php echo $article->getAssocPage()?>" required />
+      </div>
+
+      <label class="col-sm-2 control-label">All Pages</label>
+      <div class="col-sm-10">
+        <input oninput="resetBut()" type="checkbox" name="all_page" class="form-control" value="<?php echo $article->getAllPages()?>" required />
+      </div>
+
+      <input type="hidden" name="formEditArticleConfirm" value="true" required/>
+      <div class="col-sm-10">
+        <label>
+          <span class="btn btn-default" onclick="verifyf()" id="formConfirm">Verify </span>
+          <input type="submit" class="btn btn-default" id="updateArticle" onclick="verifyf();resetBut();" value="true" >
         </label>
-        <label>Inactive
-            <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"  value ="<?php echo $article->getActive()?>"  />
-            </div>
-        </label>
-
-
-
-
-
-
-        <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
-        <div class="col-sm-10"><span  class="btn btn-default form-control" onclick="verifyf()" id="formConfirm">Verify </span>
-        <input type="submit" class="btn btn-default form-control" id="updateArticle" onclick="verifyf();resetBut(); " value ="true" >  </label>
-        </div>
+      </div>
     </form>
  </div>
 <?php

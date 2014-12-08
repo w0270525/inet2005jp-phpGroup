@@ -83,16 +83,16 @@ if(verifyAdmin())
             <td><?php echo $fetchedUser->getModifiedDate() ; ?>  </td>
         </tr>
 
-            <tr><input class="hidden" type="hidden" name="updateId" id="updateId" value=<?php echo $fetchedUser->getId(); ?> required/>
+            <tr><input class="hidden" type="hidden" name="updateId" id="updateId" value="<?php echo $fetchedUser->getId(); ?>" required/>
 
-                <td><input type="text" name="userName" id="userName" value=<?php echo $fetchedUser->getUsername(); ?> required/></td>
-                <td><input type="text" name="FirstName" id="FirstName" value=<?php echo $fetchedUser->getFirstName(); ?> required/></td>
-                <td><input type="text" name="LastName" id="LastName" value=<?php echo $fetchedUser->getLastName(); ?> required/></td>
-                <td><input type="text" name="Createdby" id="Createdby" value=<?php echo $fetchedUser->getCreatedby(); ?> required/></td>
+                <td><input type="text" name="userName" id="userName" value="<?php echo $fetchedUser->getUsername(); ?>" required/></td>
+                <td><input type="text" name="FirstName" id="FirstName" value="<?php echo $fetchedUser->getFirstName(); ?>" required/></td>
+                <td><input type="text" name="LastName" id="LastName" value="<?php echo $fetchedUser->getLastName(); ?>" required/></td>
+                <td><input type="text" name="Createdby" id="Createdby" value="<?php echo $fetchedUser->getCreatedby(); ?>" required/></td>
 
-                <td><input type="radio" name="admin" id="admin" value=<?php echo $fetchedUser->isAdmin(); ?>/>  </td>
-                <td><input type="radio" name="editor" id="editor" value=<?php echo $fetchedUser->isEditor(); ?>/>  </td>
-                <td><input type="radio" name="author" id="author" value=<?php echo $fetchedUser->isAuthor(); ?>/>   </td>
+                <td><input type="radio" name="admin" id="admin" value="<?php echo $fetchedUser->isAdmin(); ?>"/>  </td>
+                <td><input type="radio" name="editor" id="editor" value="<?php echo $fetchedUser->isEditor(); ?>"/>  </td>
+                <td><input type="radio" name="author" id="author" value="<?php echo $fetchedUser->isAuthor(); ?>"/>   </td>
                 <td> <a class="button"  value="Update" onclick="$('#formSubmit').show()" >UPDATE</a></td>
 
             </tr>

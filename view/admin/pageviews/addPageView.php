@@ -20,23 +20,23 @@
 <h1>Add A New Page</h1>
 <table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Alias</th>
-      <th>Description</th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Alias</th>
+    <th>Description</th>
+  </tr>
   </thead>
-  <form name="addNewPageForm"  id="addNewPageForm" class="addNewPageForm" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
-      action="#" method="post" value="addNewPageForm">
+  <form name="addNewPageForm" id="addNewPageForm" class="addNewPageForm" onclick ="$('#addPageSubmit').hide();$('#verifyf').show()"
+        action="#" method="post" value="addNewPageForm">
     <tbody>
-      <tr>
-        <td><input oninput="resetBut()" type="text" name ="p_name" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_alias" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_desc" required /></td>
-        <input type="hidden" name = "formSubmitNewPage" value="true" required />
-        <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
+    <tr>
+      <td><input oninput="resetBut()" type="text" name ="p_name" required /></td>
+      <td><input oninput="resetBut()" type="text" name ="p_alias" required /></td>
+      <td><input oninput="resetBut()" type="text" name ="p_desc" /></td>
+      <input type="hidden" name="formSubmitNewPage" value="true" required />
+      <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
         <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
-      </tr>
+    </tr>
     </tbody>
   </form>
   <tfoot></tfoot>

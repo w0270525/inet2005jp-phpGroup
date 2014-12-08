@@ -17,34 +17,30 @@
 <?php
   endif;
 ?>
-<<h1>Update Page</h1>
+<h1>Update Page</h1>
 <table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Alias</th>
-      <th>Description</th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Alias</th>
+    <th>Description</th>
+  </tr>
   </thead>
-  <form name="updatePageForm"  id="updatePageForm" class="updatePageForm" onclick ="$('#updatePageSubmit').hide();$('#verifyf').show()"
+  <form name="updatePageForm" id="updatePageForm" class="updatePageForm" onclick ="$('#updatePageSubmit').hide();$('#verifyf').show()"
         action="#" method="post" value="updatePageForm">
     <tbody>
-      <tr>
-        <td><input oninput="resetBut()" type="text" name ="p_name" value="<?php echo $page->getName(); ?>" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_alias" value="<?php echo $page->getAlias(); ?>" required /></td>
-        <td><input oninput="resetBut()" type="text" name ="p_desc" value="<?php echo $page->getDesc(); ?>" required /></td>
-
-        // No idea what this is for...
-        <input type="hidden" name = "formSubmitUpdatePage" value="true" required />
-        // No idea what this is for...
-
-        <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-          <input type="submit" class="btn btn-default" id="updatePageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
-      </tr>
+    <tr>
+      <td><input oninput="resetBut()" type="text" name="p_name" value="<?php echo $page->getName(); ?>" required /></td>
+      <td><input oninput="resetBut()" type="text" name="p_alias" value="<?php echo $page->getAlias(); ?>" required /></td>
+      <td><input oninput="resetBut()" type="text" name="p_desc" value="<?php echo $page->getDesc(); ?>" /></td>
+      <input type="hidden" name="formSubmitUpdatePage" value="true" required />
+      <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
+        <input type="submit" class="btn btn-default" id="updatePageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
+    </tr>
     </tbody>
   </form>
   <tfoot></tfoot>
-</table>
+</table></table>
 
 <script>
     function  verifyf()

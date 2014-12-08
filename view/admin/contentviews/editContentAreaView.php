@@ -22,40 +22,39 @@ foreach(  $arrayOfContentAreas  as $content):
 
 ?>
 
-<h1></h1>
-
-
 <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editconetnformbs"  id="editcontentareaBSbutton"> Edit  Content Area   <?php echo $content->getName()?></button>
 <div id="editconetnformbs" class="collapse in">
-        <form name="editContentAreaForm"  id="editContentArea" class="editContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()"          action="#" method="post">
+  <form name="editContentAreaForm" id="editContentArea" class="editContentAreaForm" onclick ="//$('#addPageSubmit').hide();$('#verifyf').show()" action="#" method="post">
 
+    <label class="col-sm-2 control-label">Content Area Name</label>
+    <div class="col-sm-10">
+      <input oninput="resetBut()" type="text" name="c_name" value="<?php echo $content->getName()?>" class="form-control" required />
+    </div>
 
-            <label class="col-sm-2 control-label">Content Area Name</label>
-            <div class="col-sm-10">
-            <input oninput="resetBut()" type="text" name = "c_name"  value =  <?php echo $content->getName()?> class="form-control" required /></div>
+    <label class="col-sm-2 control-label">Content Area Alias</label>
+    <div class="col-sm-10">
+      <input oninput="resetBut()" type="text" name = "c_alias" value="<?php echo $content->getAlias()?>" class="form-control" required/>
+    </div>
 
-            <label class="col-sm-2 control-label">Content Sre Alias</label>
+    <label class="col-sm-2 control-label">Description</label>
+    <div class="col-sm-10">
+      <input oninput="resetBut()" type="text" name="c_desc" value="<?php echo $content->getDesc() ?>" class="form-control"/>
+    </div>
 
-                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_alias"  value = <?php echo $content->getAlias()?>  class="form-control"  required/></div>
-            <label class="col-sm-2 control-label">Description</label>
+    <label class="col-sm-2 control-label">Order</label>
+    <div class="col-sm-10">
+      <input oninput="resetBut()" type="int" value="<?php echo $content->getOrder()?>" name="c_order" />
+    </div>
 
-                    <div class="col-sm-10"><input oninput="resetBut()" type="text" name = "c_desc" value=<?php echo $content->getDesc() ?>  class="form-control"/></div>
-            <label class="col-sm-2 control-label">Order</label>
+    <!-- content area id for back end use -->
+    <input type="hidden" value="<?php echo $content->getId()?>" name="id" />
+    <div class="col-sm-10">
+      <input type="hidden" name="formSubmitEditContentArea" value="true" class="form-control"/>
+    </div>
 
-            <div class="col-sm-10">
-                    <input oninput="resetBut()" type="int"  value =<?php echo $content->getOrder()?>   name="c_order" /></div>
-
-            <!-- content area id for back end use -->
-            <input  type="hidden"  value =<?php echo $content->getId()?>   name="id" />
-
-
-            <div class="col-sm-10"> <input type="hidden" name = "formSubmitEditContentArea" value="true"   class="form-control"/></div>
-
-
-            <div  class="btn btn-default  " id="formConfirmEditContentArea" onclick="verifyeditArticle()"  class="form-control" > Verify  </div>
-           <input  type="submit" class="btn btn-default" id="editContentAreaSubmitForm" onclick="verifyeditArticle();resetBut(); " value ="Confirm" />
-
-        </form>
+    <div class="btn btn-default" id="formConfirmEditContentArea" onclick="verifyeditArticle()" class="form-control" >Verify</div>
+    <input type="submit" class="btn btn-default" id="editContentAreaSubmitForm" onclick="verifyeditArticle();resetBut();" value="Confirm" />
+  </form>
 
  <!-- close boot strap  div -->
  </div>

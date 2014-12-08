@@ -55,7 +55,7 @@ if(verifyAdmin())
                 <label>Admin</label><input type="checkbox" name="admin" id="admin"   />
                 <label>Editor</label><input type="checkbox" name="editor" id="editor" />
                 <label>Author</label><input type="checkbox" name="author" id="author" />
-                <label>Inactive</label> <input type="checkbox" name="inanctive" id="inactive" />
+                <label>Inactive</label> <input type="checkbox" name="inactive" id="inactive" />
 
 
 
