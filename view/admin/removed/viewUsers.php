@@ -1,15 +1,4 @@
 
-    <style type="text/css">
-        table
-        {
-            border: 1px solid purple;
-        }
-        th, td
-        {
-            border: 1px solid red;
-        }
-    </style>
-
 <?php
 if(!empty($lastOperationResults)):
     ?>
@@ -54,5 +43,3 @@ endif;
     </tbody>
     <tfoot></tfoot>
 </table>
-</body>
-</html>

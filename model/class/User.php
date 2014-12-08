@@ -263,7 +263,6 @@ class User {
         $this->u_pass=$passwordHash;
 
 
-
     }
 
 
@@ -274,6 +273,8 @@ class User {
     // returns tru if pass words are a match
     public function comparePass($input)
     {
+        if($this->u_pass==null || $this->u_salt==null || $this->u_key=="inactive") return 0;
+
         $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
         $passwordHashRaw = crypt ( $input,$cryptPefix );
         $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
@@ -282,8 +283,6 @@ class User {
             return 1;
         return 0;
     }
-
-
 
 
 

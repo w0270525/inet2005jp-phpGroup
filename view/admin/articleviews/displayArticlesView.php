@@ -1,13 +1,4 @@
-<style type="text/css">
-  table
-  {
-    border: 1px solid purple;
-  }
-  th, td
-  {
-    border: 1px solid red;
-  }
-</style>
+
 <?php
   if(!empty($lastOperationResults)):
 ?>
@@ -16,8 +7,8 @@
   endif;
 ?>
 
-<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#viewarticlestable">View Article </button>
-<div id="viewarticlestable" class="collapse in">
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#viewartidasclestable">View Article </button>
+<div id="viewartidasclestable" class="collapse in">
 
 <table class="table" ><tbody style="width:100%">
 
@@ -30,7 +21,7 @@
         <td> Blurb </td>
         <td> Desc </td>
      <!-- editor specific items -->
-      <?php if(CMS_checkEditor()):?>
+      <?php if(CMS_checkAuthor()|| CMS_checkEditor()):?>
         <td> Edit </td>
         <td> Delete </td>
      <?php endif;?>
@@ -78,7 +69,7 @@
             <td><?php echo $article->getDesc(); ?></td>
 
             <!-- update and delete links -->
-            <?php if(CMS_checkEditor()):?>
+            <?php if(CMS_checkAuthor()|| CMS_checkEditor()):?>
             <td><a href="?articleupdate= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
             <td><a href="?articleremove= <?php echo $article->getId() ; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
             <?php endif;

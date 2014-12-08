@@ -50,7 +50,9 @@ class ArticleController
                     // On Succes reload update form
                     $lastOperationResults="Article has been updated ". $result ." effected";
                     $arrayOfArticles[0]=$this->model->getArticle($a_id);
-                    include "../view/admin/articleviews/editArticleView.php";
+                    $_GET["page"]=$articleToUpdate->getAssocPage();
+//                    $lastOperationsResults = "You have updated the  article";
+                //    include "../view/admin/articleviews/editArticleView.php";
             else:
                     // on fail display all articles
                     $lastOperationResults="We were unable to update that article, please try again";

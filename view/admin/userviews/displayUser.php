@@ -1,31 +1,5 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>CMS Project</title>
-    <style type="text/css">
-       .glyphicon
-       {
 
-           display:block;
-           text-align:center
 
-       }
-        table
-        {
-            border: 1px solid purple;
-        }
-        th, td
-        {
-            border: 1px solid red;
-        }
-    </style>
-</head>
-<body>
 <?php
 require_once('functions.php');
  if(verifyAdmin()){
@@ -36,7 +10,6 @@ require_once('functions.php');
     <?php
     endif;
 
-    //function to insrt glps into table based on boolean value -->
 
     ?>
     <h1>Current Users:</h1>
@@ -81,5 +54,3 @@ require_once('functions.php');
 <?php
  }// end if admin
 ?>
-</body>
-</html>

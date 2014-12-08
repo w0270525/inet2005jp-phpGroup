@@ -146,5 +146,17 @@ class PageModel
         return $currentPage;
 
     }
+
+    // removes a page from the cmsand sets all the pages article to inactive
+    public function removePage($pageId)
+    {
+        $this->m_DataAccess->connectToDB();
+        $result =  $this->m_DataAccess->deletePage($this->getPage($pageId));
+        $this->m_DataAccess->closeDB();
+        return $result;
+    }
+
+}
+?>
 }
 ?>

@@ -67,20 +67,19 @@ class UserController
             include("../view/admin/userviews/addNewUser.php");
     }
 
+
+    // void = confirmUser(Array mixed)
+    // adds a user ti the databse
+    // user infor based on POST variable
     public function confirmNewUser($currentUser)
     {
-        date_default_timezone_set('UTC');
-        $array = array(null, $_POST['FirstName'],$_POST['LastName'], $_POST['userName'],"",md5(uniqid(rand(), true)),
-            $currentUser->getId(),date_default_timezone_get(),$currentUser->getId(),date_default_timezone_get(),$_POST["roles"]);
-        $this->model->constructUserArray($array);
-        $this->model->addUser(  $this->model->constructUserArray($array));
-
-
-
-
-
-
+         $roles = array($currentUser["admin"],$currentUser["author"],$currentUser["editor"]);
+        $newUser = new User(null, $currentUser['userName'],$currentUser['FirstName'], $currentUser['LastName'],"password","" ,
+                CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$currentUser["inactive"]);
+        $this->model->addUser(  $newUser);
     }
+
+
 
 
     // boolean confirmUser(User user)

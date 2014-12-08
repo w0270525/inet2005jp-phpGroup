@@ -1,10 +1,4 @@
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style>
-    .hidden {
-        display:none;
-    }
-</style>
+
 
 <?php
 if(CMS_checkAdmin()||CMS_checkEditor()||CMS_checkAuthor()):
@@ -115,11 +109,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewArticles"  id="viewArticlAuthorBut" ><a href="#">View Articles</a></li>
                             <li data-target="viewContents"  id="viewContentAuthorBut" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPageAuthorBut" ><a href="#">View Pages</a></li>
-                            <li data-target="viewStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
+                            <li data-target="viewAllStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
                        <!--     <li data-target="addNewPages"   id="addNewPagAuthorBut"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPagAuthorBut"><a href="#"  >Add Content Area</a></li>
-                            <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
-                            <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
+                        -->    <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
+                        <!--    <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
                             <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>   -->
                         </ul>
                     </div><!-- /btn-group -->
@@ -166,7 +160,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewArticles"  id="viewArticle" ><a href="#">View Articles</a></li>
                             <li data-target="viewContents"  id="viewContent" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPage" ><a href="#">View Pages</a></li>
-                            <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
+                            <li data-target="viewAllthryStyles"  id="vietyle" ><a href="#">View Styles</a></li>
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
                             <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
@@ -268,7 +262,8 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             }
             if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) && checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
             {
-                $tempController->userController()->confirmNewUser($control->currentUser);
+
+                $tempController->userController()->confirmNewUser( CMS_postFormHelperFunction($_POST));
             }
         }
         ?>
@@ -301,7 +296,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         {
             //process new page form
             if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
-                $control->pageController()->confirmAddAction( $control->currentUser);
+                $control->addArticle();
             }
 
             // process new content are form
@@ -323,9 +318,10 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $_POST=CMS_postFormHelperFunction($_POST);
 
 
-                $control->articleController()->confirmAddAction($_POST['a_contentarea'], $_POST['a_name'], $_POST['a_title'] , $_POST['a_desc'] ,
-                    $_POST['a_blurb'], $_POST['a_content'], $_POST['a_contentarea'], $_POST['all_page'], $_POST["a_inactive"]);
+                $control->articleController()->confirmAddAction($_POST['a_contentarea'], $_POST['a_name'], $_POST['a_title'] , $_POST['a_desc'] , $_POST['a_blurb'], $_POST['a_content'], $_POST['a_contentarea'], $_POST['all_page'], $_POST["a_inactive"]);
 
+            }else {
+               $resultsOfLastOperation="Please fill in all the required fields.";
             }
 
             // process new style form
@@ -356,6 +352,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             if(isset($_POST["formDelteeConfirm"])){
 
                 $control->articleController()->removeActionConfirm( $_POST["id"]);
+
+            }
+
+            if(isset($_POST["formSubmitDeletePage"])){
+
+                $control->removeArticle();
 
             }
 
@@ -407,6 +409,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->articleController()->removeAction( $_GET["articleremove"]);
 
         }
+
+        // remove page  delete form
+        if(isset($_GET["pageremove"])){
+            $control->pageController()->removeAction( $_GET["pageremove"]);
+
+        }
     }
 
 
@@ -430,6 +438,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->contentController()->addAction();
 
             ?></div>
+
         <!--  add article form -->
         <div id="addArticlesViews"   class="containerAdmin"><?php
             $control->articleController()->addAction();
@@ -452,15 +461,27 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
     }
 
 
+    // process ontent are form
+    if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+        $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+
+
+
+    }
+
+
     if($control->currentUser->isAuthor())
     {
-        // process ontent are form
-        if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
-            $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
 
 
-
+        //process new page form
+        if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
+            $control->addArticle();
         }
+
+
+
+
 
 
 
@@ -487,8 +508,19 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
      ////////////////////////////////
      // VIEWS FOR EVRYNEWONE
     ////////////////////////////////////
+    if($_SERVER["REQUEST_METHOD"]=="GET"){
     ?>
+    <!--  add article form -->
 
+    <div id="addArticlesViews"   class="containerAdmin"><?php
+        $control->articleController()->addAction();
+
+        ?></div>
+
+
+
+      <?php } //end get
+       ?>
     <!--  view all pages -->
         <div id="viewPages"  class="containerAdmin"><?php
             $control->pageController()->displayAction();?>
@@ -506,7 +538,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         ?></div>
 
     <!--  view all Stylers -->
-    <div id="viewStyles"   class="containerAdmin"><?php
+    <div id="viewAllthryStyles"   class="containerAdmin"><?php
         $control->styleController()->displayAction();
         ?></div>
 
@@ -543,4 +575,3 @@ endif;// if user.admin/edior
 
 
 </script>
-</html>

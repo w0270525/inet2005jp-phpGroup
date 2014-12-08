@@ -25,7 +25,7 @@
             <input type="text" class="form-control" placeholder="authorName"  id="authorName" name="authorName" required />
         </span>
         <span class="input-group-addon" >
-            <input type="password" class="form-control" placeholder="password" id="password" name="password" required />
+            <input type="password" class="form-control" placeholder="passwordAuthor" id="passwordAuthor" name="passwordAuthor" required />
         </span>
         <span class="input-group-addon" >
             <button type="submit" class="form-control" value="login" id="login" >Login</button>

@@ -34,17 +34,17 @@ padding-top:10px;
     text-align:center
 
 }
-/*.table
-{      display:block;
-    text-align:center;
 
-    border: 1px solid black;
-    margin-left:10%;
-    margin-right:10%;
-    width: 60%;
+.table
+{
+    border: 1px solid purple;
 }
-*/
-th, td
+.th, .td
 {
     border: 1px solid red;
+}
+
+
+.hidden {
+    display:none;
 }

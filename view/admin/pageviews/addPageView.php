@@ -1,4 +1,5 @@
-
+<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#addapagestabl">Add A new Page </button>
+<div id="addapagestabl" class="collapse in">
 <style type="text/css">
     table
     {
@@ -62,3 +63,5 @@
         $('#addPageSubmit').hide();
     }
 </script>
+
+</div>
