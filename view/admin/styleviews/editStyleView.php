@@ -11,8 +11,6 @@ if(!empty($lastOperationResults)):
 endif;
 foreach($arrayOfStyles as $style):
 ?>
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editstyleforbsaddNewStyleFORM" id="styleeditidbsbutton">  Edit Style <?php echo $style->getName(); ?></button>
-<div id="editstyleforbsaddNewStyleFORM" class="collapse in">
 
 <form name="addNewStyleFORM"  id="addNewStyleFORM" class="addNewStyleFORM" onclick ="$('#addStyleubmit').hide();$('#verifyf').show()"
       action="#" method="post" value="addNewStyleForm">
@@ -38,7 +36,7 @@ foreach($arrayOfStyles as $style):
   <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
 
 </form>
- </div>
+
 <?php
 endforeach;
 ?>

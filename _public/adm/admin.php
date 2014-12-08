@@ -265,12 +265,13 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             if((isset($_GET["update"]) && (isset($_POST["updateId"]) && checkVar($_POST["updateId"]) && checkVar($_POST["userName"]) &&
                     checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
             {
+
                 $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
             }
 
             if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) && checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
-            {
-                $tempController->confirmNewUser($_POST["userName"], $_POST["bnasd3432er"],$_POST["userName"],$_POST["FirstName"],$_POST["LastName"],$roles,$_POST["inactive"]);
+            { $_POST=CMS_postFormHelperFunction($_POST);
+                $tempController->confirmNewUser($_POST);
 
             }
         }
@@ -481,12 +482,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
 
             }
-            if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
-                $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
-
-
-
-            }
+//            if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+//                $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+//
+//
+//
+//            }
 
 
 

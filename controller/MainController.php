@@ -60,11 +60,12 @@ class MainController
             $this->pageController->confirmAddAction($_POST["p_name"] ,$_POST["p_alias"] ,$_POST["p_desc"]);
     }
 
-    function confirmNewUser($userName, $userName,$FirstName,$LastName,$roles,$active)
+    function confirmNewUser($user)
     {
+        $roles=postRolesToArray();
 
-            $newUser = new User(null, $userName,$FirstName,$LastName,"password","" ,
-                             CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$active);
+            $newUser = new User(null, $user['userName'] ,$user['FirstName'],$user['LastName'],"password","" ,
+                             CMS_getUser()->getId(), null,CMS_getUser()->getId(),$roles,$user['a_inactive'],null);
 
                 $this->userController->confirmNewUser($newUser);
     }
