@@ -36,7 +36,7 @@ PUBLIC  function __construct($uniqueId,$article){
 
 
 
-                      <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content"  class="form-control"><?php echo $article->getContent()?></textarea>
+                      <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content" id="html-content" class="form-control"><?php echo $article->getContent()?></textarea>
                       </div>
                       <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_contentarea"  class="form-control" value ="<?php echo $article->getContentArea()?>"/>
                       </div>

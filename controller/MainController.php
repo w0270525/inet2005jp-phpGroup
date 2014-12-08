@@ -60,6 +60,15 @@ class MainController
             $this->pageController->confirmAddAction($_POST["p_name"] ,$_POST["p_alias"] ,$_POST["p_desc"]);
     }
 
+    function confirmNewUser($userName, $userName,$FirstName,$LastName,$roles,$active)
+    {
+
+            $newUser = new User(null, $userName,$FirstName,$LastName,"password","" ,
+                             CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$active);
+
+                $this->userController->confirmNewUser($newUser);
+    }
+
 
     //removes am article
     public function removeArticle()
@@ -69,7 +78,7 @@ class MainController
     }
 
 
-// resets the user pasword
+// resets the user password
 function resetPassword($id, $pass)
 {
     $attemptedUser = new User($id, null, null, null, $pass, null, null, null, null, null,null,null);

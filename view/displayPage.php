@@ -18,7 +18,7 @@
  $articleCounter=0;
 
   $arrayOfStyles = array();
-  if(CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageEditStyle.php";
+  if(CMS_checkEditor() ) include "frontPageEditStyle.php";
  ?>
     <ul>
     <?php

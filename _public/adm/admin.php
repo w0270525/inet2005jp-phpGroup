@@ -116,11 +116,11 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewContents"  id="viewContentAuthorBut" ><a href="#">View Content Areas</a></li>
                             <li data-target="viewPages"  id="viewPageAuthorBut" ><a href="#">View Pages</a></li>
                             <li data-target="viewStyles"  id="viewStyleAuthorBut" ><a href="#">View Styles</a></li>
-                       <!--     <li data-target="addNewPages"   id="addNewPagAuthorBut"><a href="#"  >Add New Page</a></li>
-                            <li data-target="addContentViews"   id="addNewPagAuthorBut"><a href="#"  >Add Content Area</a></li>
-                            <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
-                            <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
-                            <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>   -->
+                           <li data-target="addNewPages"   id="addNewPagAuthorBut"><a href="#"  >Add New Page</a></li>
+                            <!--       <li data-target="addContentViews"   id="addNewPagAuthorBut"><a href="#"  >Add Content Area</a></li>
+                          <!--    <li data-target="addArticlesViews"   id="addArticlePagAuthorBut"><a href="#"  >Add New Article</a></li>
+                                  <li data-target="addNewStyleViews"  id="addStylepagAuthorBut" ><a href="#">Add Styles</a></li>
+                                  <li data-target="removePages" id="removePag" ><a href="#" >Remove Page</a></li>   -->
                         </ul>
                     </div><!-- /btn-group -->
                     <script>
@@ -259,16 +259,19 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
             $roles=postRolesToArray();
-            $_POST["roles"]=$roles;
+          //  $roles= array( $_POST["admin"], $_POST["editor"], $_POST["author"]);
+
             //custom handling with GET variable
             if((isset($_GET["update"]) && (isset($_POST["updateId"]) && checkVar($_POST["updateId"]) && checkVar($_POST["userName"]) &&
                     checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
             {
                 $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
             }
+
             if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) && checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
             {
-                $tempController->userController()->confirmNewUser($control->currentUser);
+                $tempController->confirmNewUser($_POST["userName"], $_POST["bnasd3432er"],$_POST["userName"],$_POST["FirstName"],$_POST["LastName"],$roles,$_POST["inactive"]);
+
             }
         }
         ?>
@@ -287,13 +290,6 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         <?php //  <div id="deleteUser"  class="containerAdmin"><?php include("../view/admin/userviews/addUserView.php");?> </div>
     <?php
 
-    //////////////////////// EDITOR VIEWS ///////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////
-    if(CMS_checkEditor())
-    {
-        // CUSTOM EDITOR GET AN POST
-        // CUSTOM EDITOR GET AN POST
-        // CUSTOM EDITOR GET AN POST
 
 
         // CALLS TO  PROCESS THE UPDAET FORMS
@@ -359,8 +355,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             }
 
-
         }
+
+
 
         // GETS THE UPDATE ACTIONS
         if($_SERVER["REQUEST_METHOD"]=="GET"){
@@ -407,10 +404,39 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $control->articleController()->removeAction( $_GET["articleremove"]);
 
         }
-    }
 
 
+        // activate  style
+        if(isset($_GET["activateStyle"])){
+            if ($control->styleController()->getStyle($_GET["activateStyle"])->getId()!=null)
+                $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
+        }
 
+
+        // load article form
+        if(isset($_GET["articleupdate"])){
+            $control->articleController()->updateAction( $control->currentUser);
+
+        }
+        // load  content areaq form
+        if(isset($_GET["updateContentArea"])){
+            //      $_GET["contentupdate"]
+            $control->contentController()->updateAction( $control->currentUser);
+
+        }
+
+        // load update style
+        if(isset($_GET["updatestyle"])){
+            $control->styleController()->updateAction( $control->currentUser);
+
+        }
+
+
+        // loads style delete form
+        if(isset($_GET["deleteStyle"])){
+            $control->styleController()->removeAction( $_GET["deleteStyle"]);
+        }
+        }
 
 
         ?>
@@ -449,18 +475,23 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
     <?php
-    }
-
-
-    if($control->currentUser->isAuthor())
-    {
-        // process ontent are form
-        if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
-            $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
 
 
 
-        }
+
+
+
+            // process new content are form
+            if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+                $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+
+            }
+            if(isset($_POST["formSubmitEditContentArea"])&&  $_POST["formSubmitEditContentArea"]=="true"){
+                $control->contentController()->confirmUpdateAction( $_POST["c_name"],$_POST["c_alias"],$_POST["c_desc"],$_POST["c_order"]);
+
+
+
+            }
 
 
 
@@ -482,7 +513,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
     <?php
 
-    }// END OF AUTHOR CUSTOM VIEWS
+    // END OF AUTHOR CUSTOM VIEWS
 
      ////////////////////////////////
      // VIEWS FOR EVRYNEWONE

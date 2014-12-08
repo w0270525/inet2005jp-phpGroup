@@ -227,36 +227,40 @@ class PDOMySQLUserDataModel implements iUserDataModel
         {
             die('insertUser  failed in PDOMySQLUserDataModel.php :'.$insertStatement.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
-       $deleteStateent= "DELETE * FROM USER_ROLES 	WHERE u_r_u_id=:id;";
+//       $deleteStateent= "DELETE * FROM USER_ROLES WHERE u_r_u_id = ?;";
+//
+//         try{
+//             $this->stmt = $this->dbConnection->prepare($insertStatement);
+//             $this->stmt->bindParam(1, $user->getId(), PDO::PARAM_INT);
+//             $this->stmt->execute();
+//             $rowCount += $this->stmt->rowCount();
+//         }
+//         catch(PDOException $ex)
+//         {
+//             die('insertUser  failed removing old roles in PDOMySQLUserDataModel.php :'.$deleteStateent.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+//
+//         }
+         $this->selectUserByName($user->getUsername());
 
-         try{
-             $this->stmt = $this->dbConnection->prepare($insertStatement);
-             $this->stmt->bindParam(':id', $user->getId(), PDO::PARAM_INT);
-             $this->stmt->execute();
-             $rowCount += $this->stmt->rowCount();
-         }
-         catch(PDOException $ex)
-         {
-             die('insertUser  failed removing old roles in PDOMySQLUserDataModel.php :'.$deleteStateent.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
-
-         }
-         $roles=$user->getRoles();
-         foreach($roles as $role):
-             $insertStatement= "INSERT INTO USER_ROLES VALUES(DEFAULT,:id,:role,:roleid)";
-            try{
-                $this->stmt = $this->dbConnection->prepare($insertStatement);
-                $this->stmt->bindParam(':id', $user->getId(), PDO::PARAM_INT);
-                $this->stmt->bindParam(':roleid', $role->getId(), PDO::PARAM_INT);
-                $this->stmt->execute();
-                $rowCount += $this->stmt->rowCount();
-            }
-                catch(PDOException $ex)
-             {
-                 die('insertUser  failed removing old roles in PDOMySQLUserDataModel.php :'.$deleteStateent.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
-
-             }
-         endforeach;
-
+         $fetch = $this->fetchUserID($this->fetchUsers());
+         $this->updateUser($fetch,$user->getFirstName(),$user->getLastName(),$user->getUsername(),$user->getRoleid(), CMS_getUser()->getId());
+//         $roles=$user->getRoleId();
+//         foreach($roles as $role):
+//             $insertStatement= "INSERT INTO USER_ROLES VALUES(DEFAULT,:id,:role,:roleid)";
+//            try{
+//                $this->stmt = $this->dbConnection->prepare($insertStatement);
+//                $this->stmt->bindParam(':id', $user->getId(), PDO::PARAM_INT);
+//                $this->stmt->bindParam(':roleid', $role->getId(), PDO::PARAM_INT);
+//                $this->stmt->execute();
+//                $rowCount += $this->stmt->rowCount();
+//            }
+//                catch(PDOException $ex)
+//             {
+//                 die('insertUser  failed removing old roles in PDOMySQLUserDataModel.php :'.$deleteStateent.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
+//
+//             }
+//         endforeach;
+//
 
      }
 

@@ -73,10 +73,10 @@ class UserController
     // user infor based on POST variable
     public function confirmNewUser($currentUser)
     {
-         $roles = array($currentUser["admin"],$currentUser["author"],$currentUser["editor"]);
-        $newUser = new User(null, $currentUser['userName'],$currentUser['FirstName'], $currentUser['LastName'],"password","" ,
-                CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$currentUser["inactive"]);
-        $this->model->addUser(  $newUser);
+    //    $roles = array($currentUser["admin"],$currentUser["author"],$currentUser["editor"]);
+   //     $newUser = new User(null, $currentUser['userName'],$currentUser['FirstName'], $currentUser['LastName'],"password","" ,
+   //             CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$currentUser["inactive"]);
+        $this->model->addUser(  $currentUser);
     }
 
 
