@@ -102,7 +102,7 @@ class PageModel
       $articleControl = new ArticleModel();
 
       $arrayOfArticles = $articleControl->getAllActiveArticlesByPageId($id);
-       //   getAllArticlesByPageId($id);
+      //  $arrayOfArticles = $arrayOfArticles-> getAllArticlesByPageId($id);
 
       // Create an array of all the Content Areas;
       $contentAreaControl = new ContentAreaModel();
@@ -119,15 +119,14 @@ class PageModel
           if ($a->getContentarea() == $ca->getId()) {
 
             array_push($tempArray, $a);
-
-          } // if END
+          }// if END
         } // foreach (a) END
 
         $ca->setArticles($tempArray);
 
       } // foreach (ca) END
 
-      // Set the content area array to the current page;
+        // Set the content area array to the current page;
       $currentPage->setContentAreas($arrayOfContentAreas);
 
       return $currentPage;

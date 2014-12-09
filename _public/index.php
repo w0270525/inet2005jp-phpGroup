@@ -48,9 +48,9 @@
 
     </head>
 <body>
-    <div class="bodyMain" id="bodyMain">
+    <div class="bodyMain" id="bodyMain"><?php
 
-        <?php
+        if($showLoginBar) include("../view/admin/pageLoginMenuView.php");
 
        $control->displayAdmin($control);
 
@@ -65,7 +65,7 @@
 
         $control->pageController()->displayPage($_GET['page']);
         //w the admin login bar
-        if($showLoginBar) include("../view/admin/pageLoginMenuView.php");
+
     ?>
     </div>
     </body>

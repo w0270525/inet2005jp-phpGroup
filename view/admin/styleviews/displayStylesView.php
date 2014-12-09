@@ -8,8 +8,8 @@
 $user=unserialize($_SESSION["user"]);
 ?>
 
-<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#viewserwertylefds">view Styles </button>
-<div id="viewserwertylefds" class="collapse in">
+<button type="button" class="btn btn-success" data-toggle="collapse" data-target="#viewsfdsfdsfdfdserwertylefds">view Styles </button>
+<div id="viewsfdsfdsfdfdserwertylefds" class="collapse in">
 
 
 <h1>Site Styles</h1>
@@ -81,7 +81,7 @@ $user=unserialize($_SESSION["user"]);
 <script>
  var savedHtml;
 
-     $('.confirmation').on('click', function () {
+     $('.confirmationstyle').on('click', function () {
          return confirm('Are you sure you want to change the style?');
      });
 </script>
