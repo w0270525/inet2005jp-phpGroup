@@ -10,7 +10,11 @@
 
  <?php
 
-
+ if(!empty($lastOperationResults)):
+     ?>
+     <h2><?php echo $lastOperationResults; ?></h2>
+ <?php
+ endif;
  // varibles for author editing
  require_once "formClass/editArticleFormClass.php";
  $articleCounter=0;

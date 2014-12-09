@@ -33,7 +33,7 @@ class UserController
       // updates the current user to the
 
 
-    public function commitUpdateAction($userId,$fName,$lName,$createdBy,$roles, $createdby, $current_User)
+    public function commitUpdateAction($userId,$fName,$lName,$createdBy,$roles, $createdby, $current_User,$key)
     {
 
         $lastOperationResults = "";
@@ -42,6 +42,7 @@ class UserController
         $currentUser->setLastName($lName);
         $currentUser->setRoleId($roles);
         $currentUser->setCreatedBy($createdBy);
+        $currentUser->setKey($key);
         $arrayOfUsers = $this->model->getAllUsers();
         $lastOperationResults = $this->model->updateUser($currentUser);
         $_POST=null;
@@ -53,18 +54,15 @@ class UserController
         if ($userId==$current_User)
         {
             include '../view/admin/userviews/loginToRefreshView.php';
-            forceSessionLogout();
+            CMS_forceSessionLogout();
         }
     }
 
+    // loads the view to add a new user
     public function addNewUser()
     {
-
-          //  $bnasd3432er   = md5(uniqid(rand(), true));
-
         $bnasd3432er   = md5(uniqid(rand(), true));
-
-            include("../view/admin/userviews/addNewUser.php");
+        include("../view/admin/userviews/addNewUser.php");
     }
 
 
@@ -73,10 +71,7 @@ class UserController
     // user infor based on POST variable
     public function confirmNewUser($currentUser)
     {
-    //    $roles = array($currentUser["admin"],$currentUser["author"],$currentUser["editor"]);
-   //     $newUser = new User(null, $currentUser['userName'],$currentUser['FirstName'], $currentUser['LastName'],"password","" ,
-   //             CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$currentUser["inactive"]);
-        $this->model->addUser(  $currentUser);
+        $result=$this->model->addUser(  $currentUser);
     }
 
 
@@ -95,23 +90,32 @@ class UserController
 
     //Updaes user password and salt;
     public function updateUserSecurity($user)
-    {
-        $this->model->updateUserSecurity($user);
-
-
+    {    $this->model->updateUserSecurity($user);
     }
 
 
     public function resetPass($user,$pass)
     {
+    }
 
+    // loads the remove user form
+    public function getRemoveUser($id)
+    {    $arrayOfUserObjects[]=$this->model->getUser($id);
+        include "../view/admin/userviews/deleteUserView.php";
+    }
 
-
+    public function removeUser($userName)
+    {    if( $this->model->removeUser($userName))
+            $lastOperationsSesults="User Remove";
+        else;
+            $lastOperationsSesults="User Was Not Removed";
     }
 
 
-
-
+    public function toggleUserInactivity($id)
+    {
+        return $this->model->setActive();
+    }
 
 
 

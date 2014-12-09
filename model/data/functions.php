@@ -6,7 +6,7 @@ class connect{
 // conects to the cms
     public function connectToDB()
     {
-        if (isset($_SESSION["user"]) && CMS_checkEditor()) {
+        if (isset($_SESSION["user"]) && (CMS_checkEditor() || CMS_checkAdmin())) {
             try {
                 $this->dbConnection = new PDO("mysql:host=localhost;dbname=cms", "backend", "inet2005");
                 $this->dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -78,33 +78,25 @@ function CMS_postGetReset()
 {
     $_POST=null;$_GET=null;
 }
-// $var = CMS_ID(AnyType any)
-// returns the value of ->getId or returns NULL
-// if (CMS_ID{$x)) currentId = $x CMS_ID($x);
-//function CMS_ID($any)
-//{
-// try{
-// if($any->getId())
-// return ($ant->getId())
-// }catch (ErrorException $e){
-// return NULL;
-// }
-//}
 
-// $_POST = CMS_postFormHelperFunction($_POST)
-// process the $_Post gloabls a_inactive add all_pageto int
+
+
+
+
 function CMS_postFormHelperFunction($post)
 {
     if(!isset($post["all_page"]))$post["all_page"] = 0;
     else if($post["all_page"]=="on" ) $post["all_page"] = 1;
     if(!isset($post["a_inactive"]))$post["a_inactive"] = 0;
-    else if($post["a_inactive"]=="on" ) $post["a_inactive"] = 1;
+    else   $post["a_inactive"] = 1;
     if(!isset($post["admin"]))$post["admin"] = 0;
     else if($post["admin"]=="on" ) $post["admin"] = 1;
     if(!isset($post["editor"]))$post["editor"] = 0;
     else if($post["editor"]=="on")$post["editor"] = 1;
     if(!isset($post["author"]))$post["author"] = 0;
     else if($post["author"]=="on")$post["author"] = 1;
+    if(!isset($post["active"]))$post["active"] = "inactive";
+    else if($post["active"]=="on")$post["active"] ="good";
     return $post;
 }
 
@@ -129,5 +121,74 @@ function CMS_hideAuthor(){
     if(isset($_COOKIE["hideAuthor"]) && $_COOKIE["hideAuthor"]==true) return true;
     return false;
 }
+
+
+
+function CMS_postRolesToArray()
+{
+    $roles = array();
+    if(isset($_POST["admin"]))
+        $roles[] = 1;
+    if(isset($_POST["editor"]))
+        $roles[] = 2;
+    if(isset($_POST["author"]))
+        $roles[] = 3;
+    return $roles;
+}
+
+
+function CMS_checkPostUserNamePassword()
+{
+    if(!empty($_POST["userName"]) && !empty($_POST["password"])) return true;
+    return false;
+}
+
+function CMS_confirmLogin()
+{
+
+    $control = unserialize($_SESSION["user"]);
+    $control->currentUser = unserialize($_SESSION["user"]);
+
+    if(isset($_SESSION["logged"]) &&  $_SESSION["logged"])
+        if($control->currentUser->isAdmin()
+            || $control->currentUser->isEditor()
+            || $control->currentUser->isAuthor())
+        {
+            // login confirmed ok to continue
+            return true;
+        }
+
+    $sessionFile = "../sessions/sess_" . $_SESSION["sessionId"] ;
+    unlink($sessionFile);
+}
+
+
+// force session logout
+function CMS_forceSessionLogout()
+{
+    session_start();
+    $sessionFile = "../sessions/sess_" . $_SESSION["sessionId"];
+    $_SESSION["control"] = serialize(new MainController());
+    $_SESSION["sessionid"] =  null;
+    $_SESSION["logged"] = false;
+    $_SESSION["grants"] = 0;
+
+    // FIND THE SESSION FILE ND DELETE IT FROM THE SYSTEM
+    unlink($sessionFile);
+    ?>
+    <script>
+        window.location.reload();
+    </script>
+<?php
+}
+
+
+function CMS_checkVar($any)
+{
+    if(isset($any) && !empty($any) && null!=$any) return true;
+    return false;
+}
+
+
 
 

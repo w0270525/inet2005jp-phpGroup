@@ -8,7 +8,7 @@ else echo '<span class="glyphicon glyphicon-ban-circle" style="color:red";></spa
 
 
 function verifyAdmin()
-{  if(confirmLogin())
+{  if(CMS_confirmLogin())
     if(unserialize($_SESSION['user'])->isAdmin())
         return true;
     return false;

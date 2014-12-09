@@ -30,6 +30,8 @@ require_once('functions.php');
             <th>Editor</th>
             <th>Author</th>
             <th>Edit</th>
+            <th>Active</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +50,16 @@ require_once('functions.php');
                 <td><?php tableGlyphs($user->isAdmin()) ?></td>
                 <td><?php tableGlyphs($user->isEditor()); ?></td>
                 <td><?php tableGlyphs($user->isAuthor()); ?></td>
+
                 <td><a href="?update=<?php echo $user->getId() ; ?>"><span class="glyphicon glyphicon-pencil" ></span></a></td>
+                <td><a href="?updateUserInactive=<?php echo $user->getId() ; ?>"> <span
+                        <?php if($user->getKey()=="inactive"):?>
+                       class="glyphicon glyphicon-eye-close" ></span></a></td>
+                        <?php else:?>
+                             class="glyphicon glyphicon-eye-open" >
+                         <?php endif;?>
+                </span></a></td>
+                <td><a href="?updateUserDelete=<?php echo $user->getId() ; ?>"><span class="glyphicon glyphicon-trash" ></span></a></td>
 
             </tr>
         <?php

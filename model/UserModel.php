@@ -96,8 +96,8 @@ function updateUserSecurity($user)
             $userToUpdate->getLastName(),
             $userToUpdate->getUsername(),
             $userToUpdate->getRoleId(),
-            $userToUpdate->getCreatedBy());
-
+            $userToUpdate->getCreatedBy(),
+        $userToUpdate->getKey());
 
         return "$recordsAffected record(s) updated succesfully!";
     }
@@ -136,16 +136,21 @@ function updateUserSecurity($user)
     }
 
 
+    // User = addUser($user);
+    // Adds the user into the database
     function addUser($user)
     {
         $this->m_DataAccess->connectToDB();
         $this->m_DataAccess->insertUser($user);
+        $result = $this->m_DataAccess->selectUserByName($user->getUsername());
         $this->m_DataAccess->closeDB();
+        return $result;
     }
 
 
-
-
+    // getUserById(User user)
+    // returns a user by the given id. Will return a null
+    // user otherwise
     public function getUserById($userId)
     {
 
@@ -153,7 +158,6 @@ function updateUserSecurity($user)
         $this->m_DataAccess->selectUserById($userId);
         $record =  $this->m_DataAccess->fetchUsers();
         $fetchedUser = $this->constructUser($record);
-
         $this->m_DataAccess->selectUserRoles($fetchedUser->getId());
           $fetchedUser->setRoleId($this->m_DataAccess->selectUserRoles($fetchedUser->getId()));
         $this->m_DataAccess->closeDB();
@@ -197,7 +201,15 @@ function updateUserSecurity($user)
 
     }
 
-
+    public  function removeUser($userName)
+    {
+       $this->m_DataAccess->connectToDB();
+       $userToDelete=$this->getUserByUserName($userName);
+        $id=$userToDelete->getId();
+       $result = $this->m_DataAccess->removeUser($id);
+       $this->m_DataAccess->closeDB();
+        return $result;
+    }
 
 }
 ?>

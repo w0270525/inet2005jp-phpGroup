@@ -258,18 +258,18 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
-            $roles=postRolesToArray();
+            $roles=CMS_postRolesToArray();
           //  $roles= array( $_POST["admin"], $_POST["editor"], $_POST["author"]);
 
             //custom handling with GET variable
-            if((isset($_GET["update"]) && (isset($_POST["updateId"]) && checkVar($_POST["updateId"]) && checkVar($_POST["userName"]) &&
-                    checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"]) && checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
+            if((isset($_GET["update"]) && (isset($_POST["updateId"]) && CMS_checkVar($_POST["updateId"]) && CMS_checkVar($_POST["userName"]) &&
+                    CMS_checkVar($_POST["FirstName"]) && CMS_checkVar($_POST["LastName"]) && CMS_checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
             {
-
-                $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId());
+                if(isset($_POST["active"]) )$_POST["active"]="inactive";
+                $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId(),$_POST["active"]);
             }
 
-            if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  checkVar($_POST["userName"]) && checkVar($_POST["FirstName"]) && checkVar($_POST["LastName"])))
+            if(isset($_POST["userName"]) && (isset($_POST["bnasd3432er"]) &&  CMS_checkVar($_POST["userName"]) && CMS_checkVar($_POST["FirstName"]) && CMS_checkVar($_POST["LastName"])))
             { $_POST=CMS_postFormHelperFunction($_POST);
                 $tempController->confirmNewUser($_POST);
 
@@ -296,6 +296,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // CALLS TO  PROCESS THE UPDAET FORMS
         if($_SERVER["REQUEST_METHOD"]=="POST")
         {
+            // process the delete user form
+            if(isset($_POST["deleteuserid"])){
+                $control->userController()->removeUser( $_POST["userName"]);
+            }
+
+
             //process new page form
             if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
                 $control->pageController()->confirmAddAction( $control->currentUser);
@@ -362,6 +368,21 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
         // GETS THE UPDATE ACTIONS
         if($_SERVER["REQUEST_METHOD"]=="GET"){
+
+
+
+            // toggle user activate  style
+            if(isset($_GET["userActivate"])){
+                if ($control->userController()->toggleInactivivty())
+                  $resultsOfLastOperation="Success";
+            }
+
+
+
+            if(isset($_GET["updateUserDelete"])){
+              $control->userController()->getRemoveUser($_GET["updateUserDelete"] );
+
+            }
 
             // activate  style
             if(isset($_GET["activateStyle"])){

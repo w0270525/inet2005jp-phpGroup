@@ -1,6 +1,8 @@
 <?php
 require_once "../controller/StyleController.php";
+
 require_once "../controller/UserController.php";
+
 require_once "../controller/ArticleController.php";
 require_once "../controller/PageController.php";
 require_once "../controller/ContentAreaController.php";
@@ -19,32 +21,28 @@ class MainController
         $this->contentController= new ContentAreaController() ;
         $this->currentUser=NEW User(null,null,null,null,null,null,null,null,null,null,null,null);
     }
-    // Main Controllers content area controoler
+    // Main Controllers content area controller
     protected $contentController;
-    public function contentController()
-    {
+    public function contentController()    {
         return $this->contentController;
     }
 
-    // Main Controllers user controoler
+    // Main Controllers user controller
     protected $userController;
-    public function userController()
-    {
+    public function userController()    {
         return $this->userController;
     }
 
 
     // main Controllers Article controller
     protected $articleController;
-    public function articleController()
-    {
+    public function articleController()  {
         return $this->articleController;
     }
 
     //page controller
     protected $pageController;
-    public function pageController()
-    {
+    public function pageController()    {
         return $this->pageController;
     }
 
@@ -54,39 +52,34 @@ class MainController
         return $this->styleController;
     }
 
-    //adds am article
+    // void addArticle()
+    //adds an article
     public function addArticle()
-    {
-        if(isset($_POST["p_name"]) && isset($_POST["p_alias"]) && isset($_POST["p_desc"]))
-            $this->pageController->confirmAddAction($_POST["p_name"] ,$_POST["p_alias"] ,$_POST["p_desc"]);
+    {      if(isset($_POST["p_name"]) && isset($_POST["p_alias"]) && isset($_POST["p_desc"]))
+                    $this->pageController->confirmAddAction($_POST["p_name"] ,$_POST["p_alias"] ,$_POST["p_desc"]);
     }
 
+    // void = confirmNewUser(User user);
+    // adda a new user into the database
     function confirmNewUser($user)
-    {
-        $roles=postRolesToArray();
-
-            $newUser = new User(null, $user['userName'] ,$user['FirstName'],$user['LastName'],"password","" ,
-                             CMS_getUser()->getId(), null,CMS_getUser()->getId(),$roles,$user['a_inactive'],null);
-
-                $this->userController->confirmNewUser($newUser);
+    {   $roles=CMS_postRolesToArray();
+        $newUser = new User(null, $user['userName'] ,$user['FirstName'],$user['LastName'],"password","" , CMS_getUser()->getId(), null,CMS_getUser()->getId(),null,$roles,$user['active']);
+        $this->userController->confirmNewUser($newUser);
     }
 
-
-    //removes am article
+    // removeArticle()
+    //deletes an article
     public function removeArticle()
-    {
-        if(isset( $_POST["id"]))
+    {   if(isset( $_POST["id"]))
             $this->pageController->removeConfirmAction( $_POST["id"]);
     }
 
-
-// resets the user password
-function resetPassword($id, $pass)
-{
-    $attemptedUser = new User($id, null, null, null, $pass, null, null, null, null, null,null,null);
-    $this->userController->updateUserSecurity($attemptedUser);
-
-}
+    // resetPassword(Integer userId, String password)
+    // resets the user password
+    function resetPassword($id, $pass)
+    {   $attemptedUser = new User($id, null, null, null, $pass, null, null, null, null, null,null,null);
+        $this->userController->updateUserSecurity($attemptedUser);
+    }
 
  // void = confirmUser(String username);
  // handle user login
@@ -99,8 +92,8 @@ function resetPassword($id, $pass)
                 $attemptedUser=$this->userController()->model->getUserByUserName($tryUser->getUsername());
                 $_SESSION["grants"]= $attemptedUser->getRoleId();
                 $_SESSION["user"]=serialize($attemptedUser);
-                  $this->currentUser=$attemptedUser;
-            //$_SESSION["controller"]= serialize(($this));
+                $this->currentUser=$attemptedUser;
+
                 if($attemptedUser->getPass()==="password")
                 {
                     $_SESSION["grants"]=Array(0);
@@ -115,10 +108,7 @@ function resetPassword($id, $pass)
             $this->currentUser=$tryUser;
             $_SESSION["user"]=null;
             $_SESSION["logged"]=false;
- //           $this->currentUser = new User(null, null, null, null, null, null, null, null, null, null,null,null);
-//          $_SESSION["user"]=  serialize(new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) );
-//            $currentUser=new User(null, null, null, $userName, $pass, null, null, null, null, null,null,null) ;
-             $_SESSION["user"]= serialize($this->currentUser);
+            $_SESSION["user"]= serialize($this->currentUser);
         }
 
         $_SESSION["user"]= serialize($this->currentUser );

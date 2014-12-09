@@ -7,33 +7,35 @@ if(session_status()==PHP_SESSION_NONE) {
     session_start();
 }
 
-require("../controller/MainController.php");
+require "../controller/MainController.php" ;
+
 $showLoginBar=false;
 // init the controller for the session
 // must be serialized in session varible
 $sessionID = session_id();
-if (!isset($_SESSION["sessionId"]) ||!isset($_SESSION["control"])){
-$_SESSION["sessionId"] =session_id();
-$_SESSION["control"] = serialize(new  MainController());
-$_SESSION["logged"]=false;
+if (!isset($_SESSION["sessionId"]) ||!isset($_SESSION["control"]))
+{
+    $_SESSION["sessionId"] =session_id();
+    $_SESSION["control"] = serialize(new  MainController());
+    $_SESSION["logged"]=false;
 }
 
 // clears the current login
 // resets all session variables resets controller and forces page reset
 if($_SERVER["REQUEST_METHOD"]=="POST")
 if(isset($_POST["logout"]))
-{
+    {
 
 
-$sessionFile="../sessions/sess_".  $_SESSION["sessionId"] ;
-$_SESSION["control"] = serialize(new  MainController());
-$_SESSION["sessionid"] =  null;
-$_SESSION["logged"]=false;
-$_SESSION["grants"]=0;
-$showLoginBar=true;
-// FIND THE SESSION FILE ND DELETE IT FROM THE SYSTEM
-unlink($sessionFile);
-header("refresh: 0;");
+    $sessionFile="../sessions/sess_".  $_SESSION["sessionId"] ;
+    $_SESSION["control"] = serialize(new  MainController());
+    $_SESSION["sessionid"] =  null;
+    $_SESSION["logged"]=false;
+    $_SESSION["grants"]=0;
+    $showLoginBar=true;
+    // FIND THE SESSION FILE ND DELETE IT FROM THE SYSTEM
+    unlink($sessionFile);
+    header("refresh: 0;");
 }
 
 
@@ -54,10 +56,7 @@ if(isset($_SESSION["user"])){
 
 }
 
-if(!isset($_SESSION["logged"])||$_SESSION["logged"]==false)
-    {
-        $showLoginBar=true;
-    }
+
 
 
 
@@ -67,10 +66,13 @@ if(!isset($_SESSION["logged"])) $_SESSION["logged"]=false;
 $tempController =new MainController();
 
 //HANDLES ADMIN LOGIN AND FUNCTIONALITY
+if(isset($_POST["authorName"]) && isset($_POST["passwordAuthor"]))
+    $_SESSION["logged"] = $control->confirmUser($_POST["authorName"],$_POST["passwordAuthor"]);
+
 if($_SERVER["REQUEST_URI"]=="/admin" && isset($_SESSION["logged"]) && $_SESSION["logged"]==false)
 {
     // login
-    if(checkPostUserNamePassword())
+    if(CMS_checkPostUserNamePassword())
         $_SESSION["logged"] = $control->confirmUser($_POST["userName"],$_POST["password"]);
 
     if( !isset($_SESSION["logged"]) || $_SESSION["logged"]==null || $_SESSION["logged"]==false)
@@ -78,5 +80,10 @@ if($_SERVER["REQUEST_URI"]=="/admin" && isset($_SESSION["logged"]) && $_SESSION[
 
 }
 
-//show admin menu
+
+// shows the login bar
+if(!isset($_SESSION["logged"])||$_SESSION["logged"]==false)
+{
+    $showLoginBar=true;
+}
 

@@ -28,6 +28,7 @@ if(verifyAdmin())
             <th>Admin</th>
             <th>Editor</th>
             <th>Author</th>
+            <th>Inactive</th>
             <th>Edit</th>
         </tr>
         </thead><form onsubmit="return checkform()" method="post" name="updateUser" id=updateUser">
@@ -46,6 +47,7 @@ if(verifyAdmin())
                 <td><?php tableGlyphs($fetchedUser->isAdmin()) ?></td>
                 <td><?php tableGlyphs($fetchedUser->isEditor()); ?></td>
                 <td><?php tableGlyphs($fetchedUser->isAuthor()); ?></td>
+
                 <td class="glyphicon glyphicon-save"> </td>
 
             </tr>
@@ -66,6 +68,7 @@ if(verifyAdmin())
                 <td><input type="radio" name="admin" id="admin" value="<?php echo $fetchedUser->isAdmin(); ?>"/>  </td>
                 <td><input type="radio" name="editor" id="editor" value="<?php echo $fetchedUser->isEditor(); ?>"/>  </td>
                 <td><input type="radio" name="author" id="author" value="<?php echo $fetchedUser->isAuthor(); ?>"/>   </td>
+                <td>  <input type="checkbox" name="active" id="active" /></td>
                 <td> <a class="button"  value="Update" onclick="$('#formSubmit').show()" >UPDATE</a></td>
 
             </tr>
