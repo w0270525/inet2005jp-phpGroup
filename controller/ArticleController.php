@@ -43,8 +43,7 @@ class ArticleController
     {   // verify artilce exissts
         if($currentArticle = $this->model->getArticle($a_id)):
             $articleToUpdate = new Article($a_id,$a_contentArea,$a_name,$a_title,$a_desc,$a_blurb,$a_content,$a_page,$a_allPages,null,null,CMS_getUser()->getId(),null,$a_active);
-
-            // get update result and show display
+               // get update result and show display
             if($result = $this->model->updateArticle($articleToUpdate)):
 
                     // On Succes reload update form

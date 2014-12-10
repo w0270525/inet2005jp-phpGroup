@@ -308,7 +308,7 @@ INSERT INTO cms.LOOKUP_ROLES VALUES (2, 'editor');
 INSERT INTO cms.LOOKUP_ROLES VALUES (3, 'author');
 
 # u_id, u_fname, u_lname, u_username, u_pass, u_salt, u_createdby
-INSERT INTO cms.USER  VALUES ('1', 'superuser', 'superuser', 'superuser', '$6$rounds=5000$b4f9fdc733761164$AnL6HMmFMCRonal7O967oayT.y/6EvY2ZJCYwqvg5bpsS6hycVoIH8TQi1F4WzhjdG8okPpeKAzkFsJ8FHi0T.', 'b4f9fdc7337611642a0d8f50ec0e3f09', '2014-12-04 12:50:50', '1', '2014-12-04 12:50:50', '1', NULL);
+INSERT INTO cms.USER  VALUES ('1', 'superuser', 'superuser', 'superuser', 'password', 'password', '2014-12-04 12:50:50', '1', '2014-12-04 12:50:50', '1', NULL);
 INSERT INTO cms.USER  VALUES (2,'admin', 'User', 'admin', 'password', 'password',NOW(), 1,NOW(),1,NULL);
 INSERT INTO cms.USER  VALUES (3,'editor', 'User', 'editor', 'password', 'password',NOW(), 1,NOW(),1,NULL);
 INSERT INTO cms.USER  VALUES (4,'author', 'User', 'author', 'password', 'password',NOW(), 1,NOW(),1,NULL);
