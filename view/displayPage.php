@@ -35,10 +35,8 @@
     </ul>
     <?php
       foreach ($currentPage->getContentAreas() as $ca) {
-
-
     ?>
-      <div class="<?php echo $ca->getAlias(); ?>">
+      <div class="<?php echo $ca->getAlias(); ?>" id="<?php echo $ca->getAlias(); ?>">
     <?php
         foreach ($ca->getArticles() as $a) {
 

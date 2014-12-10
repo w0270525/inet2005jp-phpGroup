@@ -103,8 +103,9 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     // returns the Articles asscoiated with a specific PAGES ID
     public function selectArticleByPageId($pageID)
     {
-        $selectStatement = "SELECT * FROM ARTICLE ";
-        $selectStatement .= "WHERE (a_assocpage = ? OR a_allpages = 1 )AND (a_inactive=0);";
+        $selectStatement =  "SELECT * FROM ARTICLE";
+        $selectStatement .= " WHERE (a_assocpage = ? OR a_allpages = 1) AND (a_inactive = 0)";
+        $selectStatement .= " ORDER BY a_creationdate DESC;";
 
         try
         {

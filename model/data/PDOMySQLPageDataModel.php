@@ -62,7 +62,7 @@ class PDOMySQLPageDataModel implements iPageDataModel
 public function selectPagesByName($name)
 {
 
-    $selectStatement = $this->SELECT . "    JOIN USER  ON p_createdby = USER.u_id WHERE p_name = :name ";
+    $selectStatement = $this->SELECT . " JOIN USER ON p_createdby = USER.u_id WHERE p_name = :name";
     try
     {
         $this->stmt = $this->dbConnection->prepare($selectStatement );
