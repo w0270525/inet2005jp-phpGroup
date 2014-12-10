@@ -60,6 +60,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewUsers" id="viewUserNav" ><a href="#">View Users</a></li>
                             <li data-target="addNUser" id="addUsers"><a href="#"   >Add User</a></li>
                             <li data-target="removeUser" id="removeUsers" ><a href="#" >Remove User</a></li>
+	                        <li data-target="viewChart" id="viewCharts" ><a href="#" >Content Charts</a></li>
 
                         </ul>
                     </div><!-- /btn-group -->
@@ -70,6 +71,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             $('#viewUsers').hide();
                             $('#addNewUser').hide();
                             $('#removeUser').hide();
+	                        $('#viewChart').hide();
 
                         }
                     </script>
