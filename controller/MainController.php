@@ -6,6 +6,7 @@ require_once "../controller/UserController.php";
 require_once "../controller/ArticleController.php";
 require_once "../controller/PageController.php";
 require_once "../controller/ContentAreaController.php";
+require_once "../controller/ChartController.php";
 
 class MainController
 {
@@ -129,6 +130,13 @@ class MainController
             include("../_public/adm/admin.php");
 
     }
+
+	//chart controller
+	protected $chartController;
+	public function displayChart()
+	{
+		return $this->chartController;
+	}
 
 
     // The current user of the site if  logged in
