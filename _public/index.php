@@ -39,7 +39,7 @@
     // SETS CURRENT PAGE  IF NOT SET
     if(!isset($_GET['page'] )||empty($_GET['page'] ))
     {
-        $_GET['page'] =1;
+        $_GET['page'] = 1;
     }
     ?>
 
@@ -48,22 +48,13 @@
 
     </head>
 <body>
-    <div class="bodyMain" id="bodyMain"><?php
+    <div class="bodyMain" id="bodyMain">
+    <?php
 
-        if($showLoginBar) include("../view/admin/pageLoginMenuView.php");
+       if($showLoginBar) include("../view/admin/pageLoginMenuView.php");
 
        $control->displayAdmin($control);
-
-
-
-
-
-
-
-
-
-
-        $control->pageController()->displayPage($_GET['page']);
+       $control->pageController()->displayPage($_GET['page']);
         //w the admin login bar
 
     ?>

@@ -1,7 +1,7 @@
 <?php
 //this file contains basic functions and classes that can be shared between different PDO's
 // DATA BASE CONNECTION OBJECT
-class connect{
+class connect {
     protected $dbConnection;
 // conects to the cms
     public function connectToDB()
