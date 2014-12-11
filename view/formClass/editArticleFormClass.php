@@ -18,7 +18,7 @@ PUBLIC  function __construct($uniqueId,$article){
               $article= $this->article;
 
 ?>
-              <button type="button" class="btn btn-success" data-toggle="collapse" data-target="#editArtform_<?php echo $this->id ?>">Edit Article <?php echo $this->article->getName(); ?></button>
+              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#editArtform_<?php echo $this->id ?>">Edit Article  <?php echo $this->article->getName(); ?></button>
               <div id="editArtform_<?php echo $this->id ?>" class="collapse in">
                   <form name="formUpdateArticleConfirm<?php echo $this->id ?>"  id="formUpdateArticleConfirm" class="form"   action="#" method="post" value="addNewPageForm">
 
@@ -40,16 +40,16 @@ PUBLIC  function __construct($uniqueId,$article){
                       </div>
                       <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="int" name = "a_contentarea"  class="form-control" value ="<?php echo $article->getContentArea()?>"/>
                       </div>
-                      <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage()?>"/>
+                      <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage();?>"/>
                       </div>
 
 
                       <label >All Page
-                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="all_page"    value ="<?php echo $article->getAllPages()?>"/>
+                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="all_page"    value ="" <?php if($article->getAllPages()) echo 'checked';?> />
                           </div>
                       </label>
                       <label>Inactive
-                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"  value ="<?php echo $article->getActive()?>"  />
+                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"  value ="" <?php if($article->getActive()) echo 'checked';?>   />
                           </div>
                       </label>
 

@@ -2,7 +2,7 @@
 <h3>YOU MUST SET YOUR PASSWORD BEFORE YOU CONTINUE</h3>
 
 <p>Both password must match to continue</p>
-<form    class="form" name="newPass" id="newPass"  action="#" method="post" >
+<form class="form" name="newPass" id="newPass"  action="#" method="post" >
 
     <input type="hidden" name="passwordReset" id="passwordReset" value = "true"/>
 
@@ -13,8 +13,8 @@
     <input class = "form-control" type="password" name="pass" id="pass"   required />
     <label>Verify Password</label>
     <input class = "form-control" type="password" name="passVerify" id="passVerify"  required / >
-	<div  type="button" class="btn btn-default" id="verifyBut" onclick="verifyPassword();clear()">Done</div>
-	<input class="" onsubmit="clear()" type="submit" id="SetPassword" name="submit"  value="Confirm" required / >
+    <div  type="button" class="btn btn-default" id="verifyBut" onclick="verifyPassword();clear()">Done</div>
+    <input class="" onsubmit="clear()" type="submit" id="SetPassword" name="submit"  value="Confirm" required / >
 </form>
 
 <script>

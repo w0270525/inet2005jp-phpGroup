@@ -58,7 +58,7 @@
             <?php echo $article->getTitle(); ?></td>
             <td><?php echo $article->getContentarea(); ?><br/>
              <?php echo $article->getContent(); ?></td>
-            <td><?php if($article->getActive()==1):
+            <td><?php if($article->getActive()==0):
                    ?>
                     <span class="glyphicon glyphicon-check"></span>
                 <?php

@@ -44,18 +44,19 @@
     {
         $_GET['page'] = 1;
     }
+
+    if(isset($_POST['passwordReset']) && isset($_POST['passVerify'])) {
+
+      $control = new MainController();
+      $control->resetPassword($_POST['userId'], $_POST['pass']);
+      header ("Location: /admin");
+
+    }
+
     ?>
 
-	if(isset($_POST['passwordReset']) && isset($_POST['passVerify'])) {
-
-	      $control = new MainController();
-	      $control->resetPassword($_POST['userId'], $_POST['pass']);
-	     header ("Location: /admin");
-
-	    }
-
-    </head>
-<body>
+  </head>
+  <body>
     <div class="bodyMain" id="bodyMain">
     <?php
 

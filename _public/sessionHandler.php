@@ -87,3 +87,8 @@ if(!isset($_SESSION["logged"])||$_SESSION["logged"]==false)
     $showLoginBar=true;
 }
 
+if(isset($_POST["passVerify"]) && isset($_POST["pass"]) && ($_POST["passVerify"] == $_POST["pass"]) && isset($_POST["passwordReset"])){
+  //  $name = $tempController->userController()->model->getUserById( $_POST["userName"])->getUsername();
+    $control->resetPassword($_POST["userName"] ,$_POST["passVerify"]);
+
+}

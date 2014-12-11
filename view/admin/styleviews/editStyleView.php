@@ -32,7 +32,9 @@ foreach($arrayOfStyles as $style):
   <input type="hidden" name="formUpdateStyle" value="true" required/>
   <input type="hidden" name="s_id" value="<?php echo $style->getId()?>" required/>
 
-  <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
+
+
+        <span class="btn btn-default" id="formAddStyleConfirm" onclick="verifyFormAddStyle()" >Verify</span>
   <input type="submit" class="btn btn-default" id="addStyleSubmit" onclick="verifyFormAddStyle();resetButStyleAdd();" value="Confirm" />
 
 </form>

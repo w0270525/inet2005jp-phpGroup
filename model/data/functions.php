@@ -86,7 +86,7 @@ function CMS_postGetReset()
 function CMS_postFormHelperFunction($post)
 {
     if(!isset($post["all_page"]))$post["all_page"] = 0;
-    else if($post["all_page"]=="on" ) $post["all_page"] = 1;
+    else  $post["all_page"] = 1;
     if(!isset($post["a_inactive"]))$post["a_inactive"] = 0;
     else   $post["a_inactive"] = 1;
     if(!isset($post["admin"]))$post["admin"] = 0;
