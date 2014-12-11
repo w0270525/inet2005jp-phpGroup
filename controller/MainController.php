@@ -79,6 +79,7 @@ class MainController
     function resetPassword($id, $pass)
     {   $attemptedUser = new User($id, null, null, null, $pass, null, null, null, null, null,null,null);
         $this->userController->updateUserSecurity($attemptedUser);
+
     }
 
  // void = confirmUser(String username);
