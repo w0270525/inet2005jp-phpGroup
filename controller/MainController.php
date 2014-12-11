@@ -141,7 +141,6 @@ class MainController
     }
 
 
-
     // The current user of the site if  logged in
     public $currentUser = NULL;
     // inACTIVE LOGOFF / COOKIE RESET

@@ -28,9 +28,9 @@
 
 
 
-</head>
+    <?php
+    //init the user session
 
-	<?php
     include_once("adm/miniViews/functions.php");
     include "sessionHandler.php";
     include_once("../controller/MainController.php");
@@ -44,6 +44,7 @@
     {
         $_GET['page'] = 1;
     }
+    ?>
 
 	if(isset($_POST['passwordReset']) && isset($_POST['passVerify'])) {
 
@@ -53,10 +54,7 @@
 
 	    }
 
-?>
-
-
-
+    </head>
 <body>
     <div class="bodyMain" id="bodyMain">
     <?php
