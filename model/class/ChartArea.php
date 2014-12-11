@@ -1,7 +1,7 @@
 
 <?php
 
-include_once("../data/PDOMySQLChartDataModel.php");
+include_once("../model/data/PDOMySQLChartDataModel.php");
 
 
 class ChartArea {

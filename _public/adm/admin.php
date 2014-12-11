@@ -289,7 +289,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 	    <div id="viewChart" class="containerAdmin">
 		    <?php
-		    $tempController->chartController()->displayChart();
+ 		    $tempController->chartController()->displayChart();
 		    ?>
 	    </div>
 
@@ -436,7 +436,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // activate  style
         if(isset($_GET["activateStyle"])){
             if ($control->styleController()->getStyle($_GET["activateStyle"])->getId()!=null)
-                $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
+                $control->styleController()->activateAction($control->styleController()->getStyle($_GET["activateStyle"]));
         }
 
             // load article form
