@@ -17,10 +17,11 @@
  endif;
  // varibles for author editing
  require_once "formClass/editArticleFormClass.php";
+ require_once "formClass/addArticleFormClass.php";
  $articleCounter=0;
 
   $arrayOfStyles = array();
-  if(isset($_SESSION["user"]) && CMS_checkEditor() && !CMS_hideAuthor()) include "frontPageEditStyle.php";
+ // if(isset($_SESSION["user"]) && CMS_checkEditor() && !CMS_hideAuthor()) include "frontPageEditStyle.php";
  ?>
     <ul>
     <?php
@@ -38,6 +39,14 @@
     ?>
       <div class="<?php echo $ca->getAlias(); ?>" id="<?php echo $ca->getAlias(); ?>">
     <?php
+        if (!$ca->getArticles())
+    {
+        if(isset($_SESSION["user"]) && CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageAddArticle.php";
+
+    }
+
+
+
         foreach ($ca->getArticles() as $a) :
             // author edit current article opption
             if(isset($_SESSION["user"]) && CMS_checkAuthor() && CMS_hideAuthor()==false) include "frontPageEditArticle.php";

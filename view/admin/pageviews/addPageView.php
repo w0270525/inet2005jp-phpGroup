@@ -25,8 +25,8 @@
       <td><input oninput="resetBut()" type="text" name ="p_alias" required /></td>
       <td><input oninput="resetBut()" type="text" name ="p_desc" /></td>
       <input type="hidden" name="formSubmitNewPage" value="true" required />
-      <td><span class="btn btn-default" id="formConfirm" onclick="verifyf()" >Verify</span>
-        <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyf();resetBut();" value="Confirm" /></td>
+      <td><span class="btn btn-default" id="formConfirmAddPagfe" onclick="verifyformpageadd()" >Verify</span>
+        <input type="submit" class="btn btn-default" id="addPageSubmit" onclick="verifyformpageadd();resetBut();" value="Confirm" /></td>
     </tr>
     </tbody>
   </form>
@@ -34,22 +34,22 @@
 </table>
     </div>
 <script>
-    function  verifyf()
+    function  verifyformpageadd()
     {
 //        if (document.forms['addNewPageForm']['p_name'].value.length>5)
 //        if (document.forms['addNewPageForm']['p_alias'].value.length>5)
 //        if (document.forms['addNewPageForm']['p_desc'].value.length>20)
 //    {
-        $('#formConfirm').hide();
+        $('#formConfirmAddPagfe').hide();
         $('#addPageSubmit').show();
     }
 
 
-    $('#addPageSubmit').hide()
+    $('#addPageSubmit').hide();
 
     function resetBut()
     {
-        $('#formConfirm').show();
+        $('#formConfirmAddPagfe').show();
         $('#addPageSubmit').hide();
     }
 </script>

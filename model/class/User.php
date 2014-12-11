@@ -254,13 +254,15 @@ class User {
     // create a uniqyes salt, takes the users password and creats a salted password
     public function updateSecurity(){
 
+         $prefix = '$6$rounds=10000$';
         // create a uniquy salt
         $this->u_salt =  md5(uniqid(rand(), true));
-        $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
+        $this->u_salt =crypt ( $this->u_salt,$prefix.$this->u_salt );
+        $cryptPefix = '$6$rounds=58680$'. $this->u_salt ;
         $passwordHashRaw = crypt ( $this->u_pass,$cryptPefix );
-        $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
-        $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
-        $this->u_pass=$passwordHash;
+     //   $cryptPrefixEscaped = '\$6\$rounds=13212\$'.  $this->u_salt . '\$';
+     //   $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
+        $this->u_pass=$passwordHashRaw;
 
 
     }
@@ -275,10 +277,10 @@ class User {
     {
         if($this->u_pass==null || $this->u_salt==null || $this->u_key=="inactive") return 0;
 
-        $cryptPefix = '$6$rounds=5000$'. $this->u_salt ;
+        $cryptPefix = '$6$rounds=58680$'. $this->u_salt ;
         $passwordHashRaw = crypt ( $input,$cryptPefix );
-        $cryptPrefixEscaped = '\$6\$rounds=5000\$'.  $this->u_salt . '\$';
-        $passwordHash = preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
+        $cryptPrefixEscaped = '\$6\$rounds=13212\$'.  $this->u_salt . '\$';
+        $passwordHash =  $passwordHashRaw;  //preg_replace('/^'.$cryptPrefixEscaped.'/','',$passwordHashRaw);
         if($passwordHash == $this->getPass())
             return 1;
         return 0;
