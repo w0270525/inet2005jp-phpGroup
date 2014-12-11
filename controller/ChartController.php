@@ -13,5 +13,13 @@ class ChartController
 
 	}
 
+	public function chartUsers()
+	{
+		$arrayOfUsers = $this->model->getAllUsers();
+
+		include '../view/admin/userviews/Chart.php';
+	}
+
+
 
 }
