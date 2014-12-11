@@ -1,10 +1,10 @@
 <h2>User Content Frequency</h2>
-<canvas id="canvas" height="450" width="600"></canvas>
+<canvas id="canvas" height="200" width="300"></canvas>
 <script>
 	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
 	var barChartData = {
-		labels : [<?php foreach($arrayOfUsers as $user) ?>],
+		labels : ["January","February","March","April","May","June","July"],
 		datasets : [
 			{
 				fillColor : "rgba(220,220,220,0.5)",

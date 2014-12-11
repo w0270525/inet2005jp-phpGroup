@@ -1,6 +1,6 @@
 <?php
 
-require_once('../model/ChartModel.php');
+require_once('../model/class/ChartArea.php');
 
 require_once('../model/data/functions.php');
 class ChartController
@@ -11,12 +11,16 @@ class ChartController
 	{
 		$this->model = new ChartArea();
 
-		include ('../view/admin/userviews/chartView.php');
 
 	}
 
 
+	public function displayChart() {
 
+
+
+		include ('../view/admin/userviews/chartView.php');
+	}
 
 
 }

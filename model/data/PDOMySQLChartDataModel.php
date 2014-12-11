@@ -32,11 +32,14 @@ class PDOMySQLChartDataModel {
 
 	public function selectUsers()
 	{
-		// hard-coding for first ten rows
-		global $userResult;
-		$selectStatement = "SELECT * FROM USER;";
 
-		//   $selectStatement .= " LIMIT :start,:count;";
+		global $userResult;
+
+
+		$selectStatement = "SELECT cms.USER.u_id, cms.USER.u_username AS u_name, count(cms.ARTICLE.a_id) AS a_count";
+		$selectStatement .= "FROM cms.ARTICLE LEFT JOIN cms.USER ON cms.USER.u_id=cms.ARTICLE.a_createdby";
+		$selectStatement .="GROUP BY cms.ARTICLE.a_createdby;"
+
 
 		try
 		{
@@ -50,9 +53,7 @@ class PDOMySQLChartDataModel {
 		}
 
 	}
-	/*
-	need a statement that will get the count for each user regarding both articles and content areas. bar chart.
-	*/
+
 
 
 

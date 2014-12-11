@@ -20,7 +20,7 @@ class MainController
         $this->pageController = new PageController();
         $this->styleController= new StyleController();
         $this->contentController= new ContentAreaController() ;
-	    $this->chartController=new ChartController();
+	    $this->chartController = new ChartController();
         $this->currentUser=NEW User(null,null,null,null,null,null,null,null,null,null,null,null);
     }
     // Main Controllers content area controller
