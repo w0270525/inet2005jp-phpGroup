@@ -16,5 +16,7 @@ interface iChartDataModel {
 	public function selectUsers();
 
 
+	public function fetchChart();
+
 
 } 

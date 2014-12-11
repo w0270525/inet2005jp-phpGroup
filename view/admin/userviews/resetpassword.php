@@ -6,7 +6,7 @@
 
     <input type="hidden" name="passwordReset" id="passwordReset" value = "true"/>
 
-    <input  type="hidden" name="userId" id="userId" value = "<?php echo  $user->getId()?>"  >
+    <input  type="hidden" name="userId" id="userId" value="<?php echo  $user->getId()?>"  >
 
 
     <label>Password</label>

@@ -59,9 +59,9 @@ class MainController
 	public function displayChart()
 	{
 		return $this->chartController;
-	}
+    }
 
-	// void addArticle()
+    // void addArticle()
     //adds an article
     public function addArticle()
     {      if(isset($_POST["p_name"]) && isset($_POST["p_alias"]) && isset($_POST["p_desc"]))
@@ -76,7 +76,7 @@ class MainController
         $this->userController->confirmNewUser($newUser);
     }
 
-	// removeArticle()
+    // removeArticle()
     //deletes an article
     public function removeArticle()
     {   if(isset( $_POST["id"]))

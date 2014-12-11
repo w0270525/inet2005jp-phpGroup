@@ -173,14 +173,6 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 
 
-                    <!-- hide the suthor menus if user is more then author  -->
-
-                    <?php if(CMS_checkAuthor()):?>
-                    <form action=""    method="post" name="" id="HideAuthorNav" style="display:inline;" >
-                        <input type="submit" name="HideAuthor" id="HideAuthor" class="btn btn-success pull-right"   value="Hide Author Buttons" style="display:inline;right:0;" />
-                    </form>
-                    <?php endif;?>
-
 
 
 
@@ -219,8 +211,16 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
                 ?>
             </div>
-        </div>
 
+        <!-- hide the suthor menus if user is more then author  -->
+
+        <?php if(CMS_checkAuthor()):?>
+            <form action=""    method="post" name="" id="HideAuthorNav" style="display:inline;" >
+                <input type="submit" name="HideAuthor" id="HideAuthor" class="btn btn-success pull-right"   value="Hide Author Buttons" style="display:inline;right:0;" />
+            </form>
+        <?php endif;?>
+
+        </div>
     </nav>
 
 
@@ -251,11 +251,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         }
 
 
-        if(isset($_GET["pagedelete"])){
-            $control->pageController->removeAction($_GET["pagedelete"]);
 
-
-        }
 
 
         if($_SERVER["REQUEST_METHOD"]=="POST")
@@ -293,7 +289,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 	    <div id="viewChart" class="containerAdmin">
 		    <?php
-		    $tempController->displayChart();
+		    $tempController->chartController()->displayChart();
 		    ?>
 	    </div>
 
@@ -313,7 +309,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
             //process new page form
             if(isset($_POST["formSubmitNewPage"])&&  $_POST["formSubmitNewPage"]=="true"){
-                $control->pageController()->confirmAddAction( $control->currentUser);
+                $control->pageController()->confirmAddAction($_POST['p_name'], $_POST['p_alias'] , $_POST['p_desc']);
             }
 
             // process new content are form
@@ -348,8 +344,13 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
               // process new style form
             if(isset($_POST["formUpdateStyle"])&&  $_POST["formUpdateStyle"]=="true"){
-                $control->styleController()->updateActionConfirm($_POST["s_id"],$_POST["s_name"], $_POST['s_desc'] , $_POST['s_style']);
+                $control->styleController()->updateActionConfirm($_POST["s_id"],$_POST["s_name"], $_POST['s_desc'] , $_POST['s_style'], $_POST["active"]);
 
+            }
+
+            // process new style form
+            if(isset($_POST["formSubmitDeletePage"])&&  $_POST["formUpdateStyle"]=="true"){
+                $control->styleController()->updateActionConfirm($_POST["s_id"],$_POST["s_name"], $_POST['s_desc'] , $_POST['s_style'], $_POST["active"]);
 
             }
 
@@ -361,17 +362,17 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             }
 
 
-                // process delete content area fornm
-         //   if(isset($_POST["formDelteeConfirm"]) && ($_POST["formDelteeConfirm"] ="'true"))
-           //     $control->contentController()->removeActionConfirm($_POST["id"]);
-
             if(isset($_POST["formDelteeConfirm"])){
 
                 $control->articleController()->removeActionConfirm( $_POST["id"]);
 
             }
+            if (isset($_POST["pagedelete"]) && isset($_POST['p_name'])&& isset( $_POST['p_alias']) && isset($_POST['p_id'])){
+            $control->pageController()->removeActionConfirm($_GET["pagedelete"]);
 
         }
+
+}
 
 
 
@@ -396,7 +397,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             // activate  style
             if(isset($_GET["activateStyle"])){
                 if ($control->styleController()->getStyle($_GET["activateStyle"])->getId()!=null)
-                $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
+                $control->styleController()->activateAction($control->styleController()->getStyle($_GET["activateStyle"]));
             }
 
 
@@ -438,12 +439,12 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                 $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
         }
 
+            // load article form
+            if(isset($_GET["articleupdate"])){
+                $control->articleController()->updateAction( $control->currentUser);
 
-        // load article form
-        if(isset($_GET["articleupdate"])){
-            $control->articleController()->updateAction( $control->currentUser);
+            }
 
-        }
         // load  content areaq form
         if(isset($_GET["updateContentArea"])){
             //      $_GET["contentupdate"]
@@ -462,6 +463,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         if(isset($_GET["deleteStyle"])){
             $control->styleController()->removeAction( $_GET["deleteStyle"]);
         }
+            if(isset($_GET["?pagedelete"])){
+                $control->pageController()->removeAction( $_GET["pagedelete"]);
+            }
         }
 
 

@@ -46,6 +46,9 @@ class PDOMySQLChartDataModel {
 			$this->stmt = $this->dbConnection->prepare($selectStatement );
 
 			$this->stmt->execute();
+
+			$this->result=$this->stmt;
+			return $this->stmt= $userResult;
 		}
 		catch(PDOException $ex)
 		{
@@ -54,7 +57,18 @@ class PDOMySQLChartDataModel {
 
 	}
 
+	public function fetchChart()
+	{
+		try
+		{
+			$this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+			return $this->result;
+		}
+		catch(PDOException $ex)
+		{
+			die('fetchArticle failed  in PDOMySQLChartDataModel: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+		}
+	}
 
 
-
-} 
+}
