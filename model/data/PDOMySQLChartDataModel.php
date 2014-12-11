@@ -8,7 +8,7 @@ include_once "iChartDataModel.php";
  * Time: 6:59 PM
  */
 
-class PDOMySQLChartDataModel {
+class PDOMySQLChartDataModel implements iChartDataModel {
 	private $connObject;
 	private $dbConnection;
 	private $result;

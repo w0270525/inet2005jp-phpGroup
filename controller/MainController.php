@@ -56,7 +56,7 @@ class MainController
 
 	//chart controller
 	protected $chartController;
-	public function displayChart()
+	public function chartController()
 	{
 		return $this->chartController;
     }

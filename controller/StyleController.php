@@ -23,7 +23,7 @@ class StyleController
     public function displayAction()
     {
         $arrayOfStyles = $this->model->getAllStyles();
-        include '../view/admin/styleviews/showStylesView.php';
+        include '../view/admin/styleviews/displayStylesView.php';
     }
 
     // void updateAction(); -->creates accessible Style Object in th DOM

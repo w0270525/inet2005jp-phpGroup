@@ -1,7 +1,7 @@
 
 <?php
 
-include_once("../data/PDOMySQLChartDataModel.php");
+include_once("../model/data/PDOMySQLChartDataModel.php");
 
 
 class ChartArea {
@@ -19,10 +19,12 @@ class ChartArea {
 	}
 
 
+
+
 	/**
 	 * @param mixed $c_count
 	 */
-	public function setCCount($c_count)
+	public function setCount($c_count)
 	{
 		$this->c_count = $c_count;
 	}
@@ -30,7 +32,7 @@ class ChartArea {
 	/**
 	 * @return mixed
 	 */
-	public function getCCount()
+	public function getCount()
 	{
 		return $this->c_count;
 	}
@@ -38,7 +40,7 @@ class ChartArea {
 	/**
 	 * @param mixed $c_data
 	 */
-	public function setCData($c_data)
+	public function setData($c_data)
 	{
 		$this->c_data = $c_data;
 	}
@@ -46,7 +48,7 @@ class ChartArea {
 	/**
 	 * @return mixed
 	 */
-	public function getCData()
+	public function getData()
 	{
 		return $this->c_data;
 	}
@@ -54,7 +56,7 @@ class ChartArea {
 	/**
 	 * @param \PDOMySQLContentAreaDataModel $c_db
 	 */
-	public function setCDb($c_db)
+	public function setDb($c_db)
 	{
 		$this->c_db = $c_db;
 	}
@@ -62,7 +64,7 @@ class ChartArea {
 	/**
 	 * @return \PDOMySQLContentAreaDataModel
 	 */
-	public function getCDb()
+	public function getDb()
 	{
 		return $this->c_db;
 	}
@@ -70,7 +72,7 @@ class ChartArea {
 	/**
 	 * @param mixed $c_users
 	 */
-	public function setCUsers($c_users)
+	public function setUsers($c_users)
 	{
 		$this->c_users = $c_users;
 	}
@@ -78,7 +80,7 @@ class ChartArea {
 	/**
 	 * @return mixed
 	 */
-	public function getCUsers()
+	public function getUsers()
 	{
 		return $this->c_users;
 	}

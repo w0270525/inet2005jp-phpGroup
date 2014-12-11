@@ -3,6 +3,7 @@
 require_once('../model/class/ChartArea.php');
 
 require_once('../model/data/functions.php');
+
 class ChartController
 {
 	public $model;
