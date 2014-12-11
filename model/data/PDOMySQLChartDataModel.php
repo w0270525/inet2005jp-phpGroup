@@ -9,6 +9,10 @@ include_once "iChartDataModel.php";
  */
 
 class PDOMySQLChartDataModel {
+	private $connObject;
+	private $dbConnection;
+	private $result;
+	private $stmt;
 
 	public function connectToDB()
 	{
@@ -46,5 +50,10 @@ class PDOMySQLChartDataModel {
 		}
 
 	}
+	/*
+	need a statement that will get the count for each user regarding both articles and content areas. bar chart.
+	*/
+
+
 
 } 

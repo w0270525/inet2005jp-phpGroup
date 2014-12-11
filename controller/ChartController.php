@@ -11,7 +11,7 @@ class ChartController
 	{
 		$this->model = new ChartArea();
 
-
+		include ('../view/admin/userviews/chartView.php');
 
 	}
 

@@ -12,6 +12,9 @@ interface iChartDataModel {
 
 	public function closeDB();
 
+	//for getting the users for the data
 	public function selectUsers();
+
+
 
 } 
