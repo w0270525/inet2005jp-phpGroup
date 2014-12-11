@@ -38,7 +38,7 @@ class PDOMySQLChartDataModel {
 
 		$selectStatement = "SELECT cms.USER.u_id, cms.USER.u_username AS u_name, count(cms.ARTICLE.a_id) AS a_count";
 		$selectStatement .= "FROM cms.ARTICLE LEFT JOIN cms.USER ON cms.USER.u_id=cms.ARTICLE.a_createdby";
-		$selectStatement .="GROUP BY cms.ARTICLE.a_createdby;"
+		$selectStatement .="GROUP BY cms.ARTICLE.a_createdby;";
 
 
 		try
