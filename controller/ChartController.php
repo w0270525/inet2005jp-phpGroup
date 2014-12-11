@@ -9,16 +9,13 @@ class ChartController
 
 	public function __construct()
 	{
-		$this->model = new ChartController();
+		$this->model = new ChartArea();
+
+
 
 	}
 
-	public function chartUsers()
-	{
-		$arrayOfUsers = $this->model->getAllUsers();
 
-		include '../view/admin/userviews/Chart.php';
-	}
 
 
 

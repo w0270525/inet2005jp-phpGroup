@@ -53,7 +53,14 @@ class MainController
         return $this->styleController;
     }
 
-    // void addArticle()
+	//chart controller
+	protected $chartController;
+	public function displayChart()
+	{
+		return $this->chartController;
+	}
+
+	// void addArticle()
     //adds an article
     public function addArticle()
     {      if(isset($_POST["p_name"]) && isset($_POST["p_alias"]) && isset($_POST["p_desc"]))
@@ -68,7 +75,14 @@ class MainController
         $this->userController->confirmNewUser($newUser);
     }
 
-    // removeArticle()
+	//chart controller
+	protected $chartController;
+	public function displayChart()
+	{
+		return $this->chartController;
+	}
+
+	// removeArticle()
     //deletes an article
     public function removeArticle()
     {   if(isset( $_POST["id"]))
@@ -131,12 +145,6 @@ class MainController
 
     }
 
-	//chart controller
-	protected $chartController;
-	public function displayChart()
-	{
-		return $this->chartController;
-	}
 
 
     // The current user of the site if  logged in
