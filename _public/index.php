@@ -31,6 +31,7 @@
 
     include_once("adm/miniViews/functions.php");
     include "sessionHandler.php";
+    include_once("../controller/MainController.php");
     // gran functions for from various layers for usability
 
     include_once("../model/data/functions.php");
@@ -41,13 +42,19 @@
     {
         $_GET['page'] = 1;
     }
+
+    if(isset($_POST['passwordReset']) && isset($_POST['passVerify'])) {
+
+      $control = new MainController();
+      $control->resetPassword($_POST['userId'], $_POST['pass']);
+      header ("Location: /admin");
+
+    }
+
     ?>
 
-
-
-
-    </head>
-<body>
+  </head>
+  <body>
     <div class="bodyMain" id="bodyMain">
     <?php
 
