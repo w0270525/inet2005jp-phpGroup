@@ -165,7 +165,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
                             <li data-target="viewStyles"  id="viewStyle" ><a href="#">View Styles</a></li>
                             <li data-target="addNewPages"   id="addNewPag"><a href="#"  >Add New Page</a></li>
                             <li data-target="addContentViews"   id="addNewPag"><a href="#"  >Add Content Area</a></li>
-                            <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>
+                        <!--    <li data-target="addArticlesViews"   id="addArticlePag"><a href="#"  >Add New Article</a></li>-->
                             <li data-target="addNewStyleViews"  id="addStylepag" ><a href="#">Add Styles</a></li>
                              </ul>
                     </div><!-- /btn-group -->
@@ -263,7 +263,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             if((isset($_GET["update"]) && (isset($_POST["updateId"]) && CMS_checkVar($_POST["updateId"]) && CMS_checkVar($_POST["userName"]) &&
                     CMS_checkVar($_POST["FirstName"]) && CMS_checkVar($_POST["LastName"]) && CMS_checkVar($_POST["Createdby"]))  && $_GET["update"]  == $_POST["updateId"]))
             {
-                if(isset($_POST["active"]) )$_POST["active"]="inactive";
+                if(isset($_POST["active"]) )$_POST["active"]="inactive";else $_POST["active"]="active";
                 $tempController->userController()->commitUpdateAction($_POST["updateId"],$_POST["userName"], $_POST["FirstName"], $_POST["LastName"], $roles,$_POST["Createdby"],$control->currentUser->getId(),$_POST["active"]);
             }
 
@@ -436,7 +436,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
         // activate  style
         if(isset($_GET["activateStyle"])){
             if ($control->styleController()->getStyle($_GET["activateStyle"])->getId()!=null)
-                $control->styleController()->activateAction($control->styleController->getStyle($_GET["activateStyle"]));
+                $control->styleController()->activateAction($control->styleController()->getStyle($_GET["activateStyle"]));
         }
 
             // load article form
