@@ -13,6 +13,7 @@
   </script>
 	<!--Chart.js-->
 	<script src="js/plugins.js"></script>
+	<script src="js/Chart.js/Chart.js"></script>
   <!-- Jquery -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <!-- BOOTSTRAP  --->

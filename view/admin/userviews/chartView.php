@@ -2,7 +2,7 @@
 <?php
 
 
-	$arrayOfChartObjects
+	$arrayOfChartObjects;
 ?>
 
 <h2>User Content Frequency</h2>
