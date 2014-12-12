@@ -24,40 +24,11 @@ class ChartModel
 	{
 		$this->m_DataAccess->connectToDB();
 
-		$this->m_DataAccess->selectUsers();
-
-
-
-
-		while($row = $this->m_DataAccess->fetchChart())
-		{
-
-
-			$arrayOfChartObjects[] =
-		}
+		$arrayOfChartObjects = $this->m_DataAccess->selectUsers();
 
 		$this->m_DataAccess->closeDB();
 
 		return $arrayOfChartObjects;
 	}
-//
-//
-//
-//if(!$result)
-//{
-//die('Could not retrieve records from the Sakila Database: ' . mysqli_error($db));
-//}
-//while ($row = mysqli_fetch_assoc($result))
-//{
-////	?>
-//<!---->
-<!--	<tr>-->
-<!--		<td>-->
-<!--			--><?php //echo $row['title']; ?><!-- </td><td> --><?php //echo $row['description']; ?><!--</td>-->
-<!--	</tr>-->
-<?php
-//}
-//
-//
-//mysqli_close($db);
+
 }
