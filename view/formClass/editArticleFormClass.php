@@ -5,17 +5,34 @@ class articleForm{
 
 public $article;
 public $id;
-PUBLIC  function __construct($uniqueId,$article){
+public $contentArea;
+private $contentAreas;
+private $pages;
+private $page;
+
+PUBLIC  function __construct($uniqueId,$article,$CA,$page){
     $this->id= $uniqueId;
     $this->article = $article;
+    $this->contentArea=$CA;
 }
 
+
+    function getContentArea()
+    {
+        $ca = new ContentAreaModel();
+        $this->contentAreas = $ca->getAllContentAreas();
+        $pa = new PageModel();
+        $this->pages=$pa->getAllPages();
+    }
 
 
 
           function showEditContentForm()
           {
               $article= $this->article;
+              $this->getContentArea();
+            //  $ca = $this->contentArea;
+              $page = $this->page;
 
 ?>
               <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#editArtform_<?php echo $this->id ?>">Edit Article  <?php echo $this->article->getName(); ?></button>
@@ -37,28 +54,39 @@ PUBLIC  function __construct($uniqueId,$article){
 
 
                       <label class="col-sm-2 control-label">Article Body (Content)</label> <div class="col-sm-10"><textarea oninput="resetBut()" rows="20" cols="120" name = "a_content" id="html-content" class="form-control"><?php echo $article->getContent()?></textarea>
-                      </div>
-                      <label class="col-sm-2 control-label">Content Area</label><div class="col-sm-10"><input oninput="resetBut()" type="int" name = "a_contentarea"  class="form-control" value ="<?php echo $article->getContentArea()?>"/>
-                      </div>
-                      <label class="col-sm-2 control-label">Page</label><div class="col-sm-10"><input oninput="resetBut()" type="text" name = "a_page"  class="form-control" value ="<?php echo $article->getAssocPage();?>"/>
-                      </div>
+</div>
+                          <label for="number">Page Number</label>
+                          <select name="a_page" id="a_page">
+                              <?php foreach($this->pages as $page):?>
+                                  <option ><?php echo $page->getId()?> </option>
+                              <?php endforeach;?>
 
 
-                      <label >All Page
-                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="all_page"    value ="" <?php if($article->getAllPages()) echo 'checked';?> />
+                          </select>
+                          <label for="number">Specify Content Area</label>
+                          <select name="a_contentarea" id="a_contentarea">
+                              <?php foreach($this->contentAreas as $contentArea):?>
+                                  <option <?php if($this->contentArea->getId()==$article->getContentarea()){?>selected="true"<?php } ?>><?php echo $contentArea->getId()?> </option>
+                              <?php endforeach;?>
+
+
+                          </select>
+
+
+                      <label  title="Set the article to be viewed on all pages">All Page
+                          <div class="col-sm-10"><input oninput="resetBut()" class= "form-control" type="checkbox" name="all_page"    value ="" <?php if($article->getAllPages()) echo 'checked';?> />
                           </div>
                       </label>
-                      <label>Inactive
-                          <div class="col-sm-10"><input oninput="resetBut()" type="checkbox" name="a_inactive"  value ="" <?php if($article->getActive()) echo 'checked';?>   />
+                      <label  title="Set the article to be viewed on only by authors">Inactive
+                          <div class="col-sm-10"><input oninput="resetBut()" class= "form-control"  type="checkbox" name="a_inactive"  value ="" <?php if($article->getActive()) echo 'checked';?>   />
                           </div>
                       </label>
-
 
 
 
                        <input type="hidden" name = "formEditArticleConfirm" value="true" required/>
                       <div class="col-sm-10">  <label><span  class="btn btn-default form-control" onclick="verifyff()" id="formConfirm<?php echo $this->id ?>()">Verify </span>
-                      <input type="submit" class="btn btn-default form-control" id="updateArticle<?php echo $this->id ?>" onclick="verifyff();resetBut(); " value ="true" >  </label>
+                      <input type="submit" class="btn btn-default form-control" id="updateArticle<?php echo $this->id ?>" onclick="verifyff();resetBut(); " value ="true" />  </label>
                       </div>
 
 

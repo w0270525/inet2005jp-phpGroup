@@ -7,6 +7,6 @@
 
 
 $articleCounter++;
-$form = new articleForm($articleCounter , $a);
+$form = new articleForm($articleCounter , $a,$ca,$currentPage);
 $form->showEditContentForm();
 ?>
