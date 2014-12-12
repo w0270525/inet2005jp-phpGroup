@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/class/Article.php';
+require_once '../model/class/ChartArea.php';
 require_once '../model/data/PDOMySQLChartDataModel.php';
 
 class ChartModel
@@ -9,7 +9,9 @@ class ChartModel
 
 	public function __construct()
 	{
+
 		$this->m_DataAccess = new PDOMySQLChartDataModel();
+
 	}
 
 	public function __destruct()
@@ -22,21 +24,11 @@ class ChartModel
 	{
 		$this->m_DataAccess->connectToDB();
 
-		$arrayOfChartObjects = array();
-
-		$this->m_DataAccess->selectUsers();
-
-		while($row =  $this->m_DataAccess->fetchChart())
-		{
-
-			$currentChartObj =$this->constructArticle($row);
-			$arrayOfChartObjects[] = $currentChartObj;
-		}
+		$arrayOfChartObjects = $this->m_DataAccess->selectUsers();
 
 		$this->m_DataAccess->closeDB();
 
 		return $arrayOfChartObjects;
 	}
-
 
 }

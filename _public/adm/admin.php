@@ -289,7 +289,7 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
 
 	    <div id="viewChart" class="containerAdmin">
 		    <?php
- 		    $tempController->chartController()->displayChart();
+		    $tempController->chartController()->displayChart();
 		    ?>
 	    </div>
 

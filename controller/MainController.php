@@ -149,7 +149,5 @@ class MainController
     private $userTimeOut = 60000;
 
 
-
 }
-
 
