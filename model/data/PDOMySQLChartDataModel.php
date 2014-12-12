@@ -1,6 +1,7 @@
 <?php
 
-include_once "iChartDataModel.php";
+require_once('functions.php');
+require_once("iChartDataModel.php");
 /**
  * Created by PhpStorm.
  * User: inet2005
@@ -8,11 +9,12 @@ include_once "iChartDataModel.php";
  * Time: 6:59 PM
  */
 
-class PDOMySQLChartDataModel {
+class PDOMySQLChartDataModel implements iChartDataModel {
 	private $connObject;
 	private $dbConnection;
 	private $result;
 	private $stmt;
+	private $row;
 
 	public function connectToDB()
 	{
@@ -36,28 +38,29 @@ class PDOMySQLChartDataModel {
 		global $userResult;
 
 
-		$selectStatement = "SELECT cms.USER.u_id, cms.USER.u_username AS u_name, count(cms.ARTICLE.a_id) AS a_count";
-		$selectStatement .= "FROM cms.ARTICLE LEFT JOIN cms.USER ON cms.USER.u_id=cms.ARTICLE.a_createdby";
+		$selectStatement = "SELECT cms.USER.u_username AS u_name, count(cms.ARTICLE.a_id) AS a_count ";
+		$selectStatement .= "FROM cms.USER LEFT JOIN cms.ARTICLE ON cms.USER.u_id = cms.ARTICLE.a_createdby ";
 		$selectStatement .="GROUP BY cms.ARTICLE.a_createdby;";
 
 
 		try
 		{
-			$this->stmt = $this->dbConnection->prepare($selectStatement );
+			$this->stmt = $this->dbConnection->prepare($selectStatement);
+
 
 			$this->stmt->execute();
+			$chartarray = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $chartarray;
 
-			$this->result=$this->stmt;
-			return $this->stmt= $userResult;
-		}
-		catch(PDOException $ex)
-		{
-			die('select users() failed : Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
-		}
 
+		}catch(PDOException $ex)
+			{
+				die('fetchArticle failed  in PDOMySQLChartDataModel: Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
+			}
 	}
 
-	public function fetchDataRow()
+
+	public function fetchChart()
 	{
 		try
 		{
@@ -70,110 +73,13 @@ class PDOMySQLChartDataModel {
 		}
 	}
 
+	public function fetchUserName($row)
+	{
+		return $row['u_name'];
+	}
 
-
-    // grabs information on users and the articles they create
-    public function selectChartData_userArticles()
-    {
-
-        $selectUserCount ="SELECT COUNT(u_id) as counter FROM USER;";
-        $selectStatement="SELECT COUNT(a_id)as counter, USER.u_username FRom ARTICLE JOIN USER ON a_createdby = USER.u_id WHERE a_createdby = 4;";
-        try
-        {
-            $this->stmt = $this->dbConnection->prepare($selectUserCount );
-            $this->stmt->execute();
-            $count= $this->stmt->fetch(PDO::FETCH_ASSOC)["counter"];
-        }
-        catch(PDOException $ex)
-        {
-            die('selectChartData_userArticles() failed to get user count in PDOMySQLChartDataModel: '.$selectUserCount. ' Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
-        }
-
-        $data =  array();
-        for($i=1;$i<$count;$i++)
-        {
-            try
-            {
-                $selectStatement="SELECT COUNT(a_id) as counter, USER.u_username FRom ARTICLE JOIN USER ON a_createdby = USER.u_id WHERE a_createdby = ".$count.";";
-
-                $this->stmt = $this->dbConnection->prepare($selectStatement );
-                $this->stmt->execute();
-                $count= $this->stmt->fetch(PDO::FETCH_ASSOC)["counter"];
-
-            }
-            catch(PDOException $ex)
-            {
-                die('selectChartData_userArticles() failed to get article informaTION in PDOMySQLChartDataModel: '.$selectStatement. ' Could not retrieve from CMS Database via PDO: ' . $ex->getMessage());
-            }
-
-            $data[$count][0]=$this->stmt->fetch(PDO::FETCH_ASSOC)["counter"];
-          $data[$count][1]= $this->stmt->fetch(PDO::FETCH_ASSOC)["u_username"];
-
-
-        }
-
-        $DATA_SET = array();
-        foreach($data as $row)
-        {
-           $arr = array('username' => $row[0], 'articles' => $row[1]);
-           $DATA_SET[]= json_encode($arr);
-
-        }
-
-
-    return $DATA_SET;
-    }
-
-
-       // returns the user name
-    public function fetchUserUsername($row)
-    {
-        return $row['u_username'];
-
-    }
-
-    // returns the useres slt
-    public function fetchUserSalt($row)
-    {
-        return $row['u_salt'];
-    }
-
-    // returns the user password
-    public function fetchUserPass($row)
-    {
-        return $row['u_pass'];
-    }
-
-    // returns the users modified by
-    public function fetchUserModifiedBy($row)
-    {
-        return $row['u_lastmodifiedby']   ;
-    }
-
-    // returns user creation date
-    public function fetchUserCreationDate($row)
-    {
-        return $row['u_createddate'];
-    }
-
-    // retrun user creator
-    public function fetchUserCreator($row)
-    {
-        return $row['u_createdby'];
-    }
-
-    // returns last modified date
-    public function fetchUserModifiedDate($row)
-    {
-        return $row['u_modifieddate'];
-    }
-
-    // returns the   user key
-    public function fetchUserKey($row)
-    {
-        return $row['u_key'];
-    }
-
-
-
+	public function fetchArticleCount($row)
+	{
+		return $row['a_count'];
+	}
 }

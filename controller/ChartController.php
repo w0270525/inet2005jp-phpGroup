@@ -18,7 +18,7 @@ class ChartController
 
 	public function displayChart() {
 
-        $jasonArray = $this->model->getChartData_userArticles();
+		$arrayOfChartObjects= $this->model->getCharts();
 
 		include ('../view/admin/chartviews/viewArticleCreatorChart.php');
 	}

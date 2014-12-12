@@ -25,13 +25,10 @@
  ?>
     <ul>
     <?php
-      foreach ($navArray as $page) {
-    ?>
-      <li><a href="<?php echo $_SERVER['PHP_SELF']; ?>?page=<?php echo $page->getId(); ?>">
-          <?php echo $page->getName(); ?></a></li>
+    //  foreach ($navArray as $page) {
 
-    <?php
-      } // foreach END
+
+    include "nav.php";
     ?>
     </ul>
     <?php

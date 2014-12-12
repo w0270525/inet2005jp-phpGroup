@@ -18,7 +18,5 @@ interface iChartDataModel {
 
 	public function fetchChart();
 
-    public function getChartData_userArticles();
-
 
 } 
