@@ -9,7 +9,9 @@ class ChartModel
 
 	public function __construct()
 	{
+
 		$this->m_DataAccess = new PDOMySQLChartDataModel();
+		while ($row = PDO::M())
 	}
 
 	public function __destruct()

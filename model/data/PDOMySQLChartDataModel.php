@@ -1,6 +1,6 @@
 <?php
-
-include_once "iChartDataModel.php";
+require_once('functions.php');
+require_once("iChartDataModel.php");
 /**
  * Created by PhpStorm.
  * User: inet2005
@@ -13,6 +13,7 @@ class PDOMySQLChartDataModel implements iChartDataModel {
 	private $dbConnection;
 	private $result;
 	private $stmt;
+	private $row;
 
 	public function connectToDB()
 	{
@@ -70,5 +71,13 @@ class PDOMySQLChartDataModel implements iChartDataModel {
 		}
 	}
 
+	public function fetchUserName($row)
+	{
+		return $row['u_name'];
+	}
 
+	public function fetchArticleCount($row)
+	{
+		return $row['a_count'];
+	}
 }

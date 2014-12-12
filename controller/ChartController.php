@@ -18,7 +18,7 @@ class ChartController
 
 	public function displayChart() {
 
-
+		$arrayOfChartObjects= $this->model->getUsers();
 
 		include ('../view/admin/userviews/chartView.php');
 	}

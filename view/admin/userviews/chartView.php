@@ -4,7 +4,11 @@
 	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
 	var barChartData = {
-		labels : ["January","February","March","April","May","June","July"],
+		labels : [<?php
+		foreach($arrayOfChartObjects)
+
+		endforeach;
+		?>],
 		datasets : [
 			{
 				fillColor : "rgba(220,220,220,0.5)",

@@ -13,7 +13,8 @@ class ChartArea {
 
 	public function __construct()
 	{
-		$this->c_db =new PDOMySQLContentAreaDataModel();
+
+
 
 
 	}
