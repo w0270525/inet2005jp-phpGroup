@@ -257,6 +257,28 @@ class PDOMySQLContentAreaDataModel implements iContentAreaDataModel
         }
     }
 
+ /////////////////////////////////////////////////////
+    public function getContentareaPagenumber($ContentAreaID)
+    {
+        $selectStatement = "SELECT * FROM CONTENT_AREAS LEFT JOIN  ARTICLE on c_a_id = ARTICLE.a_contentarea  LEFT JOIN PAGES on ARTICLE.a_assocpage = PAGES.p_id  ";
+
+
+        $selectStatement .= " WHERE CONTENT_AREAS.c_a_id = :ContentAreaID;";
+
+        try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(':ContentAreaID', $ContentAreaID, PDO::PARAM_INT);
+
+            $this->stmt->execute();
+            return $this->stmt->rowCount();
+        }
+        catch(PDOException $ex)
+        {
+            die('selectContentAreaByContentAreaId failed  in PDOMySQLPageContentAreaModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
 
 
     // returns the ContentArea id
