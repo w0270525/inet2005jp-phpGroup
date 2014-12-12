@@ -13,6 +13,7 @@ class ChartController
 		$this->model = new ChartArea();
 
 
+
 	}
 
 

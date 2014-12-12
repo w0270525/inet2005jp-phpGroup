@@ -287,9 +287,9 @@ if(isset($_SESSION["logged"])  &&($_SESSION["logged"]==true))
             $tempController->userController()->addNewUser();
             ?></div>
 
-	    <div id="viewChart" class="containerAdmin">
+	    <div id="viewCharts" class="containerAdmin">
 		    <?php
-		    $tempController->chartController()->displayChart();
+		         $tempController->chartController()->displayChart();
 		    ?>
 	    </div>
 

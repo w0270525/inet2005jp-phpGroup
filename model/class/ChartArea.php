@@ -14,13 +14,7 @@ class ChartArea {
 	public function __construct()
 	{
 
-
-
-
 	}
-
-
-
 
 	/**
 	 * @param mixed $c_count
