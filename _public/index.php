@@ -39,8 +39,6 @@
     include_once("../model/data/functions.php");
     $debug=true;
 
-    if(isset($_GET['chart'])) $tempController->chartController()->displayChart();
-
     // SETS CURRENT PAGE  IF NOT SET
     if(!isset($_GET['page'] )||empty($_GET['page'] ))
     {
