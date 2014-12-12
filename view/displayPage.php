@@ -17,7 +17,7 @@
  endif;
  // varibles for author editing
  require_once "formClass/editArticleFormClass.php";
- require_once "formClass/addArticleFormClass.php";
+ //require_once "formClass/addArticleFormClass.php";
  $articleCounter=0;
 
   $arrayOfStyles = array();
