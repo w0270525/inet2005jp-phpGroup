@@ -177,5 +177,29 @@ public function updateArticle($articleToUpdate)
 
 
 
+    public function getArticleCountByCreatorId($id)
+    {
+        $this->m_DataAccess->connectToDB();
+        $result  =  $this->m_DataAccess->getArticleCountByCreatorId($id);
+        $this->m_DataAccess->closeDB();
+        return $result;
+
+    }
+
+    // grabs the articles created by a specifeid yser
+    public function selectArticlesByCreator($id)
+    {
+        $arrayOfArticleObjects = array();
+        $this->m_DataAccess->connectToDB();
+        $result = $this->m_DataAccess->selectArticlesByCreator($id);
+        $this->m_DataAccess->closeDB();
+        foreach($result as $article)
+            $arrayOfArticleObjects[]=$this->constructArticle($article);
+        return  $arrayOfArticleObjects;
+
+    }
+
+
+
 }
 ?>

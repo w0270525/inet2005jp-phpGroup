@@ -39,4 +39,22 @@ class ChartModel
 	}
 
 
+
+    public function    getChartData_userArticles()
+    {
+        $ac = new ArticleModel();
+        $uc = new UserController();
+        $DATA_SET = array();;
+        $this->m_DataAccess->connectToDB();
+        $arrayOfUserObjects= $uc->model->getAllUsers();
+        foreach($arrayOfUserObjects as $user)
+        {
+          $DATA_SET[]=array ($user->getUsername(), $ac->getArticleCountByCreatorId($user->getId()));
+        }
+
+        $result =   $this->m_DataAccess->selectChartData_userArticles();
+        $this->m_DataAccess->closeDB();
+        return $result;
+
+    }
 }

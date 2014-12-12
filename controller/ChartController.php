@@ -1,6 +1,7 @@
 <?php
 
 require_once('../model/class/ChartArea.php');
+require_once('../model/ChartModel.php');
 
 require_once('../model/data/functions.php');
 class ChartController
@@ -9,7 +10,7 @@ class ChartController
 
 	public function __construct()
 	{
-		$this->model = new ChartArea();
+		$this->model = new ChartModel();
 
 
 	}
@@ -17,9 +18,9 @@ class ChartController
 
 	public function displayChart() {
 
+        $jasonArray = $this->model->getChartData_userArticles();
 
-
-		include ('../view/admin/userviews/chartView.php');
+		include ('../view/admin/chartviews/viewArticleCreatorChart.php');
 	}
 
 

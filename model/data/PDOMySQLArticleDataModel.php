@@ -53,6 +53,27 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
     }
 
 
+    public function selectArticlesByCreator($id)
+    {
+        $selectStatement = "SELECT * FROM ARTICLE   LEFT JOIN USER ON a_createdby = :u_id;";
+         try
+        {
+            $this->stmt = $this->dbConnection->prepare($selectStatement );
+            $this->stmt->bindParam(':u_id', $id, PDO::PARAM_STR);
+            $this->stmt->execute();
+        }
+        catch(PDOException $ex)
+        {
+            die('selectArticlesByCreator failed  in PDOMySQLPageArticleModel: '.$selectStatement.': Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+        }
+        $arrayOfArticles = array();
+        while($row = $this->fetchArticle())
+            $arrayOfArticles[]=$row;
+        return $arrayOfArticles;
+
+    }
+
+
     // gets all the Articles from the database
     // returns an array with Articles information including roles
     public function selectArticleByArticleName($name)
@@ -119,6 +140,10 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             die('selectArticleByPageId failed  in PDOMySQLArticleDataModel: Could not select records from CMS Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+
+
 
 
     //  Integer selectActiveArticlesByPageId (Integer pageId)
@@ -242,6 +267,28 @@ class PDOMySQLArticleDataModel implements iArticleDataModel
             die('Update failed  in PDOMySQLArticleDataModel :'.$updateStatement.' Could not select records from CMS  Database via PDO: ' . $ex->getMessage());
         }
     }
+
+
+    public function getArticleCountByCreatorId($id)
+    {
+        $selectStatement = "SELECT COUNT(a_id) as count  FROM ARTICLE WHERE a_createdby = :id ";
+        try
+        {  $this->stmt = $this->dbConnection->prepare($selectStatement);
+            $this->stmt->bindParam(':id', $id, PDO::PARAM_STR);
+            $this->stmt->execute();
+            $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $this->result["count"];
+        }
+        catch(PDOException $ex)
+        {
+            die('getArticleCountByCreatorId failed  in PDOMySQLPageArticleModel: '. $selectStatement .': Could not select records from Content Management System Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+
+
+
+
 
     // returns the Article id
     public function fetchArticleID($row)

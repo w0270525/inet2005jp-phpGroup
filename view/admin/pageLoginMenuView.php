@@ -2,15 +2,19 @@
 <!-- hide the login menu custom css-->
 <style>
 
+    #disappearing
+    {
+        transition: heigth 1.5s ease-out;
+    }
 
     #disappearing {
-        display: none;
+        height: 0;
     }
     #disappearing:hover{
-        display: block;
-    }
+        height: 20 ;    }
     #minimized:hover~#disappearing{
-        display: block;
+        height: 0 ;
+
     }
 
 
